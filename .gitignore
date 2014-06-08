@@ -11,6 +11,7 @@
 *~
 *.out
 
+
 # OS folders
 .DS_Store
 ._*
@@ -26,3 +27,6 @@ node_modules
 dist
 .tmp
 app/bower_components
+app/resources
+
+
