@@ -9,4 +9,8 @@ $(document).ready(function(){
         swfPath: "/js",
         supplied: "mp3"
     });
+
+    $("#metainfo a").popover({
+        placement : 'top'
+    });
 });

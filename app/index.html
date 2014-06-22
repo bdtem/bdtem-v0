@@ -26,9 +26,9 @@
 
     <div class="btn-group btn-group-justified">
 
-        <button class="btn btn-link pull-left">
-            <span><img class="logo" src="images/logo_transparent.png"/></span>
-        </button>
+
+        <span><img class="logo" src="images/logo_transparent.png"/></span>
+
 
         <button class="btn btn-link btn-lg pull-right">
             <span class="fa fa-share"></span>
@@ -67,61 +67,73 @@ TODO: IMPLEMENT ACTUAL MUSIC PLAYER -->
         <div class="jp-type-single">
             <div class="jp-gui jp-interface">
                 <ul class="jp-controls">
-                    <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
-                    <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-                    <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-                    <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
-                    <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+
+                    <li><a href="javascript:;" class="jp-play" tabindex="1" title="Play">
+                        &#xf04b;
+                    </a></li>
+
+                    <li><a href="javascript:;" class="jp-pause" tabindex="1">
+                        &#xf04c;
+                    </a></li>
+
+                    <li><a href="javascript:;" class="jp-stop" tabindex="1">
+                        &#xf04d;
+                    </a></li>
+
+
+                    <li><a href="javascript:;" class="jp-previous" tabindex="1" title="previous">
+                        &#xf049;
+                    </a></li>
+
+
+                    <li><a href="javascript:;" class="jp-next" tabindex="1" title="next">
+                        &#xf050;
+                    </a></li>
+
                 </ul>
+
                 <div class="jp-progress">
                     <div class="jp-seek-bar">
                         <div class="jp-play-bar"></div>
                     </div>
                 </div>
-                <div class="jp-volume-bar">
-                    <div class="jp-volume-bar-value"></div>
-                </div>
+
                 <div class="jp-time-holder">
                     <div class="jp-current-time"></div>
                     <div class="jp-duration"></div>
                 </div>
-            </div>
-            <div class="jp-details">
-                <ul>
-                    <li><span class="jp-title"></span></li>
-                </ul>
-            </div>
-            <div class="jp-no-solution">
-                <span>Update Required</span>
-                To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+
+                <div class="jp-volume-bar">
+                    <div class="jp-volume-bar-value"></div>
+                </div>
+
+                <a href="javascript:;" class="jp-mute" tabindex="1" title="mute">
+                    &#xf026;
+                </a>
+
+                <a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">
+                    &#xf028;
+                </a>
+
+                <div class="jp-no-solution">
+                    <span>Update Required</span>
+                    To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                </div>
             </div>
         </div>
     </div>
 
 
-    <div class="btn-group btn-group-lg">
-        <button type="button" class="btn btn-default btn-lg">
-            <span class="fa fa-play"></span>
-        </button>
 
-        <button type="button" class="btn btn-default btn-lg">
-            <span class="fa fa-pause"></span>
-        </button>
-
-        <button type="button" class="btn btn-default btn-lg">
-            <span class="fa fa-fast-backward"></span>
-        </button>
-
-        <button type="button" class="btn btn-default ">
-            <span class="fa fa-fast-forward"></span>
-        </button>
-
-    </div>
-
-    <div class="btn-group btn-group-lg pull-right">
-        <button type="button" class="btn btn-default btn-lg btn-link">
-            <span class="fa fa-info-circle"></span>
-        </button>
+    <div id="metainfo" class="fa pull-right">
+        <a class="btn btn-lg"
+           data-content="Some cool data"
+           data-toggle="popover"
+           title=""
+           href="#"
+           data-original-title="Some title">
+            &#xf05a;
+        </a>
     </div>
 
 
