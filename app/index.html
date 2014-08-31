@@ -10,7 +10,6 @@
 
 <head>
 
-
     <!-- build:js scripts/main.js -->
     <script src="bower_components/angular/angular.js"></script>
 
@@ -35,10 +34,6 @@
     <script src="bower_components/bootstrap/js/tab.js"></script>
     <!-- endbuild -->
 
-    <!-- endbuild -->
-
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
@@ -52,15 +47,14 @@
 
 </head>
 
+
 <body>
 
 <nav class="navbar navbar-static-top small right">
 
     <div class="btn-group btn-group-justified">
 
-
         <span><img class="logo" src="images/logo_transparent.png"/></span>
-
 
         <button class="btn btn-link btn-lg pull-right">
             <span class="fa fa-share"></span>
@@ -89,12 +83,13 @@
 
 </div>
 
-<!-- PLAYBACK CONTROLS
-TODO: IMPLEMENT ACTUAL MUSIC PLAYER -->
+<!-- PLAYBACK CONTROLS -->
+
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 
 
-    <div ng-controller="PlaylistCtrl">
+    <div ng-controller="PlaylistCtrl" class="ng-scope">
+
         <audio media-player="bdtemplayer" data-playlist="songs">
             <source src="audio/01_Funeral_March.mp3" type="audio/mpeg">
         </audio>
@@ -115,7 +110,21 @@ TODO: IMPLEMENT ACTUAL MUSIC PLAYER -->
 
         {{bdtemplayer.currentTime}} :: {{bdtemplayer.duration}}
 
+
+        <label for="seekbar"></label>
+        <input
+               type="range"
+               id="seekbar"
+               min="0"
+               value={{bdtemplayer.currentTime}}
+               max="{{bdtemplayer.duration}}"
+               onchange="$scope.bdtemplayer.seek(this.value);"
+               >
+
+        <progress value="{{bdtemplayer.currentTime}}" max="{{bdtemplayer.duration}}"></progress>
+
     </div>
+
 
     <div id="metainfo" class="fa pull-right">
         <a class="btn btn-lg"

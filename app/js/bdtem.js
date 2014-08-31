@@ -2,7 +2,6 @@ var bdtem = angular.module('bdtem', ['mediaPlayer']);
 
 bdtem.controller('PlaylistCtrl', function($scope) {
 
-
     $scope.songs = [
         { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
         { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
@@ -19,8 +18,17 @@ bdtem.controller('PlaylistCtrl', function($scope) {
         { src: '../audio/13_Ha_Na.mp3', type: 'audio/mpeg'}
     ];
 
+    $scope.cleanDuration = function(seconds) {
+
+        return seconds;
+    };
+
+    $scope.test = function() {
+        return "HI I AM A VALUE";
+    };
+
     $scope.titles = [
-        "HI I AM A 1-BASED ARRAY!",
+        "",
         "Funeral March",
         "Hesitating Sun",
         "Future Is Bleaker",
