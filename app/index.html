@@ -6,8 +6,39 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html ng-app="bdtem"> <!--<![endif]-->
+
 <head>
+
+
+    <!-- build:js scripts/main.js -->
+    <script src="bower_components/angular/angular.js"></script>
+
+    <script src="bower_components/angular-media-player/src/directive.js"></script>
+    <script src="bower_components/angular-media-player/src/helpers.js"></script>
+
+    <script src="js/bdtem.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
+
+    <!-- build:js scripts/vendor/bootstrap.js -->
+    <script src="bower_components/bootstrap/js/affix.js"></script>
+    <script src="bower_components/bootstrap/js/alert.js"></script>
+    <script src="bower_components/bootstrap/js/dropdown.js"></script>
+    <script src="bower_components/bootstrap/js/tooltip.js"></script>
+    <script src="bower_components/bootstrap/js/modal.js"></script>
+    <script src="bower_components/bootstrap/js/transition.js"></script>
+    <script src="bower_components/bootstrap/js/button.js"></script>
+    <script src="bower_components/bootstrap/js/popover.js"></script>
+    <script src="bower_components/bootstrap/js/carousel.js"></script>
+    <script src="bower_components/bootstrap/js/scrollspy.js"></script>
+    <script src="bower_components/bootstrap/js/collapse.js"></script>
+    <script src="bower_components/bootstrap/js/tab.js"></script>
+    <!-- endbuild -->
+
+    <!-- endbuild -->
+
+
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
@@ -18,8 +49,9 @@
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-    <link type="text/css" href="styles/player/jplayer.blue.monday.css" rel="stylesheet" />
+
 </head>
+
 <body>
 
 <nav class="navbar navbar-static-top small right">
@@ -43,13 +75,13 @@
         </button>
 
         <button class="btn btn-link btn-lg pull-right">
-            <span class="fa fa-dollar"></span>
+             <span class="fa fa-dollar"></span>
         </button>
     </div>
 
 </nav>
 
-<div class="media-body left pull-left">
+<div class="media-body left pull-left" style="background-image: url(./images/DreamSmall.gif)">
 
     <div class="container pull-left">
         <img src="images/mockup.png">
@@ -62,68 +94,28 @@ TODO: IMPLEMENT ACTUAL MUSIC PLAYER -->
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 
 
-    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
-    <div id="jp_container_1" class="jp-audio">
-        <div class="jp-type-single">
-            <div class="jp-gui jp-interface">
-                <ul class="jp-controls">
+    <div ng-controller="PlaylistCtrl">
+        <audio media-player="bdtemplayer" data-playlist="songs">
+            <source src="audio/01_Funeral_March.mp3" type="audio/mpeg">
+        </audio>
 
-                    <li><a href="javascript:;" class="jp-play" tabindex="1" title="Play">
-                        &#xf04b;
-                    </a></li>
-
-                    <li><a href="javascript:;" class="jp-pause" tabindex="1">
-                        &#xf04c;
-                    </a></li>
-
-                    <li><a href="javascript:;" class="jp-stop" tabindex="1">
-                        &#xf04d;
-                    </a></li>
-
-
-                    <li><a href="javascript:;" class="jp-previous" tabindex="1" title="previous">
-                        &#xf049;
-                    </a></li>
-
-
-                    <li><a href="javascript:;" class="jp-next" tabindex="1" title="next">
-                        &#xf050;
-                    </a></li>
-
-                </ul>
-
-                <div class="jp-progress">
-                    <div class="jp-seek-bar">
-                        <div class="jp-play-bar"></div>
-                    </div>
-                </div>
-
-                <div class="jp-time-holder">
-                    <div class="jp-current-time"></div>
-                    <div class="jp-duration"></div>
-                </div>
-
-                <div class="jp-volume-bar">
-                    <div class="jp-volume-bar-value"></div>
-                </div>
-
-                <a href="javascript:;" class="jp-mute" tabindex="1" title="mute">
-                    &#xf026;
-                </a>
-
-                <a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">
-                    &#xf028;
-                </a>
-
-                <div class="jp-no-solution">
-                    <span>Update Required</span>
-                    To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
-                </div>
-            </div>
+        <div class="btn" ng-click="bdtemplayer.prev()">
+            <i class="fa fa-fast-backward"></i>
         </div>
+
+        <div class="btn" ng-click="bdtemplayer.playPause()">
+            <i class="fa fa-play" ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
+        </div>
+
+        <div class="btn" ng-click="bdtemplayer.next()">
+            <i class="fa fa-fast-forward"></i>
+        </div>
+
+        {{titles[bdtemplayer.currentTrack]}}
+
+        {{bdtemplayer.currentTime}} :: {{bdtemplayer.duration}}
+
     </div>
-
-
 
     <div id="metainfo" class="fa pull-right">
         <a class="btn btn-lg"
@@ -145,44 +137,6 @@ TODO: IMPLEMENT ACTUAL MUSIC PLAYER -->
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>
-    (function (b, o, i, l, e, r) {
-        b.GoogleAnalyticsObject = l;
-        b[l] || (b[l] =
-                function () {
-                    (b[l].q = b[l].q || []).push(arguments)
-                });
-        b[l].l = +new Date;
-        e = o.createElement(i);
-        r = o.getElementsByTagName(i)[0];
-        e.src = '//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e, r)
-    }(window, document, 'script', 'ga'));
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
-</script>
-
-
-<!-- build:js scripts/main.js -->
-<script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
-<script type="text/javascript" src="scripts/jPlayer/jquery.jplayer/jquery.jplayer.js"></script>
-<script src="scripts/main.js"></script>
-<!-- endbuild -->
-
-<!-- build:js scripts/vendor/bootstrap.js -->
-<script src="bower_components/bootstrap/js/affix.js"></script>
-<script src="bower_components/bootstrap/js/alert.js"></script>
-<script src="bower_components/bootstrap/js/dropdown.js"></script>
-<script src="bower_components/bootstrap/js/tooltip.js"></script>
-<script src="bower_components/bootstrap/js/modal.js"></script>
-<script src="bower_components/bootstrap/js/transition.js"></script>
-<script src="bower_components/bootstrap/js/button.js"></script>
-<script src="bower_components/bootstrap/js/popover.js"></script>
-<script src="bower_components/bootstrap/js/carousel.js"></script>
-<script src="bower_components/bootstrap/js/scrollspy.js"></script>
-<script src="bower_components/bootstrap/js/collapse.js"></script>
-<script src="bower_components/bootstrap/js/tab.js"></script>
-<!-- endbuild -->
 </body>
+
 </html>
