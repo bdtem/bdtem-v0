@@ -6,7 +6,7 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html ng-app="bdtem"> <!--<![endif]-->
+<html ng-app="bdtem" class="ng-scope"> <!--<![endif]-->
 
 <head>
 
@@ -90,6 +90,15 @@
 
     <div ng-controller="PlaylistCtrl" class="ng-scope">
 
+        <label for="seekbar"></label>
+        <input
+                type="range"
+                id="seekbar"
+                min="0"
+                value={{bdtemplayer.currentTime}}
+                max="{{bdtemplayer.duration}}"
+                ng-click="bdtemplayer.seek($event.srcElement.value);"
+                >
         <audio media-player="bdtemplayer" data-playlist="songs">
             <source src="audio/01_Funeral_March.mp3" type="audio/mpeg">
         </audio>
@@ -111,15 +120,6 @@
         {{bdtemplayer.currentTime}} :: {{bdtemplayer.duration}}
 
 
-        <label for="seekbar"></label>
-        <input
-               type="range"
-               id="seekbar"
-               min="0"
-               value={{bdtemplayer.currentTime}}
-               max="{{bdtemplayer.duration}}"
-               onchange="$scope.bdtemplayer.seek(this.value);"
-               >
 
         <progress value="{{bdtemplayer.currentTime}}" max="{{bdtemplayer.duration}}"></progress>
 
