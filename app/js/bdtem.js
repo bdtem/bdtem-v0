@@ -18,41 +18,6 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         { src: '../audio/13_Ha_Na.mp3', type: 'audio/mpeg'}
     ];
 
-    this.isPlaying = function () {
-        return $scope.bdtemplayer.isPlaying;
-    };
-
-
-    this.seekTo = function (whereToSeek) {
-        whereToSeek = whereToSeek | 0;
-
-        console.log("sup I'm seeking to : " + whereToSeek);
-
-        $scope.bdtemplayer.seek(whereToSeek);
-    };
-
-    this.currentTime = 0;
-
-    this.__defineGetter__("currentTime", function () {
-        return $scope.bdtemplayer.currentTime | 0;
-    });
-
-    this.__defineSetter__("currentTime", this.seekTo);
-
-    this.prev = function () {
-        $scope.bdtemplayer.prev();
-    };
-
-    this.next = function () {
-        $scope.bdtemplayer.next();
-    };
-
-
-
-    this.cleanDuration = function (seconds) {
-        return seconds;
-    };
-
     this.titles = [
         "",
         "Funeral March",
@@ -70,13 +35,33 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         "Ha Na"
     ];
 
+    this.isPlaying = function () {
+        return $scope.bdtemplayer.isPlaying;
+    };
 
-    console.log($scope.songs);
+    this.seekTo = function (whereToSeek) {
+        $scope.bdtemplayer.seek(whereToSeek | 0);
+    };
+
+    this.currentTime = 0;
+
+    this.__defineGetter__("currentTime", function () {
+        return $scope.bdtemplayer.currentTime | 0;
+    });
+
+
+    this.__defineSetter__("currentTime", this.seekTo);
+
+    this.prev = function () {
+        $scope.bdtemplayer.prev();
+    };
+
+    this.next = function () {
+        $scope.bdtemplayer.next();
+    };
 
     this.mySpecialPlayButton = function () {
         $scope.bdtemplayer.playPause();
     };
-
-    console.log($scope.mySpecialPlayButton);
 
 });
