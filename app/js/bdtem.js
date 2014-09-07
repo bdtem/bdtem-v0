@@ -1,8 +1,8 @@
 var bdtem = angular.module('bdtem', ['mediaPlayer']);
 
-bdtem.controller('PlaylistCtrl', function($scope) {
+bdtem.controller('PlaylistCtrl', function ($scope) {
 
-    $scope.songs = [
+    this.songs = [
         { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
         { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
         { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
@@ -18,16 +18,42 @@ bdtem.controller('PlaylistCtrl', function($scope) {
         { src: '../audio/13_Ha_Na.mp3', type: 'audio/mpeg'}
     ];
 
-    $scope.cleanDuration = function(seconds) {
+    this.isPlaying = function () {
+        return $scope.bdtemplayer.isPlaying;
+    };
 
+
+    this.seekTo = function (whereToSeek) {
+        whereToSeek = whereToSeek | 0;
+
+        console.log("sup I'm seeking to : " + whereToSeek);
+
+        $scope.bdtemplayer.seek(whereToSeek);
+    };
+
+    this.currentTime = 0;
+
+    this.__defineGetter__("currentTime", function () {
+        return $scope.bdtemplayer.currentTime | 0;
+    });
+
+    this.__defineSetter__("currentTime", this.seekTo);
+
+    this.prev = function () {
+        $scope.bdtemplayer.prev();
+    };
+
+    this.next = function () {
+        $scope.bdtemplayer.next();
+    };
+
+
+
+    this.cleanDuration = function (seconds) {
         return seconds;
     };
 
-    $scope.test = function() {
-        return "HI I AM A VALUE";
-    };
-
-    $scope.titles = [
+    this.titles = [
         "",
         "Funeral March",
         "Hesitating Sun",
@@ -47,10 +73,8 @@ bdtem.controller('PlaylistCtrl', function($scope) {
 
     console.log($scope.songs);
 
-    $scope.mySpecialPlayButton = function () {
-        $scope.customText = 'I started angular-media-player with a custom defined action!';
+    this.mySpecialPlayButton = function () {
         $scope.bdtemplayer.playPause();
-        console.log($scope.customText);
     };
 
     console.log($scope.mySpecialPlayButton);

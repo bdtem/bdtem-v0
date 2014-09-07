@@ -50,7 +50,7 @@
 
 <body>
 
-<nav class="navbar navbar-static-top small right">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
     <div class="btn-group btn-group-justified">
 
@@ -69,7 +69,7 @@
         </button>
 
         <button class="btn btn-link btn-lg pull-right">
-             <span class="fa fa-dollar"></span>
+            <span class="fa fa-dollar"></span>
         </button>
     </div>
 
@@ -87,57 +87,57 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 
+    <div ng-controller="PlaylistCtrl as playlist" class="ng-scope">
 
-    <div ng-controller="PlaylistCtrl" class="ng-scope">
-
-        <label for="seekbar"></label>
-        <input
-                type="range"
-                id="seekbar"
-                min="0"
-                value={{bdtemplayer.currentTime}}
-                max="{{bdtemplayer.duration}}"
-                ng-click="bdtemplayer.seek($event.srcElement.value);"
-                >
-        <audio media-player="bdtemplayer" data-playlist="songs">
+        <audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="playlist.songs">
             <source src="audio/01_Funeral_March.mp3" type="audio/mpeg">
         </audio>
 
-        <div class="btn" ng-click="bdtemplayer.prev()">
-            <i class="fa fa-fast-backward"></i>
-        </div>
+        <table>
+            <tr>
 
-        <div class="btn" ng-click="bdtemplayer.playPause()">
-            <i class="fa fa-play" ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
-        </div>
+                <td width="3.333%">
+                    <div class="btn" ng-click="playlist.prev()">
+                        <i class="fa fa-fast-backward"></i>
+                    </div>
+                </td>
+                <td width="3.333%">
+                    <div class="btn" ng-click="playlist.mySpecialPlayButton()">
+                        <i class="fa fa-play"
+                           ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
+                    </div>
+                </td>
+                <td width="8.333%">
+                    <div class="btn" ng-click="playlist.next()">
+                        <i class="fa fa-fast-forward"></i>
+                    </div>
+                </td>
+                <td width="20%">
+                    Now playing:
+                    <em> {{playlist.titles[bdtemplayer.currentTrack]}}
+                    </em>
+                </td>
+                <td width="50%">
+                    <label for="seekbar">Seek:</label>
+                    <input type="range" id="seekbar" ng-model="playlist.currentTime" step="0.1"/>
+                </td>
 
-        <div class="btn" ng-click="bdtemplayer.next()">
-            <i class="fa fa-fast-forward"></i>
-        </div>
 
-        {{titles[bdtemplayer.currentTrack]}}
-
-        {{bdtemplayer.currentTime}} :: {{bdtemplayer.duration}}
-
-
-
-        <progress value="{{bdtemplayer.currentTime}}" max="{{bdtemplayer.duration}}"></progress>
-
+                <td width="5%">
+                    <div id="metainfo" class="fa pull-right">
+                        <a class="btn btn-lg"
+                           data-content="Some cool data"
+                           data-toggle="popover"
+                           title=""
+                           href="#"
+                           data-original-title="Some title">
+                            &#xf05a;
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
-
-
-    <div id="metainfo" class="fa pull-right">
-        <a class="btn btn-lg"
-           data-content="Some cool data"
-           data-toggle="popover"
-           title=""
-           href="#"
-           data-original-title="Some title">
-            &#xf05a;
-        </a>
-    </div>
-
-
 </nav>
 
 
