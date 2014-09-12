@@ -48,9 +48,9 @@
 </head>
 
 
-<body>
+<body style="background-color: #000000; background-repeat: no-repeat !important;">
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav style="border: none" class="navbar navbar-default navbar-fixed-top" role="navigation">
 
     <div class="btn-group btn-group-justified">
 
@@ -85,7 +85,7 @@
 
 <!-- PLAYBACK CONTROLS -->
 
-<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+<nav style="border: none" class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 
     <div ng-controller="PlaylistCtrl as playlist" class="ng-scope">
 
@@ -112,14 +112,11 @@
                         <i class="fa fa-fast-forward"></i>
                     </div>
                 </td>
-                <td width="20%">
-                    Now playing:
-                    <em> {{playlist.titles[bdtemplayer.currentTrack]}}
-                    </em>
-                </td>
+
                 <td width="50%">
-                    <label for="seekbar">Seek:</label>
-                    <input type="range" id="seekbar" ng-model="playlist.currentTime" step="0.1"/>
+                    <div style="height: 20px" id="progressbar" ng-click="seekFromProgressBar($event)">
+                        <progress value={{bdtemplayer.currentTime}}  max="{{bdtemplayer.duration}}"></progress>
+                    </div>
                 </td>
 
 

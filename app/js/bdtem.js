@@ -39,15 +39,32 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         return $scope.bdtemplayer.isPlaying;
     };
 
+    this.currentTime = 0;
+
+    var getCurrentTime = function () {
+        return $scope.bdtemplayer.currentTime | 0;
+    };
+
+    $scope.seekFromProgressBar = function(event) {
+        var srcElement = event.srcElement;
+        var sourceElement = srcElement ? srcElement : event.target;
+        var maxInDuration = sourceElement.max;
+        var pxWidth = sourceElement.offsetWidth;
+        var xOffset = sourceElement.offsetParent.offsetLeft;
+        var clickOffset = event.layerX;
+        var pixelsRight = Math.abs(xOffset - clickOffset);
+
+        var percentage = pixelsRight / pxWidth;
+        var whereToSeekInDuration = Math.floor(percentage * maxInDuration);
+
+        $scope.bdtemplayer.seek(whereToSeekInDuration);
+    };
+
     this.seekTo = function (whereToSeek) {
         $scope.bdtemplayer.seek(whereToSeek | 0);
     };
 
-    this.currentTime = 0;
-
-    this.__defineGetter__("currentTime", function () {
-        return $scope.bdtemplayer.currentTime | 0;
-    });
+    this.__defineGetter__("currentTime", getCurrentTime);
 
 
     this.__defineSetter__("currentTime", this.seekTo);
