@@ -1,0 +1,43 @@
+body {
+background-color: #000000;
+}
+
+table {
+text-align: center;
+width: 100%;
+color: #FFFFFF;
+}
+
+td {font-family: "Book Antiqua";
+color: #FFFFFF;
+ }
+
+td.italic {font-style: italic}
+
+table.bold {font-weight: bold}
+
+td.bold {font-weight: bold}
+
+td.one {letter-spacing: 8px}
+
+td.italictwo {font-style: italic; letter-spacing: 4px}
+
+td.three {letter-spacing: 5.8px}
+
+td.four {letter-spacing: 9.5px}
+
+td.five {letter-spacing: 8px}
+
+td.six {letter-spacing: 9px}
+
+td.lower {padding: .5%}
+
+td.boldness {font-weight: bold; letter-spacing: .3px}
+
+p {
+color: #FFFFFF;
+}
+
+p.bold {font-weight: bold; text-align: center}
+
+p.bolding {font-weight: bold; text-align: center; word-spacing: 16px}

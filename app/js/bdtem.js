@@ -17,7 +17,6 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: 'audio/mpeg'},
         { src: '../audio/13_Ha_Na.mp3', type: 'audio/mpeg'}
     ];
-
     $scope.titles = [
         "",
         "Funeral March",
@@ -35,6 +34,12 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         "Ha Na"
     ];
 
+    $scope.metadata = $scope.titles.map(function(datString) {
+        var metadata = datString + " is a pretty cool track.";
+        console.log(metadata);
+        return  metadata;
+    });
+
     this.isPlaying = function () {
         return $scope.bdtemplayer.isPlaying;
     };
@@ -51,7 +56,7 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         var maxInDuration = $scope.bdtemplayer.duration;
         var pxWidth = sourceElement.offsetWidth;
         var xOffset = sourceElement.offsetParent.offsetLeft;
-        var clickOffset = event.layerX;
+        var clickOffset = event.layerX | event.clientX;
         var pixelsRight = Math.abs(xOffset - clickOffset);
 
         var percentage = pixelsRight / pxWidth;
@@ -71,10 +76,16 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
 
 
     var refreshMetadata = function () {
-        var popover = $('.popover-content');
-        var currentTitle = $scope.titles[$scope.bdtemplayer.currentTrack];
-        popover.attr('data-content', currentTitle);
-        popover.html(currentTitle);
+        var popoverContent = $('.popover-content');
+        var popoverTitle = $('.popover-title');
+        var currentTrack = $scope.bdtemplayer.currentTrack;
+        var currentTitle = $scope.titles[currentTrack];
+        var currentMetadata = $scope.metadata[currentTrack];
+        popoverContent.attr('title', currentTitle);
+        popoverContent.attr('data-title', currentTitle);
+        popoverContent.attr('data-content', currentMetadata);
+        popoverContent.html(currentMetadata);
+        popoverTitle.html(currentTitle);
     };
 
     $scope.prev = function () {
@@ -90,9 +101,5 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
     $scope.mySpecialPlayButton = function () {
         $scope.bdtemplayer.playPause();
     };
-
-    $scope.metadataPopover = function () {
-        console.log("I would like to pop over some data :D");
-    }
 
 });

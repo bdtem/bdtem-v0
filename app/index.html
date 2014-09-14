@@ -104,11 +104,11 @@
 
             <div class="btn"
                  id="metadata"
-                 title="Metadata"
+                 title="{{titles[bdtemplayer.currentTrack] | uppercase}}"
                  data-placement="top"
                  data-container="nav"
                  data-toggle="popover"
-                 data-content="{{titles[bdtemplayer.currentTrack]}}"
+                 data-content="{{metadata[bdtemplayer.currentTrack] | uppercase}}"
                  onclick="$('#metadata').popover();"
                     >
                 <i class="fa">
