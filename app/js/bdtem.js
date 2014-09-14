@@ -1,22 +1,26 @@
-var bdtem = angular.module('bdtem', ['mediaPlayer']);
+var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer']);
 
 bdtem.controller('PlaylistCtrl', function ($scope) {
 
+
+    var audioFormat = 'audio/mpeg';
+
     $scope.songs = [
-        { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
-        { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
-        { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
-        { src: '../audio/04_Sad_to_Feel.mp3', type: 'audio/mpeg'},
-        { src: '../audio/05_2-D.mp3', type: 'audio/mpeg'},
-        { src: '../audio/06_Digging_Out.mp3', type: 'audio/mpeg'},
-        { src: '../audio/07_The_Debate_1.mp3', type: 'audio/mpeg'},
-        { src: '../audio/08_Too_Late_3.mp3', type: 'audio/mpeg'},
-        { src: '../audio/09_Tried_to_Be.mp3', type: 'audio/mpeg'},
-        { src: '../audio/10_Too_Late_2.mp3', type: 'audio/mpeg'},
-        { src: '../audio/11_She_Loves.mp3', type: 'audio/mpeg'},
-        { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: 'audio/mpeg'},
-        { src: '../audio/13_Ha_Na.mp3', type: 'audio/mpeg'}
+        { src: '../audio/01_Funeral_March.mp3', type: audioFormat},
+        { src: '../audio/02_Hesitating_Sun.mp3', type: audioFormat},
+        { src: '../audio/03_Future_Is_Bleaker.mp3', type: audioFormat},
+        { src: '../audio/04_Sad_to_Feel.mp3', type: audioFormat},
+        { src: '../audio/05_2-D.mp3', type: audioFormat},
+        { src: '../audio/06_Digging_Out.mp3', type: audioFormat},
+        { src: '../audio/07_The_Debate_1.mp3', type: audioFormat},
+        { src: '../audio/08_Too_Late_3.mp3', type: audioFormat},
+        { src: '../audio/09_Tried_to_Be.mp3', type: audioFormat},
+        { src: '../audio/10_Too_Late_2.mp3', type: audioFormat},
+        { src: '../audio/11_She_Loves.mp3', type: audioFormat},
+        { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: audioFormat},
+        { src: '../audio/13_Ha_Na.mp3', type: audioFormat}
     ];
+
     $scope.titles = [
         "",
         "Funeral March",
@@ -78,9 +82,12 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
     var refreshMetadata = function () {
         var popoverContent = $('.popover-content');
         var popoverTitle = $('.popover-title');
-        var currentTrack = $scope.bdtemplayer.currentTrack;
-        var currentTitle = $scope.titles[currentTrack];
-        var currentMetadata = $scope.metadata[currentTrack];
+
+        var currentTrackNumber = $scope.bdtemplayer.currentTrack;
+
+        var currentTitle = $scope.titles[currentTrackNumber].toUpperCase();
+        var currentMetadata = $scope.metadata[currentTrackNumber].toUpperCase();
+
         popoverContent.attr('title', currentTitle);
         popoverContent.attr('data-title', currentTitle);
         popoverContent.attr('data-content', currentMetadata);

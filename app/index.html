@@ -19,6 +19,7 @@
 
 
     <!-- main app -->
+    <script src="js/filters.js"></script>
     <script src="js/bdtem.js"></script>
 
     <!-- build:js scripts/vendor/bootstrap.js -->
@@ -88,6 +89,10 @@
         <div style="height: 50px; align-self: center; align-content: center; text-align: center; margin: 0 auto;"
              id="progressbar" ng-click="seekFromProgressBar($event)">
             <progress value={{bdtemplayer.currentTime}} max="{{bdtemplayer.duration}}"></progress>
+        </div>
+
+        <div style="align-content: center; align-self: center; text-align: center">
+            {{bdtemplayer.currentTime | timeFilter }} / {{bdtemplayer.duration | timeFilter}}
         </div>
 
         <div style="align-self: center; align-content: center; text-align: center; margin: 0 auto;">
