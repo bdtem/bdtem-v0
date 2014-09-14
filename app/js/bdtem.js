@@ -2,7 +2,7 @@ var bdtem = angular.module('bdtem', ['mediaPlayer']);
 
 bdtem.controller('PlaylistCtrl', function ($scope) {
 
-    this.songs = [
+    $scope.songs = [
         { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
         { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
         { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
@@ -18,7 +18,7 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         { src: '../audio/13_Ha_Na.mp3', type: 'audio/mpeg'}
     ];
 
-    this.titles = [
+    $scope.titles = [
         "",
         "Funeral March",
         "Hesitating Sun",
@@ -69,12 +69,22 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
 
     this.__defineSetter__("currentTime", this.seekTo);
 
+
+    var refreshMetadata = function () {
+        var popover = $('.popover-content');
+        var currentTitle = $scope.titles[$scope.bdtemplayer.currentTrack];
+        popover.attr('data-content', currentTitle);
+        popover.html(currentTitle);
+    };
+
     $scope.prev = function () {
         $scope.bdtemplayer.prev();
+        refreshMetadata();
     };
 
     $scope.next = function () {
         $scope.bdtemplayer.next();
+        refreshMetadata();
     };
 
     $scope.mySpecialPlayButton = function () {
