@@ -7339,4 +7339,27 @@ input[type="range"]::-ms-thumb {
   background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
   /* W3C */
 }
+progress::-webkit-progress-bar {
+  background: #000000;
+  color: #000000;
+}
+progress::-webkit-progress-value {
+  background: #ffffff;
+  color: #000000;
+}
+progress::-moz-progress-bar {
+  background: #ffffff;
+  border: none;
+  background-clip: content-box;
+}
+progress {
+  -webkit-appearance: none;
+  background: #000000;
+  height: 2px;
+  color: #ffffff;
+  width: 100%;
+  border: none;
+  border-left: solid white 1px;
+  border-right: solid white 1px;
+}
 /*# sourceMappingURL=/styles/main.css.map */

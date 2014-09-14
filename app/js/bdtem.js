@@ -48,7 +48,7 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
     $scope.seekFromProgressBar = function(event) {
         var srcElement = event.srcElement;
         var sourceElement = srcElement ? srcElement : event.target;
-        var maxInDuration = sourceElement.max;
+        var maxInDuration = $scope.bdtemplayer.duration;
         var pxWidth = sourceElement.offsetWidth;
         var xOffset = sourceElement.offsetParent.offsetLeft;
         var clickOffset = event.layerX;
@@ -69,16 +69,20 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
 
     this.__defineSetter__("currentTime", this.seekTo);
 
-    this.prev = function () {
+    $scope.prev = function () {
         $scope.bdtemplayer.prev();
     };
 
-    this.next = function () {
+    $scope.next = function () {
         $scope.bdtemplayer.next();
     };
 
-    this.mySpecialPlayButton = function () {
+    $scope.mySpecialPlayButton = function () {
         $scope.bdtemplayer.playPause();
     };
+
+    $scope.metadataPopover = function () {
+        console.log("I would like to pop over some data :D");
+    }
 
 });

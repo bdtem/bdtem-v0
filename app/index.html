@@ -83,57 +83,36 @@
 
 </div>
 
-<!-- PLAYBACK CONTROLS -->
-
 <nav style="border: none" class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 
     <div ng-controller="PlaylistCtrl as playlist" class="ng-scope">
 
         <audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="playlist.songs">
-            <source src="audio/01_Funeral_March.mp3" type="audio/mpeg">
+            <source src="{{songs[1].src}}">
         </audio>
 
-        <table>
-            <tr>
+        <div style="height: 50px; align-self: center; align-content: center; text-align: center; margin: 0 auto;"
+             id="progressbar" ng-click="seekFromProgressBar($event)">
+            <progress value={{bdtemplayer.currentTime}} max="{{bdtemplayer.duration}}"></progress>
+        </div>
 
-                <td width="3.333%">
-                    <div class="btn" ng-click="playlist.prev()">
-                        <i class="fa fa-fast-backward"></i>
-                    </div>
-                </td>
-                <td width="3.333%">
-                    <div class="btn" ng-click="playlist.mySpecialPlayButton()">
-                        <i class="fa fa-play"
-                           ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
-                    </div>
-                </td>
-                <td width="8.333%">
-                    <div class="btn" ng-click="playlist.next()">
-                        <i class="fa fa-fast-forward"></i>
-                    </div>
-                </td>
-
-                <td width="50%">
-                    <div style="height: 20px" id="progressbar" ng-click="seekFromProgressBar($event)">
-                        <progress value={{bdtemplayer.currentTime}}  max="{{bdtemplayer.duration}}"></progress>
-                    </div>
-                </td>
-
-
-                <td width="5%">
-                    <div id="metainfo" class="fa pull-right">
-                        <a class="btn btn-lg"
-                           data-content="Some cool data"
-                           data-toggle="popover"
-                           title=""
-                           href="#"
-                           data-original-title="Some title">
-                            &#xf05a;
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div style="align-self: center; align-content: center; text-align: center; margin: 0 auto;">
+            <div class="btn" ng-click="playlist.prev()">
+                <i class="fa fa-fast-backward"></i>
+            </div>
+            <div class="btn" ng-click="mySpecialPlayButton()">
+                <i class="fa fa-play"
+                   ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
+            </div>
+            <div class="btn" ng-click="next()">
+                <i class="fa fa-fast-forward"></i>
+            </div>
+            <div class="btn " ng-click="metadataPopover()">
+                <i class="fa">
+                    &#xf05a;
+                </i>
+            </div>
+        </div>
     </div>
 </nav>
 
