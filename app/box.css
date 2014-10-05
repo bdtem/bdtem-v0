@@ -9,5 +9,5 @@ table {
 
 .bottomless {
     table-layout: fixed; width: 30%; text-align: center; border: 2pt solid white; border-collapse: collapse;
-    line-height: 180%; border-bottom: none
+    line-height: 180%; border-bottom: none;
 }
