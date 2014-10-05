@@ -6,7 +6,7 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html ng-app="bdtem" class="ng-scope"> <!--<![endif]-->
+<html ng-app="bdtem"> <!--<![endif]-->
 
 <head>
 
@@ -38,6 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="box.css">
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -45,7 +46,7 @@
 </head>
 
 
-<body style="background-color: #000000; background-repeat: no-repeat !important;">
+<body style="background-color: #000000; background-repeat: no-repeat !important;" ng-controller="PlaylistCtrl as playlist" class="ng-scope">
 
 <nav style="border: none" class="navbar navbar-default navbar-fixed-top" role="navigation">
 
@@ -72,17 +73,91 @@
 
 </nav>
 
-<div class="media-body left pull-left" style="background-image: url(./images/DreamSmall.gif)">
+<div id="datBox" class="media-body left pull-left" style="background-image: url(./images/DreamSmall.gif); height: 90%">
 
-    <div class="container pull-left">
-        <img src="images/mockup.png">
-    </div>
+    <table class="bottomless">
+        <tr>
+            <td>
+                <p><span style="letter-spacing: 6pt">IF ALL THAT WAS SAID</span>
+                    <br/>
+                <span style="letter-spacing: 3pt"> ABOUT <span
+                        style="font-style: italic">THOSE WHO ARE DEAD</span></span>
+                    <br/>
+                    <span style="letter-spacing: 4.2pt">WAS COMPILED IN A BOOK</span>
+                    <br/>
+                    <span style="letter-spacing: 7pt"> AND LEFT IN A NOOK</span>
+                    <br/>
+                    <span style="letter-spacing: 6pt">I'D BE HAPPY TO READ</span>
+                    <br/>
+                    <span style="letter-spacing: 6.5pt">OF HARROWING DEEDS</span>
+                    <br/>
+                    <span style="font-weight: bold">BUT I'D LIKE NOT TO KNOW THE ENDING</span>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <table class="bottomless">
+        <tr>
+            <td>
+                <p><span style="font-weight: bold"><a ng-click="skipToTrack(1)">HESITATING SUN</a>
+    <img src="images/shield.png" border="0" style="width: 5%; height: 5%"/>
+      <a ng-click="skipToTrack(2)">FUTURE IS BLEAKER</a>
+    <br/>
+      <a ng-click="skipToTrack(3)">FEEL THE SAME</a>
+        <img src="images/shield.png" border="0" style="width: 5%; height: 5%"/>
+      <a ng-click="skipToTrack(4)">SIT ON A DREAM</a>
+    <br/>
+    <a ng-click="skipToTrack(5)">THE DEBATE</a>
+      <img src="images/shield.png" border="0" style="width: 5%; height: 5%"/>
+      <a ng-click="skipToTrack(6)">WORKING AT FIRST</a>
+   <br/>
+     <a ng-click="skipToTrack(7)">TRIED TO BE</a>
+   <img src="images/shield.png" border="0" style="width: 5%; height: 5%"/>
+     <a ng-click="skipToTrack(8)">THE BASEMENT</a>
+   <br/>
+   <a ng-click="skipToTrack(9)">ONE LEVEL AT A TIME</a>
+   <br/>
+     <a ng-click="skipToTrack(10)">THE END</a>
+     <br/>
+    <span style="word-spacing: 8pt"><a ng-click="skipToTrack(0)">PLAY ALL</a>
+   <img src="images/scrollBrighter.png" border="0" style="width: 30%; height: 30%"/>
+    <a href="audio/bdtem.zip">DOWNLOAD</a></span></span>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <table class="bottomless">
+        <tr>
+            <td>
+                <p><span style="font-style: italic; font-size: 125%; letter-spacing: 7pt"> DEY CO. / DEY IND.</span>
+                    <br/>
+                    <span style="font-weight: bold; font-size: 120%; letter-spacing: 23pt">PRESENTS</span>
+                    <br/>
+                    <span style="letter-spacing: 1.5pt; font-size: 120%">BOB DEY'S TANK ENGINE MAN</span>
+                    <br/>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td>
+                <p><span style="font-style: italic; letter-spacing: 13.5pt; font-size: 150%"> BEFORE LIFE</span>
+                    <br/>
+                    <span style="font-style: italic; letter-spacing: 12pt; font-size: 150%">AFTER DEATH</span>
+                    <br/>
+                </p>
+            </td>
+        </tr>
+    </table>
 
 </div>
 
 <nav id="playlistnavbar" style="border: none" class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 
-    <div ng-controller="PlaylistCtrl as playlist" class="ng-scope">
+    <div>
 
         <audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="songs"></audio>
 
@@ -92,7 +167,9 @@
         </div>
 
         <div style="align-content: center; align-self: center; text-align: center">
-            {{bdtemplayer.currentTime | timeFilter }} / {{bdtemplayer.duration | timeFilter}}
+
+            Now Playing: {{ titles[bdtemplayer.currentTrack] | uppercase }}
+            {{bdtemplayer.formatTime}} / {{bdtemplayer.formatDuration}}
         </div>
 
         <div style="align-self: center; align-content: center; text-align: center; margin: 0 auto;">
@@ -129,6 +206,8 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
+
+
 
 </body>
 

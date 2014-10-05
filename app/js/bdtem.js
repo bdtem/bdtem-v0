@@ -38,7 +38,7 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         "Ha Na"
     ];
 
-    $scope.metadata = $scope.titles.map(function(datString) {
+    $scope.metadata = $scope.titles.map(function (datString) {
         var metadata = datString + " is a pretty cool track.";
         console.log(metadata);
         return  metadata;
@@ -54,7 +54,7 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         return $scope.bdtemplayer.currentTime | 0;
     };
 
-    $scope.seekFromProgressBar = function(event) {
+    $scope.seekFromProgressBar = function (event) {
         var srcElement = event.srcElement;
         var sourceElement = srcElement ? srcElement : event.target;
         var maxInDuration = $scope.bdtemplayer.duration;
@@ -108,5 +108,9 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
     $scope.mySpecialPlayButton = function () {
         $scope.bdtemplayer.playPause();
     };
+
+    $scope.skipToTrack = function ( index ) {
+        $scope.bdtemplayer.play( index, true );
+    }
 
 });
