@@ -16,7 +16,7 @@
 
     <script src="bower_components/angular-media-player/src/directive.js"></script>
     <script src="bower_components/angular-media-player/src/helpers.js"></script>
-
+    <script src="bower_components/angular-hotkeys/build/hotkeys.js"></script>
 
     <!-- main app -->
     <script src="js/filters.js"></script>
@@ -176,7 +176,7 @@
             <div class="btn" ng-click="prev()">
                 <i class="fa fa-fast-backward"></i>
             </div>
-            <div class="btn" ng-click="mySpecialPlayButton()">
+            <div class="btn" ng-click="bdtemPlayPause()">
                 <i class="fa fa-play"
                    ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
             </div>

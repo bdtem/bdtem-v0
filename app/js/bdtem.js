@@ -1,6 +1,6 @@
-var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer']);
+var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys']);
 
-bdtem.controller('PlaylistCtrl', function ($scope) {
+bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
 
 
     $scope.songs = [
@@ -52,6 +52,10 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         return $scope.bdtemplayer.currentTime | 0;
     };
 
+    var getDuration = function () {
+        return $scope.bdtemplayer.duration | 0;
+    };
+
     $scope.seekFromProgressBar = function (event) {
         var srcElement = event.srcElement;
         var sourceElement = srcElement ? srcElement : event.target;
@@ -65,6 +69,10 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         var whereToSeekInDuration = Math.floor(percentage * maxInDuration);
 
         $scope.bdtemplayer.seek(whereToSeekInDuration);
+    };
+
+    $scope.seekTo = function (whereToSeek) {
+        $scope.bdtemplayer.seek(whereToSeek | 0);
     };
 
     this.seekTo = function (whereToSeek) {
@@ -103,12 +111,53 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         refreshMetadata();
     };
 
-    $scope.mySpecialPlayButton = function () {
+    $scope.bdtemPlayPause = function () {
         $scope.bdtemplayer.playPause();
     };
 
-    $scope.skipToTrack = function ( index ) {
-        $scope.bdtemplayer.play( index, true );
-    }
+    $scope.skipToTrack = function (index) {
+        $scope.bdtemplayer.play(index, true);
+    };
 
+    hotkeys.bindTo($scope)
+        .add({
+            combo: 'space',
+            description: 'Play / Pause',
+            callback: function () {
+                $scope.bdtemPlayPause();
+            }
+        }).add({
+            combo: 'left',
+            description: 'Previous Track',
+            callback: function () {
+                $scope.prev();
+            }
+        }).add({
+            combo: 'right',
+            description: 'Next Track',
+            callback: function () {
+                $scope.next();
+            }
+        }).add({
+            combo: 'ctrl+left',
+            description: 'Seek Back 10 Seconds',
+            callback: function () {
+                var whereToSeek = getCurrentTime() - 10;
+
+                whereToSeek = whereToSeek < 0 ? 0 : whereToSeek;
+
+                $scope.seekTo(whereToSeek);
+            }
+        }).add({
+            combo: 'ctrl+right',
+            description: 'Seek Forward 10 Seconds',
+            callback: function () {
+                var duration = getDuration();
+
+                var whereToSeek = getCurrentTime() + 10;
+                whereToSeek = whereToSeek > duration ? duration : whereToSeek;
+
+                $scope.seekTo(whereToSeek);
+            }
+        });
 });
