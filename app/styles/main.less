@@ -1,17 +1,40 @@
 @import "../bower_components/bootstrap/less/bootstrap.less";
+
 @icon-font-path: "../fonts/glyphicons/";
 
 @import "../bower_components/font-awesome/less/font-awesome.less";
 @fa-font-path: "../fonts/font-awesome";
 
+//Overrides:
+
+//Variable overrides:
+@link-color: #FFFFFF;
+@link-hover-color: darken(@link-color, 30%);
+@popover-bg: #000000;
+
+
+//Basic / scaffolding overrides:
 body {
   background-color: #000000;
+}
+
+a {
+  color: @link-color;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: @link-hover-color;
+  }
+
+  &:focus {
+    .tab-focus();
+  }
 }
 
 .media-body {
   background-color: #000000;
 }
-
 
 .container {
   color: #f5f5f5;
@@ -38,10 +61,10 @@ body {
 }
 
 .browsehappy {
-  margin: 0.2em 0; 
-  background: #ccc; 
-  color: #000; 
-  padding: 0.2em 0; 
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
 
 .jumbotron {
@@ -49,74 +72,47 @@ body {
   background-color: #131313;
 }
 
-input[type="range"] {
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-  width: 100%;
-  height: 20px;
-  margin: 0;
+//Popover overrides:
+
+.popover-title {
+  font-family: "Palatino Linotype", "Book Antiqua", "Helvetica Neue Light", serif;
+  margin: 0; // reset heading margin
+  padding: 8px 14px;
+  font-size: 14pt;
+  color: #FFF0F0;
+  font-weight: normal;
+  line-height: 18px;
+  background-color: @popover-title-bg;
+  border-bottom: 1px solid darken(@popover-title-bg, 5%);
+  border-radius: 5px 5px 0 0;
+}
+
+.popover-content {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 12pt;
+  font-kerning: 15pt;
+  padding: 9px 14px;
+}
+
+// Progress bar overrides (browser specific):
+
+progress::-webkit-progress-bar {
+  background: #000000;
+  color: #000000
+}
+
+progress::-webkit-progress-value {
+  background: #ffffff;
+  color: #000000;
+}
+
+progress::-moz-progress-bar {
+  background: #ffffff;
   border: none;
-  padding: 1px 2px;
-  border-radius: 14px;
-  background: #232528;
-  box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-  -webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-  outline: none; /* no focus outline */
+  background-clip: content-box
 }
 
-input[type="range"]::-moz-range-track {
-  border: inherit;
-  background: transparent;
-}
-
-input[type="range"]::-ms-track {
-  border: inherit;
-  color: transparent; /* don't drawn vertical reference line */
-  background: transparent;
-}
-
-input[type="range"]::-ms-fill-lower,
-input[type="range"]::-ms-fill-upper {
-  background: transparent;
-}
-
-input[type="range"]::-ms-tooltip {
-  display: none;
-}
-
-/* thumb */
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 40px;
-  height: 18px;
-  border: none;
-  border-radius: 12px;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f)); /* android <= 2.2 */
-  background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%); /* older mobile safari and android > 2.2 */;
-  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
-}
-input[type="range"]::-moz-range-thumb {
-  width: 40px;
-  height: 18px;
-  border: none;
-  border-radius: 12px;
-  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
-}
-
-input[type="range"]::-ms-thumb {
-  width: 40px;
-  height: 18px;
-  border-radius: 12px;
-  border: 0;
-  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
-}
-
-progress::-webkit-progress-bar { background: #000000; color: #000000 }
-progress::-webkit-progress-value { background: #ffffff; color: #000000; }
-progress::-moz-progress-bar { background: #ffffff; border: none; background-clip: content-box}
-
-progress{
+progress {
   -webkit-appearance: none;
   background: #000000;
   height: 2px;
