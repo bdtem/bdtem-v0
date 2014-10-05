@@ -3,22 +3,20 @@ var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer']);
 bdtem.controller('PlaylistCtrl', function ($scope) {
 
 
-    var audioFormat = 'audio/mpeg';
-
     $scope.songs = [
-        { src: '../audio/01_Funeral_March.mp3', type: audioFormat},
-        { src: '../audio/02_Hesitating_Sun.mp3', type: audioFormat},
-        { src: '../audio/03_Future_Is_Bleaker.mp3', type: audioFormat},
-        { src: '../audio/04_Sad_to_Feel.mp3', type: audioFormat},
-        { src: '../audio/05_2-D.mp3', type: audioFormat},
-        { src: '../audio/06_Digging_Out.mp3', type: audioFormat},
-        { src: '../audio/07_The_Debate_1.mp3', type: audioFormat},
-        { src: '../audio/08_Too_Late_3.mp3', type: audioFormat},
-        { src: '../audio/09_Tried_to_Be.mp3', type: audioFormat},
-        { src: '../audio/10_Too_Late_2.mp3', type: audioFormat},
-        { src: '../audio/11_She_Loves.mp3', type: audioFormat},
-        { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: audioFormat},
-        { src: '../audio/13_Ha_Na.mp3', type: audioFormat}
+        { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
+        { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
+        { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
+        { src: '../audio/04_Sad_to_Feel_the_Same.mp3', type: 'audio/mpeg'},
+        { src: '../audio/05_Sit_on_a_Dream.mp3', type: 'audio/mpeg'},
+        { src: '../audio/06_Digging_Out.mp3', type: 'audio/mpeg'},
+        { src: '../audio/07_The_Debate.mp3', type: 'audio/mpeg'},
+        { src: '../audio/08_Working_at_First.mp3', type: 'audio/mpeg'},
+        { src: '../audio/09_Tried_to_Be.mp3', type: 'audio/mpeg'},
+        { src: '../audio/10_The_Basement.mp3', type: 'audio/mpeg'},
+        { src: '../audio/11_One_Level_at_a_Time.mp3', type: 'audio/mpeg'},
+        { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: 'audio/mpeg'},
+        { src: '../audio/13_The_End.mp3', type: 'audio/mpeg'}
     ];
 
     $scope.titles = [
@@ -26,16 +24,16 @@ bdtem.controller('PlaylistCtrl', function ($scope) {
         "Funeral March",
         "Hesitating Sun",
         "Future Is Bleaker",
-        "Sad to Feel",
-        "2-D",
+        "Sad to Feel the Same",
+        "Sit on a Dream",
         "Digging Out",
-        "The Debate 1",
-        "Too Late 3",
+        "The Debate",
+        "Working at First",
         "Tried to Be",
-        "Too Late 2",
-        "She Loves",
+        "The Basement",
+        "One Level at a Time",
         "Every Sound in a Row",
-        "Ha Na"
+        "The End"
     ];
 
     $scope.metadata = $scope.titles.map(function (datString) {
