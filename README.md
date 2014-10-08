@@ -30,8 +30,8 @@ Style:
 - Polish up the transport bar
 - Get / position the updated background image
 - Finalize design for seek bar
--Compare design with Tyler's original mock-up to see if we are forgetting/missing anything aesthetically
-- Move the buttons to the bottom right (maybe move the shield, too?)
+- Compare design with Tyler's original mock-up to see if we are forgetting/missing anything aesthetically
+- Move the buttons to the bottom right (maybe move the shield, too)?
 - Style metadata popup
 
 // NICE TO DO:
