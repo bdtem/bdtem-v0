@@ -3,21 +3,22 @@ var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys
 bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
 
 
-    $scope.songs = [
-        { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
-        { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
-        { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
-        { src: '../audio/04_Sad_to_Feel_the_Same.mp3', type: 'audio/mpeg'},
-        { src: '../audio/05_Sit_on_a_Dream.mp3', type: 'audio/mpeg'},
-        { src: '../audio/06_Digging_Out.mp3', type: 'audio/mpeg'},
-        { src: '../audio/07_The_Debate.mp3', type: 'audio/mpeg'},
-        { src: '../audio/08_Working_at_First.mp3', type: 'audio/mpeg'},
-        { src: '../audio/09_Tried_to_Be.mp3', type: 'audio/mpeg'},
-        { src: '../audio/10_The_Basement.mp3', type: 'audio/mpeg'},
-        { src: '../audio/11_One_Level_at_a_Time.mp3', type: 'audio/mpeg'},
-        { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: 'audio/mpeg'},
-        { src: '../audio/13_The_End.mp3', type: 'audio/mpeg'}
-    ];
+
+        $scope.songs = [
+            { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
+            { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
+            { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
+            { src: '../audio/04_Sad_to_Feel_the_Same.mp3', type: 'audio/mpeg'},
+            { src: '../audio/05_Sit_on_a_Dream.mp3', type: 'audio/mpeg'},
+            { src: '../audio/06_Digging_Out.mp3', type: 'audio/mpeg'},
+            { src: '../audio/07_The_Debate.mp3', type: 'audio/mpeg'},
+            { src: '../audio/08_Working_at_First.mp3', type: 'audio/mpeg'},
+            { src: '../audio/09_Tried_to_Be.mp3', type: 'audio/mpeg'},
+            { src: '../audio/10_The_Basement.mp3', type: 'audio/mpeg'},
+            { src: '../audio/11_One_Level_at_a_Time.mp3', type: 'audio/mpeg'},
+            { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: 'audio/mpeg'},
+            { src: '../audio/13_The_End.mp3', type: 'audio/mpeg'}
+        ];
 
     $scope.titles = [
         "",
@@ -37,9 +38,13 @@ bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
     ];
 
     $scope.metadata = $scope.titles.map(function (datString) {
-        var metadata = datString + " is a pretty cool track.";
+        var metadata = "This is some metadata for " + datString +". It is a pretty cool track.";
         console.log(metadata);
         return  metadata;
+    });
+
+    $scope.catalogNumbers = $scope.titles.map(function () {
+        return "Gr. 2"
     });
 
     this.isPlaying = function () {
