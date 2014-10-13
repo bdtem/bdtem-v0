@@ -3,8 +3,6 @@
 
 // MUST DO:
 
-- Buy domain name(s)
-
 Box:
 
 - Get the updated song titles / tracks
@@ -14,9 +12,7 @@ Link Buttons:
 
 - Link up all the top-right buttons to the desired actions
 - Position the links and the shield away from edges
-- Link all the buttons to the real things
 - Make info video or use a placeholder video
-- Set up accounts for link buttons (newsletter sign-up; contact info (emails, etc.); social media; paypal; 
 
 Metadata Popup
 
@@ -29,10 +25,7 @@ Style:
 - Correctly position / size 'the box' within the page
 - Polish up the transport bar
 - Get / position the updated background image
-- Finalize design for seek bar
-- Compare design with Tyler's original mock-up to see if we are forgetting/missing anything aesthetically
-- Move the buttons to the bottom right (maybe move the shield, too)?
-- Style metadata popup
+
 
 // NICE TO DO:
 
