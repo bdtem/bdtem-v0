@@ -1,23 +1,62 @@
 body {
-    background-color: #000000; color: #FFFFFF; font-family: "Book Antiqua";
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: "Book Antiqua";
+}
+
+img {
+    border: none;
 }
 
 table {
-    table-layout: fixed; width: 22.5em; height: 5em; text-align: center; border: 2pt solid white; border-collapse: collapse;
-    line-height: 180%;
+    vertical-align: middle;
+    table-layout: fixed;
+    width: 20vw;
+    height: 75vh;
+    text-align: center;
+    border-collapse: collapse;
+    line-height: 3.2vh
 }
 
-tr td:last-child{
-    white-space:nowrap;
+tr td {
+    border: 2pt solid white;
+    font-size: 1.7vmin;
+
+    padding-left: 0.8vw;
+    padding-right: 0.8vw;
+
+    align-self: center;
+    text-align: center;
+    align-content: center;
+}
+
+.stretched {
+}
+
+
+tr td:last-child {
+    white-space: nowrap;
+}
+
+.shield {
+    max-width: 3vw;
+    max-height: 3vh;
 }
 
 .bottomless {
+    vertical-align: middle;
     border-bottom: none;
 }
 
-.stretch_it{
+.pull-down {
+    position: relative;
+    top: 3vmin;
+}
+
+.stretch_it {
     white-space: nowrap;
 }
-.justify{
-    text-align:justify;
+
+.justify {
+    text-align: justify;
 }

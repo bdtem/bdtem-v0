@@ -39,12 +39,11 @@ bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
 
     $scope.metadata = $scope.titles.map(function (datString) {
         var metadata = "This is some metadata for " + datString +". It is a pretty cool track.";
-        console.log(metadata);
         return  metadata;
     });
 
-    $scope.catalogNumbers = $scope.titles.map(function () {
-        return "Gr. 2"
+    $scope.catalogNumbers = $scope.titles.map(function (element, index) {
+        return  'Gr. 2' + ' No. ' + index;
     });
 
     this.isPlaying = function () {
@@ -96,14 +95,16 @@ bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
 
         var currentTrackNumber = $scope.bdtemplayer.currentTrack;
 
-        var currentTitle = $scope.titles[currentTrackNumber].toUpperCase();
-        var currentMetadata = $scope.metadata[currentTrackNumber].toUpperCase();
+        var currentTitle = $scope.titles[currentTrackNumber];
+        var currentMetadata = $scope.metadata[currentTrackNumber];
+        var currentCatalog = $scope.catalogNumbers[currentTrackNumber];
 
-        popoverContent.attr('title', currentTitle);
-        popoverContent.attr('data-title', currentTitle);
+        var titleAndCatalog = currentTitle + ' ' + currentCatalog;
+        popoverContent.attr('title', titleAndCatalog);
+        popoverContent.attr('data-title', titleAndCatalog);
         popoverContent.attr('data-content', currentMetadata);
         popoverContent.html(currentMetadata);
-        popoverTitle.html(currentTitle);
+        popoverTitle.html(titleAndCatalog);
     };
 
     $scope.prev = function () {
@@ -122,6 +123,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
 
     $scope.skipToTrack = function (index) {
         $scope.bdtemplayer.play(index, true);
+        refreshMetadata();
     };
 
     hotkeys.bindTo($scope)

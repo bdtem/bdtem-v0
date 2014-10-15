@@ -79,10 +79,10 @@ a {
 }
 
 .logo {
-  min-height: 2%;
-  max-height: 40px;
-  min-width: 2%;
-  max-width: 20px;
+  min-height: 2vh;
+  max-height: 20vh;
+  min-width: 2vw;
+  max-width: 15vw;
   background-color: #000000;
   margin: 5px;
 }
@@ -95,17 +95,24 @@ a {
 }
 
 .middle-main {
-  background: #000000 url(../images/DreamSmall.gif);
+  background: 20vw #000000 no-repeat url(../images/DreamSmall.gif);
+  background-size: 100vw 100vh;
   overflow: hidden;
   zoom: 1;
   min-height: 90%;
   max-height: 90%;
   max-width: 100%;
   min-width: 100%;
-  padding-left: 4%;
+  padding-top: 5vh;
+  padding-left: 10vw;
 }
 
 //Popover overrides:
+
+.popover {
+  min-width: 75%;
+  max-width: 40%;
+}
 
 .popover-title {
   font-family: "Palatino Linotype", "Book Antiqua", "Helvetica Neue Light", serif;

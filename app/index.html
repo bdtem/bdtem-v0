@@ -19,7 +19,6 @@
     <script src="bower_components/angular-hotkeys/build/hotkeys.js"></script>
 
     <!-- main app -->
-    <script src="js/jquery_fns.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/bdtem.js"></script>
 
@@ -49,7 +48,7 @@
 
 <body ng-controller="PlaylistCtrl as playlist" class="ng-scope">
 
-<div style="border-bottom: deeppink 1px solid" class="container navbar-container">
+<div class="container navbar-container">
     <nav style="border: none; overflow:hidden;" class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="btn-group btn-group-justified">
 
@@ -75,91 +74,87 @@
     </nav>
 </div>
 
-<div style="border-top: deepskyblue 1px solid;border-bottom: deepskyblue 1px solid" class="row middle-main">
+<div class="row middle-main">
 
     <table class="bottomless">
-        <tr>
-            <td class="stretched">
-                <p><span style="letter-spacing: 6pt">IF ALL THAT WAS SAID</span>
-                    <br/>
-                <span style="letter-spacing: 3pt"> ABOUT <span
-                        style="font-style: italic">THOSE WHO ARE DEAD</span></span>
-                    <br/>
-                    <span style="letter-spacing: 4.2pt">WAS COMPILED IN A BOOK</span>
-                    <br/>
-                    <span style="letter-spacing: 7pt"> AND LEFT IN A NOOK</span>
-                    <br/>
-                    <span style="letter-spacing: 6pt">I'D BE HAPPY TO READ</span>
-                    <br/>
-                    <span style="letter-spacing: 6.5pt">OF HARROWING DEEDS</span>
-                    <br/>
-                    <span style="font-weight: bold">BUT I'D LIKE NOT TO KNOW THE ENDING</span>
-                </p>
-            </td>
-        </tr>
-    </table>
 
-    <table class="bottomless">
         <tr>
             <td>
-                <p style="margin: 0; padding: 0;    font-weight: bold"><a ng-click="skipToTrack(1)">HESITATING SUN</a>
-    <img src="images/shield.png" border="0" style="width: 5%; height: 5%"/>
-      <a ng-click="skipToTrack(2)">FUTURE IS BLEAKER</a>
-    <br/>
-      <a ng-click="skipToTrack(3)">FEEL THE SAME</a>
-        <img src="images/shield.png" border="0" style="width: 5%; height: 5%"/>
-      <a ng-click="skipToTrack(4)">SIT ON A DREAM</a>
-    <br/>
-    <a ng-click="skipToTrack(6)">THE DEBATE</a>
-      <img src="images/shield.png" border="0" style="width: 5%; height: 5%"/>
-      <a ng-click="skipToTrack(7)">WORKING AT FIRST</a>
-   <br/>
-     <a ng-click="skipToTrack(8)">TRIED TO BE</a>
-   <img src="images/shield.png" border="0" style="width: 5%; height: 5%"/>
-     <a ng-click="skipToTrack(9)">THE BASEMENT</a>
-   <br/>
-   <a ng-click="skipToTrack(10)">ONE LEVEL AT A TIME</a>
-   <br/>
-     <a ng-click="skipToTrack(12)">THE END</a>
-     <br/>
-    <span style="word-spacing: 8pt"><a ng-click="skipToTrack(0)">PLAY ALL</a>
-   <img src="images/scrollBrighter.png" border="0" style="width: 30%; height: 30%"/>
-    <a href="audio/bdtem.zip">DOWNLOAD</a></span>
-                </p>
+                <span class="stretched">IF ALL THAT WAS SAID</span>
+                    <br/>
+                    <span class="stretched">ABOUT <i>THOSE WHO ARE DEAD</i></span>
+                    <br/>
+                    <span class="stretched">WAS COMPILED IN A BOOK</span>
+                    <br/>
+                    <span class="stretched">AND LEFT IN A NOOK</span>
+                    <br/>
+                    <span class="stretched">I'D BE HAPPY TO READ</span>
+                    <br/>
+                    <span class="stretched">OF HARROWING DEEDS</span>
+                    <br/>
+                    <span class="stretched"><b>BUT I'D LIKE NOT TO KNOW THE ENDING</b>&nbsp;</span>
+
             </td>
         </tr>
-    </table>
 
-    <table class="bottomless">
+        <tr>
+            <td><b>
+                <a ng-click="skipToTrack(1)">HESITATING SUN</a>
+                    <img src="images/shield.png" class="shield"/>
+                    <a ng-click="skipToTrack(2)">FUTURE IS BLEAKER&nbsp;</a>
+                    <br/>
+                    <a ng-click="skipToTrack(3)">FEEL THE SAME</a>
+                    <img src="images/shield.png" class="shield"/>
+                    <a ng-click="skipToTrack(4)">SIT ON A DREAM</a>
+                    <br/>
+                    <a ng-click="skipToTrack(6)">THE DEBATE</a>
+                    <img src="images/shield.png" class="shield"/>
+                    <a ng-click="skipToTrack(7)">WORKING AT FIRST</a>
+                    <br/>
+                    <a ng-click="skipToTrack(8)">TRIED TO BE</a>
+                    <img src="images/shield.png" class="shield"/>
+                    <a ng-click="skipToTrack(9)">THE BASEMENT</a>
+                    <br/>
+                    <a ng-click="skipToTrack(10)">ONE LEVEL AT A TIME</a>
+                    <br/>
+                    <a ng-click="skipToTrack(12)">THE END</a>
+                    <br/>
+                    <a class="pull-down" ng-click="skipToTrack(0)">PLAY ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <img src="images/scrollBrighter.png" style="width: 30%; height: 30%"/>
+                    <a class="pull-down" href="audio/bdtem.zip">&nbsp;&nbsp;&nbsp;&nbsp;DOWNLOAD</a>
+            </b>
+            </td>
+        </tr>
+
         <tr>
             <td>
-                <p><span style="font-style: italic; font-size: 125%; letter-spacing: 7pt"> DEY CO. / DEY IND.</span>
+                <span class="stretched"> DEY CO. / DEY IND.</span>
                     <br/>
-                    <span style="font-weight: bold; font-size: 120%; letter-spacing: 23pt">PRESENTS</span>
+                    <span class="stretched">PRESENTS</span>
                     <br/>
-                    <span style="letter-spacing: 1.5pt; font-size: 120%">BOB DEY'S TANK ENGINE MAN</span>
+                    <span class="stretched">BOB DEY'S TANK ENGINE MAN</span>
                     <br/>
-                </p>
             </td>
         </tr>
-    </table>
 
-    <table>
         <tr>
             <td>
-                <p><span style="font-style: italic; letter-spacing: 13.5pt; font-size: 150%"> BEFORE LIFE</span>
+                    <span class="stretched">BEFORE LIFE</span>
+
                     <br/>
-                    <span style="font-style: italic; letter-spacing: 12pt; font-size: 150%">AFTER DEATH</span>
-                    <br/>
-                </p>
+
+                    <span class="stretched">AFTER DEATH</span>
             </td>
         </tr>
+
     </table>
+
+    <script src="js/jquery_fns.js"></script>
 
 </div>
 
 
-<nav id="playlistnavbar" style="border-top: deeppink 1px solid" class="navbar navbar-default navbar-fixed-bottom"
+<nav id="playlistnavbar" class="navbar navbar-default navbar-fixed-bottom"
      role="navigation">
 
     <div>
@@ -181,7 +176,7 @@
 
             <div class="btn btn-lg pull-right"
                  id="metadata"
-                 title="{{titles[bdtemplayer.currentTrack]}} {{catalogNumbers[bdtemplayer.currentTrack]}} No. {{bdtemplayer.currentTrack}}"
+                 title="{{titles[bdtemplayer.currentTrack]}} {{catalogNumbers[bdtemplayer.currentTrack]}}"
                  data-placement="top"
                  data-container="nav"
                  data-toggle="popover"

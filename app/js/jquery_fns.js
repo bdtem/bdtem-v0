@@ -2,29 +2,32 @@
  * Created by abl on 10/12/14.
  */
 
-$.fn.stretch_text = function(){
-    var elmt          = $(this),
-        cont_width    = elmt.width(),
-        txt           = elmt.html(),
-        one_line      = $('<span class="stretch_it">' + txt + '</span>'),
-        nb_char       = elmt.text().length,
-        spacing       = cont_width/nb_char,
-        txt_width;
+$.fn.stretch_text = function () {
+    var element = $(this),
+        container_width = element.parent().width(),
+        element_width = element.width(),
+        nb_char = element.text().length,
+        spacing = container_width / nb_char;
 
-    elmt.html(one_line);
-    txt_width = one_line.width();
+    if (element_width <= container_width) {
+        var char_width = element_width / nb_char,
+            ltr_spacing = spacing - char_width + (spacing - char_width) / nb_char;
 
-    if (txt_width < cont_width){
-        var  char_width     = txt_width/nb_char,
-            ltr_spacing    = spacing - char_width + (spacing - char_width)/nb_char ;
-
-        one_line.css({'letter-spacing': ltr_spacing});
+        element.css({'letter-spacing': ltr_spacing});
     } else {
-        one_line.contents().unwrap();
-        elmt.addClass('justify');
+        element.contents().unwrap();
+        element.addClass('justify');
     }
 };
 
-$(document).ready(
-    $('.stretched').stretch_text()
-);
+$(document).ready(function () {
+
+    $('.stretched').each(function () {
+        $(this).stretch_text();
+    });
+
+    $(window).resize(function() {console.log('fuck yo couch')});
+
+});
+
+
