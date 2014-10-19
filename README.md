@@ -5,13 +5,15 @@
 
 Box:
 
-- Get the updated song titles / tracks
+- Get the updated tracks
 - Finish linking up the 'box links' to the desired actions
 
 Link Buttons:
 
 - Link up all the top-right buttons to the desired actions
-- Position the links and the shield away from edges
+- Position the links away from edges
+- Use the new top-right icons
+- Add animation to top-right icons
 - Make info video or use a placeholder video
 
 Metadata Popup
