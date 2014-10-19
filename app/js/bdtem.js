@@ -1,8 +1,6 @@
-var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys']);
+var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys', 'ui.bootstrap']);
 
-bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
-
-
+bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
 
         $scope.songs = [
             { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
@@ -50,27 +48,27 @@ bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
         return $scope.bdtemplayer.isPlaying;
     };
 
-    this.currentTime = 0;
-
     var getCurrentTime = function () {
         return $scope.bdtemplayer.currentTime | 0;
     };
+    $scope.__defineGetter__('currentTime', getCurrentTime);
 
     var getDuration = function () {
         return $scope.bdtemplayer.duration | 0;
     };
+    $scope.__defineGetter__('currentDuration', getDuration);
 
     $scope.seekFromProgressBar = function (event) {
         var srcElement = event.srcElement;
         var sourceElement = srcElement ? srcElement : event.target;
-        var maxInDuration = $scope.bdtemplayer.duration;
+
         var pxWidth = sourceElement.offsetWidth;
         var xOffset = sourceElement.offsetParent.offsetLeft;
         var clickOffset = event.layerX | event.clientX;
         var pixelsRight = Math.abs(xOffset - clickOffset);
 
         var percentage = pixelsRight / pxWidth;
-        var whereToSeekInDuration = Math.floor(percentage * maxInDuration);
+        var whereToSeekInDuration = Math.floor(percentage * getDuration());
 
         $scope.bdtemplayer.seek(whereToSeekInDuration);
     };
@@ -83,29 +81,22 @@ bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
         $scope.bdtemplayer.seek(whereToSeek | 0);
     };
 
-    this.__defineGetter__("currentTime", getCurrentTime);
+    var getMetadataTitle = function() {
+        var currentTrack = $scope.bdtemplayer.currentTrack;
+        var titleComponents = [
+            $scope.titles[currentTrack],
+            '<div class="pull-right">',
+            $scope.catalogNumbers[currentTrack],
+            '</div>',
+            '<br/>',
+            $filter('timeFilter')(getCurrentTime()),
+            "/",
+            $filter('timeFilter')(getDuration())
+        ];
 
-
-    this.__defineSetter__("currentTime", this.seekTo);
-
-
-    var refreshMetadata = function () {
-        var popoverContent = $('.popover-content');
-        var popoverTitle = $('.popover-title');
-
-        var currentTrackNumber = $scope.bdtemplayer.currentTrack;
-
-        var currentTitle = $scope.titles[currentTrackNumber];
-        var currentMetadata = $scope.metadata[currentTrackNumber];
-        var currentCatalog = $scope.catalogNumbers[currentTrackNumber];
-
-        var titleAndCatalog = currentTitle + ' ' + currentCatalog;
-        popoverContent.attr('title', titleAndCatalog);
-        popoverContent.attr('data-title', titleAndCatalog);
-        popoverContent.attr('data-content', currentMetadata);
-        popoverContent.html(currentMetadata);
-        popoverTitle.html(titleAndCatalog);
+        return titleComponents.join(" ");
     };
+    $scope.__defineGetter__('metadataTitle', getMetadataTitle);
 
     $scope.prev = function () {
         $scope.bdtemplayer.prev();
@@ -150,21 +141,24 @@ bdtem.controller('PlaylistCtrl', function ($scope, hotkeys) {
             description: 'Seek Back 10 Seconds',
             callback: function () {
                 var whereToSeek = getCurrentTime() - 10;
-
-                whereToSeek = whereToSeek < 0 ? 0 : whereToSeek;
-
                 $scope.seekTo(whereToSeek);
             }
         }).add({
             combo: 'ctrl+right',
             description: 'Seek Forward 10 Seconds',
             callback: function () {
-                var duration = getDuration();
-
                 var whereToSeek = getCurrentTime() + 10;
-                whereToSeek = whereToSeek > duration ? duration : whereToSeek;
-
                 $scope.seekTo(whereToSeek);
             }
         });
+
+    $scope.asHtml = function (val) {
+        console.log($sce);
+
+        return $sce.trustAsHtml("<i>yeaaah</i>");
+    };
+
+    $scope.isSceEnabled = function () {
+        return $sce.isEnabled();
+    }
 });
