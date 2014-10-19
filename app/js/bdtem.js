@@ -1,4 +1,4 @@
-var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys', 'ui.bootstrap']);
+var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys']);
 
 bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
 
@@ -153,8 +153,6 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
         });
 
     $scope.asHtml = function (val) {
-        console.log($sce);
-
         return $sce.trustAsHtml("<i>yeaaah</i>");
     };
 
