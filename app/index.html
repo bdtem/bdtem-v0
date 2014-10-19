@@ -11,6 +11,7 @@
 <head>
 
     <!-- build:js scripts/main.js -->
+    <link rel="stylesheet" type="text/css" href="app/styles/main.less"/>
     <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
@@ -52,7 +53,6 @@
     <nav style="border: none; overflow:hidden;" class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="btn-group btn-group-justified">
 
-            <img class="logo" src="images/logo_transparent.png">
 
             <button class="btn btn-link btn-lg pull-right">
                 <span class="fa fa-share-alt"></span>
@@ -98,10 +98,10 @@
         </tr>
 
         <tr>
-            <td><b>
+            <td>
                 <a ng-click="skipToTrack(1)">HESITATING SUN</a>
                     <img src="images/shield.png" class="shield"/>
-                    <a ng-click="skipToTrack(2)">FUTURE IS BLEAKER&nbsp;</a>
+                    <a ng-click="skipToTrack(2)">FUTURE IS BLEAKER</a>
                     <br/>
                     <a ng-click="skipToTrack(3)">FEEL THE SAME</a>
                     <img src="images/shield.png" class="shield"/>
@@ -119,16 +119,16 @@
                     <br/>
                     <a ng-click="skipToTrack(12)">THE END</a>
                     <br/>
-                    <a class="pull-down" ng-click="skipToTrack(0)">PLAY ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    <img src="images/scrollBrighter.png" style="width: 30%; height: 30%"/>
-                    <a class="pull-down" href="audio/bdtem.zip">&nbsp;&nbsp;&nbsp;&nbsp;DOWNLOAD</a>
-            </b>
+                    <a class="pull-down" ng-click="skipToTrack(0)">PLAY ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <img src="images/scrollBrighter.png" style="max-width: 10vh; max-height: 5vw"/>
+                    <a class="pull-down" href="audio/bdtem.zip">    &nbsp;&nbsp;&nbsp;DOWNLOAD</a>
+
             </td>
         </tr>
 
         <tr>
             <td>
-                <span class="stretched"> DEY CO. / DEY IND.</span>
+                <span class="stretched"><i>DEY CO. / DEY IND.</i></span>
                     <br/>
                     <span class="stretched">PRESENTS</span>
                     <br/>
@@ -139,11 +139,11 @@
 
         <tr>
             <td>
-                    <span class="stretched">BEFORE LIFE</span>
+                    <span class="stretched"><i>BEFORE LIFE</i></span>
 
                     <br/>
 
-                    <span class="stretched">AFTER DEATH</span>
+                    <span class="stretched"><i>AFTER DEATH</i></span>
             </td>
         </tr>
 
@@ -160,21 +160,22 @@
     <div>
         <audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="songs"></audio>
 
-        <div>
+        <div style="width: 100%; display: inline-block" id="progressbar" ng-click="seekFromProgressBar($event)">
+            <progress value={{bdtemplayer.currentTime}} max="{{bdtemplayer.duration}}"></progress>
+        </div>
+
+        <div class="transport-bar">
             <div class="btn" ng-click="prev()">
-                <i class="fa fa-fast-backward"></i>
+                <i class="fa fa-backward"></i>
+            </div>
+            <div class="btn" ng-click="next()">
+                <i class="fa fa-forward"></i>
             </div>
             <div class="btn" ng-click="bdtemPlayPause()">
                 <i class="fa fa-play"
                    ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
             </div>
-            <div class="btn" ng-click="next()">
-                <i class="fa fa-fast-forward"></i>
-            </div>
-
-            {{bdtemplayer.formatTime}} / {{bdtemplayer.formatDuration}}
-
-            <div class="btn btn-lg pull-right"
+            <div class="btn btn-lg "
                  id="metadata"
                  title="{{titles[bdtemplayer.currentTrack]}} {{catalogNumbers[bdtemplayer.currentTrack]}}"
                  data-placement="top"
@@ -186,11 +187,6 @@
                     &#xf05a;
                 </i>
             </div>
-
-            <div style="width: 50%; display: inline-block" id="progressbar" ng-click="seekFromProgressBar($event)">
-                <progress value={{bdtemplayer.currentTime}} max="{{bdtemplayer.duration}}"></progress>
-            </div>
-
         </div>
     </div>
 </nav>

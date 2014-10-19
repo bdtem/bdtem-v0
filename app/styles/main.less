@@ -12,11 +12,18 @@
 @link-hover-color: darken(@link-color, 30%);
 @popover-bg: #000000;
 
-
 //Basic / scaffolding overrides:
-html, body{
+html, body {
   height: 100%;
   max-height: 100%;
+}
+
+
+@font-face {
+  font-family: "Superclarendon";
+  src: url('../fonts/superclarendon/superclarendon.eot') format('embedded-opentype'), url('../fonts/superclarendon/superclarendon.woff') format('woff'), url('../fonts/superclarendon/superclarendon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
@@ -95,8 +102,7 @@ a {
 }
 
 .middle-main {
-  background: 20vw #000000 no-repeat url(../images/DreamSmall.gif);
-  background-size: 100vw 100vh;
+  background: #000000 no-repeat url(../images/DreamSmall.gif) right;
   overflow: hidden;
   zoom: 1;
   min-height: 90%;
@@ -115,7 +121,7 @@ a {
 }
 
 .popover-title {
-  font-family: "Palatino Linotype", "Book Antiqua", "Helvetica Neue Light", serif;
+  font-family: "Superclarendon";
   margin: 0; // reset heading margin
   padding: 8px 14px;
   font-size: 14pt;
@@ -128,7 +134,7 @@ a {
 }
 
 .popover-content {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-family: "Superclarendon";
   font-size: 12pt;
   font-kerning: 15pt;
   padding: 9px 14px;
@@ -161,4 +167,11 @@ progress {
   border: none;
   border-left: solid white 1px;
   border-right: solid white 1px;
+}
+
+.transport-bar {
+  align-self: center;
+  align-content: center;
+  text-align: center;
+  margin: 0 auto;
 }
