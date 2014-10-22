@@ -1,4 +1,10 @@
-var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys']);
+var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys', 'ui.bootstrap']);
+
+bdtem.filter('unsafe', ['$sce', function ($sce) {
+    return function (val) {
+        return $sce.trustAsHtml(val);
+    };
+}]);
 
 bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
 
@@ -81,12 +87,11 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
         $scope.bdtemplayer.seek(whereToSeek | 0);
     };
 
-    var getMetadataTitle = function() {
-        var currentTrack = $scope.bdtemplayer.currentTrack;
+    $scope.getMetadataTitle = function() {
         var titleComponents = [
-            $scope.titles[currentTrack],
+            $scope.titles[$scope.bdtemplayer.currentTrack],
             '<div class="pull-right">',
-            $scope.catalogNumbers[currentTrack],
+            $scope.catalogNumbers[$scope.bdtemplayer.currentTrack],
             '</div>',
             '<br/>',
             $filter('timeFilter')(getCurrentTime()),
@@ -96,7 +101,6 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
 
         return titleComponents.join(" ");
     };
-    $scope.__defineGetter__('metadataTitle', getMetadataTitle);
 
     $scope.prev = function () {
         $scope.bdtemplayer.prev();
@@ -152,11 +156,21 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
             }
         });
 
-    $scope.asHtml = function (val) {
-        return $sce.trustAsHtml("<i>yeaaah</i>");
-    };
-
     $scope.isSceEnabled = function () {
         return $sce.isEnabled();
     }
 });
+
+// update popover template for binding unsafe html
+angular.module("template/popover/popover.html", []).run(["$templateCache", function ($templateCache) {
+    $templateCache.put("template/popover/popover.html",
+            "<div class=\"popover {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" +
+            "  <div class=\"arrow\"></div>\n" +
+            "\n" +
+            "  <div class=\"popover-inner\">\n" +
+            "      <h3 class=\"popover-title\" ng-bind-html=\"title | unsafe\" ng-show=\"title\"></h3>\n" +
+            "      <div class=\"popover-content\"ng-bind-html=\"content | unsafe\"></div>\n" +
+            "  </div>\n" +
+            "</div>\n" +
+            "");
+}]);

@@ -10,7 +10,7 @@
 <head>
 
     <!-- build:js scripts/main.js -->
-    <link rel="stylesheet" type="text/css" href="app/styles/main.less"/>
+    <link rel="stylesheet" type="text/css" href="styles/main.less"/>
     <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
@@ -50,23 +50,23 @@
 
 <div class="container navbar-container">
     <nav style="border: none; overflow:hidden;" class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="btn-group btn-group-justified">
+        <div class="btn-group pull-right">
 
 
-            <button class="btn btn-link btn-lg pull-right">
-                <span class="fa fa-share-alt"></span>
+            <button class="btn">
+                <span class="buttonz">&#xe801;</span>
             </button>
 
-            <button class="btn btn-link btn-lg pull-right">
-                <span class="fa fa-envelope"></span>
+            <button class="btn">
+                <span class="buttonz">&#xe802;</span>
             </button>
 
-            <button class="btn btn-link btn-lg pull-right">
-                <span class="fa fa-phone"></span>
+            <button class="btn">
+                <span class="buttonz">&#xe808;</span>
             </button>
 
-            <button class="btn btn-link btn-lg pull-right">
-                <span class="fa fa-dollar"></span>
+            <button class="btn">
+                <span class="buttonz">&#xe809;</span>
             </button>
         </div>
 
@@ -166,23 +166,23 @@
         </div>
 
         <div class="transport-bar">
-            <div class="btn" ng-click="prev()">
-                <i class="fa fa-backward"></i>
+            <div class="btn buttonz" ng-click="prev()">
+                &#xe805;
             </div>
-            <div class="btn" ng-click="next()">
-                <i class="fa fa-forward"></i>
+            <div class="btn buttonz" ng-click="next()">
+                &#xe803;
             </div>
             <div class="btn" ng-click="bdtemPlayPause()">
                 <i class="fa fa-play"
                    ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
             </div>
 
-            <button class="btn fa"
+            <button class="btn buttonz-small"
                     popover="{{metadata[bdtemplayer.currentTrack]}}"
-                    popover-title="{{asHtml('<b> sup dawg </b>')}}"
+                    popover-title="{{getMetadataTitle()}}"
                     popover-placement="top"
                     >
-                    &#xf05a;
+                &#xe806;
             </button>
         </div>
     </div>
