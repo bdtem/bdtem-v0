@@ -159,11 +159,7 @@
     <div id="bottomBar">
         <audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="songs"></audio>
 
-        <div style="width: 100%; display: inline-block" id="progressbar" ng-click="seekFromProgressBar($event)">
-            <progressbar value='currentTime' max="bdtemplayer.duration" type="success">
-                <span style="color:pink; white-space:nowrap;">{{currentTime | timeFilter}} / {{bdtemplayer.duration | timeFilter}}</span>
-            </progressbar>
-        </div>
+        <progressbar ng-click="seekFromProgressBar($event)" animate="false" value="(currentTime / currentDuration) * 100" max="100"></progressbar>
 
         <div class="transport-bar">
             <div class="btn buttonz" ng-click="prev()">

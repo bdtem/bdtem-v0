@@ -8,6 +8,11 @@
 //Overrides:
 
 //Variable overrides:
+@progress-bar-color: #FFFFFF;
+@progress-bar-bg: #FFFFFF;
+@progress-bg: #000000;
+
+
 @link-color: #FFFFFF;
 @link-hover-color: darken(@link-color, 30%);
 @popover-bg: #000000;
@@ -66,8 +71,13 @@ a {
 }
 
 .navbar {
+  border: none;
   min-height: 5%;
   max-height: 100%;
+}
+
+.navbar-default {
+  border: none;
 }
 
 .navbar-container {
@@ -179,33 +189,12 @@ a {
   font-size: 3vw;
 }
 
-// Progress bar overrides (browser specific):
+// Progress bar overrides:
 
-progress::-webkit-progress-bar {
-  background: #000000;
-  color: #000000
-}
-
-progress::-webkit-progress-value {
-  background: #ffffff;
-  color: #000000;
-}
-
-progress::-moz-progress-bar {
-  background: #ffffff;
+.progress {
+  height: 1vh;
+  margin: 0;
   border: none;
-  background-clip: content-box
-}
-
-progress {
-  -webkit-appearance: none;
-  background: #000000;
-  height: 2px;
-  color: #ffffff;
-  width: 100%;
-  border: none;
-  border-left: solid white 1px;
-  border-right: solid white 1px;
 }
 
 .transport-bar {

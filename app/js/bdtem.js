@@ -104,12 +104,10 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
 
     $scope.prev = function () {
         $scope.bdtemplayer.prev();
-        refreshMetadata();
     };
 
     $scope.next = function () {
         $scope.bdtemplayer.next();
-        refreshMetadata();
     };
 
     $scope.bdtemPlayPause = function () {
@@ -118,7 +116,6 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
 
     $scope.skipToTrack = function (index) {
         $scope.bdtemplayer.play(index, true);
-        refreshMetadata();
     };
 
     hotkeys.bindTo($scope)

@@ -1,79 +1,13 @@
-<link rel="stylesheet" type="text/css" href="box.css"/>
-<table class="bottomless">
-    <tr>
-        <td>
-            <p>
-                <span style="letter-spacing: .5em; padding-left: .4em">IF ALL THAT WAS SAID</span>
-                <br/>
-                <span style="letter-spacing: .25em"> ABOUT <span
-                        style="font-style: italic">THOSE WHO ARE DEAD</span></span>
-                <br/>
-                <span style="letter-spacing: .35em">WAS COMPILED IN A BOOK</span>
-                <br/>
-                <span style="letter-spacing: .6em; padding-left: .2em"> AND LEFT IN A NOOK</span>
-                <br/>
-                <span style="letter-spacing: .5em; padding-left: .25em">I'D BE HAPPY TO READ</span>
-                <br/>
-                <span style="letter-spacing: .52em; padding-left: .3em">OF HARROWING DEEDS</span>
-                <br/>
-                <span style="font-weight: bold; letter-spacing: .001em; padding-right: .2em">BUT I'D LIKE NOT TO KNOW THE ENDING</span>
-            </p>
-        </td>
-    </tr>
-</table>
-<table class="bottomless">
-    <tr>
-        <td>
-            <p>
-                <span style="font-weight: bold">
-                    HESITATING SUN
-    <img src="images/shield.png" border="0" class="shield"/>
-      FUTURE IS BLEAKER
-    <br/>
-      FEEL THE SAME
-        <img src="images/shield.png" border="0" class="shield"/>
-      SIT ON A DREAM
-    <br/>
-    THE DEBATE
-      <img src="images/shield.png" border="0" class="shield"/>
-      WORKING AT FIRST
-   <br/>
-     TRIED TO BE
-   <img src="images/shield.png" border="0" class="shield"/>
-     THE BASEMENT
-   <br/>
-   ONE LEVEL AT A TIME
-   <br/>
-     THE END
-     <br/>
-    PLAY ALL
-   <img src="images/scrollBrighter.png" border="0" style="width: 33%; height: 12%"/>
+<link href="styles/main.css" rel="stylesheet">
+<script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="js/test.js"></script>
 
-    DOWNLOAD</span>
-            </p>
-        </td>
-    </tr>
-</table>
+        <body ng-app="testApp">
 
-<table class="bottomless">
-    <tr>
-        <td>
-            <p><span style="font-style: italic; font-size: 1.25em; letter-spacing: .45em; padding-left: .2em"> DEY CO. / DEY IND.</span>
-                <br/>
-                <span style="font-weight: bold; font-size: 1.2em; letter-spacing: 1.75em; padding-left: .5em">PRESENTS</span>
-                <br/>
-                <span style="letter-spacing: .1em; font-size: 1.2em; padding-left: .2em">BOB DEY'S TANK ENGINE MAN</span>
-                <br/>
-            </p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p><span style="font-style: italic; letter-spacing: .92em; padding-left: .5em; font-size: 1.3em"> BEFORE LIFE</span>
-                <br/>
-                <span style="font-style: italic; letter-spacing: .82em; padding-left: .5em; font-size: 1.3em">AFTER DEATH</span>
-                <br/>
-            </p>
-        </td>
-    </tr>
-</table>
+<div ng-controller="TestCtrl as test">
+<progressbar type="success" value="currentTime" max="currentDuration"><span>{{currentTime}} / {{currentDuration}}</span></progressbar>
+    {{helloThere}}
+</div>
+        </body>
