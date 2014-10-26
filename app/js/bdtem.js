@@ -33,7 +33,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
                     templateUrl: 'templates/donate.html',
                     controller: 'DonateCtrl',
                     size: 'lg'
-                    })
+                })
             }
         },
         {
@@ -58,7 +58,6 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 bdtem.controller('DonateCtrl', function ($scope) {
 
 });
-
 
 
 bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
@@ -96,10 +95,78 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
         "The End"
     ];
 
-    $scope.metadata = $scope.titles.map(function (datString) {
-        var metadata = "This is some metadata for " + datString + ". It is a pretty cool track.";
-        return  metadata;
-    });
+    $scope.metadata = [
+        {
+            title: "Funeral March",
+            description: "Included for the purposes of mood.  A peaceful place.  Like a Grave at evening time.",
+            catalog: "Gr. 0, No. 1"
+        },
+        {
+            title: "Hesitating Sun",
+            description: "In this thing he calls his Grave, where he waits for the release from his release, Mark Jumper wastes his thoughts by thinking about time (which, by the way, he had already spent much of in this place; though his thinking is concerned mostly with that time which he had spent in a more distant past than the presently created past (i.e. recent past (i.e. earlier today or yesterday or last week)))." +
+                "<br/><br/> Think of a questioning, maybe an exhausted self doubt will do.  He is reflecting, projecting, rejecting, selecting. From this, you will understand his mindset as he divides his memories into categories. " +
+                "<br/><br/>Memory One= My Time Working " +
+                "<br>Memory Two= My Time Dead " +
+                "<br/>Memory Three= My Time Here",
+            catalog: "Gr. 0, No. 2"
+        },
+        {
+            title: "Future is Bleaker",
+            description: "Picture him in his rooms, where he is surrounded by works unfinished. A noodling doodle on a page reminding him of past failures, but taunting him with efforts expected." +
+                "He is agitated. And his mind is twisting. And he is thinking upon some vision of the future.",
+            catalog: "Gr. 0, No. 3"
+        },
+        {
+            title: "Sad to Feel the Same",
+            description: "See him now, some months since first arriving, his intricate self analysis having grown more complex with each rumination. " +
+                "The roots of his misery lay bare and shriveling in the sun, but still he feels/thinks/is the same.",
+            catalog: "Gr. 0, No. 4"
+        },
+        {
+            title: "Sit on a Dream",
+            description: "Pacing around the grave one day, he hears a curious sound. " +
+                "Something he has not heard in many months. " +
+                "Oh, but it is just the wind whistling in his deaf ears. " +
+                "Or is it a conversation with an old friend? " +
+                "A prattling discourse of prodding and projecting that seems to have as little chance of ending as it has of containing any meaning. " +
+                "And yet, when it finally does end, it will be the last time he refuses to leave." +
+                "<br/><br/>\"There is life above,\" he is told.  \"It is, perhaps, time to rejoin it.\"",
+            catalog: "Gr. 0, No. 5"
+        },
+        {
+            title: "Digging Out",
+            description: "A mood and a transition. " +
+                "The summer field at night is a place of wonder. " +
+                "The grass grown tall. The firing flies flashing. " +
+                "The white moonlight mixing with the distant yellow fires of electric bulbs. " +
+                "He sees a place of far-off interest, emanating also sounds and smells. " +
+                "It is a Circus. " +
+                "Fresh from his waiting turmoil, he stumbles toward this beacon in the night, having no other place to go.",
+            catalog: "Cr. 0, No. 1"
+        },
+        {
+            title: "The Debate",
+            description: "After being overwhelmed by experiences, laying one lesson on top of another, he has arrived at a brilliant idea, so he seeks an audience with Circus management. " +
+                "He hopes to convince the manager to let him stage a performance. " +
+                "Right away and with the support of the whole Circus. " +
+                "He could shake off the cobwebs with the sound of applause." +
+                "<br/><br/>A \"Good evening\" and \"thank you\" should do. " +
+                "If he could have but 5 minutes to explain... perhaps longer.  " +
+                "Complex ideas require complex explanations.",
+            catalog: "Cr. 0, No. 2"
+        },
+        {
+            title: "Working at First",
+            description: "After being overwhelmed by experiences, laying one lesson on top of another, he has arrived at a brilliant idea, so he seeks an audience with Circus management. " +
+                "He hopes to convince the manager to let him stage a performance. " +
+                "Right away and with the support of the whole Circus. " +
+                "He could shake off the cobwebs with the sound of applause." +
+                "<br/><br/>A \"Good evening\" and \"thank you\" should do. " +
+                "If he could have but 5 minutes to explain... perhaps longer.  " +
+                "Complex ideas require complex explanations.",
+            catalog: "Cr. 0, No. 3"
+        }
+    ];
 
     $scope.catalogNumbers = $scope.titles.map(function (element, index) {
         return  'Gr. 2' + ' No. ' + index;
