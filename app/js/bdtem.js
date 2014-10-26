@@ -6,50 +6,78 @@ bdtem.filter('unsafe', ['$sce', function ($sce) {
     };
 }]);
 
-bdtem.controller('ButtonsCtrl', function ($scope) {
+bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 
     $scope.buttons = [
         {
             purpose: 'Share',
             glyph: '\ue801',
-            tooltip: 'TELL YOUR FRIENDS ABOUT RICK!'
+            tooltip: 'TELL YOUR FRIENDS ABOUT RICK!',
+            action: function () {
+                var duration = 1000;
+                var holdOldValue = this.tooltip;
+                this.tooltip = "THIS ISN'T IMPLEMENTED YET LOL!11! xD";
+                AnimateRotate('#button-' + this.purpose, 360, duration);
+
+                setTimeout(function () {
+                    $scope.buttons[0].tooltip = holdOldValue;
+                }, duration);
+            }
         },
         {
             purpose: 'Donate',
             glyph: '\ue802',
-            tooltip: 'GIVE RICK SOME DOUGH!'
+            tooltip: 'GIVE RICK SOME DOUGH!',
+            action: function () {
+                $modal.open({
+                    templateUrl: 'templates/donate.html',
+                    controller: 'DonateCtrl',
+                    size: 'lg'
+                    })
+            }
         },
         {
             purpose: 'Newsletter',
             glyph: '\ue808',
-            tooltip: 'WHAT\'S UP WITH RICK?'
+            tooltip: 'WHAT\'S UP WITH RICK?',
+            action: function () {
+                window.open('https://tinyletter.com/Department_of_Archives');
+            }
         },
         {
             purpose: 'Contact',
             glyph: '\ue809',
-            tooltip: 'GIVE RICK A CALL!'
+            tooltip: 'GIVE RICK A CALL!',
+            action: function () {
+            }
         }
     ];
 
 });
 
+bdtem.controller('DonateCtrl', function ($scope) {
+
+});
+
+
+
 bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
 
-        $scope.songs = [
-            { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
-            { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
-            { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
-            { src: '../audio/04_Sad_to_Feel_the_Same.mp3', type: 'audio/mpeg'},
-            { src: '../audio/05_Sit_on_a_Dream.mp3', type: 'audio/mpeg'},
-            { src: '../audio/06_Digging_Out.mp3', type: 'audio/mpeg'},
-            { src: '../audio/07_The_Debate.mp3', type: 'audio/mpeg'},
-            { src: '../audio/08_Working_at_First.mp3', type: 'audio/mpeg'},
-            { src: '../audio/09_Tried_to_Be.mp3', type: 'audio/mpeg'},
-            { src: '../audio/10_The_Basement.mp3', type: 'audio/mpeg'},
-            { src: '../audio/11_One_Level_at_a_Time.mp3', type: 'audio/mpeg'},
-            { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: 'audio/mpeg'},
-            { src: '../audio/13_The_End.mp3', type: 'audio/mpeg'}
-        ];
+    $scope.songs = [
+        { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
+        { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
+        { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
+        { src: '../audio/04_Sad_to_Feel_the_Same.mp3', type: 'audio/mpeg'},
+        { src: '../audio/05_Sit_on_a_Dream.mp3', type: 'audio/mpeg'},
+        { src: '../audio/06_Digging_Out.mp3', type: 'audio/mpeg'},
+        { src: '../audio/07_The_Debate.mp3', type: 'audio/mpeg'},
+        { src: '../audio/08_Working_at_First.mp3', type: 'audio/mpeg'},
+        { src: '../audio/09_Tried_to_Be.mp3', type: 'audio/mpeg'},
+        { src: '../audio/10_The_Basement.mp3', type: 'audio/mpeg'},
+        { src: '../audio/11_One_Level_at_a_Time.mp3', type: 'audio/mpeg'},
+        { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: 'audio/mpeg'},
+        { src: '../audio/13_The_End.mp3', type: 'audio/mpeg'}
+    ];
 
     $scope.titles = [
         "",
@@ -69,7 +97,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
     ];
 
     $scope.metadata = $scope.titles.map(function (datString) {
-        var metadata = "This is some metadata for " + datString +". It is a pretty cool track.";
+        var metadata = "This is some metadata for " + datString + ". It is a pretty cool track.";
         return  metadata;
     });
 
@@ -114,7 +142,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
         $scope.bdtemplayer.seek(whereToSeek | 0);
     };
 
-    $scope.getMetadataTitle = function() {
+    $scope.getMetadataTitle = function () {
         var titleComponents = [
             $scope.titles[$scope.bdtemplayer.currentTrack],
             '<div class="pull-right">',

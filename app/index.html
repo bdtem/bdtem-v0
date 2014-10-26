@@ -54,14 +54,15 @@
         <div class="btn-group pull-right" ng-repeat="button in buttons">
 
             <button
+                    id="button-{{button.purpose}}"
                     class="buttonz btn"
                     tooltip-html-unsafe="{{button.tooltip}}"
                     tooltip-placement="bottom"
                     tooltip-append-to-body="true"
+                    ng-click="button.action()"
                     >
 
                 {{button.glyph}}
-
             </button>
 
         </div>
