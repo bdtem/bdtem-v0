@@ -46,34 +46,30 @@
 </head>
 
 
-<body ng-controller="PlaylistCtrl as playlist" class="ng-scope">
+<body>
 
-<div class="container navbar-container">
-    <nav style="border: none; overflow:hidden;" class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="btn-group pull-right">
+<div class="container navbar-container" >
 
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="ButtonsCtrl as buttonsController">
+        <div class="btn-group pull-right" ng-repeat="button in buttons">
 
-            <button class="btn">
-                <span class="buttonz">&#xe801;</span>
+            <button
+                    class="buttonz btn"
+                    tooltip-html-unsafe="{{button.tooltip}}"
+                    tooltip-placement="bottom"
+                    tooltip-append-to-body="true"
+                    >
+
+                {{button.glyph}}
+
             </button>
 
-            <button class="btn">
-                <span class="buttonz">&#xe802;</span>
-            </button>
-
-            <button class="btn">
-                <span class="buttonz">&#xe808;</span>
-            </button>
-
-            <button class="btn">
-                <span class="buttonz">&#xe809;</span>
-            </button>
         </div>
 
     </nav>
 </div>
 
-<div class="row middle-main">
+<div class="row middle-main" ng-controller="PlaylistCtrl as playlist">
 
     <table class="bottomless">
 
@@ -118,9 +114,9 @@
                 <br/>
                 <a ng-click="skipToTrack(12)">THE END</a>
                 <br/>
-                <a class="pull-down" ng-click="skipToTrack(0)">PLAY ALL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a class="pull-down" ng-click="skipToTrack(0)">PLAY ALL</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <img src="images/scrollBrighter.png" style="max-width: 10vh; max-height: 5vw"/>
-                <a class="pull-down" href="audio/bdtem.zip">    &nbsp;&nbsp;&nbsp;DOWNLOAD</a>
+                &nbsp;&nbsp;&nbsp;<a class="pull-down" href="audio/bdtem.zip">DOWNLOAD</a>
 
             </td>
         </tr>
@@ -154,7 +150,8 @@
 
 
 <nav id="playlistnavbar" class="navbar navbar-default navbar-fixed-bottom"
-     role="navigation">
+     role="navigation"
+        ng-controller="PlaylistCtrl as playlist">
 
     <div id="bottomBar">
         <audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="songs"></audio>

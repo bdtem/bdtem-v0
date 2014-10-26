@@ -7496,7 +7496,7 @@ a:focus {
 }
 .navbar-container {
   height: 5%;
-  overflow: hidden;
+  overflow-y: auto;
   min-height: 2%;
   max-height: 5%;
 }
@@ -7505,6 +7505,8 @@ a:focus {
 }
 .navbar-fixed-top {
   background-color: transparent;
+  overflow-y: auto;
+  padding-right: 4vw;
 }
 .navbar-fixed-bottom {
   background-color: transparent;
@@ -7565,6 +7567,22 @@ a:focus {
   border-right: none;
   border-left: none;
 }
+.tooltip {
+  font-family: "Superclarendon";
+  font-size: 12pt;
+  color: #7777FF;
+  font-weight: normal;
+  background-color: #000000;
+  z-index: 1030;
+}
+.tooltip-inner {
+  font-family: "Superclarendon";
+  font-size: 1em;
+  color: #b3b3b3;
+  font-style: italic;
+  background-color: transparent;
+  z-index: 1030;
+}
 .popover-content {
   font-family: "Superclarendon";
   font-style: italic;
@@ -7578,6 +7596,7 @@ a:focus {
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  z-index: 1030;
 }
 .buttonz-small {
   display: inline-block;
@@ -7586,6 +7605,7 @@ a:focus {
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  z-index: 1030;
   font-size: 3vw;
 }
 .progress {

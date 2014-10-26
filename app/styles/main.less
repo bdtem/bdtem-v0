@@ -82,7 +82,7 @@ a {
 
 .navbar-container {
   height: 5%;
-  overflow: hidden;
+  overflow-y: auto;
   min-height: 2%;
   max-height: 5%;
 }
@@ -93,6 +93,8 @@ a {
 
 .navbar-fixed-top {
   background-color: transparent;
+  overflow-y: auto;
+  padding-right: 4vw;
 }
 
 .navbar-fixed-bottom {
@@ -168,6 +170,33 @@ a {
   border-left: none;
 }
 
+.tooltip {
+  font-family: "Superclarendon";
+  font-size: 12pt;
+  color: #7777FF;
+  font-weight: normal;
+
+  background-color: @popover-title-bg;
+  z-index: @zindex-navbar-fixed;
+}
+
+
+.tooltip-inner {
+  font-family: "Superclarendon";
+  font-size: 1em;
+  color: @link-hover-color;
+
+  font-style: italic;
+
+  background-color: transparent;
+  z-index: @zindex-navbar-fixed;
+}
+
+
+.button-tooltip {
+ }
+
+
 .popover-content {
   font-family: "Superclarendon";
   font-style: italic;
@@ -182,6 +211,7 @@ a {
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  z-index: @zindex-navbar-fixed;
 }
 
 .buttonz-small {

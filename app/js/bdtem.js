@@ -6,6 +6,33 @@ bdtem.filter('unsafe', ['$sce', function ($sce) {
     };
 }]);
 
+bdtem.controller('ButtonsCtrl', function ($scope) {
+
+    $scope.buttons = [
+        {
+            purpose: 'Share',
+            glyph: '\ue801',
+            tooltip: 'TELL YOUR FRIENDS ABOUT RICK!'
+        },
+        {
+            purpose: 'Donate',
+            glyph: '\ue802',
+            tooltip: 'GIVE RICK SOME DOUGH!'
+        },
+        {
+            purpose: 'Newsletter',
+            glyph: '\ue808',
+            tooltip: 'WHAT\'S UP WITH RICK?'
+        },
+        {
+            purpose: 'Contact',
+            glyph: '\ue809',
+            tooltip: 'GIVE RICK A CALL!'
+        }
+    ];
+
+});
+
 bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
 
         $scope.songs = [
