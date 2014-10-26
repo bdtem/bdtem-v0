@@ -210,10 +210,11 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
     };
 
     $scope.getMetadataTitle = function () {
+        var currentTrack = $scope.bdtemplayer.currentTrack;
         var titleComponents = [
-            $scope.titles[$scope.bdtemplayer.currentTrack],
+            $scope.metadata[currentTrack].title,
             '<div class="pull-right">',
-            $scope.catalogNumbers[$scope.bdtemplayer.currentTrack],
+            $scope.metadata[currentTrack].catalog,
             '</div>',
             '<br/>',
             $filter('timeFilter')(getCurrentTime()),
