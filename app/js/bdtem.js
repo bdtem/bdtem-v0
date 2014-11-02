@@ -6,6 +6,33 @@ bdtem.filter('unsafe', ['$sce', function ($sce) {
     };
 }]);
 
+// update popover template for binding unsafe html
+angular.module("template/popover/popover.html", []).run(["$templateCache", function ($templateCache) {
+    $templateCache.put("template/popover/popover.html",
+            "<div class=\"popover {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" +
+            "  <div class=\"arrow\"></div>\n" +
+            "\n" +
+            "  <div class=\"popover-inner\">\n" +
+            "      <h3 class=\"popover-title\" ng-bind-html=\"title | unsafe\" ng-show=\"title\"></h3>\n" +
+            "      <div class=\"popover-content\"ng-bind-html=\"content | unsafe\"></div>\n" +
+            "  </div>\n" +
+            "</div>\n" +
+            "");
+}]);
+
+bdtem.service('playerService', function () {
+    var bdtemplayer;
+
+    return {
+        getPlayer: function () {
+            return bdtemplayer;
+        },
+        setPlayer: function (player) {
+            bdtemplayer = player;
+        }
+    };
+});
+
 bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 
     $scope.buttons = [
@@ -55,12 +82,12 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 
 });
 
-bdtem.controller('DonateCtrl', function ($scope) {
+bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playerService) {
 
-});
-
-
-bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
+    function setPlayer() {
+        playerService.setPlayer($scope.bdtemplayer);
+    }
+    $(document).ready(setPlayer);
 
     $scope.songs = [
         { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
@@ -76,22 +103,6 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
         { src: '../audio/11_One_Level_at_a_Time.mp3', type: 'audio/mpeg'},
         { src: '../audio/12_Every_Sound_in_a_Row.mp3', type: 'audio/mpeg'},
         { src: '../audio/13_The_End.mp3', type: 'audio/mpeg'}
-    ];
-
-    $scope.titles = [
-        "Funeral March",
-        "Hesitating Sun",
-        "Future Is Bleaker",
-        "Sad to Feel the Same",
-        "Sit on a Dream",
-        "Digging Out",
-        "The Debate",
-        "Working at First",
-        "Tried to Be",
-        "The Basement",
-        "One Level at a Time",
-        "Every Sound in a Row",
-        "The End"
     ];
 
     $scope.metadata = [
@@ -157,16 +168,16 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
         {
             title: "Working at First",
             description: "The story he tells begins something like this: <br/><br/> " +
-           "\"I started, a long time ago, working on a project that seemed to me fun and perhaps a little challenging. " +
-               " Or at least, it seemed like it would be easy.  That's why I decided to do it.  From the first, " +
-            "I felt that I could see the results in their complete form.  Or, it was more like feeling a sensation of " +
+                "\"I started, a long time ago, working on a project that seemed to me fun and perhaps a little challenging. " +
+                " Or at least, it seemed like it would be easy.  That's why I decided to do it.  From the first, " +
+                "I felt that I could see the results in their complete form.  Or, it was more like feeling a sensation of " +
                 "easily obtainable completion. <br/> " +
-            "I used this clarity of vision to guide me forward.  How hard could an easy something be anyway?\" " +
-            "<br/><br/>He attempts to clarify by saying this: <br/><br/> " +
-        "\"I worked in an office.  I was given access to what seemed like limitless resources.  My inspiration was " +
-            "given to me in the form of instructions and tasks.  I worked diligently on many of these tasks, " +
-            "and patiently on some others.  I set out on a path to accomplishment at a time when I was not afraid to " +
-            "fail.\" ",
+                "I used this clarity of vision to guide me forward.  How hard could an easy something be anyway?\" " +
+                "<br/><br/>He attempts to clarify by saying this: <br/><br/> " +
+                "\"I worked in an office.  I was given access to what seemed like limitless resources.  My inspiration was " +
+                "given to me in the form of instructions and tasks.  I worked diligently on many of these tasks, " +
+                "and patiently on some others.  I set out on a path to accomplishment at a time when I was not afraid to " +
+                "fail.\" ",
             catalog: "Cr. 0, No. 3"
         },
         {
@@ -174,88 +185,84 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
             description: "As he sits and makes explanations, he remembers something he once read; " +
                 "or perhaps he is thinking it into existence at this very moment:<br/><br/>" +
 
-            "\"I can recall the events of my death <br/>" +
+                "\"I can recall the events of my death <br/>" +
                 "as though they were the memories of another man <br/>" +
-            "the biting braid which snuffed my breath <br/>" +
-            "the bottles of fluids and powders in cans\"" +
+                "the biting braid which snuffed my breath <br/>" +
+                "the bottles of fluids and powders in cans\"" +
 
-            "<br/><br/>And this is where the story becomes strange and full of other stories.",
+                "<br/><br/>And this is where the story becomes strange and full of other stories.",
             catalogue: "Cr. 0, No. 4"
         },
         {
             title: "The Basement",
             description: "\"When the brain says goodbye, as far as I can tell, God seems to give you a secret.\" <br/><br/>" +
-        "\"Do you believe in God?\" He is asked. <br/><br/>" +
-            "Taking a moment, as though caught off guard by such a question, he replies, \"No, I don't think so.\"",
+                "\"Do you believe in God?\" He is asked. <br/><br/>" +
+                "Taking a moment, as though caught off guard by such a question, he replies, \"No, I don't think so.\"",
             catalogue: "Cr. 0, No. 5"
         },
         {
             title: "One Level at a Time",
             description: "A body stacked upon a body <br/>" +
-            "repeated into heights. <br/>" +
-            "All those brains, <br/>" +
-        "stacks of wisdom <br/>" +
-        "and naive judgements <br/>" +
-        "and prejudices <br/>" +
-        "and dead thoughts <br/><br/>" +
+                "repeated into heights. <br/>" +
+                "All those brains, <br/>" +
+                "stacks of wisdom <br/>" +
+                "and naive judgements <br/>" +
+                "and prejudices <br/>" +
+                "and dead thoughts <br/><br/>" +
 
-        "If I were stacked that way, <br/>" +
-        "part of the pile, <br/>" +
-        "between two others <br/>" +
-        "or on top <br/>" +
-        "or between this one and the ground, <br/>" +
-        "I would be as meaningless <br/>" +
-        "as anything else <br/>" +
-    "that has been stacked <br/>" +
-    "and forgotten.",
+                "If I were stacked that way, <br/>" +
+                "part of the pile, <br/>" +
+                "between two others <br/>" +
+                "or on top <br/>" +
+                "or between this one and the ground, <br/>" +
+                "I would be as meaningless <br/>" +
+                "as anything else <br/>" +
+                "that has been stacked <br/>" +
+                "and forgotten.",
             catalogue: "Cr. 0, No. 6"
         },
         {
             title: "Every Sound in a Row",
             description: "ONE:<br/>" +
-            "I broke my back <br/>" +
-            "and my mind, <br/>" +
-            "this time beyond repair. <br/>" +
-            "I drew into a thought that <br/>" +
-            "bit with poison, <br/>" +
-            "and a noisome flesh remained. <br/><br/>" +
+                "I broke my back <br/>" +
+                "and my mind, <br/>" +
+                "this time beyond repair. <br/>" +
+                "I drew into a thought that <br/>" +
+                "bit with poison, <br/>" +
+                "and a noisome flesh remained. <br/><br/>" +
 
-           "TWO: <br/>" +
-    "Waking in a place unfamiliar to me, <br/>" +
-        "I stumbled down a flight of steps <br/>" +
-    "and kept stumbling down 9 more <br/>" +
-    "until, at length, I reached <br/>" +
-    "the bottom, where I was also <br/>" +
-    "not supposed to be. <br/><br/>" +
+                "TWO: <br/>" +
+                "Waking in a place unfamiliar to me, <br/>" +
+                "I stumbled down a flight of steps <br/>" +
+                "and kept stumbling down 9 more <br/>" +
+                "until, at length, I reached <br/>" +
+                "the bottom, where I was also <br/>" +
+                "not supposed to be. <br/><br/>" +
 
-        "THREE: <br/>" +
-    "Having time to think <br/>" +
-    "is the perfect sort of thing. <br/>" +
-        "Taking time to rest <br/>" +
-    "is prescription at its best. <br/>" +
-        "A mind can’t be lost <br/>" +
-    "if you grab it with both hands. <br/><br/>" +
+                "THREE: <br/>" +
+                "Having time to think <br/>" +
+                "is the perfect sort of thing. <br/>" +
+                "Taking time to rest <br/>" +
+                "is prescription at its best. <br/>" +
+                "A mind can’t be lost <br/>" +
+                "if you grab it with both hands. <br/><br/>" +
 
-       "Memory Four= My Time Left.",
+                "Memory Four= My Time Left.",
             catalogue: "Cr. 0, No. 7"
         },
         {
             title: "The End",
             description: "FOUR: <br/>" +
-            "A mind let go <br/>" +
-            "is a mind unknown, <br/>" +
-            "is a mind let grown. <br/>" +
-            "Collapse the tired, buckling knees, <br/>" +
-        "release the dreaming from your sleep. <br/>" +
-            "Never stop, I suppose. <br/>" +
-            "Even though no one is listening.",
+                "A mind let go <br/>" +
+                "is a mind unknown, <br/>" +
+                "is a mind let grown. <br/>" +
+                "Collapse the tired, buckling knees, <br/>" +
+                "release the dreaming from your sleep. <br/>" +
+                "Never stop, I suppose. <br/>" +
+                "Even though no one is listening.",
             catalogue: "Cr. 0, No. 8"
         }
     ];
-
-    $scope.catalogNumbers = $scope.titles.map(function (element, index) {
-        return  'Gr. 2' + ' No. ' + index;
-    });
 
     this.isPlaying = function () {
         return $scope.bdtemplayer.isPlaying;
@@ -322,10 +329,6 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
         $scope.bdtemplayer.playPause();
     };
 
-    $scope.skipToTrack = function (index) {
-        $scope.bdtemplayer.play(index, true);
-    };
-
     hotkeys.bindTo($scope)
         .add({
             combo: 'space',
@@ -361,21 +364,13 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce) {
             }
         });
 
-    $scope.isSceEnabled = function () {
-        return $sce.isEnabled();
-    }
 });
 
-// update popover template for binding unsafe html
-angular.module("template/popover/popover.html", []).run(["$templateCache", function ($templateCache) {
-    $templateCache.put("template/popover/popover.html",
-            "<div class=\"popover {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" +
-            "  <div class=\"arrow\"></div>\n" +
-            "\n" +
-            "  <div class=\"popover-inner\">\n" +
-            "      <h3 class=\"popover-title\" ng-bind-html=\"title | unsafe\" ng-show=\"title\"></h3>\n" +
-            "      <div class=\"popover-content\"ng-bind-html=\"content | unsafe\"></div>\n" +
-            "  </div>\n" +
-            "</div>\n" +
-            "");
-}]);
+bdtem.controller('MiddleCtrl', function($scope, playerService) {
+
+    $scope.skipToTrack = function (index) {
+        playerService.getPlayer().play(index, true);
+    };
+
+
+});
