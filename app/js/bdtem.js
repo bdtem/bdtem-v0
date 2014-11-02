@@ -60,7 +60,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
                     templateUrl: 'templates/donate.html',
                     controller: 'DonateCtrl',
                     size: 'lg'
-                })
+                });
             }
         },
         {
@@ -82,11 +82,19 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 
 });
 
+bdtem.controller('DonateCtrl', function ($scope) {
+});
+
 bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playerService) {
 
+    var player;
+
     function setPlayer() {
-        playerService.setPlayer($scope.bdtemplayer);
+        var scopePlayer = $scope.bdtemplayer;
+        playerService.setPlayer(scopePlayer);
+        player = scopePlayer;
     }
+
     $(document).ready(setPlayer);
 
     $scope.songs = [
@@ -106,6 +114,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     ];
 
     $scope.metadata = [
+        {},
         {
             title: "Funeral March",
             description: "Included for the purposes of mood.  A peaceful place.  Like a Grave at evening time.",
@@ -191,14 +200,14 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
                 "the bottles of fluids and powders in cans\"" +
 
                 "<br/><br/>And this is where the story becomes strange and full of other stories.",
-            catalogue: "Cr. 0, No. 4"
+            catalog: "Cr. 0, No. 4"
         },
         {
             title: "The Basement",
             description: "\"When the brain says goodbye, as far as I can tell, God seems to give you a secret.\" <br/><br/>" +
                 "\"Do you believe in God?\" He is asked. <br/><br/>" +
                 "Taking a moment, as though caught off guard by such a question, he replies, \"No, I don't think so.\"",
-            catalogue: "Cr. 0, No. 5"
+            catalog: "Cr. 0, No. 5"
         },
         {
             title: "One Level at a Time",
@@ -219,7 +228,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
                 "as anything else <br/>" +
                 "that has been stacked <br/>" +
                 "and forgotten.",
-            catalogue: "Cr. 0, No. 6"
+            catalog: "Cr. 0, No. 6"
         },
         {
             title: "Every Sound in a Row",
@@ -248,7 +257,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
                 "if you grab it with both hands. <br/><br/>" +
 
                 "Memory Four= My Time Left.",
-            catalogue: "Cr. 0, No. 7"
+            catalog: "Cr. 0, No. 7"
         },
         {
             title: "The End",
@@ -260,21 +269,21 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
                 "release the dreaming from your sleep. <br/>" +
                 "Never stop, I suppose. <br/>" +
                 "Even though no one is listening.",
-            catalogue: "Cr. 0, No. 8"
+            catalog: "Cr. 0, No. 8"
         }
     ];
 
     this.isPlaying = function () {
-        return $scope.bdtemplayer.isPlaying;
+        return player.isPlaying;
     };
 
     var getCurrentTime = function () {
-        return $scope.bdtemplayer.currentTime | 0;
+        return player.currentTime | 0;
     };
     $scope.__defineGetter__('currentTime', getCurrentTime);
 
     var getDuration = function () {
-        return $scope.bdtemplayer.duration | 0;
+        return player.duration | 0;
     };
     $scope.__defineGetter__('currentDuration', getDuration);
 
@@ -290,19 +299,19 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
         var percentage = pixelsRight / pxWidth;
         var whereToSeekInDuration = Math.floor(percentage * getDuration());
 
-        $scope.bdtemplayer.seek(whereToSeekInDuration);
+        player.seek(whereToSeekInDuration);
     };
 
     $scope.seekTo = function (whereToSeek) {
-        $scope.bdtemplayer.seek(whereToSeek | 0);
+        player.seek(whereToSeek | 0);
     };
 
     this.seekTo = function (whereToSeek) {
-        $scope.bdtemplayer.seek(whereToSeek | 0);
+        player.seek(whereToSeek | 0);
     };
 
     $scope.getMetadataTitle = function () {
-        var currentTrack = $scope.bdtemplayer.currentTrack;
+        var currentTrack = player.currentTrack;
         var titleComponents = [
             $scope.metadata[currentTrack].title,
             '<div class="pull-right">',
@@ -314,19 +323,26 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
             $filter('timeFilter')(getDuration())
         ];
 
-        return titleComponents.join(" ");
+        return titleComponents.join("&nbsp;");
     };
 
-    $scope.prev = function () {
-        $scope.bdtemplayer.prev();
+
+    this.playInXMillis = function (millis) {
+        setTimeout(player.play(true), millis);
     };
 
-    $scope.next = function () {
-        $scope.bdtemplayer.next();
+    $scope.prevTrack = function () {
+        player.prev(true);
+        playInXMillis(250);
+    };
+
+    $scope.nextTrack = function () {
+        player.next(true);
+        playInXMillis(250);
     };
 
     $scope.bdtemPlayPause = function () {
-        $scope.bdtemplayer.playPause();
+        player.playPause();
     };
 
     hotkeys.bindTo($scope)
@@ -340,13 +356,13 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
             combo: 'left',
             description: 'Previous Track',
             callback: function () {
-                $scope.prev();
+                $scope.prevTrack();
             }
         }).add({
             combo: 'right',
             description: 'Next Track',
             callback: function () {
-                $scope.next();
+                $scope.nextTrack();
             }
         }).add({
             combo: 'ctrl+left',
@@ -366,11 +382,14 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
 });
 
-bdtem.controller('MiddleCtrl', function($scope, playerService) {
+bdtem.controller('MiddleCtrl', function ($scope, playerService) {
 
     $scope.skipToTrack = function (index) {
-        playerService.getPlayer().play(index, true);
+        var player = playerService.getPlayer();
+        player.play(index, true);
+        if (!player.playing) {
+            player.play();
+        }
     };
-
 
 });
