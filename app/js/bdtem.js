@@ -89,10 +89,15 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
     var player;
 
+    $scope.__defineGetter__('player', function (){
+        return player | setPlayer();
+    });
+
     function setPlayer() {
         var scopePlayer = $scope.bdtemplayer;
         playerService.setPlayer(scopePlayer);
         player = scopePlayer;
+        return scopePlayer;
     }
 
     $(document).ready(setPlayer);
@@ -278,12 +283,12 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     };
 
     var getCurrentTime = function () {
-        return player.currentTime | 0;
+        return player ? (player.currentTime | 0) : 0;
     };
     $scope.__defineGetter__('currentTime', getCurrentTime);
 
     var getDuration = function () {
-        return player.duration | 0;
+        return player ? (player.duration | 0) : 0;
     };
     $scope.__defineGetter__('currentDuration', getDuration);
 
@@ -311,19 +316,23 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     };
 
     $scope.getMetadataTitle = function () {
-        var currentTrack = player.currentTrack;
-        var titleComponents = [
-            $scope.metadata[currentTrack].title,
-            '<div class="pull-right">',
-            $scope.metadata[currentTrack].catalog,
-            '</div>',
-            '<br/>',
-            $filter('timeFilter')(getCurrentTime()),
-            "/",
-            $filter('timeFilter')(getDuration())
-        ];
+        if(player) {
+            var currentTrack = player.currentTrack;
+            var titleComponents = [
+                $scope.metadata[currentTrack].title,
+                '<div class="pull-right">',
+                $scope.metadata[currentTrack].catalog,
+                '</div>',
+                '<br/>',
+                $filter('timeFilter')(getCurrentTime()),
+                "/",
+                $filter('timeFilter')(getDuration())
+            ];
 
-        return titleComponents.join("&nbsp;");
+            return titleComponents.join("&nbsp;");
+        } else {
+            return "";
+        }
     };
 
 
