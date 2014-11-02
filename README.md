@@ -3,23 +3,11 @@
 
 // MUST DO:
 
-Box:
-
-- Get the updated tracks
-- Finish linking up the 'box links' to the desired actions
-
 Link Buttons:
 
-- Link up all the top-right buttons to the desired actions
-- Position the links away from edges
-- Use the new top-right icons
-- Add animation to top-right icons
+- Get the share button to work
+- Get the contact button to work
 - Make info video or use a placeholder video
-
-Metadata Popup
-
-- Finish the metadata popup configuration
-- Add metadata (name, cat. #, description)
 
 Style:
 
