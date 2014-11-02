@@ -89,7 +89,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
     var player;
 
-    $scope.__defineGetter__('player', function (){
+    $scope.__defineGetter__('player', function () {
         return player | setPlayer();
     });
 
@@ -316,38 +316,35 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     };
 
     $scope.getMetadataTitle = function () {
-        if(player) {
-            var currentTrack = player.currentTrack;
-            var titleComponents = [
-                $scope.metadata[currentTrack].title,
-                '<div class="pull-right">',
-                $scope.metadata[currentTrack].catalog,
-                '</div>',
-                '<br/>',
-                $filter('timeFilter')(getCurrentTime()),
-                "/",
-                $filter('timeFilter')(getDuration())
-            ];
+        var extractedPlayer;
 
-            return titleComponents.join("&nbsp;");
+        if (player) {
+            extractedPlayer = player;
         } else {
-            return "";
+            extractedPlayer = setPlayer;
         }
-    };
 
+        var currentTrack = extractedPlayer.currentTrack | 0;
+        var titleComponents = [
+            $scope.metadata[currentTrack].title,
+            '<div class="pull-right">',
+            $scope.metadata[currentTrack].catalog,
+            '</div>',
+            '<br/>',
+            $filter('timeFilter')(getCurrentTime()),
+            "/",
+            $filter('timeFilter')(getDuration())
+        ];
 
-    this.playInXMillis = function (millis) {
-        setTimeout(player.play(true), millis);
+        return titleComponents.join("&nbsp;");
     };
 
     $scope.prevTrack = function () {
         player.prev(true);
-        playInXMillis(250);
     };
 
     $scope.nextTrack = function () {
         player.next(true);
-        playInXMillis(250);
     };
 
     $scope.bdtemPlayPause = function () {
