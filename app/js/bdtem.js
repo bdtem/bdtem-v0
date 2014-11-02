@@ -39,7 +39,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Share',
             glyph: '\ue801',
-            tooltip: 'TELL YOUR FRIENDS ABOUT RICK!',
+            tooltip: 'SHARE',
             action: function () {
                 var duration = 1000;
                 var holdOldValue = this.tooltip;
@@ -54,7 +54,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Donate',
             glyph: '\ue802',
-            tooltip: 'GIVE RICK SOME DOUGH!',
+            tooltip: 'DONATE',
             action: function () {
                 $modal.open({
                     templateUrl: 'templates/donate.html',
@@ -66,7 +66,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Newsletter',
             glyph: '\ue808',
-            tooltip: 'WHAT\'S UP WITH RICK?',
+            tooltip: 'NEWS',
             action: function () {
                 window.open('https://tinyletter.com/Department_of_Archives');
             }
@@ -74,7 +74,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Contact',
             glyph: '\ue809',
-            tooltip: 'GIVE RICK A CALL!',
+            tooltip: 'CONTACT',
             action: function () {
             }
         }

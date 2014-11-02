@@ -11,8 +11,8 @@ img {
 table {
     vertical-align: middle;
     table-layout: fixed;
-    width: 20vw;
-    height: 75vh;
+    width: 26vw;
+    height: 76vh;
     text-align: center;
     border-collapse: collapse;
     line-height: 3.2vh
@@ -27,15 +27,17 @@ tr td {
     border-right: 0pt;
     border-left: 0pt;
 
-    padding-left: 0.8vw;
-    padding-right: 0.8vw;
+    padding-left: 0.4vw;
+    padding-right: 0.4vw;
 
     align-self: center;
     text-align: center;
     align-content: center;
 }
 
+
 .stretched {
+
 }
 
 
