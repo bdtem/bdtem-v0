@@ -59,6 +59,7 @@
                     tooltip-html-unsafe="{{button.tooltip}}"
                     tooltip-placement="bottom"
                     tooltip-append-to-body="true"
+                    tooltip-trigger="mouseover : mouseleave"
                     ng-click="button.action()"
                     >
 
@@ -167,7 +168,7 @@
                 &#xe803;
             </div>
             <div class="btn" ng-click="bdtemPlayPause()">
-                <i class="fa fa-play"
+                <i class="fa fa-play" tooltip="PLAY" tooltip-placement="top"
                    ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
             </div>
 
