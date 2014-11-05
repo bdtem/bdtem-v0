@@ -1,0 +1,30 @@
+<div ng-controller="ContactCtrl as contact">
+
+    <p class="centered">Tell me a secret.</p>
+
+    <form novalidate class="simple-form">
+
+        <label>
+            Your E-Mail:
+            <input ng-model="contact.email"/>
+        </label>
+        <br/><br/>
+        <label>
+            Something You Don't Not Want To Say:
+            <br/>
+            <textarea ng-model="contact.content"></textarea>
+        </label>
+
+        <br/><br/>
+
+        <div class="centered">
+            <input type="image"
+                   class="logo"
+                   style="text-align: center"
+                   name="submit"
+                   ng-click="$close('submitted'); submitContact(contact)"
+                   src="images/shield.png"
+                   alt="Tell me a secret."/>
+        </div>
+    </form>
+</div>

@@ -7611,6 +7611,19 @@ a:focus {
   border-radius: none;
   border-right: none;
   border-left: none;
+  font-size: 1vw;
+}
+label {
+  font-size: 1vw;
+}
+input {
+  background-color: #000000;
+  color: #ffffff;
+}
+textarea {
+  background-color: #000000;
+  color: #ffffff;
+  width: 63vw;
 }
 .buttonz {
   display: inline-block;

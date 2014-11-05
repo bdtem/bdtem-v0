@@ -76,6 +76,11 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
             glyph: '\ue809',
             tooltip: 'CONTACT',
             action: function () {
+                $modal.open({
+                    templateUrl: 'templates/contact.html',
+                    controller: 'ContactCtrl',
+                    size: 'lg'
+                });
             }
         }
     ];
@@ -83,6 +88,23 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 });
 
 bdtem.controller('DonateCtrl', function ($scope) {
+});
+
+
+bdtem.factory('postContactForm', ['$http', function ($http) {
+    return {
+        postContact: function (contactData, callback) {
+            $http.post('/contact', contactData).success(callback);
+        }
+    }
+}]);
+
+bdtem.controller('ContactCtrl', function ($scope) {
+
+    $scope.submitContact = function (contact) {
+        console.log(contact);
+    };
+
 });
 
 bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playerService) {
