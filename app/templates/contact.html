@@ -4,27 +4,58 @@
 
     <form novalidate class="simple-form">
 
-        <label>
-            Your E-Mail:
-            <input ng-model="contact.email"/>
-        </label>
-        <br/><br/>
-        <label>
-            Something You Don't Not Want To Say:
-            <br/>
-            <textarea ng-model="contact.content"></textarea>
-        </label>
+        <table class="borderless">
+            <tr class="borderless">
+                <td>
+                    <label for="email">
+                        Your E-Mail:
+                    </label>
+                </td>
+                <td>
+                    <input id="email" ng-model="contact.email"/>
+                </td>
+            </tr>
 
-        <br/><br/>
+            <tr>
+                <td>
+                    <label for="subject">
+                        What is this concerning?
+                    </label>
+                </td>
+                <td>
+                    <input id="subject" ng-model="contact.subject"/>
+                </td>
+            </tr>
 
-        <div class="centered">
-            <input type="image"
-                   class="logo"
-                   style="text-align: center"
-                   name="submit"
-                   ng-click="$close('submitted'); submitContact(contact)"
-                   src="images/shield.png"
-                   alt="Tell me a secret."/>
-        </div>
+            <tr>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="content">
+                        Something You Don't Not Want To Say:
+                    </label>
+                </td>
+
+                <td>
+                    <textarea id="content" ng-model="contact.content"></textarea>
+                </td>
+
+            </tr>
+
+            <tr class="centered">
+                <td colspan="2" class="centered">
+                    <input type="image"
+                           class="logo"
+                           style="text-align: center"
+                           name="submit"
+                           ng-click="$close('submitted'); submitContact(contact)"
+                           src="images/shield.png"
+                           alt="Tell me a secret."/>
+                </td>
+            </tr>
+
+
+        </table>
     </form>
 </div>

@@ -1,3 +1,5 @@
+const __HOST__ = '127.0.0.1';
+
 var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys', 'ui.bootstrap']);
 
 bdtem.filter('unsafe', ['$sce', function ($sce) {
@@ -99,10 +101,28 @@ bdtem.factory('postContactForm', ['$http', function ($http) {
     }
 }]);
 
-bdtem.controller('ContactCtrl', function ($scope) {
+bdtem.controller('ContactCtrl', function ($scope, $http) {
 
     $scope.submitContact = function (contact) {
         console.log(contact);
+
+        $http.post('http://'+__HOST__+':3000/contact', contact)
+            .success(function (data, status, headers, config) {
+                console.log('------SUCCESS! :DD --------');
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+
+            }).
+            error(function (data, status, headers, config) {
+                console.log('------- FAILURE :CCCC --------');
+                console.log(data);
+                console.log(status);
+                console.log(headers);
+                console.log(config);
+            });
+
     };
 
 });
