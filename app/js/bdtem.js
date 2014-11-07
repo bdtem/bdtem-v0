@@ -16,7 +16,7 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
             "\n" +
             "  <div class=\"popover-inner\">\n" +
             "      <h3 class=\"popover-title\" ng-bind-html=\"title | unsafe\" ng-show=\"title\"></h3>\n" +
-            "      <div class=\"popover-content\"ng-bind-html=\"content | unsafe\"></div>\n" +
+            "      <div class=\"popover-content\" ng-bind-html=\"content | unsafe\"></div>\n" +
             "  </div>\n" +
             "</div>\n" +
             "");
@@ -45,7 +45,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
             action: function () {
                 var duration = 1000;
                 var holdOldValue = this.tooltip;
-                this.tooltip = "THIS ISN'T IMPLEMENTED YET LOL!11! xD";
+                this.tooltip = "THERE IS NOTHING HERE YET. WE DO NOT DO THESE THINGS YET.";
                 AnimateRotate('#button-' + this.purpose, 360, duration);
 
                 setTimeout(function () {
