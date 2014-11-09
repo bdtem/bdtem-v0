@@ -1,6 +1,16 @@
 const __HOST__ = '127.0.0.1';
 
-var bdtem = angular.module('bdtem', ['bdtemFilters', 'mediaPlayer', 'cfp.hotkeys', 'ui.bootstrap']);
+var bdtem = angular.module('bdtem', [
+    'bdtemFilters',
+    'mediaPlayer',
+    'cfp.hotkeys',
+    'ui.bootstrap',
+    "ngSanitize",
+    "com.2fdevs.videogular",
+    "com.2fdevs.videogular.plugins.controls",
+    "com.2fdevs.videogular.plugins.overlayplay",
+    "com.2fdevs.videogular.plugins.poster"
+]);
 
 bdtem.filter('unsafe', ['$sce', function ($sce) {
     return function (val) {
@@ -31,6 +41,19 @@ bdtem.service('playerService', function () {
         },
         setPlayer: function (player) {
             bdtemplayer = player;
+        }
+    };
+});
+
+bdtem.service('videoService', function () {
+    var videoAPI;
+
+    return {
+        getVideoAPI: function () {
+            return videoAPI;
+        },
+        setVideoAPI: function (API) {
+            videoAPI = API;
         }
     };
 });
@@ -127,7 +150,46 @@ bdtem.controller('ContactCtrl', function ($scope, $http) {
 
 });
 
-bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playerService) {
+
+bdtem.controller('VideoCtrl', function($scope, $sce, playerService, videoService) {
+
+    var controller = this;
+    controller.API = null;
+
+    controller.onPlayerReady = function(API) {
+        controller.API = API;
+        videoService.setVideoAPI(API);
+        console.log('player ready');
+        console.log(API);
+    };
+
+    $scope.customClickOverlayPlay = function() {
+        console.log('overlay play clicked');
+        playerService.getPlayer().pause();
+        controller.API.playPause();
+    };
+
+    controller.config = {
+        sources: [
+            {src: $sce.trustAsResourceUrl("../video/about.mp4"), type: "video/mp4"}
+        ],
+        tracks: [
+            {
+            }
+        ],
+        theme: "bower_components/videogular-themes-default/videogular.css",
+        plugins: {
+            poster: "../images/DreamSmall.gif"
+        }
+    };
+
+
+
+
+
+});
+
+bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playerService, videoService) {
 
     var player;
 
@@ -142,7 +204,10 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
         return scopePlayer;
     }
 
-    $(document).ready(setPlayer);
+    $(document).ready(function () {
+        setPlayer();
+        console.log('player set');
+    });
 
     $scope.songs = [
         { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
@@ -390,6 +455,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     };
 
     $scope.bdtemPlayPause = function () {
+        videoService.getVideoAPI().pause();
         player.playPause();
     };
 
@@ -430,10 +496,13 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
 });
 
-bdtem.controller('MiddleCtrl', function ($scope, playerService) {
+bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
 
     $scope.skipToTrack = function (index) {
         var player = playerService.getPlayer();
+
+        videoService.getVideoAPI().pause();
+
         player.play(index, true);
         if (!player.playing) {
             player.play();

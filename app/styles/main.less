@@ -17,6 +17,8 @@
 @link-hover-color: darken(@link-color, 30%);
 @popover-bg: #000000;
 
+
+
 //Basic / scaffolding overrides:
 html, body {
   height: 100%;
@@ -140,15 +142,37 @@ a {
 }
 
 .middle-main {
-  background: #000000 no-repeat url(../images/DreamSmall.gif) right;
+  background: #000000;
   overflow: hidden;
   zoom: 1;
   min-height: 90%;
   max-height: 90%;
-  max-width: 100%;
-  min-width: 100%;
-  padding-top: 5vh;
-  padding-left: 10vw;
+  max-width: 33%;
+  padding-top: 4vh;
+  padding-left: 5vw;
+}
+
+.middle-video-container {
+//  background: #FF00FF no-repeat url(../images/DreamSmall.gif) right;
+  max-height: 80vh;
+  max-width: 66%;
+  padding-top: 4vh;
+  overflow: hidden;
+}
+
+
+video {
+  max-width: 960px;
+  max-height: 540px;
+}
+
+videogular vg-overlay-play .play:before {
+content: "BLAHHHHHH!" ;
+}
+
+
+videogular .iconButton {
+  display: none;
 }
 
 //Popover overrides:

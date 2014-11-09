@@ -7,9 +7,16 @@
     "modernizr": "~2.6.2",
     "jquery": "~1.9.1",
     "angular": "latest",
+    "angular-sanitize": "latest",
     "angular-bootstrap": "latest",
     "angular-media-player": "latest",
-    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5"
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5",
+    "videogular": "latest",
+    "videogular-controls": "latest",
+    "videogular-buffering": "latest",
+    "videogular-overlay-play": "latest",
+    "videogular-poster": "latest",
+    "videogular-ima-ads": "latest"
   },
   "devDependencies": {}
 }
