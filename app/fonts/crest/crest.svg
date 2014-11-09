@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2014 by original authors @ fontello.com</metadata>
+<defs>
+<font id="buttonz_bdtem" horiz-adv-x="1000" >
+<font-face font-family="buttonz_bdtem" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="crest_vector" unicode="&#xe800;" d="m163 110c-20 8-35 22-40 40-1 4-1 12-1 57l0 51 65 64c36 34 73 71 82 80 10 9 77 75 150 145l132 129 30 0 30 0 0-76 0-76-117-112c-233-224-310-298-314-301-2-2-5-4-6-4-2 0-6 2-11 3z m247 123l0 97 91 0 90 0 0-97 0-97-11 0-12 0 0 62 0 63-2 0-3 0 0-63 0-62-12 0-12 0 0 64 0 64-6 0-5 0 0-64 0-64-10 0-11 0 0 31 0 30-5 0-5 0 0-30 0-31-11 0-11 0 0 63 0 63-6 0c-3 0-7 0-8-1-1 0-1-7-1-63l0-62-8 0-8 0 0 86 0 87-7 0-7 0 0-87 0-86-10 0-10 0 0 97z m-194 213c-26 3-45 10-50 19-2 4-2 6 0 10 3 4 11 9 22 12 10 4 10 4 17 11l7 7 0 15 0 15-4 2c-14 4-30 16-40 29-9 13-14 28-15 46 0 6 0 12-1 13-2 11 16 20 47 25 19 3 52 3 70 0 33-5 51-15 46-26 0-1-1-7-1-13-1-35-23-64-55-75l-5-1 0-15 0-14 11-9c8-6 14-9 18-11 11-4 19-11 19-16 0-9-16-18-39-22-12-2-36-3-47-2z" horiz-adv-x="707" />
+</font>
+</defs>
+</svg>
