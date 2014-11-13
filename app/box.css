@@ -73,3 +73,17 @@ tr td:last-child {
 .justify {
     text-align: justify;
 }
+
+.orb {
+    width: 570px;
+    height: 540px;
+    margin: 2% auto;
+    background: url(http://couleurs.na.tl/rick/spriteSheet77.png);
+    animation: play 5s steps(55) infinite;
+}
+
+@keyframes play {
+    100% { background-position: -31350px }
+}
+
+

@@ -7550,7 +7550,6 @@ a:focus {
   padding: 0.2em 0;
 }
 .middle-container {
-  overflow: hidden;
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -7572,7 +7571,6 @@ a:focus {
 video {
   max-width: 960px;
   max-height: 540px;
-  overflow: hidden;
 }
 videogular {
   overflow: hidden;
@@ -7585,6 +7583,41 @@ videogular vg-overlay-play .bdtemPlay:before {
   color: #000000;
   font-weight: 400;
   content: "\e801";
+}
+@keyframes play {
+  100% {
+    background-position: -31350px;
+  }
+}
+@-webkit-keyframes play {
+  100% {
+    background-position: -31350px;
+  }
+}
+@-moz-keyframes play {
+  100% {
+    background-position: -31350px;
+  }
+}
+@keyframes play {
+  100% {
+    background-position: -31350px;
+  }
+}
+.videogular-poster-img {
+  width: 570px;
+  height: 480px;
+  padding-top: -50px !important;
+  margin: 2% auto;
+  background: url('http://couleurs.na.tl/rick/spriteSheet77.png');
+  animation: play 7s steps(55) infinite;
+  -webkit-animation: play 7s steps(55) infinite;
+  /* Safari 4+ */
+  -moz-animation: play 7s steps(55, end) infinite;
+  /* Fx 5+ */
+  -o-animation: play 7s steps(55) infinite;
+  /* Opera 12+ */
+  animation-direction: alternate-reverse;
 }
 videogular .iconButton {
   display: none;
