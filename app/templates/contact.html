@@ -1,61 +1,50 @@
 <div ng-controller="ContactCtrl as contact">
 
-    <p class="centered">If for any reason you need to contact us, put your message here.  It will be redirected upon receipt.</p>
+    <p class="centered">If for any reason you need to contact us, put your message here. It will be redirected upon
+        receipt.</p>
+
+    <br/>
 
     <form novalidate class="simple-form">
+        <div><label for="email">
+            Your E-Mail:
+        </label>
 
-        <table class="borderless">
-            <tr class="borderless">
-                <td>
-                    <label for="email">
-                        Your E-Mail:
-                    </label>
-                </td>
-                <td>
-                    <input id="email" ng-model="contact.email"/>
-                </td>
-            </tr>
+            <input id="email" ng-model="contact.email"/>
 
-            <tr>
-                <td>
-                    <label for="subject">
-                        What is this concerning?
-                    </label>
-                </td>
-                <td>
-                    <input id="subject" ng-model="contact.subject"/>
-                </td>
-            </tr>
+        </div>
 
-            <tr>
-            </tr>
+        <br/>
 
-            <tr>
-                <td>
-                    <label for="content">
-                        Something You Don't Not Want To Say:
-                    </label>
-                </td>
+        <div>
+            <label for="subject">
+                What is this concerning?
+            </label>
 
-                <td>
-                    <textarea id="content" ng-model="contact.content"></textarea>
-                </td>
+            <input id="subject" ng-model="contact.subject"/>
 
-            </tr>
+        </div>
 
-            <tr class="centered">
-                <td colspan="2" class="centered">
-                    <input type="image"
-                           class="logo"
-                           style="text-align: center"
-                           name="submit"
-                           ng-click="$close('submitted'); submitContact(contact)"
-                           src="images/shield.png"
-                           alt="Tell me a secret."/>
-                </td>
-            </tr>
+        <br/>
 
+        <div>
+            <label for="content">
+                Something You Don't Not Want To Say:
+            </label>
 
-        </table>
+            <textarea id="content" ng-model="contact.content"></textarea>
+        </div>
+
+        <br/>
+
+        <div class="centered">
+            <input type="image"
+                   class="logo"
+                   style="text-align: center"
+                   name="submit"
+                   ng-click="$close('submitted'); submitContact(contact)"
+                   src="images/shield.png"
+                   alt="Tell me a secret."/>
+        </div>
     </form>
 </div>

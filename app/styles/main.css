@@ -7653,13 +7653,18 @@ label {
   font-size: 1vw;
 }
 input {
+  text-align: center;
+  align-self: center;
+  align-content: center;
+  align-items: center;
   background-color: #000000;
   color: #ffffff;
 }
 textarea {
   background-color: #000000;
   color: #ffffff;
-  width: 50vw;
+  width: 64vw;
+  height: 20vh;
 }
 .buttonz {
   display: inline-block;
