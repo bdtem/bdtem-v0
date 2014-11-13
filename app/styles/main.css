@@ -7466,8 +7466,8 @@ body {
 }
 @font-face {
   font-family: 'crest';
-  src: url('../fonts/crest/crest.eot?25532730');
-  src: url('../fonts/crest/crest.eot?25532730#iefix') format('embedded-opentype'), url('../fonts/crest/crest.woff?25532730') format('woff'), url('../fonts/crest/crest.ttf?25532730') format('truetype'), url('../fonts/crest/crest.svg?25532730#buttonz_bdtem') format('svg');
+  src: url('../fonts/crest/playcrests.eot?25532730');
+  src: url('../fonts/crest/playcrests.eot?25532730#iefix') format('embedded-opentype'), url('../fonts/crest/playcrests.woff?25532730') format('woff'), url('../fonts/crest/playcrests.ttf?25532730') format('truetype'), url('../fonts/crest/playcrests.svg?25532730') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -7582,9 +7582,11 @@ videogular vg-overlay-play {
 }
 videogular vg-overlay-play .bdtemPlay:before {
   font-family: 'crest';
-  color: #ffffff;
-  text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;
-  content: "\e800";
+
+font-weight: 400;
+
+  color: #000000;
+  content: "\e801";
 }
 videogular .iconButton {
   display: none;
