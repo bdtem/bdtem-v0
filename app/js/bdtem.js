@@ -48,12 +48,19 @@ bdtem.service('playerService', function () {
 bdtem.service('videoService', function () {
     var videoAPI;
 
+    const PLAY = "play";
+    const PAUSE = "pause";
+    const STOP = "stop";
+
     return {
         getVideoAPI: function () {
             return videoAPI;
         },
         setVideoAPI: function (API) {
             videoAPI = API;
+        },
+        isPlaying : function () {
+            return (videoAPI && videoAPI.currentState === PLAY);
         }
     };
 });
@@ -455,7 +462,13 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     };
 
     $scope.bdtemPlayPause = function () {
-        videoService.getVideoAPI().pause();
+
+        var videoAPI = videoService.getVideoAPI();
+
+        if(videoService.isPlaying()) {
+            videoAPI.pause();
+        }
+
         player.playPause();
     };
 
