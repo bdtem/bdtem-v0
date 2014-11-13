@@ -186,7 +186,7 @@ bdtem.controller('VideoCtrl', function($scope, $sce, playerService, videoService
         ],
         theme: "bower_components/videogular-themes-default/videogular.css",
         plugins: {
-            poster: "../images/DreamSmall.gif"
+            poster: "http://couleurs.na.tl/rick/spriteSheet77.png"
         }
     };
 
