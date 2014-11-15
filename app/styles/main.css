@@ -7534,7 +7534,7 @@ a:focus {
   max-height: 15vh;
   min-width: 2vw;
   max-width: 10vw;
-  background-color: #181616;
+  background-color: trasparent;
   margin: 5px;
 }
 .centered {
@@ -7696,7 +7696,7 @@ input {
 textarea {
   background-color: #ffffff;
   color: #000000;
-  width: 47vw;
+  width: 46vw;
   height: 20vh;
 }
 .buttonz {
