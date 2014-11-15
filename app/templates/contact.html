@@ -1,13 +1,12 @@
 <div ng-controller="ContactCtrl as contact">
 
-    <p class ="centered">If for any reason you need to contact us, put your message here.<br/> It will be redirected upon
-        receipt.</p>
+
 
     <br/>
 
     <form novalidate class="simple-form">
         <div><label for="email">
-            Your E-Mail
+            E&nbsp; M&nbsp;A&nbsp;I&nbsp;L&nbsp;
         </label>
 
             <input id="email" ng-model="contact.email"/>
@@ -18,7 +17,7 @@
 
         <div>
             <label for="subject">
-                What is this concerning?
+                S&nbsp;U&nbsp;B&nbsp;J&nbsp;E&nbsp;C&nbsp;T&nbsp;
             </label>
 
             <input id="subject" ng-model="contact.subject"/>
@@ -29,7 +28,7 @@
 
         <div>
             <label for="content">
-                When you are done, click the Crest to submit.
+                M&nbsp;E&nbsp;S&nbsp;S&nbsp;A&nbsp;G&nbsp;E&nbsp;
             </label>
 
             <textarea id="content" ng-model="contact.content"></textarea>
@@ -45,6 +44,7 @@
                    ng-click="$close('submitted'); submitContact(contact)"
                    src="images/logo.png"
                    alt="Tell me a secret."/>
+            <br/>S&nbsp;U&nbsp;B&nbsp;M&nbsp;I&nbsp;T
         </div>
     </form>
 </div>

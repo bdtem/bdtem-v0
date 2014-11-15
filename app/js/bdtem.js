@@ -91,7 +91,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
                 $modal.open({
                     templateUrl: 'templates/donate.html',
                     controller: 'DonateCtrl',
-                    size: 'lg'
+                    size: 'med'
                 });
             }
         },
@@ -111,7 +111,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
                 $modal.open({
                     templateUrl: 'templates/contact.html',
                     controller: 'ContactCtrl',
-                    size: 'lg'
+                    size: 'med'
                 });
             }
         }
