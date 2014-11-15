@@ -7572,9 +7572,6 @@ video {
   max-width: 960px;
   max-height: 540px;
 }
-videogular {
-  overflow: hidden;
-}
 videogular vg-overlay-play {
   font-family: "crest";
 }
@@ -7618,6 +7615,7 @@ videogular vg-overlay-play .bdtemPlay:before {
   -o-animation: play 7s steps(55) infinite;
   /* Opera 12+ */
   animation-direction: alternate-reverse;
+  -webkit-animation-direction: alternate;
 }
 videogular .iconButton {
   display: none;
