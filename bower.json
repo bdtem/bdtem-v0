@@ -6,9 +6,9 @@
     "font-awesome": "~4.2.0",
     "modernizr": "~2.6.2",
     "jquery": "~1.9.1",
-    "angular": "latest",
-    "angular-sanitize": "latest",
-    "angular-bootstrap": "latest",
+    "angular": "~1.2.26",
+    "angular-sanitize": "~1.2.25",
+    "angular-bootstrap": "~0.11.2",
     "angular-media-player": "latest",
     "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5",
     "videogular": "latest",
@@ -16,7 +16,8 @@
     "videogular-buffering": "latest",
     "videogular-overlay-play": "latest",
     "videogular-poster": "latest",
-    "videogular-ima-ads": "latest"
+    "videogular-ima-ads": "latest",
+    "videogular-themes-default": "latest"
   },
   "devDependencies": {}
 }
