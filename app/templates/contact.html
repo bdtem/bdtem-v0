@@ -4,9 +4,9 @@
 
     <br/>
 
-    <form novalidate class="simple-form">
+    <form novalidate class="simple-form" style ="letter-spacing: .5vw">
         <div><label for="email">
-            E&nbsp; M&nbsp;A&nbsp;I&nbsp;L&nbsp;
+            EMAIL
         </label>
 
             <input id="email" ng-model="contact.email"/>
@@ -17,7 +17,7 @@
 
         <div>
             <label for="subject">
-                S&nbsp;U&nbsp;B&nbsp;J&nbsp;E&nbsp;C&nbsp;T&nbsp;
+               SUBJECT
             </label>
 
             <input id="subject" ng-model="contact.subject"/>
@@ -28,7 +28,7 @@
 
         <div>
             <label for="content">
-                M&nbsp;E&nbsp;S&nbsp;S&nbsp;A&nbsp;G&nbsp;E&nbsp;
+                MESSAGE
             </label>
 
             <textarea id="content" ng-model="contact.content"></textarea>
@@ -44,7 +44,7 @@
                    ng-click="$close('submitted'); submitContact(contact)"
                    src="images/logo.png"
                    alt="Tell me a secret."/>
-            <br/>S&nbsp;U&nbsp;B&nbsp;M&nbsp;I&nbsp;T
+            <br/>SUBMIT
         </div>
     </form>
 </div>

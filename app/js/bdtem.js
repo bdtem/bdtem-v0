@@ -73,16 +73,16 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
             glyph: '\ue801',
             tooltip: 'SHARE',
             action: function () {
-                var duration = 1000;
-                var holdOldValue = this.tooltip;
-                this.tooltip = "THERE IS NOTHING HERE YET. WE DO NOT DO THESE THINGS YET.";
-                AnimateRotate('#button-' + this.purpose, 360, duration);
 
-                setTimeout(function () {
-                    $scope.buttons[0].tooltip = holdOldValue;
-                }, duration);
+                $modal.open({
+                    templateUrl: "templates/share.html",
+                    size: 'med'
+                });
+
             }
         },
+
+
         {
             purpose: 'Donate',
             glyph: '\ue802',
