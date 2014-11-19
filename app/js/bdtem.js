@@ -73,16 +73,12 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
             glyph: '\ue801',
             tooltip: 'SHARE',
             action: function () {
-
                 $modal.open({
                     templateUrl: "templates/share.html",
                     size: 'med'
                 });
-
             }
         },
-
-
         {
             purpose: 'Donate',
             glyph: '\ue802',
@@ -131,10 +127,27 @@ bdtem.factory('postContactForm', ['$http', function ($http) {
     }
 }]);
 
+bdtem.controller('ShareCtrl', function ($scope) {
+
+    $scope.socialMediaBullshit = [
+        {
+            shareName: 'facebook',
+            shareLink: 'http://www.facebook.com/sharer.php?u=http://www.bdtem.co.in',
+            shareText: 'FACE'
+        },
+        {
+            shareName: 'twitter',
+            shareLink: 'http://twitter.com/share?text=I%20am%20posting%20this%20because%20I%20do%20not%20know%20what%20it%20is.%20&url=http://www.bdtem.co.in',
+            shareText: 'TWIT'
+        }
+    ];
+
+});
+
 bdtem.controller('ContactCtrl', function ($scope, $http) {
 
     $scope.submitContact = function (contact) {
-        console.log(contact);
+//        console.log(contact);
 
         $http.post('http://'+__HOST__+':3000/contact', contact)
             .success(function (data, status, headers, config) {
@@ -166,12 +179,12 @@ bdtem.controller('VideoCtrl', function($scope, $sce, playerService, videoService
     controller.onPlayerReady = function(API) {
         controller.API = API;
         videoService.setVideoAPI(API);
-        console.log('player ready');
-        console.log(API);
+//        console.log('player ready');
+//        console.log(API);
     };
 
     $scope.customClickOverlayPlay = function() {
-        console.log('overlay play clicked');
+//        console.log('overlay play clicked');
         playerService.getPlayer().pause();
         controller.API.playPause();
     };
@@ -184,7 +197,7 @@ bdtem.controller('VideoCtrl', function($scope, $sce, playerService, videoService
             {
             }
         ],
-        theme: "bower_components/videogular-themes-default/videogular.css",
+        theme: "styles/videogular.css",
         plugins: {
             poster: "http://couleurs.na.tl/rick/spriteSheet77.png"
         }
@@ -454,10 +467,20 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     };
 
     $scope.prevTrack = function () {
+        var videoAPI = videoService.getVideoAPI();
+        if(videoService.isPlaying()) {
+            videoAPI.pause();
+        }
+
         player.prev(true);
     };
 
     $scope.nextTrack = function () {
+        var videoAPI = videoService.getVideoAPI();
+        if(videoService.isPlaying()) {
+            videoAPI.pause();
+        }
+
         player.next(true);
     };
 

@@ -34,7 +34,7 @@ angular.module("com.2fdevs.videogular.plugins.overlayplay", [])
                 "</div>",
             link: function (scope, elem, attr, API) {
                 function onComplete(target, params) {
-                    scope.overlayPlayIcon = {bdtemPlay: true};
+                    scope.overlayPlayIcon = {bdtemPlay: false};
                 }
 
                 function onPlay(target, params) {
@@ -48,7 +48,7 @@ angular.module("com.2fdevs.videogular.plugins.overlayplay", [])
                             break;
 
                         case VG_STATES.PAUSE:
-                            scope.overlayPlayIcon = {bdtemPlay: true};
+                            scope.overlayPlayIcon = {bdtemPlay: false};
                             break;
 
                         case VG_STATES.STOP:

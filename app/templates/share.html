@@ -1,0 +1,15 @@
+<div class="centered extra-padding"
+     ng-controller="ShareCtrl as share"
+     ng-click="$close('clicked')">
+
+    <br/><br/>
+
+    <a ng-repeat="bullshit in socialMediaBullshit"
+       ng-class="{'pull-left': $first, 'pull-right': $last, 'text-center' : $middle}"
+       class="spacedLink" ng-href="{{bullshit.shareLink}}" target="_blank">{{bullshit.shareText}}</a>
+
+
+    <br/><br/><br/>
+    <img class="centered logo" src="images/logo.png"/>
+    <br/>
+</div>

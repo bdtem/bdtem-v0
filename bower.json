@@ -16,8 +16,7 @@
     "videogular-buffering": "latest",
     "videogular-overlay-play": "latest",
     "videogular-poster": "latest",
-    "videogular-ima-ads": "latest",
-    "videogular-themes-default": "latest"
+    "videogular-ima-ads": "latest"
   },
   "devDependencies": {}
 }

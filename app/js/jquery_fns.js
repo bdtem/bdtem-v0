@@ -3,33 +3,42 @@
  */
 
 $.fn.stretch_text = function () {
-    var element = $(this),
-        container_width = element.parent().width(),
-        element_width = element.width(),
-        nb_char = element.text().length,
-        spacing = container_width / nb_char;
+    var element = $(this);
+
+    var container_width = element.parent().width();
+
+    var element_width = element.width();
+
+    var nb_char = element.text().length;
+
+    var spacing = container_width / nb_char;
 
     if (element_width <= container_width) {
+        element.removeClass('justify');
+
         var char_width = element_width / nb_char,
             ltr_spacing = spacing - char_width + (spacing - char_width) / nb_char;
 
         element.css({'letter-spacing': ltr_spacing});
     } else {
-        element.contents().unwrap();
         element.addClass('justify');
     }
 };
 
-$(document).ready(function () {
+function stretchTheText() {
+//    console.log('beep');
 
-    $('.stretched').each(function () {
+    var $stretched = $('.stretched');
+
+    $stretched.each(function () {
+//        console.log('boop');
         $(this).stretch_text();
     });
+}
 
-    $(window).resize(function() {console.log('fuck yo couch')});
-
+$(document).ready(function () {
+    stretchTheText();
 });
-
 
 function AnimateRotate(selector, angle, animationDuration) {
     // caching the object for performance reasons
@@ -39,7 +48,7 @@ function AnimateRotate(selector, angle, animationDuration) {
     // (starts from `0` to `angle`), you can name it as you want
     $({deg: 0}).animate({deg: angle}, {
         duration: animationDuration,
-        step: function(now) {
+        step: function (now) {
             // in the step-callback (that is fired each step of the animation),
             // you can use the `now` paramter which contains the current
             // animation-position (`0` up to `angle`)

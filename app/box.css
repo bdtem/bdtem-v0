@@ -11,7 +11,7 @@ img {
 table {
     vertical-align: middle;
     table-layout: fixed;
-    width: 26vw;
+    width: 23vw;
     height: 76vh;
     text-align: center;
     border-collapse: collapse;
@@ -32,6 +32,15 @@ tr td {
     align-self: center;
     text-align: center;
     align-content: center;
+}
+
+.littlebiggerfont {
+    font-size: 2vmin;
+}
+
+.biggerfont {
+    font-size: 2.3vmin;
+    line-height: 5vh;
 }
 
 .bordered {

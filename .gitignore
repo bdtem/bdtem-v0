@@ -10,7 +10,12 @@
 *.vi
 *~
 *.out
-
+*.png
+*.jpg
+*.gif
+*.mp4
+*.mp3
+*.map
 
 # OS folders
 .DS_Store
