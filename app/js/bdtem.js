@@ -96,7 +96,10 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
             glyph: '\ue808',
             tooltip: 'NEWS',
             action: function () {
-                window.open('https://tinyletter.com/Department_of_Archives');
+                $modal.open({
+                    templateUrl: 'templates/newsletter.html',
+                    size: 'med'
+                });
             }
         },
         {
