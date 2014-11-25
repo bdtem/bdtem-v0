@@ -15,7 +15,7 @@
 
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="bower_components/videogular/videogular.js"></script>
-    <script src="bower_components/videogular-controls/controls.js"></script>
+    <script src="scripts/videogular/controls.js"></script>
     <script src="scripts/videogular/overlay-play.js"></script>
     <script src="scripts/videogular/poster.js"></script>
     <script src="bower_components/videogular-buffering/buffering.js"></script>
@@ -168,6 +168,15 @@
             <vg-overlay-play></vg-overlay-play>
             <vg-poster-image vg-url='controller.config.plugins.poster'></vg-poster-image>
 
+            <vg-controls vg-autohide="true" vg-autohide-time="500">
+                <div class="pull-right pad-right">
+                    <vg-volume>
+                        <vg-mutebutton></vg-mutebutton>
+                        <vg-volumebar></vg-volumebar>
+                    </vg-volume>
+                </div>
+            </vg-controls>
+
         </videogular>
     </div>
 
@@ -214,7 +223,6 @@
                     >
                 VOLUME
             </div>
-
 
         </div>
     </div>

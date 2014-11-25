@@ -7635,8 +7635,8 @@ videogular vg-overlay-play .bdtemPlay:before {
   filter: none;
   opacity: 1;
 }
-videogular .iconButton {
-  display: none;
+.pad-right {
+  padding-right: 1vw;
 }
 .popover {
   min-width: 20vw;
