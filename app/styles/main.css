@@ -7537,6 +7537,14 @@ a:focus {
   background-color: trasparent;
   margin: 5px;
 }
+.logosubmit {
+  min-height: 2vh;
+  max-height: 18vh;
+  min-width: 2vw;
+  max-width: 15vw;
+  background-color: trasparent;
+  margin: 5px;
+}
 .centered {
   align-self: center;
   align-content: center;
