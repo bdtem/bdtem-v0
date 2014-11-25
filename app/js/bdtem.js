@@ -59,7 +59,7 @@ bdtem.service('videoService', function () {
         setVideoAPI: function (API) {
             videoAPI = API;
         },
-        isPlaying : function () {
+        isPlaying: function () {
             return (videoAPI && videoAPI.currentState === PLAY);
         }
     };
@@ -152,7 +152,7 @@ bdtem.controller('ContactCtrl', function ($scope, $http) {
     $scope.submitContact = function (contact) {
 //        console.log(contact);
 
-        $http.post('http://'+__HOST__+':3000/contact', contact)
+        $http.post('http://' + __HOST__ + ':3000/contact', contact)
             .success(function (data, status, headers, config) {
                 console.log('------SUCCESS! :DD --------');
                 console.log(data);
@@ -174,19 +174,19 @@ bdtem.controller('ContactCtrl', function ($scope, $http) {
 });
 
 
-bdtem.controller('VideoCtrl', function($scope, $sce, playerService, videoService) {
+bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService) {
 
     var controller = this;
     controller.API = null;
 
-    controller.onPlayerReady = function(API) {
+    controller.onPlayerReady = function (API) {
         controller.API = API;
         videoService.setVideoAPI(API);
 //        console.log('player ready');
 //        console.log(API);
     };
 
-    $scope.customClickOverlayPlay = function() {
+    $scope.customClickOverlayPlay = function () {
 //        console.log('overlay play clicked');
         playerService.getPlayer().pause();
         controller.API.playPause();
@@ -207,14 +207,18 @@ bdtem.controller('VideoCtrl', function($scope, $sce, playerService, videoService
     };
 
 
-
-
-
 });
 
 bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playerService, videoService) {
 
     var player;
+    var volume = 1;
+
+    $scope.$watch('volume', function (newValue) {
+        if (player) {
+            player.setVolume(newValue);
+        }
+    });
 
     $scope.__defineGetter__('player', function () {
         return player | setPlayer();
@@ -224,6 +228,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
         var scopePlayer = $scope.bdtemplayer;
         playerService.setPlayer(scopePlayer);
         player = scopePlayer;
+        volume = scopePlayer.volume;
         return scopePlayer;
     }
 
@@ -471,7 +476,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
     $scope.prevTrack = function () {
         var videoAPI = videoService.getVideoAPI();
-        if(videoService.isPlaying()) {
+        if (videoService.isPlaying()) {
             videoAPI.pause();
         }
 
@@ -480,7 +485,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
     $scope.nextTrack = function () {
         var videoAPI = videoService.getVideoAPI();
-        if(videoService.isPlaying()) {
+        if (videoService.isPlaying()) {
             videoAPI.pause();
         }
 
@@ -491,7 +496,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
         var videoAPI = videoService.getVideoAPI();
 
-        if(videoService.isPlaying()) {
+        if (videoService.isPlaying()) {
             videoAPI.pause();
         }
 
