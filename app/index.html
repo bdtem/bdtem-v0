@@ -206,8 +206,13 @@
                 &#xe806;
             </div>
 
-            <div class="btn buttonz-small">
-                <input min="0" max="1" step="0.01" type="range" ng-model="volume" />
+            <div class="btn buttonz-small"
+                 tooltip-html-unsafe="{{volumeBar}}"
+                 tooltip-placement="top"
+                 tooltip-append-to-body="true"
+                 tooltip-trigger="click"
+                    >
+                VOLUME
             </div>
 
 

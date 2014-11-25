@@ -108,6 +108,11 @@ a {
   background-color: transparent;
 }
 
+.above-navbar {
+  margin-bottom: 10vh;
+  background: transparent;
+}
+
 .btn-group {
   background-color: transparent;
 }
@@ -184,7 +189,6 @@ video {
   max-height: 540px;
 }
 
-
 videogular vg-overlay-play {
   font-family: "crest";
 }
@@ -197,19 +201,27 @@ videogular vg-overlay-play .bdtemPlay:before {
 }
 
 @keyframes play {
-   100% { background-position: -31350px }
+  100% {
+    background-position: -31350px
+  }
 }
 
 @-webkit-keyframes play {
-  100% { background-position: -31350px }
+  100% {
+    background-position: -31350px
+  }
 }
 
 @-moz-keyframes play {
-  100% { background-position: -31350px }
+  100% {
+    background-position: -31350px
+  }
 }
 
 @keyframes play {
-  100% { background-position: -31350px }
+  100% {
+    background-position: -31350px
+  }
 }
 
 .videogular-poster-img {
@@ -222,13 +234,13 @@ videogular vg-overlay-play .bdtemPlay:before {
   background: #000000 url('http://couleurs.na.tl/rick/spriteSheet77.png') no-repeat;
   animation: play 7s steps(55) infinite;
   -webkit-animation: play 7s steps(55) infinite; /* Safari 4+ */
-  -moz-animation:    play 7s steps(55, end) infinite; /* Fx 5+ */
-  -o-animation:      play 7s steps(55) infinite; /* Opera 12+ */
+  -moz-animation: play 7s steps(55, end) infinite; /* Fx 5+ */
+  -o-animation: play 7s steps(55) infinite; /* Opera 12+ */
   animation-direction: alternate-reverse;
   -webkit-animation-direction: alternate;
 }
 
- .overlayPlayContainer {
+.overlayPlayContainer {
   filter: none;
   opacity: 1;
 }
@@ -269,7 +281,7 @@ videogular .iconButton {
   color: #7777FF;
   font-weight: normal;
 
-  background-color: @popover-title-bg;
+  background-color: transparent;
   z-index: @zindex-navbar-fixed;
 }
 
@@ -283,9 +295,6 @@ videogular .iconButton {
   background-color: transparent;
   z-index: @zindex-navbar-fixed;
 }
-
-
-
 
 .popover-content {
   font-family: "Superclarendon";
@@ -312,7 +321,8 @@ videogular .iconButton {
   &hover,
   &focus {
     color: #999999;
-  };
+  }
+;
 }
 
 .modal-content .extra-padding {
@@ -339,7 +349,6 @@ input {
   align-self: center;
   align-content: center;
   align-items: center;
-
 
   background-color: #ffffff;
   color: #000000;
@@ -403,9 +412,7 @@ input[type="range"] {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   width: 100%;
   height: 0.1vh;
-  margin: 0;
   border: none;
-  padding: 1px 2px;
   background: #ffffff;
   box-shadow: none;
   -webkit-box-shadow: none;
@@ -440,21 +447,20 @@ input[type="range"]::-webkit-slider-thumb {
   height: 4vh;
   border: none;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFFFFF), color-stop(100%, #EEEEEE)); /* android <= 2.2 */
-  background-image: -webkit-linear-gradient(top , #FFFFFF 0, #EEEEEE 100%); /* older mobile safari and android > 2.2 */;
+  background-image: -webkit-linear-gradient(top, #FFFFFF 0, #EEEEEE 100%); /* older mobile safari and android > 2.2 */;
   background-image: linear-gradient(to bottom, #FFFFFF 0, #EEEEEE 100%); /* W3C */
 }
+
 input[type="range"]::-moz-range-thumb {
-  width: 40px;
-  height: 18px;
+  width: 0.2vw;
+  height: 4vh;
   border: none;
-  border-radius: 12px;
-  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
+  background-image: linear-gradient(to bottom, #FFFFFF 0, #EEEEEE 100%); /* W3C */
 }
 
 input[type="range"]::-ms-thumb {
-  width: 40px;
-  height: 18px;
-  border-radius: 12px;
+  width: 0.2vw;
+  height: 4vh;
   border: 0;
-  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%); /* W3C */
+  background-image: linear-gradient(to bottom, #FFFFFF 0, #EEEEEE 100%); /* W3C */
 }

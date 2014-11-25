@@ -214,6 +214,8 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     var player;
     var volume = 1;
 
+    $scope.volumeBar = "<input class='above-navbar fa-rotate-90' min='0' max='1' step='0.01' type='range' ng-model='volume' />"
+
     $scope.$watch('volume', function (newValue) {
         if (player) {
             player.setVolume(newValue);

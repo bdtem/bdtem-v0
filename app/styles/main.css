@@ -7517,6 +7517,10 @@ a:focus {
 .navbar-fixed-bottom {
   background-color: transparent;
 }
+.above-navbar {
+  margin-bottom: 10vh;
+  background: transparent;
+}
 .btn-group {
   background-color: transparent;
 }
@@ -7658,7 +7662,7 @@ videogular .iconButton {
   font-size: 12pt;
   color: #7777FF;
   font-weight: normal;
-  background-color: #000000;
+  background-color: transparent;
   z-index: 1030;
 }
 .tooltip-inner {
@@ -7763,9 +7767,7 @@ input[type="range"] {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   width: 100%;
   height: 0.1vh;
-  margin: 0;
   border: none;
-  padding: 1px 2px;
   background: #ffffff;
   box-shadow: none;
   -webkit-box-shadow: none;
@@ -7803,19 +7805,17 @@ input[type="range"]::-webkit-slider-thumb {
   /* W3C */
 }
 input[type="range"]::-moz-range-thumb {
-  width: 40px;
-  height: 18px;
+  width: 0.2vw;
+  height: 4vh;
   border: none;
-  border-radius: 12px;
-  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0, #eeeeee 100%);
   /* W3C */
 }
 input[type="range"]::-ms-thumb {
-  width: 40px;
-  height: 18px;
-  border-radius: 12px;
+  width: 0.2vw;
+  height: 4vh;
   border: 0;
-  background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0, #eeeeee 100%);
   /* W3C */
 }
 /*# sourceMappingURL=/styles/main.css.map */
