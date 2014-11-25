@@ -7669,7 +7669,7 @@ videogular .iconButton {
 }
 .modal-content {
   font-family: "Superclarendon";
-  font-size: 2vw;
+  font-size: 1.2vw;
   padding: 2vh 2vw;
   background-color: #ffffff;
   color: #000000;
@@ -7693,7 +7693,7 @@ videogular .iconButton {
   font-size: 2vw;
 }
 label {
-  font-size: 1.5vw;
+  font-size: 1.2vw;
 }
 .text_line {
   clear: both;
@@ -7720,6 +7720,11 @@ textarea {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   z-index: 1030;
+}
+.modal-content .tooltip {
+  background-color: #ffffff;
+  color: #000000;
+  z-index: 5000;
 }
 .buttonz-small {
   display: inline-block;
