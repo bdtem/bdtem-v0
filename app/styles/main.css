@@ -7721,6 +7721,9 @@ textarea {
   -moz-osx-font-smoothing: grayscale;
   z-index: 1030;
 }
+.slider {
+  width: 10%;
+}
 .modal-content .tooltip {
   background-color: #ffffff;
   color: #000000;
