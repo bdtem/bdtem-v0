@@ -26,18 +26,24 @@ $.fn.stretch_text = function () {
 };
 
 function stretchTheText() {
-//    console.log('beep');
-
     var $stretched = $('.stretched');
 
     $stretched.each(function () {
-//        console.log('boop');
         $(this).stretch_text();
     });
 }
 
+var positionTheVolumeBar = function () {
+    var volumeToggle = $('#volumeToggle');
+    var volumeBar = $('#volumeBar');
+
+    var left = volumeToggle.offset().left - 33;
+    volumeBar.offset({top: -volumeToggle.height(), left: left});
+};
+
 $(document).ready(function () {
     stretchTheText();
+    positionTheVolumeBar();
 });
 
 function AnimateRotate(selector, angle, animationDuration) {
