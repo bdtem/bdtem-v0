@@ -69,7 +69,7 @@ tr td:last-child {
 
 .pull-down {
     position: relative;
-    top: 3vmin;
+    top: 1vmin;
 }
 
 .stretch_it {
@@ -91,5 +91,23 @@ tr td:last-child {
 @keyframes play {
     100% { background-position: -31350px }
 }
+
+.row .words {
+    text-align: center;
+    color: #ffffff;
+    font-size: .8em;
+    font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
+    width: 29em;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color:#ffffff;
+    line-height: 1.7em;
+    padding-top:5px;
+    padding-bottom: 5px;
+
+}
+
+
+
 
 

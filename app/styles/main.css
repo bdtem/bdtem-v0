@@ -7572,7 +7572,7 @@ a:focus {
   max-height: 90%;
   max-width: 33%;
   padding-top: 4vh;
-  padding-left: 6vw;
+  padding-left: 8vw;
   padding-right: 0px;
 }
 .middle-video-container {
@@ -7732,6 +7732,7 @@ textarea {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   z-index: 1030;
+  vertical-align: middle;
 }
 .slider {
   width: 10%;
@@ -7749,6 +7750,7 @@ textarea {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   z-index: 1030;
+  vertical-align: middle;
   font-size: 3vw;
 }
 .progress {
