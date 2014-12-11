@@ -7577,21 +7577,14 @@ a:focus {
 }
 .middle-video-container {
   max-height: 80vh;
-  max-width: 66%;
+  max-width: 960px;
   padding-top: 4vh;
+  border: cyan 2px;
 }
-video {
+videogular {
+  border: green 2px;
   max-width: 960px;
   max-height: 540px;
-}
-videogular vg-overlay-play {
-  font-family: "crest";
-}
-videogular vg-overlay-play .bdtemPlay:before {
-  font-family: 'crest';
-  color: #000000;
-  font-weight: 400;
-  content: "\e801";
 }
 @keyframes play {
   100% {
@@ -7613,14 +7606,27 @@ videogular vg-overlay-play .bdtemPlay:before {
     background-position: -31350px;
   }
 }
-.videogular-poster-img {
+.videogular-poster-img-container {
   min-width: 570px;
-  min-height: 500px;
-  padding-bottom: 20px;
-  margin: 0;
-  border-left: 15vw solid black;
-  background-position: right;
-  background: #000000 url('http://couleurs.na.tl/rick/spriteSheet77.png') no-repeat;
+  max-width: 960px;
+  min-height: 540px;
+  background-color: black;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+}
+.videogular-poster-img {
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  display: inline-block;
+  margin: 0 auto;
+  min-width: 570px;
+  max-width: 570px;
+  min-height: 540px;
+  max-height: 540px;
+  background: #000000 url('http://couleurs.na.tl/rick/spriteSheet77.png');
   animation: play 7s steps(55) infinite;
   -webkit-animation: play 7s steps(55) infinite;
   /* Safari 4+ */
@@ -7630,10 +7636,6 @@ videogular vg-overlay-play .bdtemPlay:before {
   /* Opera 12+ */
   animation-direction: alternate-reverse;
   -webkit-animation-direction: alternate;
-}
-.overlayPlayContainer {
-  filter: none;
-  opacity: 1;
 }
 .pad-right {
   padding-right: 1vw;

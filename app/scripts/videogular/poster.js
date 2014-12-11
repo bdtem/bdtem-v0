@@ -33,7 +33,9 @@ angular.module("com.2fdevs.videogular.plugins.poster", [])
 			scope: {
 				vgUrl: "="
 			},
-			template: '<div class="videogular-poster-img"></div>',
+			template: '<div class="videogular-poster-img-container">' +
+                '<div class="videogular-poster-img"></div>' +
+                '</div>',
 			link: function (scope, elem, attr, API) {
 				function onUpdateState(newState) {
 					switch (newState) {
