@@ -180,11 +180,11 @@
                 &#xe804;
             </div>
 
-            <div id="volumeToggle" class="btn buttonz-small" ng-click="toggleVolumeBar()">
-                &#xe809;
+            <div id="volumeToggle" class="btn buttonz-small">
+                <span class="btn buttonz-small" ng-click="toggleVolumeBar()">&#xe809;</span>
+                <input id="volumeBar" ng-show="showVolumeBar" class='above-navbar fa-rotate-270' value='1' min='0' max='1' step='0.01' type='range' ng-model='volume' />
             </div>
 
-            <input id="volumeBar" ng-show="showVolumeBar" class='above-navbar fa-rotate-270' value='1' min='0' max='1' step='0.01' type='range' ng-model='volume' />
         </div>
     </div>
 </nav>

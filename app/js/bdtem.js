@@ -218,6 +218,10 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
     $scope.toggleVolumeBar = function () {
         $scope.showVolumeBar = !$scope.showVolumeBar;
+
+        if($scope.showVolumeBar) {
+            positionTheVolumeBar();
+        }
     };
 
     $scope.$watch('volume', function (newValue) {
@@ -437,8 +441,9 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
         var srcElement = event.srcElement;
         var sourceElement = srcElement ? srcElement : event.target;
 
-        var pxWidth = sourceElement.offsetWidth;
-        var xOffset = sourceElement.offsetParent.offsetLeft;
+        var offsetParent = sourceElement.offsetParent;
+        var pxWidth = offsetParent.offsetWidth;
+        var xOffset = offsetParent.offsetLeft;
         var clickOffset = event.layerX | event.clientX;
         var pixelsRight = Math.abs(xOffset - clickOffset);
 
