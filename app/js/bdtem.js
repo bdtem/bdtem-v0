@@ -558,10 +558,8 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
 
         videoService.getVideoAPI().pause();
 
-        player.play(index, true);
-        if (!player.playing) {
-            player.play();
-        }
+        player.play(index, false);
+        player.load(true);
     };
 
 });
