@@ -22,9 +22,20 @@ html, body {
   max-height: 100%;
 }
 
+body {
+  background-color: #000000;
+}
+
+.media-body {
+  background-color: #000000;
+}
+
 @font-face {
   font-family: "Superclarendon";
-  src: url('../fonts/superclarendon/superclarendon.eot') format('embedded-opentype'), url('../fonts/superclarendon/superclarendon.woff') format('woff'), url('../fonts/superclarendon/superclarendon.ttf') format('truetype');
+  src:
+      url('../fonts/superclarendon/superclarendon.eot') format('embedded-opentype'),
+      url('../fonts/superclarendon/superclarendon.woff') format('woff'),
+      url('../fonts/superclarendon/superclarendon.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -52,13 +63,12 @@ html, body {
 
 }
 
-body {
-  background-color: #000000;
-}
+
 
 a {
   color: @link-color;
   text-decoration: none;
+  cursor: pointer;
 
   &:hover,
   &:focus {
@@ -68,10 +78,6 @@ a {
   &:focus {
     .tab-focus();
   }
-}
-
-.media-body {
-  background-color: #000000;
 }
 
 .container {
@@ -129,6 +135,13 @@ a {
   &:focus {
     color: @link-hover-color;
   }
+}
+
+.small-crest {
+  .buttonz;
+  font-size:3vmin;
+  padding: 1px;
+  content: "\e801";
 }
 
 .logo {

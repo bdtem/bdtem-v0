@@ -9,7 +9,7 @@
 <html ng-app="bdtem"> <!--<![endif]-->
 <head>
     <!-- build:js scripts/main.js -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
     <link type="application/octet-stream" href="styles/main.less"/>
     <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -29,6 +29,7 @@
     <!-- main app -->
     <script src="js/filters.js"></script>
     <script src="js/bdtem.js"></script>
+    <script src="js/jquery_fns.js"></script>
 
     <!-- build:js scripts/vendor/bootstrap.js -->
     <script src="bower_components/bootstrap/js/affix.js"></script>
@@ -45,7 +46,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" type="text/css" href="box.css">
+    <link rel="stylesheet" type="text/css" href="styles/box.css">
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -85,46 +86,61 @@
 
         <div class="container">
             <div class="row words">
-                <div class="col-md-12" style="border-top-style: solid; border-top-width: 2px; border-top-color:#ffffff; padding-top: 5px;"><span style="letter-spacing:5px">IF ALL THAT WAS SAID</span><br/>
-                    <span style="letter-spacing:3px">ABOUT <em>THOSE THAT ARE DEAD</em></span><BR/>
-                    <span style="letter-spacing:5px">WAS COMPILED IN A BOOK</span><BR/>
-                   <span style="letter-spacing:5px"> AND LEFT IN A NOOK</span><BR/>
-                    <span style="letter-spacing:6px">I'D BE HAPPY TO READ</span><BR/>
-                    <span style="letter-spacing:5px">OF HARROWING DEEDS</span><BR/>
+                <div class="col-md-12"
+                     style="border-top-style: solid; border-top-width: 2px; border-top-color:#ffffff; padding-top: 5px;">
+                    <span style="letter-spacing:5px">IF ALL THAT WAS SAID</span><br/>
+                    <span style="letter-spacing:3px">ABOUT <em>THOSE THAT ARE DEAD</em></span><br/>
+                    <span style="letter-spacing:5px">WAS COMPILED IN A BOOK</span><br/>
+                    <span style="letter-spacing:5px"> AND LEFT IN A NOOK</span><br/>
+                    <span style="letter-spacing:6px">I'D BE HAPPY TO READ</span><br/>
+                    <span style="letter-spacing:5px">OF HARROWING DEEDS</span><br/>
                     <span style="letter-spacing:.5px">BUT I'D LIKE NOT TO KNOW THE ENDING</span></div>
-                </div>
+            </div>
 
             <div class="row words" style="letter-spacing: .6px">
-                <div class="col-md-12" style="line-height: 3vmin;"><a ng-click="skipToTrack(1)">HESITATING SUN</a><div class="buttonz" style="font-size:3vmin; padding: 1px;">&#xe801;</div><a ng-click="skipToTrack(2)">FUTURE IS BLEAKER</a><br/>
-                   <span style="padding-right:3px"><a ng-click="skipToTrack(3)">FEEL THE SAME</a></span><div class="buttonz" style="font-size:3vmin; padding: 1px;">&#xe801;</div><span style="padding-left: 3px"><a ng-click="skipToTrack(4)">SIT ON A DREAM</a></span><BR/>
-                    <a ng-click="skipToTrack(6)">THE DEBATE</a><div class="buttonz" style="font-size:3vmin; padding: 1px;">&#xe801;</div><a ng-click="skipToTrack(7)">WORKING AT FIRST</a><BR/>
-                    <a ng-click="skipToTrack(8)">TRIED TO BE</a><div class="buttonz" style="font-size:3vmin; padding: 1px">&#xe801;</div><a ng-click="skipToTrack(9)">THE BASEMENT</a><BR/><a ng-click="skipToTrack(10)">ONE LEVEL AT A TIME</a><BR/>
+                <div class="col-md-12" style="line-height: 3vmin;">
+                    <a ng-click="skipToTrack(1)">HESITATING SUN</a>
+
+                    <div class="small-crest">&#xe801;</div>
+                    <a ng-click="skipToTrack(2)">FUTURE IS BLEAKER</a><br/>
+                   <span style="padding-right:3px">
+                       <a ng-click="skipToTrack(3)">FEEL THE SAME</a>
+                   </span>
+
+                    <div class="small-crest">&#xe801;</div>
+                    <span style="padding-left: 3px"><a ng-click="skipToTrack(4)">SIT ON A DREAM</a></span><br/>
+                    <a ng-click="skipToTrack(6)">THE DEBATE</a>
+
+                    <div class="small-crest">&#xe801;</div>
+                    <a ng-click="skipToTrack(7)">WORKING AT FIRST</a><br/>
+                    <a ng-click="skipToTrack(8)">TRIED TO BE</a>
+
+                    <div class="small-crest">&#xe801;</div>
+                    <a ng-click="skipToTrack(9)">THE BASEMENT</a><br/>
+                    <a ng-click="skipToTrack(10)">ONE LEVEL AT A TIME</a><br/>
                     <a ng-click="skipToTrack(12)">THE END</a><br/><br/>
 
                     <img src="images/SmallerScrollsTransBetter.png" style="max-width: 12vh; max-height: 7vw"/>
 
                     <br/>
-                    <a class="pull-left" ng-click="skipToTrack(0)">&nbsp;&nbsp;PLAY ALL</a>
+                    &nbsp;&nbsp;<a class="pull-left" ng-click="skipToTrack(0)">PLAY ALL</a>
 
-                    <a class="pull-right" href="audio/bdtem.zip">DOWNLOAD&nbsp;&nbsp;</a>
+                    <a class="pull-right" href="audio/bdtem.zip">DOWNLOAD</a>&nbsp;&nbsp;
                 </div>
-                </div>
+            </div>
 
-        <div class="row words-end">
-                <div class="col-md-12"><span style="letter-spacing: 5px"><em>DEY CO. / DEY IND.</em></span><BR/>
-                    <span style="letter-spacing: 15px"><strong>PRESENTS</strong></span><BR/>
+            <div class="row words-end">
+                <div class="col-md-12"><span style="letter-spacing: 5px"><em>DEY CO. / DEY IND.</em></span><br/>
+                    <span style="letter-spacing: 15px"><strong>PRESENTS</strong></span><br/>
                     <span style="letter-spacing: 2px">BOB DEY'S TANK ENGINE MAN</span>
                 </div>
             </div>
             <div class="row words-bottom">
-                <div class="col-md-12"<span style="letter-spacing: 15px;"><em>BEFORE LIFE</em></span><BR/>
-                    <span style="letter-spacing: 13px;"><em>AFTER DEATH</em></span>
-                </div>
-                </div>
+                <span style="letter-spacing: 15px;"><em>BEFORE LIFE</em></span><br/>
+                <span style="letter-spacing: 13px;"><em>AFTER DEATH</em></span>
             </div>
+        </div>
 
-
-        <script src="js/jquery_fns.js"></script>
 
     </div>
 
@@ -149,7 +165,6 @@
 
         </videogular>
     </div>
-
 
 </div>
 
@@ -187,7 +202,8 @@
 
             <div id="volumeToggle" class="btn buttonz-small">
                 <span class="btn buttonz-small" ng-click="toggleVolumeBar()">&#xe809;</span>
-                <input id="volumeBar" ng-show="showVolumeBar" class='above-navbar fa-rotate-270' value='1' min='0' max='1' step='0.01' type='range' ng-model='volume' />
+                <input id="volumeBar" ng-show="showVolumeBar" class='above-navbar fa-rotate-270' value='1' min='0'
+                       max='1' step='0.01' type='range' ng-model='volume'/>
             </div>
 
         </div>
