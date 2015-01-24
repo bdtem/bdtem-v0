@@ -1,0 +1,70 @@
+@import "variables";
+
+.middle-video-container {
+  max-height: 80vh;
+  max-width: 960px;
+  padding-top: 4vh;
+}
+
+videogular {
+  max-width: 960px;
+  max-height: 540px;
+}
+
+@keyframes play {
+  100% {
+    background-position: -31350px
+  }
+}
+@-webkit-keyframes play {
+  100% {
+    background-position: -31350px
+  }
+}
+@-moz-keyframes play {
+  100% {
+    background-position: -31350px
+  }
+}
+@keyframes play {
+  100% {
+    background-position: -31350px
+  }
+}
+
+.videogular-poster-img-container {
+  min-width: 570px;
+  max-width: 960px;
+  min-height: 540px;
+  background-color: @background;
+
+  text-align: center;
+  align-content: center;
+
+  align-items: center;
+  align-self: center;
+}
+
+.videogular-poster-img {
+
+  align-items: center;
+  align-self: center;
+  text-align: center;
+
+  display: inline-block;
+  margin: 0 auto;
+
+  min-width: 570px;
+  max-width: 570px;
+
+  min-height: 540px;
+  max-height: 540px;
+
+  background: url('http://couleurs.na.tl/rick/spriteSheet77.png');
+  animation: play 7s steps(55) infinite;
+  -webkit-animation: play 7s steps(55) infinite; /* Safari 4+ */
+  -moz-animation: play 7s steps(55, end) infinite; /* Fx 5+ */
+  -o-animation: play 7s steps(55) infinite; /* Opera 12+ */
+  animation-direction: alternate-reverse;
+  -webkit-animation-direction: alternate;
+}

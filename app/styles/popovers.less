@@ -1,0 +1,51 @@
+.popover {
+  min-width: 20vw;
+  max-width: 40vw;
+
+  border: none;
+}
+
+.popover-title {
+  font-family: "Superclarendon";
+  margin: 0; // reset heading margin
+  padding: 8px 14px;
+  font-size: 12pt;
+  color: @text-color;
+  font-weight: normal;
+
+  background-color: @popover-title-bg;
+
+  border-top: 1px solid @text-color;
+  border-bottom: 1px solid @text-color;
+  border-radius: none;
+  border-right: none;
+  border-left: none;
+}
+
+.tooltip {
+  font-family: "Superclarendon";
+  font-size: 12pt;
+  color: #7777FF;
+  font-weight: normal;
+
+  background-color: transparent;
+  z-index: @zindex-navbar-fixed;
+}
+
+.tooltip-inner {
+  font-family: "Superclarendon";
+  font-size: 1em;
+  color: @link-hover-color;
+
+  font-style: italic;
+
+  background-color: transparent;
+  z-index: @zindex-navbar-fixed;
+}
+
+.popover-content {
+  font-family: "Superclarendon";
+  font-style: italic;
+  font-size: 10pt;
+  padding: 9px 14px;
+}
