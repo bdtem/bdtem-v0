@@ -219,7 +219,7 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
     $scope.toggleVolumeBar = function () {
         $scope.showVolumeBar = !$scope.showVolumeBar;
 
-        if($scope.showVolumeBar) {
+        if ($scope.showVolumeBar) {
             positionTheVolumeBar();
         }
     };
@@ -427,6 +427,11 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
         return player.isPlaying;
     };
 
+    this.isPlaying = function (index) {
+        return index === player.currentTrack;
+    };
+
+
     var getCurrentTime = function () {
         return player ? (player.currentTime | 0) : 0;
     };
@@ -553,6 +558,10 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
 bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
 
+    var randomColor = function () {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    };
+
     $scope.skipToTrack = function (index) {
         var player = playerService.getPlayer();
 
@@ -560,6 +569,32 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
 
         player.play(index, false);
         player.load(true);
+
+        setTrackHighlighting();
     };
+
+    var setTrackHighlighting = function () {
+        var currentTrack = playerService.getPlayer().currentTrack;
+
+        var idWildcard = "bdtem-track";
+        var highlightedTrackId = idWildcard + currentTrack;
+
+        var $tracks = $("[id^=" + idWildcard + "]");
+
+        var generatedColor = randomColor();
+
+        $tracks.each(function () {
+            var trackName = $(this);
+            var id = this.id;
+
+            if (id === highlightedTrackId) {
+                trackName.css({color: generatedColor});
+            } else {
+                trackName.css({color: "#F0F0F0"});
+            }
+        });
+
+
+    }
 
 });
