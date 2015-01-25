@@ -1,4 +1,4 @@
-const __HOST__ = '127.0.0.1';
+    const __HOST__ = '127.0.0.1';
 
 var bdtem = angular.module('bdtem', [
     'bdtemFilters',
@@ -35,14 +35,33 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
 bdtem.service('playerService', function () {
     var bdtemplayer;
 
+    var idWildcard = "bdtem-track";
+
     return {
         getPlayer: function () {
             return bdtemplayer;
         },
         setPlayer: function (player) {
             bdtemplayer = player;
+        },
+        setTrackHighlighting: function () {
+            var trackToHighlight = bdtemplayer.currentTrack;
+
+            var highlightedTrackId = idWildcard + trackToHighlight;
+
+            var $tracks = $("[id^=" + idWildcard + "]");
+
+            var generatedColor = randomColor();
+
+            $tracks.each(function () {
+                var trackName = $(this);
+                var id = this.id;
+
+                /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
+                trackName.css( {color: id === highlightedTrackId ? generatedColor : "#F0F0F0"} );
+            });
         }
-    };
+    }
 });
 
 bdtem.service('videoService', function () {
@@ -150,8 +169,6 @@ bdtem.controller('ShareCtrl', function ($scope) {
 bdtem.controller('ContactCtrl', function ($scope, $http) {
 
     $scope.submitContact = function (contact) {
-//        console.log(contact);
-
         $http.post('http://' + __HOST__ + ':3000/contact', contact)
             .success(function (data, status, headers, config) {
                 console.log('------SUCCESS! :DD --------');
@@ -173,6 +190,10 @@ bdtem.controller('ContactCtrl', function ($scope, $http) {
 
 });
 
+    var randomColor = function () {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    };
+
 
 bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService) {
 
@@ -182,12 +203,9 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
     controller.onPlayerReady = function (API) {
         controller.API = API;
         videoService.setVideoAPI(API);
-//        console.log('player ready');
-//        console.log(API);
     };
 
     $scope.customClickOverlayPlay = function () {
-//        console.log('overlay play clicked');
         playerService.getPlayer().pause();
         controller.API.playPause();
     };
@@ -209,7 +227,13 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
 
 });
 
-bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playerService, videoService) {
+bdtem.controller('PlaylistCtrl', function ($scope,
+                                           $filter,
+                                           hotkeys,
+                                           $sce,
+                                           playerService,
+                                           videoService,
+                                           $timeout) {
 
     var player;
     var volume = 1;
@@ -497,6 +521,8 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
         }
 
         player.prev(true);
+        $timeout(playerService.setTrackHighlighting);
+
     };
 
     $scope.nextTrack = function () {
@@ -506,6 +532,8 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
         }
 
         player.next(true);
+        $timeout(playerService.setTrackHighlighting);
+
     };
 
     $scope.bdtemPlayPause = function () {
@@ -558,10 +586,6 @@ bdtem.controller('PlaylistCtrl', function ($scope, $filter, hotkeys, $sce, playe
 
 bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
 
-    var randomColor = function () {
-        return '#' + Math.floor(Math.random() * 16777215).toString(16);
-    };
-
     $scope.skipToTrack = function (index) {
         var player = playerService.getPlayer();
 
@@ -570,31 +594,7 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
         player.play(index, false);
         player.load(true);
 
-        setTrackHighlighting();
+        playerService.setTrackHighlighting();
     };
-
-    var setTrackHighlighting = function () {
-        var currentTrack = playerService.getPlayer().currentTrack;
-
-        var idWildcard = "bdtem-track";
-        var highlightedTrackId = idWildcard + currentTrack;
-
-        var $tracks = $("[id^=" + idWildcard + "]");
-
-        var generatedColor = randomColor();
-
-        $tracks.each(function () {
-            var trackName = $(this);
-            var id = this.id;
-
-            if (id === highlightedTrackId) {
-                trackName.css({color: generatedColor});
-            } else {
-                trackName.css({color: "#F0F0F0"});
-            }
-        });
-
-
-    }
 
 });
