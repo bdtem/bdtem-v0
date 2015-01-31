@@ -39,23 +39,24 @@ var positionTheVolumeBar = function () {
 
     var offset = volumeToggle.offset();
 
-    console.log('width');
-    console.log(volumeBar.width());
-    console.log('height');
+//    console.log('width');
+//    console.log(volumeBar.width());
+//    console.log('height');
 
     var height = volumeBar.outerHeight();
-    console.log(height);
+
+//    console.log(height);
 
     var left = offset.left - (height * 10);
     var top = -(volumeToggle.height() / 2);
 
-    console.log(left);
+//    console.log(left);
 
     volumeBar.css({top: top, left: left});
 
-    console.log($('#volumeToggle').offset());
-    console.log($('#volumeBar').css('left'));
-    console.log($('#volumeBar').css('top'));
+//    console.log($('#volumeToggle').offset());
+//    console.log($('#volumeBar').css('left'));
+//    console.log($('#volumeBar').css('top'));
 
 };
 
