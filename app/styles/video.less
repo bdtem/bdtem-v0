@@ -1,14 +1,28 @@
 @import "variables";
 
-.middle-video-container {
+.middle-video-container-base {
   max-height: 80vh;
   max-width: 960px;
-  padding-top: 4vh;
+  padding-bottom: @navbar-height;
+
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.middle-video-container {
+  .center-block;
+  .middle-video-container-base;
+}
+
+.sidr-open.middle-video-container {
+  .middle-video-container-base;
 }
 
 videogular {
   max-width: 960px;
-  max-height: 540px;
+  max-height: 75vh;
 }
 
 @keyframes play {

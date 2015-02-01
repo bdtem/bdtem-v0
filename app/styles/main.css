@@ -3631,7 +3631,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
   position: relative;
-  min-height: 50px;
+  min-height: 5vh;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -3728,10 +3728,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand {
   float: left;
-  padding: 15px 15px;
+  padding: -7.5vh 15px;
   font-size: 18px;
   line-height: 20px;
-  height: 50px;
+  height: 5vh;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -3748,8 +3748,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: right;
   margin-right: 15px;
   padding: 9px 10px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: -14.5vh;
+  margin-bottom: -14.5vh;
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
@@ -3773,7 +3773,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-nav {
-  margin: 7.5px -15px;
+  margin: -3.75vh -15px;
 }
 .navbar-nav > li > a {
   padding-top: 10px;
@@ -3811,8 +3811,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: -7.5vh;
+    padding-bottom: -7.5vh;
   }
   .navbar-nav.navbar-right:last-child {
     margin-right: -15px;
@@ -3836,8 +3836,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom: 1px solid transparent;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: -14.5vh;
+  margin-bottom: -14.5vh;
 }
 @media (min-width: 768px) {
   .navbar-form .form-group {
@@ -3904,20 +3904,20 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom-left-radius: 0;
 }
 .navbar-btn {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: -14.5vh;
+  margin-bottom: -14.5vh;
 }
 .navbar-btn.btn-sm {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: -12.5vh;
+  margin-bottom: -12.5vh;
 }
 .navbar-btn.btn-xs {
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin-top: -8.5vh;
+  margin-bottom: -8.5vh;
 }
 .navbar-text {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: -7.5vh;
+  margin-bottom: -7.5vh;
 }
 @media (min-width: 768px) {
   .navbar-text {
@@ -7448,8 +7448,8 @@ button.close {
 }
 html,
 body {
-  height: 100%;
-  max-height: 100%;
+  height: 90%;
+  max-height: 90%;
 }
 body {
   background-color: #000000;
@@ -7476,16 +7476,16 @@ a:focus {
 }
 .navbar {
   border: none;
-  min-height: 5%;
+  height: 5vh;
   max-height: 100%;
 }
 .navbar-default {
   border: none;
 }
 .navbar-container {
-  height: 5%;
+  height: 5vh;
   min-height: 2%;
-  max-height: 5%;
+  max-height: 5vh;
   overflow: hidden;
 }
 .navbar-default {
@@ -7497,6 +7497,7 @@ a:focus {
 }
 .navbar-fixed-bottom {
   background-color: transparent;
+  margin-bottom: 5vh;
 }
 .btn-group {
   background-color: transparent;
@@ -7565,14 +7566,13 @@ label {
   margin-left: 15px;
   margin-right: 15px;
 }
+.menu-container {
+  max-width: 33%;
+}
 .middle-main {
   background: #000000;
-  zoom: 1;
-  min-height: 90%;
-  max-height: 90%;
   max-width: 33%;
   padding-top: 1vh;
-  padding-left: 8vw;
   padding-right: 0px;
 }
 .pad-right {
@@ -7615,14 +7615,59 @@ label {
   text-align: center;
   margin: 0 auto;
 }
-.middle-video-container {
+.sidr {
+  display: none;
+  position: absolute;
+  position: fixed;
+  top: 5vh;
+  max-height: 90vh;
+  z-index: 999999;
+  min-width: 25vw;
+  max-width: 25vw;
+  overflow-x: none;
+  overflow-y: auto;
+}
+.sidr.right {
+  left: auto;
+  right: -25vw;
+}
+.sidr.left {
+  left: -25vw;
+  right: auto;
+}
+.middle-video-container-base {
   max-height: 80vh;
   max-width: 960px;
-  padding-top: 4vh;
+  padding-bottom: 5vh;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  vertical-align: middle;
+}
+.middle-video-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 80vh;
+  max-width: 960px;
+  padding-bottom: 5vh;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  vertical-align: middle;
+}
+.sidr-open.middle-video-container {
+  max-height: 80vh;
+  max-width: 960px;
+  padding-bottom: 5vh;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  vertical-align: middle;
 }
 videogular {
   max-width: 960px;
-  max-height: 540px;
+  max-height: 75vh;
 }
 @keyframes play {
   100% {
