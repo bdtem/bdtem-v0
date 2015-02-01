@@ -49,16 +49,16 @@ bdtem.service('playerService', function () {
 
             var highlightedTrackId = idWildcard + trackToHighlight;
 
-            var $tracks = $("[id^=" + idWildcard + "]");
+            var $tracks = $("[class^='" + idWildcard + "']");
 
             var generatedColor = randomColor();
 
             $tracks.each(function () {
                 var trackName = $(this);
-                var id = this.id;
+                var id = this.classList.contains(highlightedTrackId);
 
                 /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
-                trackName.css({color: id === highlightedTrackId ? generatedColor : "#F0F0F0"});
+                trackName.css({color: id ? generatedColor : "#F0F0F0"});
             });
         },
         skipToTrack: function (index) {

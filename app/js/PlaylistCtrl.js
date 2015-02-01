@@ -39,7 +39,6 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$
         $scope.metadata = Metadata;
 
 
-
         $scope.__defineGetter__('player', function () {
             return player | setPlayer();
         });
@@ -55,16 +54,14 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$
         $(document).ready(function () {
             setPlayer();
 
-            var track = $location.search()['track'];
+            var track = parseInt($location.search()['track']);
 
-            console.log("track is " + track);
-            if (track && Math.floor(track) == track && $.isNumeric(track)) {
-                $timeout(function () {playerService.skipToTrack(parseInt(track))});
+            if (track > 0 && track < $scope.songs.length) {
+                $timeout(function () {
+                    playerService.skipToTrack(track)
+                });
             }
-
         });
-
-
 
         this.isPlaying = function () {
             return player.isPlaying;
@@ -122,7 +119,7 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$
 
             var metadata = $scope.metadata[currentTrack];
 
-            if(metadata) {
+            if (metadata) {
 
                 var titleComponents = [
                     metadata.title,

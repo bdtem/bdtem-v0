@@ -11,10 +11,13 @@
     <!-- build:js scripts/main.js -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
     <link type="application/octet-stream" href="styles/main.less"/>
-    <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
 
+    <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/sidr/jquery.sidr.min.js"></script>
+
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+
     <script src="bower_components/videogular/videogular.js"></script>
     <script src="scripts/videogular/controls.js"></script>
     <script src="scripts/videogular/overlay-play.js"></script>
@@ -80,51 +83,54 @@
 
         </div>
 
+        <a href="#" id="simple-menu">Open Menu</a>
+
     </nav>
 </div>
 
-<div class="row middle-container">
+<nav id="menu-container" >
 
-    <div class="col-md-4 middle-main" ng-controller="MiddleCtrl as middle">
+    <div id="sidr" class="sidr middle-main" ng-controller="MiddleCtrl as middle">
 
-        <div class="container">
-            <div class="row words">
-                <div class="col-md-12"
+        <div class="">
+            <div class="words">
+                <div
                      style="border-top-style: solid; border-top-width: 2px; border-top-color:#ffffff; padding-top: 5px;">
-                    <span style="letter-spacing:5px">IF ALL THAT WAS SAID</span><br/>
-                    <span style="letter-spacing:3px">ABOUT <em>THOSE THAT ARE DEAD</em></span><br/>
-                    <span style="letter-spacing:5px">WAS COMPILED IN A BOOK</span><br/>
-                    <span style="letter-spacing:5px"> AND LEFT IN A NOOK</span><br/>
-                    <span style="letter-spacing:6px">I'D BE HAPPY TO READ</span><br/>
-                    <span style="letter-spacing:5px">OF HARROWING DEEDS</span><br/>
-                    <span style="letter-spacing:.5px">BUT I'D LIKE NOT TO KNOW THE ENDING</span></div>
+                    <span class="bdtem-track1" style="letter-spacing:5px">IF ALL THAT WAS SAID</span><br/>
+                    <span class="bdtem-track1" style="letter-spacing:3px">ABOUT <em>THOSE THAT ARE DEAD</em></span><br/>
+                    <span class="bdtem-track6" style="letter-spacing:5px">WAS COMPILED IN A BOOK</span><br/>
+                    <span class="bdtem-track6" style="letter-spacing:5px"> AND LEFT IN A NOOK</span><br/>
+                    <span class="bdtem-track12" style="letter-spacing:6px">I'D BE HAPPY TO READ</span><br/>
+                    <span class="bdtem-track12" style="letter-spacing:5px">OF HARROWING DEEDS</span><br/>
+                    <span class="bdtem-track12" style="letter-spacing:.5px">BUT I'D LIKE NOT TO KNOW THE ENDING</span>
+                </div>
             </div>
 
-            <div class="row words" style="letter-spacing: .6px">
-                <div class="col-md-12" style="line-height: 3vmin;">
-                    <a id="bdtem-track2" ng-click="skipToTrack(1)">HESITATING SUN</a>
+            <div class="words" style="letter-spacing: .6px">
+                <div  style="line-height: 3vmin;">
+                    <a class="bdtem-track2" ng-click="skipToTrack(1)">HESITATING SUN</a>
 
                     <div class="small-crest">&#xe801;</div>
 
-                    <a id="bdtem-track3" ng-click="skipToTrack(2)">FUTURE IS BLEAKER</a><br/>
+                    <a class="bdtem-track3" ng-click="skipToTrack(2)">FUTURE IS BLEAKER</a><br/>
                    <span style="padding-right:3px">
-                       <a id="bdtem-track4" ng-click="skipToTrack(3)">FEEL THE SAME</a>
+                       <a class="bdtem-track4" ng-click="skipToTrack(3)">FEEL THE SAME</a>
                    </span>
 
                     <div class="small-crest">&#xe801;</div>
                     <span style="padding-left: 3px">
-                        <a id="bdtem-track5" ng-click="skipToTrack(4)">SIT ON A DREAM</a>
+                        <a class="bdtem-track5" ng-click="skipToTrack(4)">SIT ON A DREAM</a>
                     </span><br/>
-                    <a id="bdtem-track7" ng-click="skipToTrack(6)">THE DEBATE</a>
+                    <a class="bdtem-track7" ng-click="skipToTrack(6)">THE DEBATE</a>
 
                     <div class="small-crest">&#xe801;</div>
-                    <a id="bdtem-track8" ng-click="skipToTrack(7)">WORKING AT FIRST</a><br/>
-                    <a id="bdtem-track9" ng-click="skipToTrack(8)">TRIED TO BE</a>
+                    <a class="bdtem-track8" ng-click="skipToTrack(7)">WORKING AT FIRST</a><br/>
+                    <a class="bdtem-track9" ng-click="skipToTrack(8)">TRIED TO BE</a>
 
                     <div class="small-crest">&#xe801;</div>
-                    <a id="bdtem-track10" ng-click="skipToTrack(9)">THE BASEMENT</a><br/>
-                    <a id="bdtem-track11" ng-click="skipToTrack(10)">ONE LEVEL AT A TIME</a><br/>
-                    <a id="bdtem-track13" ng-click="skipToTrack(12)">THE END</a><br/><br/>
+                    <a class="bdtem-track10" ng-click="skipToTrack(9)">THE BASEMENT</a><br/>
+                    <a class="bdtem-track11" ng-click="skipToTrack(10)">ONE LEVEL AT A TIME</a><br/>
+                    <a class="bdtem-track13" ng-click="skipToTrack(12)">THE END</a><br/><br/>
 
                     <img src="images/SmallerScrollsTransBetter.png" style="max-width: 12vh; max-height: 7vw"/>
 
@@ -135,13 +141,13 @@
                 </div>
             </div>
 
-            <div class="row words-end">
+            <div class="words-end">
                 <div class="col-md-12"><span style="letter-spacing: 5px"><em>DEY CO. / DEY IND.</em></span><br/>
                     <span style="letter-spacing: 15px"><strong>PRESENTS</strong></span><br/>
                     <span style="letter-spacing: 2px">BOB DEY'S TANK ENGINE MAN</span>
                 </div>
             </div>
-            <div class="row words-bottom">
+            <div class="words-bottom">
                 <span style="letter-spacing: 15px;"><em>BEFORE LIFE</em></span><br/>
                 <span style="letter-spacing: 13px;"><em>AFTER DEATH</em></span>
             </div>
@@ -150,8 +156,9 @@
 
     </div>
 
+</nav>
 
-    <div class="col-md-8 middle-video-container" ng-controller="VideoCtrl as controller">
+    <div class="middle-video-container" ng-controller="VideoCtrl as controller">
         <videogular vg-player-ready="controller.onPlayerReady" class="middle-video" vg-theme="controller.config.theme">
             <vg-video vg-src="controller.config.sources"
                       vg-tracks="controller.config.tracks">
@@ -172,7 +179,6 @@
         </videogular>
     </div>
 
-</div>
 
 
 <nav id="playlistnavbar" class="navbar navbar-default navbar-fixed-bottom"
