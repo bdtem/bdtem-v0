@@ -4,7 +4,7 @@
 
 $.fn.stretch_text = function () {
     var element = $(this);
-
+debugger;
     var container_width = element.parent().width();
 
     var element_width = element.width();
@@ -14,14 +14,11 @@ $.fn.stretch_text = function () {
     var spacing = container_width / nb_char;
 
     if (element_width <= container_width) {
-        element.removeClass('justify');
 
         var char_width = element_width / nb_char,
             ltr_spacing = spacing - char_width + (spacing - char_width) / nb_char;
 
         element.css({'letter-spacing': ltr_spacing});
-    } else {
-        element.addClass('justify');
     }
 };
 
@@ -39,36 +36,21 @@ var positionTheVolumeBar = function () {
 
     var offset = volumeToggle.offset();
 
-//    console.log('width');
-//    console.log(volumeBar.width());
-//    console.log('height');
-
     var height = volumeBar.outerHeight();
-
-//    console.log(height);
 
     var left = offset.left - (height * 10);
     var top = -(volumeToggle.height() / 2);
 
-//    console.log(left);
-
     volumeBar.css({top: top, left: left});
 
-//    console.log($('#volumeToggle').offset());
-//    console.log($('#volumeBar').css('left'));
-//    console.log($('#volumeBar').css('top'));
-
 };
-
-$(document).ready(function () {
-    stretchTheText();
-    positionTheVolumeBar();
-
-});
 
 const ROTATE_CLASS = "fa-flip-horizontal";
 
 $(document).ready(function () {
+
+    positionTheVolumeBar();
+
     var tracksMenuToggle = $('#tracks-menu-toggle');
     tracksMenuToggle.sidr({
         name: 'tracks-menu',
@@ -76,7 +58,7 @@ $(document).ready(function () {
         side: 'left',
         source: null,
         displace: true,
-        onOpen: function () {tracksMenuToggle.addClass(ROTATE_CLASS);},
+        onOpen: function () {stretchTheText(); tracksMenuToggle.addClass(ROTATE_CLASS);},
         onClose: function () {tracksMenuToggle.removeClass(ROTATE_CLASS);},
         renaming: true,
         body: 'left'
