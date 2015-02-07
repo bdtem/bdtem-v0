@@ -7621,6 +7621,9 @@ label {
   text-align: center;
   margin: 0 auto;
 }
+.podcasts {
+  padding-top: 10vh;
+}
 .sidr {
   display: none;
   position: absolute;
@@ -7641,11 +7644,30 @@ label {
   left: -25vw;
   right: auto;
 }
-.left-menu-button {
-  position: relative;
-  top: 31vh;
-  z-index: 99999;
+.menu-button {
+  position: absolute;
+  top: 40vh;
+  z-index: 1000;
+  font-family: "Superclarendon";
   text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 10vmin transparent;
+}
+.menu-button:hover,
+.menu-button:focus {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+.left-menu-button {
+  position: absolute;
+  top: 40vh;
+  z-index: 1000;
+  font-family: "Superclarendon";
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 10vmin transparent;
+  border-top-right-radius: 10vmin;
+  border-bottom-right-radius: 10vmin;
 }
 .left-menu-button:hover,
 .left-menu-button:focus {
@@ -7653,11 +7675,17 @@ label {
   text-decoration: none;
 }
 .right-menu-button {
-  position: relative;
-  top: 31vh;
-  z-index: 99999;
+  position: absolute;
+  top: 40vh;
+  z-index: 1000;
+  font-family: "Superclarendon";
   text-decoration: none;
-  top: 15vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 10vmin transparent;
+  float: right;
+  right: 0vw;
+  border-top-left-radius: 10vmin;
+  border-bottom-left-radius: 10vmin;
 }
 .right-menu-button:hover,
 .right-menu-button:focus {

@@ -80,8 +80,8 @@
                     >
 
                 {{button.glyph}}
+                {{!$last ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : ""}}
             </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         </div>
     </nav>
@@ -107,13 +107,13 @@
             <div class="words">
                 <div
                      style="border-top-style: solid; border-top-width: 2px; border-top-color:#ffffff; padding-top: 5px;">
-                    <span class="bdtem-track1" style="letter-spacing:5px">IF ALL THAT WAS SAID</span><br/>
-                    <span class="bdtem-track1" style="letter-spacing:3px">ABOUT <em>THOSE THAT ARE DEAD</em></span><br/>
-                    <span class="bdtem-track6" style="letter-spacing:5px">WAS COMPILED IN A BOOK</span><br/>
-                    <span class="bdtem-track6" style="letter-spacing:5px"> AND LEFT IN A NOOK</span><br/>
-                    <span class="bdtem-track12" style="letter-spacing:6px">I'D BE HAPPY TO READ</span><br/>
-                    <span class="bdtem-track12" style="letter-spacing:5px">OF HARROWING DEEDS</span><br/>
-                    <span class="bdtem-track12" style="letter-spacing:.5px">BUT I'D LIKE NOT TO KNOW THE ENDING</span>
+                    <span class="bdtem-track1 stretched" style="letter-spacing:5px">IF ALL THAT WAS SAID</span><br/>
+                    <span class="bdtem-track1 stretched" style="letter-spacing:3px">ABOUT <em>THOSE THAT ARE DEAD</em></span><br/>
+                    <span class="bdtem-track6 stretched" style="letter-spacing:5px">WAS COMPILED IN A BOOK</span><br/>
+                    <span class="bdtem-track6 stretched" style="letter-spacing:5px"> AND LEFT IN A NOOK</span><br/>
+                    <span class="bdtem-track12 stretched" >I'D BE HAPPY TO READ</span><br/>
+                    <span class="bdtem-track12 stretched" >OF HARROWING DEEDS</span><br/>
+                    <span class="bdtem-track12 stretched" style="letter-spacing:.5px">BUT I'D LIKE NOT TO KNOW THE ENDING</span>
                 </div>
             </div>
 
@@ -146,9 +146,9 @@
                     <img src="images/SmallerScrollsTransBetter.png" style="max-width: 12vh; max-height: 7vw"/>
 
                     <br/>
-                    &nbsp;&nbsp;<a class="pull-left" ng-click="skipToTrack(0)">PLAY ALL</a>
+                    &nbsp;<a class="pull-left" ng-click="skipToTrack(0)">PLAY ALL</a>
 
-                    <a class="pull-right" href="audio/bdtem.zip">DOWNLOAD</a>&nbsp;&nbsp;
+                    <a class="pull-right" href="audio/bdtem.zip">DOWNLOAD</a>&nbsp;
                 </div>
             </div>
 
@@ -191,6 +191,24 @@
         </videogular>
     </div>
 
+<nav id="podcasts-container" >
+
+    <div id="podcast-menu" class="sidr middle-main" >
+
+        <div class="podcasts">
+
+            There are definitely going to be some podcasts here.<br/>
+            <br/>
+            At some point.<br/>
+            <br/>
+            They'll probably be fun to listen to.
+
+            <br/><br/><br/><br/>
+            Lorem ipsum, motherfucker.
+        </div>
+
+    </div>
+    </nav>
 
 <right href="#" class="fa right-menu-button pull-right righted" id="podcast-menu-toggle">
     |<br/>
