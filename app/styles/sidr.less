@@ -4,25 +4,41 @@
 @sidr-hide-width: -@sidr-width;
 
 .sidr {
-    display: none;
-    position: absolute;
-    position: fixed;
-    top: @navbar-height;
-    max-height: (100vh - 2*@navbar-height);
-    z-index: 999999;
+  display: none;
+  position: absolute;
+  position: fixed;
+  top: @navbar-height;
+  max-height: (100vh - 2*@navbar-height);
+  z-index: 999999;
 
-    min-width: @sidr-width;
-    max-width: @sidr-width;
-    overflow-x: none;
-    overflow-y: auto;
- }
+  min-width: @sidr-width;
+  max-width: @sidr-width;
+  overflow-x: none;
+  overflow-y: auto;
+}
 
 .sidr.right {
-    left: auto;
-    right: @sidr-hide-width;
+  left: auto;
+  right: @sidr-hide-width;
 }
 
 .sidr.left {
-    left: @sidr-hide-width;
-    right: auto
+  left: @sidr-hide-width;
+  right: auto
+}
+
+.left-menu-button {
+  position: relative;
+  top: 31vh;
+  z-index: 99999;
+  text-decoration: none;
+  &:hover, &:focus {
+    color: @text-color;
+    text-decoration: none;
+  }
+}
+
+.right-menu-button {
+  .left-menu-button;
+  top: 15vh;
 }

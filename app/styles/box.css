@@ -113,9 +113,6 @@ tr td:last-child {
     color: #ffffff;
     font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
     width: 53vmin;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color:#ffffff;
     line-height: 3vmin;
     padding-top:5px;
     padding-bottom: 5px;
@@ -128,9 +125,8 @@ tr td:last-child {
     color: #ffffff;
     font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
     width: 53vmin;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color:#ffffff;
+    border-bottom: 2px solid #ffffff;
+    border-top: 2px solid #ffffff;
     line-height: 4vmin;
     padding-top:5px;
     padding-bottom: 5px;

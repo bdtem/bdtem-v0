@@ -66,27 +66,39 @@ $(document).ready(function () {
 
 });
 
-$(document).ready(function() {
-    $('#simple-menu').sidr({
-        name: 'sidr',
+const ROTATE_CLASS = "fa-flip-horizontal";
+
+$(document).ready(function () {
+    var tracksMenuToggle = $('#tracks-menu-toggle');
+    tracksMenuToggle.sidr({
+        name: 'tracks-menu',
         speed: 200,
         side: 'left',
         source: null,
+        displace: true,
+        onOpen: function () {tracksMenuToggle.addClass(ROTATE_CLASS);},
+        onClose: function () {tracksMenuToggle.removeClass(ROTATE_CLASS);},
         renaming: true,
-        body: 'body'
-
+        body: 'left'
     });
-});
 
-$(document).ready(function() {
-    $('.sub-menu-sidr').hide();
 
-    $("#sidr li:has(ul)").click(function(){
-
-        $("ul",this).toggle('fast');
+    var podcastMenuToggle = $('#podcast-menu-toggle');
+    podcastMenuToggle.sidr({
+        name: 'podcast-menu',
+        speed: 200,
+        side: 'right',
+        source: null,
+        displace: true,
+        onOpen: function () {podcastMenuToggle.addClass(ROTATE_CLASS);},
+        onClose: function () {podcastMenuToggle.removeClass(ROTATE_CLASS);},
+        renaming: true,
+        body: 'right'
     });
-});
 
+
+
+});
 
 $(window).resize(function () {
     positionTheVolumeBar();

@@ -7556,6 +7556,12 @@ label {
   align-items: center;
   text-align: center;
 }
+.righted {
+  align-self: right;
+  align-content: right;
+  align-items: right;
+  text-align: right;
+}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -7635,10 +7641,36 @@ label {
   left: -25vw;
   right: auto;
 }
+.left-menu-button {
+  position: relative;
+  top: 31vh;
+  z-index: 99999;
+  text-decoration: none;
+}
+.left-menu-button:hover,
+.left-menu-button:focus {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+.right-menu-button {
+  position: relative;
+  top: 31vh;
+  z-index: 99999;
+  text-decoration: none;
+  top: 15vh;
+}
+.right-menu-button:hover,
+.right-menu-button:focus {
+  color: #f0f0f0;
+  text-decoration: none;
+}
 .middle-video-container-base {
   max-height: 80vh;
   max-width: 960px;
   padding-bottom: 5vh;
+  position: fixed;
+  left: 15vw;
+  top: 5vh;
   align-content: center;
   align-self: center;
   align-items: center;
@@ -7651,15 +7683,21 @@ label {
   max-height: 80vh;
   max-width: 960px;
   padding-bottom: 5vh;
+  position: fixed;
+  left: 15vw;
+  top: 5vh;
   align-content: center;
   align-self: center;
   align-items: center;
   vertical-align: middle;
 }
-.sidr-open.middle-video-container {
+.sidr-open .middle-video-container {
   max-height: 80vh;
   max-width: 960px;
   padding-bottom: 5vh;
+  position: fixed;
+  left: 15vw;
+  top: 5vh;
   align-content: center;
   align-self: center;
   align-items: center;
