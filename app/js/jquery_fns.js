@@ -4,8 +4,7 @@
 
 $.fn.stretch_text = function () {
     var element = $(this);
-debugger;
-    var container_width = element.parent().width();
+        var container_width = element.parent().width();
 
     var element_width = element.width();
 
