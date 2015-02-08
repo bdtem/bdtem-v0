@@ -122,17 +122,13 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$
             if (metadata) {
 
                 var titleComponents = [
-                    metadata.title,
-                    '<div class="pull-right">',
-                    metadata.catalog,
-                    '</div>',
+                        '<div class="pull-left">' + metadata.title + '</div>',
+                        '<div class="pull-right">' + metadata.catalog + '</div>',
                     '<br/>',
-                    $filter('timeFilter')(getCurrentTime()),
+                        '<div class="pull-left">' + $filter('timeFilter')(getCurrentTime()),
                     "/",
-                    $filter('timeFilter')(getDuration()),
-                    '<div class="pull-right buttonz" >',
-                    '\ue808',
-                    '</div>'
+                        $filter('timeFilter')(getDuration()) + '</div>',
+                    '<div class="pull-right button-font unpadded" >\ue808</div>'
                 ];
 
                 return titleComponents.join("&nbsp;");
@@ -206,6 +202,18 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$
                 callback: function () {
                     var whereToSeek = getCurrentTime() + 10;
                     $scope.seekTo(whereToSeek);
+                }
+            }).add({
+                combo: 'a',
+                description: 'Toggle album menu',
+                callback: function () {
+                    $.sidr('toggle', 'tracks-menu')
+                }
+            }).add({
+                combo: 'p',
+                description: 'Toggle podcast menu',
+                callback: function () {
+                    $.sidr('toggle', 'podcast-menu')
                 }
             });
 
