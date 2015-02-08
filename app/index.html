@@ -71,7 +71,7 @@
 
             <button
                     id="button-{{button.purpose}}"
-                    class="buttonz btn"
+                    class="buttonz btn padded"
                     tooltip-html-unsafe="{{button.tooltip}}"
                     tooltip-placement="bottom"
                     tooltip-append-to-body="true"
@@ -80,8 +80,8 @@
                     >
 
                 {{button.glyph}}
-                {{!$last ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : ""}}
             </button>
+
 
         </div>
     </nav>
@@ -89,14 +89,15 @@
 
 
 <left href="#" class="fa left-menu-button superclarendon" id="tracks-menu-toggle">
-    |<br/>
-    |||<br/>
-    |||||<br/>
-    ALBUM<br/>
-    |||||<br/>
-    |||<br/>
-    |<br/>
-
+&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;&nbsp;&nbsp;||<br/>
+\&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;&nbsp;||||<br/>
+&nbsp;\&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;|||||||<br/>
+&nbsp;&nbsp;\&nbsp;&nbsp;&nbsp;\&nbsp;||||||||||<br/>
+&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;Album<br/>
+&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;||||||||||<br/>
+&nbsp;/&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;|||||||<br/>
+/&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;||||<br/>
+&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;||<br/>
 </left>
 
 <nav id="menu-container" >
@@ -211,13 +212,15 @@
     </nav>
 
 <right href="#" class="fa right-menu-button pull-right righted" id="podcast-menu-toggle">
-    |<br/>
-    |||<br/>
-    |||||<br/>
-    PODCAST<br/>
-    |||||<br/>
-    |||<br/>
-    |<br/>
+    ||<br/>
+    ||||<br/>
+    |||||||<br/>
+    |||||||||||||<br/>
+    Podcast<br/>
+    |||||||||||||<br/>
+    |||||||<br/>
+    ||||<br/>
+    ||<br/>
 </right>
 
 
