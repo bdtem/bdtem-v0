@@ -81,6 +81,11 @@
   padding-right: @pad-width;
 }
 
+.unpadded {
+  padding: 0;
+  margin: 0;
+}
+
 .text_line {
   clear: both;
 }
@@ -88,15 +93,18 @@
 .button-tooltip {
 }
 
-.buttonz {
-  display: inline-block;
+.button-font {
   font: normal normal normal 14px/1 buttonz_bdtem;
-  font-size: 4vw;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 4vw;
+}
+
+.buttonz {
+  .button-font;
+  display: inline-block;
   z-index: @zindex-navbar-fixed;
-  vertical-align: middle;
 }
 
 .buttonz-small {

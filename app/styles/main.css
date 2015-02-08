@@ -7522,14 +7522,13 @@ label {
   z-index: 1030;
 }
 .small-crest {
-  display: inline-block;
   font: normal normal normal 14px/1 buttonz_bdtem;
-  font-size: 4vw;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 4vw;
+  display: inline-block;
   z-index: 1030;
-  vertical-align: middle;
   font-size: 3vmin;
   padding: 1px;
   content: "\e801";
@@ -7588,28 +7587,37 @@ label {
   padding-left: 7vw;
   padding-right: 7vw;
 }
+.unpadded {
+  padding: 0;
+  margin: 0;
+}
 .text_line {
   clear: both;
 }
-.buttonz {
-  display: inline-block;
+.button-font {
   font: normal normal normal 14px/1 buttonz_bdtem;
-  font-size: 4vw;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 4vw;
+}
+.buttonz {
+  font: normal normal normal 14px/1 buttonz_bdtem;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 4vw;
+  display: inline-block;
   z-index: 1030;
-  vertical-align: middle;
 }
 .buttonz-small {
-  display: inline-block;
   font: normal normal normal 14px/1 buttonz_bdtem;
-  font-size: 4vw;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 4vw;
+  display: inline-block;
   z-index: 1030;
-  vertical-align: middle;
   font-size: 3vw;
 }
 .progress {
@@ -7634,7 +7642,7 @@ label {
   position: fixed;
   top: 5vh;
   max-height: 90vh;
-  z-index: 999999;
+  z-index: 1000;
   min-width: 25vw;
   max-width: 25vw;
   overflow-x: none;
@@ -7810,7 +7818,9 @@ videogular {
 .popover {
   min-width: 20vw;
   max-width: 40vw;
-  border: none;
+  border: transparent 0px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 .popover-title {
   font-family: "Superclarendon";
@@ -7822,7 +7832,8 @@ videogular {
   background-color: #000000;
   border-top: 1px solid #f0f0f0;
   border-bottom: 1px solid #f0f0f0;
-  border-radius: none;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
   border-right: none;
   border-left: none;
 }
