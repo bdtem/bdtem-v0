@@ -7514,6 +7514,11 @@ a:focus {
 label {
   font-size: 1.2vw;
 }
+@media screen and (max-width: 360px) {
+  .navbar-container {
+    display: none;
+  }
+}
 .above-navbar {
   position: absolute;
   background: transparent;
@@ -7660,53 +7665,84 @@ label {
 }
 .menu-button {
   position: absolute;
+  display: inline;
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
   text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.6);
-  border: 10vmin transparent;
 }
 .menu-button:hover,
 .menu-button:focus {
   color: #f0f0f0;
   text-decoration: none;
 }
+.menu-spaced {
+  letter-spacing: 0.2vw;
+}
 .left-menu-button {
   position: absolute;
+  display: inline;
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
   text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.6);
-  border: 10vmin transparent;
-  border-top-right-radius: 10vmin;
-  border-bottom-right-radius: 10vmin;
-  padding-right: 5vw;
+  border-top-left-radius: 2vmin;
+  border-bottom-left-radius: 2vmin;
+  padding-left: 0.5vw;
 }
 .left-menu-button:hover,
 .left-menu-button:focus {
   color: #f0f0f0;
   text-decoration: none;
 }
+left-words {
+  -webkit-transition: letter-spacing 1s;
+  -moz-transition: letter-spacing 1s;
+  -ms-transition: letter-spacing 1s;
+  -o-transition: letter-spacing 1s;
+  transition: letter-spacing 1s;
+}
+right-words {
+  -webkit-transition: letter-spacing 1s;
+  -moz-transition: letter-spacing 1s;
+  -ms-transition: letter-spacing 1s;
+  -o-transition: letter-spacing 1s;
+  transition: letter-spacing 1s;
+}
 .right-menu-button {
   position: absolute;
+  display: inline;
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
   text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.6);
-  border: 10vmin transparent;
   float: right;
   right: 0vw;
-  border-top-left-radius: 10vmin;
-  border-bottom-left-radius: 10vmin;
-  padding-left: 1vw;
+  border-top-right-radius: 2vmin;
+  border-bottom-right-radius: 2vmin;
+  padding-right: 0.5vw;
 }
 .right-menu-button:hover,
 .right-menu-button:focus {
   color: #f0f0f0;
   text-decoration: none;
+}
+@media screen and (max-width: 1000px) {
+  .left-menu-button ::before {
+    content: "test";
+  }
+  .left-menu-button ::after {
+    content: 'bleep';
+  }
+  .left-menu-button ::before {
+    content: "test";
+  }
+  .left-menu-button ::after {
+    content: 'bleep';
+  }
+  .right-menu-button ::after {
+    content: 'bloop';
+  }
 }
 .middle-video-container-base {
   max-height: 70vh;

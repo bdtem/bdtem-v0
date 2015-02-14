@@ -4,7 +4,7 @@
 
 $.fn.stretch_text = function () {
     var element = $(this);
-        var container_width = element.parent().width();
+    var container_width = element.parent().width();
 
     var element_width = element.width();
 
@@ -51,34 +51,105 @@ $(document).ready(function () {
     positionTheVolumeBar();
 
     var tracksMenuToggle = $('#tracks-menu-toggle');
+    var leftWords = $('#left-menu-words');
+
+
+
+    var animateLeftIn = function () {
+        tracksMenuToggle.animate(
+            {
+                'letter-spacing': '0.01vw',
+                'padding-right': 0,
+                'margin': 0,
+                'width': '3.25vw'
+            },
+            500, 0, 0);
+    };
+
+    var animateLeftOut = function () {
+        tracksMenuToggle.animate(
+            {
+                'letter-spacing': '1.5vw',
+                'margin': '0.1w'},
+            500, 0, 0);
+    };
+
     tracksMenuToggle.sidr({
         name: 'tracks-menu',
         speed: 200,
         side: 'left',
         source: null,
         displace: true,
-        onOpen: function () {stretchTheText(); tracksMenuToggle.addClass(ROTATE_CLASS);},
-        onClose: function () {tracksMenuToggle.removeClass(ROTATE_CLASS);},
+        onOpen: function () {
+            stretchTheText();
+            tracksMenuToggle.addClass(ROTATE_CLASS);
+            animateLeftIn();
+            leftWords.removeClass('left-menu-words');
+            leftWords.css({display: 'none'});
+        },
+        onClose: function () {
+            tracksMenuToggle.removeClass(ROTATE_CLASS);
+            animateLeftOut();
+            leftWords.addClass('left-menu-words');
+            leftWords.css({display: 'inline'});
+        },
         renaming: true,
         body: 'left'
     });
 
 
     var podcastMenuToggle = $('#podcast-menu-toggle');
+    var rightWords = $('.right-menu-words');
+
+
+    var animateRightIn = function () {
+        podcastMenuToggle.animate(
+            {
+                'letter-spacing': '0.01vw',
+                'padding-right': 0,
+                'margin': 0,
+                'width': '3.25vw'
+            },
+            500, 0, 0);
+    };
+
+    var animateRightOut = function () {
+        podcastMenuToggle.animate(
+            {
+                'letter-spacing': '1.5vw',
+                'margin': '0.1w'},
+            500, 0, 0);
+    };
+
+
     podcastMenuToggle.sidr({
         name: 'podcast-menu',
         speed: 200,
         side: 'right',
         source: null,
         displace: true,
-        onOpen: function () {podcastMenuToggle.addClass(ROTATE_CLASS);},
-        onClose: function () {podcastMenuToggle.removeClass(ROTATE_CLASS);},
+        onOpen: function () {
+            podcastMenuToggle.addClass(ROTATE_CLASS);
+            animateRightIn();
+            rightWords.removeClass('right-menu-words');
+            rightWords.css({display: 'none'});
+        },
+        onClose: function () {
+            podcastMenuToggle.removeClass(ROTATE_CLASS);
+//            podcastMenuToggle.addClass('menu-spaced');
+
+            animateRightOut();
+
+//            rightWords.addClass('right-menu-words');
+            rightWords.css({display: 'inline'});
+        },
         renaming: true,
         body: 'right'
     });
 
 
-
+    animateLeftOut();
+    animateRightOut();
 });
 
 $(window).resize(function () {
