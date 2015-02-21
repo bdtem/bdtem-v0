@@ -60,21 +60,21 @@ input[type="range"]::-webkit-slider-thumb {
   width: 0.5vh;
   height: 2vw;
   border: none;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFFFFF), color-stop(100%, #EEEEEE)); /* android <= 2.2 */
-  background-image: -webkit-linear-gradient(top, #FFFFFF 0, #EEEEEE 100%); /* older mobile safari and android > 2.2 */;
-  background-image: linear-gradient(to bottom, #FFFFFF 0, #EEEEEE 100%); /* W3C */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @text-color), color-stop(100%, @text-color)); /* android <= 2.2 */
+  background-image: -webkit-linear-gradient(top, @text-color 0, @text-color 100%); /* older mobile safari and android > 2.2 */;
+  background-image: linear-gradient(to bottom, @text-color 0, @text-color 100%); /* W3C */
 }
 
 input[type="range"]::-moz-range-thumb {
   width: 0.5vh;
   height: 2vw;
   border: none;
-  background-image: linear-gradient(to bottom, #FFFFFF 0, #EEEEEE 100%); /* W3C */
+  background-image: linear-gradient(to bottom, @text-color 0, @text-color 100%); /* W3C */
 }
 
 input[type="range"]::-ms-thumb {
   width: 0.5vh;
   height: 2vw;
   border: 0;
-  background-image: linear-gradient(to bottom, #FFFFFF 0, #EEEEEE 100%); /* W3C */
+  background-image: linear-gradient(to bottom, @text-color 0, @text-color 100%); /* W3C */
 }

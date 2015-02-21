@@ -1,8 +1,10 @@
 @import "variables";
 
-.middle-video-container-base {
-  max-height: 70vh;
-  max-width: 960px;
+.middle-video-container {
+
+
+  max-height: 80vh;
+  max-width: 55vw;
   padding-bottom: @navbar-height;
 
   margin: 5vh auto;
@@ -15,17 +17,11 @@
 
 }
 
-.middle-video-container {
-  .middle-video-container-base;
-}
-
-.sidr-open .middle-video-container {
-  .middle-video-container-base;
-}
-
 videogular {
-  max-width: 960px;
-  max-height: 70vh;
+
+
+  max-width: 55vw;
+  max-height: 80vh;
   margin: auto;
 }
 
@@ -78,7 +74,8 @@ videogular {
   min-height: 540px;
   max-height: 540px;
 
-  background: url('http://couleurs.na.tl/rick/spriteSheet77.png');
+  background: url('http://couleurs.na.tl/rick/spriteSheetTransparent.png');
+  filter: invert(100%);
   animation: play 7s steps(55) infinite;
   -webkit-animation: play 7s steps(55) infinite; /* Safari 4+ */
   -moz-animation: play 7s steps(55, end) infinite; /* Fx 5+ */
