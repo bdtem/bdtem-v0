@@ -12,12 +12,12 @@
     "angular-media-player": "latest",
     "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5",
     "sidr": "~1.2.1",	
-    "videogular": "latest",
-    "videogular-controls": "latest",
-    "videogular-buffering": "latest",
-    "videogular-overlay-play": "latest",
-    "videogular-poster": "latest",
-    "videogular-ima-ads": "latest"
+    "videogular": "0.7.x",
+    "videogular-controls": "~0.7.x",
+    "videogular-buffering": "0.7.x",
+    "videogular-overlay-play": "0.7.x",
+    "videogular-poster": "0.7.x",
+    "videogular-ima-ads": "0.7.x"
   },
   "devDependencies": {}
 }
