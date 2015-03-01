@@ -68,19 +68,9 @@
         
         <div class="centered btn-group" ng-repeat="button in buttons">
 
-            <button
-                    id="button-{{button.purpose}}"
-                    class="buttonz btn padded"
-                    tooltip-html-unsafe="{{button.tooltip}}"
-                    tooltip-placement="bottom"
-                    tooltip-append-to-body="true"
-                    tooltip-trigger="mouseover : mouseleave"
-                    ng-click="button.action()"
-                    >
-
-                {{button.glyph}}
+            <button id="button-{{button.purpose}}" class="btn padded" ng-click="button.action()">
+                {{button.tooltip}}
             </button>
-
 
         </div>
     </nav>
