@@ -86,6 +86,8 @@ bdtem.service('playerService', function () {
         skipToTrack: function (index) {
             bdtemplayer.play(index, true);
             bdtemplayer.load(true);
+            $rootScope.$broadcast('trackChange', bdtemplayer.currentTrack);
+
             this.setTrackHighlighting();
         }
     }
@@ -269,11 +271,18 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
 
      var currentTrack = player.currentTrack | 0;
 
-     $scope.duration = player.duration;
-     $scope.metadata = Metadata[currentTrack];
+    function setMetadata(track) {
+         $scope.duration = player.duration | 0;
+         $scope.metadata = Metadata[track];
+     }
 
-     var getCurrentTime = function () {
+     setMetadata(currentTrack);
+
+     $scope.$on('trackChange', function(event, track) {setMetadata(track)});
+
+     function getCurrentTime() {
          return player ? (player.currentTime | 0) : 0;
-     };
+     }
+
      $scope.__defineGetter__('currentTime', getCurrentTime);
  });

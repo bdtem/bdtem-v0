@@ -1,5 +1,5 @@
-bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
-    function PlaylistCtrl(Metadata, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
+bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
+    function PlaylistCtrl(Metadata, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
 
         var player;
         var volume = 1;
@@ -160,6 +160,8 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$
             }
 
             player.prev(true);
+            $rootScope.$broadcast('trackChange', player.currentTrack);
+
             $timeout(playerService.setTrackHighlighting);
 
         };
@@ -171,6 +173,8 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$
             }
 
             player.next(true);
+            $rootScope.$broadcast('trackChange', player.currentTrack);
+
             $timeout(playerService.setTrackHighlighting);
 
         };
