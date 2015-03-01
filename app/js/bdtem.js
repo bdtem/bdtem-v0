@@ -1,4 +1,4 @@
-const __HOST__ = '127.0.0.1';
+ __HOST__ = '127.0.0.1';
 
 var bdtem = angular.module('bdtem', [
     'bdtemFilters',
@@ -6,11 +6,33 @@ var bdtem = angular.module('bdtem', [
     'cfp.hotkeys',
     'ui.bootstrap',
     "ngSanitize",
+    "ui.router",
     "com.2fdevs.videogular",
     "com.2fdevs.videogular.plugins.controls",
     "com.2fdevs.videogular.plugins.overlayplay",
     "com.2fdevs.videogular.plugins.poster"
 ]);
+
+
+
+ bdtem.config(['$stateProvider', '$urlRouterProvider',
+     function($stateProvider, $urlRouterProvider) {
+
+        // For any unmatched url, redirect to /state1
+        $urlRouterProvider.otherwise("/");
+        //
+        // Now set up the states
+        $stateProvider
+            .state('video', {
+                url: "/",
+                templateUrl: "templates/video.html"
+            })
+            .state('metadata', {
+                url: "/",
+                templateUrl: "templates/app.html",
+                controller: 'MetadataCtrl'
+            });
+    }]);
 
 bdtem.filter('unsafe', ['$sce', function ($sce) {
     return function (val) {
@@ -240,3 +262,18 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
     };
 
 });
+
+
+ bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, Metadata, playerService) {
+     var player = playerService.getPlayer();
+
+     var currentTrack = player.currentTrack | 0;
+
+     $scope.duration = player.duration;
+     $scope.metadata = Metadata[currentTrack];
+
+     var getCurrentTime = function () {
+         return player ? (player.currentTime | 0) : 0;
+     };
+     $scope.__defineGetter__('currentTime', getCurrentTime);
+ });

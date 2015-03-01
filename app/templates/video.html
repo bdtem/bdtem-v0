@@ -1,0 +1,20 @@
+<div class="middle-video-container" ng-controller="VideoCtrl as controller">
+    <videogular vg-player-ready="controller.onPlayerReady" class="middle-video" vg-theme="controller.config.theme">
+        <vg-video vg-src="controller.config.sources"
+                  vg-tracks="controller.config.tracks">
+        </vg-video>
+
+        <vg-overlay-play></vg-overlay-play>
+        <vg-poster-image vg-url='controller.config.plugins.poster'></vg-poster-image>
+
+        <vg-controls vg-autohide="true" vg-autohide-time="500">
+            <div class="pull-right pad-right">
+                <vg-volume>
+                    <vg-mutebutton></vg-mutebutton>
+                    <vg-volumebar></vg-volumebar>
+                </vg-volume>
+            </div>
+        </vg-controls>
+
+    </videogular>
+</div>

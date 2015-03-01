@@ -1,5 +1,5 @@
-bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout',
-    function PlaylistCtrl(Metadata, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout) {
+bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
+    function PlaylistCtrl(Metadata, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
 
         var player;
         var volume = 1;
@@ -104,6 +104,22 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$scope', '$filter', 'hotkeys', '$
 
         this.seekTo = function (whereToSeek) {
             player.seek(whereToSeek | 0);
+        };
+
+
+        var previousState = null;
+        const METADATA = 'metadata';
+
+        $scope.toggleMetadata = function () {
+
+            var currentState = $state.current.name;
+            if (currentState === METADATA) {
+                $state.go(previousState);
+                previousState = null;
+            } else {
+                previousState = currentState;
+                $state.go(METADATA);
+            }
         };
 
         $scope.getMetadataTitle = function () {
