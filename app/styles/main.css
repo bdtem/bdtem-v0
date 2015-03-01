@@ -5293,7 +5293,7 @@ button.close {
   max-width: 276px;
   padding: 1px;
   text-align: left;
-  background-color: #fbfbd8;
+  background-color: #fbfbfb;
   background-clip: padding-box;
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -5320,8 +5320,8 @@ button.close {
   font-size: 14px;
   font-weight: normal;
   line-height: 18px;
-  background-color: #fafaca;
-  border-bottom: 1px solid #f7f7b3;
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #e7e7e7;
   border-radius: 5px 5px 0 0;
 }
 .popover-content {
@@ -7452,11 +7452,11 @@ body {
   max-height: 90%;
 }
 body {
-  background-color: #fbfbd8;
+  background-color: #fbfbfb;
   font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
 }
 .media-body {
-  background-color: #fbfbd8;
+  background-color: #fbfbfb;
 }
 a {
   color: #000000;
@@ -7581,7 +7581,7 @@ label {
   max-width: 33%;
 }
 .middle-main {
-  background: #fbfbd8;
+  background: #fbfbfb;
   max-width: 33%;
   padding-top: 1vh;
   padding-right: 0px;
@@ -7820,7 +7820,7 @@ videogular {
   max-width: 960px;
   min-height: 40vh;
   max-height: 70vh;
-  background-color: #fbfbd8;
+  background-color: #fbfbfb;
   text-align: center;
   align-content: center;
   align-items: center;
@@ -7882,7 +7882,7 @@ videogular {
   font-size: 12pt;
   color: #000000;
   font-weight: normal;
-  background-color: #fafaca;
+  background-color: #f3f3f3;
   border-top: 1px solid #000000;
   border-bottom: 1px solid #000000;
   border-top-left-radius: 30px;
@@ -7917,13 +7917,13 @@ videogular {
   font-size: 1.2vw;
   padding: 2vh 2vw;
   background-color: #000000;
-  color: #fbfbd8;
+  color: #fbfbfb;
 }
 .modal-content a {
   font-size: 1.2vw;
   text-decoration: none;
   background-color: #000000;
-  color: #fbfbd8;
+  color: #fbfbfb;
 }
 .modal-content ahover,
 .modal-content afocus {
@@ -7934,12 +7934,12 @@ videogular {
 }
 .modal-content .spacedLink {
   letter-spacing: 1.5vw;
-  color: #fbfbd8;
+  color: #fbfbfb;
   font-size: 2vw;
 }
 .modal-content .tooltip {
   background-color: #000000;
-  color: #fbfbd8;
+  color: #fbfbfb;
   z-index: 5000;
 }
 input {
@@ -7948,11 +7948,11 @@ input {
   align-content: center;
   align-items: center;
   background-color: #000000;
-  color: #fbfbd8;
+  color: #fbfbfb;
 }
 textarea {
   background-color: #000000;
-  color: #fbfbd8;
+  color: #fbfbfb;
   width: 100%;
   height: 20vh;
 }
