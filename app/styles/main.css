@@ -7501,9 +7501,10 @@ a:focus {
 }
 .btn-group {
   background-color: transparent;
+  font-size: 1vmin;
 }
 .btn {
-  font-size: 1.5vw;
+  font-size: 1.1vw;
   color: #000000;
   background-color: transparent;
 }

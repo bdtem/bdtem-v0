@@ -95,7 +95,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Share',
             glyph: '\ue808',
-            tooltip: 'SHARE',
+            tooltip: 'Share',
             action: function () {
                 $modal.open({
                     templateUrl: "templates/share.html",
@@ -106,7 +106,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Donate',
             glyph: '\ue803',
-            tooltip: 'DONATE',
+            tooltip: 'Donate',
             action: function () {
                 $modal.open({
                     templateUrl: 'templates/donate.html',
@@ -118,7 +118,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Newsletter',
             glyph: '\ue805',
-            tooltip: 'NEWS',
+            tooltip: 'News',
             action: function () {
                 $modal.open({
                     templateUrl: 'templates/newsletter.html',
@@ -129,7 +129,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Contact',
             glyph: '\ue800',
-            tooltip: 'CONTACT',
+            tooltip: 'Contact',
             action: function () {
                 $modal.open({
                     templateUrl: 'templates/contact.html',
