@@ -7916,14 +7916,14 @@ videogular {
   font-family: "Superclarendon";
   font-size: 1.2vw;
   padding: 2vh 2vw;
-  background-color: #000000;
-  color: #fbfbfb;
+  background-color: #fbfbfb;
+  color: #000000;
 }
 .modal-content a {
   font-size: 1.2vw;
   text-decoration: none;
-  background-color: #000000;
-  color: #fbfbfb;
+  background-color: #fbfbfb;
+  color: #000000;
 }
 .modal-content ahover,
 .modal-content afocus {
@@ -7934,12 +7934,12 @@ videogular {
 }
 .modal-content .spacedLink {
   letter-spacing: 1.5vw;
-  color: #fbfbfb;
+  color: #000000;
   font-size: 2vw;
 }
 .modal-content .tooltip {
-  background-color: #000000;
-  color: #fbfbfb;
+  background-color: #fbfbfb;
+  color: #000000;
   z-index: 5000;
 }
 input {
@@ -7947,12 +7947,12 @@ input {
   align-self: center;
   align-content: center;
   align-items: center;
-  background-color: #000000;
-  color: #fbfbfb;
+  background-color: #fbfbfb;
+  color: #000000;
 }
 textarea {
-  background-color: #000000;
-  color: #fbfbfb;
+  background-color: #fbfbfb;
+  color: #000000;
   width: 100%;
   height: 20vh;
 }
@@ -7967,7 +7967,7 @@ input[type="range"] {
   height: 0.2vmin;
   max-height: 5vmin;
   border: none;
-  background: #000000;
+  background: #fbfbfb;
   box-shadow: none;
   -webkit-box-shadow: none;
   outline: none;
