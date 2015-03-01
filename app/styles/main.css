@@ -7967,7 +7967,7 @@ input[type="range"] {
   height: 0.2vmin;
   max-height: 5vmin;
   border: none;
-  background: #fbfbfb;
+  background: #000000;
   box-shadow: none;
   -webkit-box-shadow: none;
   outline: none;
