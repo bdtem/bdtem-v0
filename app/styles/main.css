@@ -7482,11 +7482,18 @@ a:focus {
 .navbar-default {
   border: none;
 }
-.navbar-container {
-  height: 5vh;
-  min-height: 2%;
-  max-height: 5vh;
-  overflow: hidden;
+@media screen and (min-width: 641px) {
+  .navbar-container {
+    height: 5vh;
+    min-height: 2%;
+    max-height: 5vh;
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 640px) {
+  .navbar-container {
+    display: none;
+  }
 }
 .navbar-default {
   background-color: transparent;
@@ -7495,9 +7502,16 @@ a:focus {
   background-color: transparent;
   padding-right: 4vw;
 }
-.navbar-fixed-bottom {
-  background-color: transparent;
-  margin-bottom: 5vh;
+@media screen and (min-width: 641px) {
+  .navbar-fixed-bottom {
+    background-color: transparent;
+    margin-bottom: 5vh;
+  }
+}
+@media screen and (max-width: 640px) {
+  .navbar-fixed-bottom {
+    display: none;
+  }
 }
 .btn-group {
   background-color: transparent;
@@ -7573,6 +7587,41 @@ label {
 }
 .menu-container {
   max-width: 33%;
+}
+@media screen and (max-width: 640px) {
+  .inner-two {
+    height: 100%;
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #FFF;
+    border-radius: 50%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  .inner-two .transport-bar {
+    margin: 35px auto;
+  }
+  .inner-two .transport-bar .btn {
+    font-size: 55px;
+    padding: 0px;
+  }
+  .inner-two .transport-bar .btn_play {
+    font-size: 20px;
+    padding: 0px 5px;
+  }
+  .container {
+    width: 200px;
+    height: 200px;
+    margin: 230px auto;
+  }
+}
+@media screen and (min-width: 641px) {
+  .inner-two {
+    display: none;
+  }
+  .container {
+    display: none;
+  }
 }
 .middle-main {
   background: #000000;
@@ -7708,35 +7757,42 @@ label {
   color: #f0f0f0;
   text-decoration: none;
 }
-.middle-video-container-base {
-  max-height: 70vh;
-  max-width: 960px;
-  padding-bottom: 5vh;
-  margin: 5vh auto;
-  align-content: center;
-  align-self: center;
-  align-items: center;
-  vertical-align: middle;
+@media screen and (min-width: 641px) {
+  .middle-video-container-base {
+    max-height: 70vh;
+    max-width: 960px;
+    padding-bottom: 5vh;
+    margin: 5vh auto;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    vertical-align: middle;
+  }
+  .middle-video-container {
+    max-height: 70vh;
+    max-width: 960px;
+    padding-bottom: 5vh;
+    margin: 5vh auto;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    vertical-align: middle;
+  }
+  .sidr-open .middle-video-container {
+    max-height: 70vh;
+    max-width: 960px;
+    padding-bottom: 5vh;
+    margin: 5vh auto;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    vertical-align: middle;
+  }
 }
-.middle-video-container {
-  max-height: 70vh;
-  max-width: 960px;
-  padding-bottom: 5vh;
-  margin: 5vh auto;
-  align-content: center;
-  align-self: center;
-  align-items: center;
-  vertical-align: middle;
-}
-.sidr-open .middle-video-container {
-  max-height: 70vh;
-  max-width: 960px;
-  padding-bottom: 5vh;
-  margin: 5vh auto;
-  align-content: center;
-  align-self: center;
-  align-items: center;
-  vertical-align: middle;
+@media screen and (max-width: 640px) {
+  .middle-video-container {
+    display: none;
+  }
 }
 videogular {
   max-width: 960px;

@@ -66,7 +66,7 @@
 
     <nav class="centered navbar navbar-default navbar-fixed-top" role="navigation"
          ng-controller="ButtonsCtrl as buttonsController">
-        
+
         <div class="centered btn-group" ng-repeat="button in buttons">
 
             <button
@@ -190,6 +190,31 @@ Album<br/>
             </vg-controls>
 
         </videogular>
+    </div>
+
+    <div class="inner-two container">
+        <div class="inner-two">
+            <div class="inner-two">
+                <div class="inner-two">
+                    <div class="inner-two">
+                        <div class="inner-two">
+                            <div class="transport-bar">
+                                <div class="btn buttonz" ng-click="prevTrack()">
+                                    &#xe807;
+                                </div>
+                                <div class="btn btn_play" ng-click="bdtemPlayPause()">
+                                    <i class="fa fa-play"
+                                       ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
+                                </div>
+                                <div class="btn buttonz" ng-click="nextTrack()">
+                                    &#xe802;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 <nav id="podcasts-container" >

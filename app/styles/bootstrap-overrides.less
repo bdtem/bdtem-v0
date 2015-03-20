@@ -41,12 +41,18 @@ a {
 .navbar-default {
   border: none;
 }
-
-.navbar-container {
-  height: @navbar-height;
-  min-height: 2%;
-  max-height: @navbar-height;
-  overflow: hidden;
+@media screen and (min-width: 641px) {
+  .navbar-container {
+    height: @navbar-height;
+    min-height: 2%;
+    max-height: @navbar-height;
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 640px) {
+  .navbar-container {
+    display:none;
+  }
 }
 
 .navbar-default {
@@ -57,10 +63,16 @@ a {
   background-color: transparent;
   padding-right: 4vw;
 }
-
-.navbar-fixed-bottom {
-  background-color: transparent;
-  margin-bottom: 5vh;
+@media screen and (min-width: 641px) {
+  .navbar-fixed-bottom {
+    background-color: transparent;
+    margin-bottom: 5vh;
+  }
+}
+@media screen and (max-width: 640px) {
+  .navbar-fixed-bottom {
+    display:none;
+  }
 }
 
 .btn-group {

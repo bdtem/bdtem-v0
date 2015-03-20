@@ -1,28 +1,33 @@
 @import "variables";
+@media screen and (min-width: 641px) {
+    .middle-video-container-base {
+      max-height: 70vh;
+      max-width: 960px;
+      padding-bottom: @navbar-height;
 
-.middle-video-container-base {
-  max-height: 70vh;
-  max-width: 960px;
-  padding-bottom: @navbar-height;
+      margin: 5vh auto;
 
-  margin: 5vh auto;
+      align-content: center;
+      align-self: center;
+      align-items: center;
 
-  align-content: center;
-  align-self: center;
-  align-items: center;
+      vertical-align: middle;
 
-  vertical-align: middle;
+    }
 
+    .middle-video-container {
+      .middle-video-container-base;
+    }
+
+    .sidr-open .middle-video-container {
+      .middle-video-container-base;
+    }
 }
-
-.middle-video-container {
-  .middle-video-container-base;
+@media screen and (max-width: 640px){
+    .middle-video-container{
+        display:none;
+    }
 }
-
-.sidr-open .middle-video-container {
-  .middle-video-container-base;
-}
-
 videogular {
   max-width: 960px;
   max-height: 70vh;

@@ -64,6 +64,41 @@
 .menu-container {
   max-width: 33%;
 }
+@media screen and (max-width: 640px) {
+    .inner-two{
+        height: 100%;
+        width: 100%;
+        background: #1a1a1a;
+        border: 1px solid #FFF;
+        border-radius: 50%;
+        padding: 5px;
+        box-sizing: border-box;
+        .transport-bar{
+            margin: 35px auto;
+            .btn{
+                font-size: 55px;
+                padding: 0px;
+            }
+            .btn_play{
+                font-size:20px;
+                padding: 0px 5px;
+            }
+        }
+    }
+    .container {
+        width: 200px;
+        height: 200px;
+        margin: 230px auto;
+    }
+}
+@media screen and (min-width: 641px) {
+    .inner-two{
+        display: none;
+    }
+    .container {
+        display: none;
+    }
+}
 
 .middle-main {
   background: @background;
