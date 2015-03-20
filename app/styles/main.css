@@ -7482,6 +7482,7 @@ a:focus {
 .navbar-default {
   border: none;
 }
+<<<<<<< HEAD
 @media screen and (min-width: 641px) {
   .navbar-container {
     height: 5vh;
@@ -7494,6 +7495,13 @@ a:focus {
   .navbar-container {
     display: none;
   }
+=======
+.navbar-container {
+  height: 5vh;
+  min-height: 2%;
+  max-height: 5vh;
+  overflow: hidden;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 }
 .navbar-default {
   background-color: transparent;
@@ -7502,6 +7510,7 @@ a:focus {
   background-color: transparent;
   padding-right: 4vw;
 }
+<<<<<<< HEAD
 @media screen and (min-width: 641px) {
   .navbar-fixed-bottom {
     background-color: transparent;
@@ -7512,6 +7521,11 @@ a:focus {
   .navbar-fixed-bottom {
     display: none;
   }
+=======
+.navbar-fixed-bottom {
+  background-color: transparent;
+  margin-bottom: 5vh;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 }
 .btn-group {
   background-color: transparent;
@@ -7527,6 +7541,11 @@ a:focus {
 }
 label {
   font-size: 1.2vw;
+}
+@media screen and (max-width: 360px) {
+  .navbar-container {
+    display: none;
+  }
 }
 .above-navbar {
   position: absolute;
@@ -7588,6 +7607,7 @@ label {
 .menu-container {
   max-width: 33%;
 }
+<<<<<<< HEAD
 @media screen and (max-width: 640px) {
   .inner-two {
     height: 100%;
@@ -7623,6 +7643,8 @@ label {
     display: none;
   }
 }
+=======
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 .middle-main {
   background: #000000;
   max-width: 33%;
@@ -7709,41 +7731,84 @@ label {
 }
 .menu-button {
   position: absolute;
+<<<<<<< HEAD
+=======
+  display: inline;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
   text-decoration: none;
+<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.6);
   border: 10vmin transparent;
+=======
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 }
 .menu-button:hover,
 .menu-button:focus {
   color: #f0f0f0;
   text-decoration: none;
 }
+<<<<<<< HEAD
 .left-menu-button {
   position: absolute;
+=======
+.menu-spaced {
+  letter-spacing: 0.2vw;
+}
+.left-menu-button {
+  position: absolute;
+  display: inline;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
   text-decoration: none;
+<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.6);
   border: 10vmin transparent;
   border-top-right-radius: 10vmin;
   border-bottom-right-radius: 10vmin;
   padding-right: 5vw;
+=======
+  border-top-left-radius: 2vmin;
+  border-bottom-left-radius: 2vmin;
+  padding-left: 0.5vw;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 }
 .left-menu-button:hover,
 .left-menu-button:focus {
   color: #f0f0f0;
   text-decoration: none;
 }
+<<<<<<< HEAD
 .right-menu-button {
   position: absolute;
+=======
+left-words {
+  -webkit-transition: letter-spacing 1s;
+  -moz-transition: letter-spacing 1s;
+  -ms-transition: letter-spacing 1s;
+  -o-transition: letter-spacing 1s;
+  transition: letter-spacing 1s;
+}
+right-words {
+  -webkit-transition: letter-spacing 1s;
+  -moz-transition: letter-spacing 1s;
+  -ms-transition: letter-spacing 1s;
+  -o-transition: letter-spacing 1s;
+  transition: letter-spacing 1s;
+}
+.right-menu-button {
+  position: absolute;
+  display: inline;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
   text-decoration: none;
+<<<<<<< HEAD
   background-color: rgba(0, 0, 0, 0.6);
   border: 10vmin transparent;
   float: right;
@@ -7751,12 +7816,20 @@ label {
   border-top-left-radius: 10vmin;
   border-bottom-left-radius: 10vmin;
   padding-left: 1vw;
+=======
+  float: right;
+  right: 0vw;
+  border-top-right-radius: 2vmin;
+  border-bottom-right-radius: 2vmin;
+  padding-right: 0.5vw;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 }
 .right-menu-button:hover,
 .right-menu-button:focus {
   color: #f0f0f0;
   text-decoration: none;
 }
+<<<<<<< HEAD
 @media screen and (min-width: 641px) {
   .middle-video-container-base {
     max-height: 70vh;
@@ -7793,6 +7866,54 @@ label {
   .middle-video-container {
     display: none;
   }
+=======
+@media screen and (max-width: 1000px) {
+  .left-menu-button ::before {
+    content: "test";
+  }
+  .left-menu-button ::after {
+    content: 'bleep';
+  }
+  .left-menu-button ::before {
+    content: "test";
+  }
+  .left-menu-button ::after {
+    content: 'bleep';
+  }
+  .right-menu-button ::after {
+    content: 'bloop';
+  }
+}
+.middle-video-container-base {
+  max-height: 70vh;
+  max-width: 960px;
+  padding-bottom: 5vh;
+  margin: 5vh auto;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  vertical-align: middle;
+}
+.middle-video-container {
+  max-height: 70vh;
+  max-width: 960px;
+  padding-bottom: 5vh;
+  margin: 5vh auto;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  vertical-align: middle;
+}
+.sidr-open .middle-video-container {
+  max-height: 70vh;
+  max-width: 960px;
+  padding-bottom: 5vh;
+  margin: 5vh auto;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  vertical-align: middle;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 }
 videogular {
   max-width: 960px;

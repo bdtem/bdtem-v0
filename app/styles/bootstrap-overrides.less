@@ -41,6 +41,7 @@ a {
 .navbar-default {
   border: none;
 }
+<<<<<<< HEAD
 @media screen and (min-width: 641px) {
   .navbar-container {
     height: @navbar-height;
@@ -53,6 +54,14 @@ a {
   .navbar-container {
     display:none;
   }
+=======
+
+.navbar-container {
+  height: @navbar-height;
+  min-height: 2%;
+  max-height: @navbar-height;
+  overflow: hidden;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 }
 
 .navbar-default {
@@ -63,6 +72,7 @@ a {
   background-color: transparent;
   padding-right: 4vw;
 }
+<<<<<<< HEAD
 @media screen and (min-width: 641px) {
   .navbar-fixed-bottom {
     background-color: transparent;
@@ -73,6 +83,12 @@ a {
   .navbar-fixed-bottom {
     display:none;
   }
+=======
+
+.navbar-fixed-bottom {
+  background-color: transparent;
+  margin-bottom: 5vh;
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 }
 
 .btn-group {
@@ -93,3 +109,9 @@ a {
 label {
   font-size: 1.2vw;
 }
+
+@media screen and (max-width: 360px) {
+  .navbar-container {
+    display: none;
+  }
+ }

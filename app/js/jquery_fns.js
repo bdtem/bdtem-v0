@@ -4,7 +4,11 @@
 
 $.fn.stretch_text = function () {
     var element = $(this);
+<<<<<<< HEAD
         var container_width = element.parent().width();
+=======
+    var container_width = element.parent().width();
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 
     var element_width = element.width();
 
@@ -51,34 +55,125 @@ $(document).ready(function () {
     positionTheVolumeBar();
 
     var tracksMenuToggle = $('#tracks-menu-toggle');
+<<<<<<< HEAD
+=======
+    var leftWords = $('#left-menu-words');
+
+
+
+    var animateLeftIn = function () {
+        tracksMenuToggle.animate(
+            {
+                'letter-spacing': '0.01vw',
+                'padding-right': 0,
+                'margin': 0,
+                'width': '3.25vw'
+            },
+            500, 0, 0);
+    };
+
+    var animateLeftOut = function () {
+        tracksMenuToggle.animate(
+            {
+                'letter-spacing': '1.5vw',
+                'margin': '0.1w'},
+            500, 0, 0);
+    };
+
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
     tracksMenuToggle.sidr({
         name: 'tracks-menu',
         speed: 200,
         side: 'left',
         source: null,
         displace: true,
+<<<<<<< HEAD
         onOpen: function () {stretchTheText(); tracksMenuToggle.addClass(ROTATE_CLASS);},
         onClose: function () {tracksMenuToggle.removeClass(ROTATE_CLASS);},
+=======
+        onOpen: function () {
+            stretchTheText();
+            tracksMenuToggle.addClass(ROTATE_CLASS);
+            animateLeftIn();
+            leftWords.removeClass('left-menu-words');
+            leftWords.css({display: 'none'});
+        },
+        onClose: function () {
+            tracksMenuToggle.removeClass(ROTATE_CLASS);
+            animateLeftOut();
+            leftWords.addClass('left-menu-words');
+            leftWords.css({display: 'inline'});
+        },
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
         renaming: true,
         body: 'left'
     });
 
 
     var podcastMenuToggle = $('#podcast-menu-toggle');
+<<<<<<< HEAD
+=======
+    var rightWords = $('.right-menu-words');
+
+
+    var animateRightIn = function () {
+        podcastMenuToggle.animate(
+            {
+                'letter-spacing': '0.01vw',
+                'padding-right': 0,
+                'margin': 0,
+                'width': '3.25vw'
+            },
+            500, 0, 0);
+    };
+
+    var animateRightOut = function () {
+        podcastMenuToggle.animate(
+            {
+                'letter-spacing': '1.5vw',
+                'margin': '0.1w'},
+            500, 0, 0);
+    };
+
+
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
     podcastMenuToggle.sidr({
         name: 'podcast-menu',
         speed: 200,
         side: 'right',
         source: null,
         displace: true,
+<<<<<<< HEAD
         onOpen: function () {podcastMenuToggle.addClass(ROTATE_CLASS);},
         onClose: function () {podcastMenuToggle.removeClass(ROTATE_CLASS);},
+=======
+        onOpen: function () {
+            podcastMenuToggle.addClass(ROTATE_CLASS);
+            animateRightIn();
+            rightWords.removeClass('right-menu-words');
+            rightWords.css({display: 'none'});
+        },
+        onClose: function () {
+            podcastMenuToggle.removeClass(ROTATE_CLASS);
+//            podcastMenuToggle.addClass('menu-spaced');
+
+            animateRightOut();
+
+//            rightWords.addClass('right-menu-words');
+            rightWords.css({display: 'inline'});
+        },
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
         renaming: true,
         body: 'right'
     });
 
 
+<<<<<<< HEAD
 
+=======
+    animateLeftOut();
+    animateRightOut();
+>>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 });
 
 $(window).resize(function () {
