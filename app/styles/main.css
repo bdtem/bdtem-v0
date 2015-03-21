@@ -7839,7 +7839,7 @@ videogular {
   min-height: 540px;
   max-height: 540px;
   background: url('http://couleurs.na.tl/rick/spriteSheetTransparent.png');
-  filter: invert(100%);
+  filter: brightness(1.5);
   animation: play 7s steps(55) infinite;
   -webkit-animation: play 7s steps(55) infinite;
   /* Safari 4+ */
