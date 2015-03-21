@@ -69,8 +69,14 @@
   background: @background;
   max-width: 33%;
   padding-top: 1vh;
-  padding-right: 0px;
-  line-height: 5vh ;
+  padding-right: 0;
+  line-height: 5vh;
+
+  align-content: right;
+
+  align-items: right;
+  text-align: right;
+
 }
 
 .pad-right {
@@ -148,15 +154,14 @@
 }
 
 .words-end {
-  font-size: 2.2vmin;
-  text-align: center;
+  font-size: 2vmin;
+  text-align: left;
   color: @text-color;
   font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
-  width: 53vmin;
+  width: @sidr-width;
   line-height: 3vmin;
   padding-top:5px;
   padding-bottom: 5px;
-
 }
 
 .words-bottom {
@@ -164,15 +169,18 @@
   text-align: center;
   color: @text-color;
   font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
-  width: 53vmin;
+  width: @sidr-width;
   border-bottom: 2px solid @text-color;
   border-top: 2px solid @text-color;
-  line-height: 4vmin;
-  padding-top:5px;
-  padding-bottom: 5px;
+//  line-height: 4vmin;
+//  margin-top: 4vh;
+  margin-bottom: 3vh;
 
 }
 
-tracks-menu {
-  line-height: 10vh;
+.track-menu-entry {
+  text-align: right;
+  align-self: right;
+  align-content: right;
+
 }

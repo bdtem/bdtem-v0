@@ -1,11 +1,5 @@
 bdtem.value('Metadata',
     [
-        {"title": "",
-            "description": "",
-            "catalog": "",
-            src:"",
-            type:""
-        },
         {
             "title": "Funeral March",
             "description": "Included for the purposes of mood.  A peaceful place.  Like a Grave at evening time.",

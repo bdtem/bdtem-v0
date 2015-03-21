@@ -1,5 +1,3 @@
- __HOST__ = '127.0.0.1';
-
 var bdtem = angular.module('bdtem', [
     'bdtemFilters',
     'mediaPlayer',
@@ -66,8 +64,7 @@ bdtem.service('playerService', function ($rootScope) {
         setPlayer: function (player) {
             bdtemplayer = player;
         },
-        setTrackHighlighting: function () {
-            var trackToHighlight = bdtemplayer.currentTrack;
+        setTrackHighlighting: function (trackToHighlight) {
 
             var highlightedTrackId = idWildcard + trackToHighlight;
 
@@ -84,11 +81,15 @@ bdtem.service('playerService', function ($rootScope) {
             });
         },
         skipToTrack: function (index) {
-            bdtemplayer.play(index, true);
-            bdtemplayer.load(true);
-            $rootScope.$broadcast('trackChange', bdtemplayer.currentTrack);
 
-            this.setTrackHighlighting();
+            //Because angular media player is dumb and 1-based. Remove this correction after changing to videogular.
+            bdtemplayer.play(index + 1, true);
+
+
+            bdtemplayer.load(true);
+            $rootScope.$broadcast('trackChange', index);
+
+            this.setTrackHighlighting(index);
         }
     }
 });
@@ -165,9 +166,9 @@ bdtem.controller('ShareCtrl', function ($scope) {
 });
 
 
-var randomColor = function () {
+function randomColor () {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
-};
+}
 
 
 bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService) {
@@ -208,29 +209,30 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, Me
 
     $scope.skipToTrack = function (index) {
         videoService.getVideoAPI().pause();
+
+
+        console.log("skip to " + index)
         playerService.skipToTrack(index);
     };
 
 });
 
 
- bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, Metadata, playerService) {
+ bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, Metadata, playerService, $timeout) {
      var player = playerService.getPlayer();
+     setMetadata(0);
 
-     var currentTrack = player.currentTrack | 0;
+     function setMetadata(track) {
+        $scope.metadata = Metadata[track];
 
-    function setMetadata(track) {
-         $scope.duration = player.duration | 0;
-         $scope.metadata = Metadata[track];
-     }
-
-     setMetadata(currentTrack);
-
-     $scope.$on('trackChange', function(event, track) {setMetadata(track)});
+        $timeout(function () {$scope.duration = player.duration | 0}, 99);
+    }
 
      function getCurrentTime() {
          return player ? (player.currentTime | 0) : 0;
      }
+
+     $scope.$on('trackChange', function(event, track) {setMetadata(track)});
 
      $scope.__defineGetter__('currentTime', getCurrentTime);
  });

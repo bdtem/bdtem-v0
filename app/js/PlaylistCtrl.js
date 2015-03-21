@@ -144,11 +144,12 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter',
                 videoAPI.pause();
             }
 
-            player.prev(true);
-            $rootScope.$broadcast('trackChange', player.currentTrack);
-
-            $timeout(playerService.setTrackHighlighting);
-
+            var previousTrack = player.currentTrack - 2;
+            if(previousTrack >= 0) {
+                player.prev(true);
+                $rootScope.$broadcast('trackChange', previousTrack);
+                playerService.setTrackHighlighting(previousTrack);
+            }
         };
 
         $scope.nextTrack = function () {
@@ -157,11 +158,12 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter',
                 videoAPI.pause();
             }
 
-            player.next(true);
-            $rootScope.$broadcast('trackChange', player.currentTrack);
-
-            $timeout(playerService.setTrackHighlighting);
-
+            var nextTrack = player.currentTrack;
+            if (nextTrack < $scope.songs.length) {
+                player.next(true);
+                $rootScope.$broadcast('trackChange', nextTrack);
+                playerService.setTrackHighlighting(nextTrack);
+            }
         };
 
         $scope.bdtemPlayPause = function () {
@@ -219,6 +221,12 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter',
                 description: 'Toggle podcast menu',
                 callback: function () {
                     $.sidr('toggle', 'podcast-menu')
+                }
+            }).add({
+                combo: 'i',
+                description: 'Toggle metadata',
+                callback: function () {
+                    $scope.toggleMetadata();
                 }
             });
 

@@ -68,7 +68,7 @@
 
     <nav class="centered navbar navbar-default navbar-fixed-top" role="navigation"
          ng-controller="ButtonsCtrl as buttonsController">
-        
+
         <div class="centered btn-group" ng-repeat="button in buttons">
 
             <button id="button-{{button.purpose}}" class="btn padded" ng-click="button.action()">
@@ -95,8 +95,14 @@
 <nav id="menu-container">
 
     <div id="tracks-menu" class="sidr middle-main" ng-controller="MiddleCtrl as middle">
-            <a class="bdtem-track{{$index}}" ng-repeat="track in tracks" ng-click="skipToTrack($index - 1)">
-                {{track.title}}<br/>
+        <div class="words-bottom">
+            <span style="letter-spacing: 0.5vw;"><em>BEFORE LIFE</em></span><br/>
+            <span style="letter-spacing: 0.4vw;"><em>AFTER DEATH</em></span>
+        </div>
+
+
+        <a class="track-menu-entry bdtem-track{{$index}}" ng-repeat="track in tracks" ng-click="skipToTrack($index)">
+                {{track.title | uppercase}}&nbsp;&nbsp;&nbsp;<br/>
             </a>
     </div>
 
