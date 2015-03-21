@@ -54,7 +54,7 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
             "");
 }]);
 
-bdtem.service('playerService', function () {
+bdtem.service('playerService', function ($rootScope) {
     var bdtemplayer;
 
     var idWildcard = "bdtem-track";
@@ -80,7 +80,7 @@ bdtem.service('playerService', function () {
                 var id = this.classList.contains(highlightedTrackId);
 
                 /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
-                trackName.css({color: id ? generatedColor : "#F0F0F0"});
+                trackName.css({color: id ? generatedColor : "#000000"});
             });
         },
         skipToTrack: function (index) {
@@ -117,20 +117,9 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 
     $scope.buttons = [
         {
-            purpose: 'Share',
-            glyph: '\ue808',
-            tooltip: 'Share',
-            action: function () {
-                $modal.open({
-                    templateUrl: "templates/share.html",
-                    size: 'med'
-                });
-            }
-        },
-        {
-            purpose: 'Donate',
+            purpose: 'Contribute',
             glyph: '\ue803',
-            tooltip: 'Donate',
+            tooltip: 'Contribute',
             action: function () {
                 $modal.open({
                     templateUrl: 'templates/donate.html',
@@ -140,24 +129,12 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
             }
         },
         {
-            purpose: 'Newsletter',
+            purpose: 'Archive Updates',
             glyph: '\ue805',
-            tooltip: 'News',
+            tooltip: 'Archive Updates',
             action: function () {
                 $modal.open({
                     templateUrl: 'templates/newsletter.html',
-                    size: 'med'
-                });
-            }
-        },
-        {
-            purpose: 'Contact',
-            glyph: '\ue800',
-            tooltip: 'Contact',
-            action: function () {
-                $modal.open({
-                    templateUrl: 'templates/contact.html',
-                    controller: 'ContactCtrl',
                     size: 'med'
                 });
             }
@@ -169,14 +146,6 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 bdtem.controller('DonateCtrl', function ($scope) {
 });
 
-
-bdtem.factory('postContactForm', ['$http', function ($http) {
-    return {
-        postContact: function (contactData, callback) {
-            $http.post('/contact', contactData).success(callback);
-        }
-    }
-}]);
 
 bdtem.controller('ShareCtrl', function ($scope) {
 
@@ -195,29 +164,6 @@ bdtem.controller('ShareCtrl', function ($scope) {
 
 });
 
-bdtem.controller('ContactCtrl', function ($scope, $http) {
-
-    $scope.submitContact = function (contact) {
-        $http.post('http://' + __HOST__ + ':3000/contact', contact)
-            .success(function (data, status, headers, config) {
-                console.log('------SUCCESS! :DD --------');
-                console.log(data);
-                console.log(status);
-                console.log(headers);
-                console.log(config);
-
-            }).
-            error(function (data, status, headers, config) {
-                console.log('------- FAILURE :CCCC --------');
-                console.log(data);
-                console.log(status);
-                console.log(headers);
-                console.log(config);
-            });
-
-    };
-
-});
 
 var randomColor = function () {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -256,7 +202,9 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
 
 });
 
-bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService) {
+bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, Metadata) {
+
+    $scope.tracks = Metadata;
 
     $scope.skipToTrack = function (index) {
         videoService.getVideoAPI().pause();

@@ -7585,6 +7585,7 @@ label {
   max-width: 33%;
   padding-top: 1vh;
   padding-right: 0px;
+  line-height: 5vh ;
 }
 .pad-right {
   padding-right: 1vw;
@@ -7677,6 +7678,9 @@ label {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+tracks-menu {
+  line-height: 10vh;
+}
 .sidr {
   display: none;
   position: absolute;
@@ -7684,18 +7688,18 @@ label {
   top: 5vh;
   max-height: 90vh;
   z-index: 1000;
-  min-width: 25vw;
-  max-width: 25vw;
+  min-width: 18vw;
+  max-width: 18vw;
   overflow-x: none;
   overflow-y: auto;
 }
 .sidr.right {
   left: auto;
-  right: -25vw;
+  right: -18vw;
   height: 100%;
 }
 .sidr.left {
-  left: -25vw;
+  left: -18vw;
   right: auto;
   height: 100%;
 }
@@ -7722,8 +7726,6 @@ label {
   z-index: 1000;
   font-family: "Superclarendon";
   text-decoration: none;
-  border-top-left-radius: 2vmin;
-  border-bottom-left-radius: 2vmin;
   padding-left: 0.5vw;
 }
 .left-menu-button:hover,

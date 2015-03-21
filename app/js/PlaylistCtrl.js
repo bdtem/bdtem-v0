@@ -20,22 +20,7 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter',
         });
 
 
-        $scope.songs = [
-            { src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'},
-            { src: '../audio/02_Hesitating_Sun.mp3', type: 'audio/mpeg'},
-            { src: '../audio/03_Future_Is_Bleaker.mp3', type: 'audio/mpeg'},
-            { src: '../audio/04_Sad_To_Feel_The_Same.mp3', type: 'audio/mpeg'},
-            { src: '../audio/05_Sit_On_A_Dream.mp3', type: 'audio/mpeg'},
-            { src: '../audio/06_Digging_Out.mp3', type: 'audio/mpeg'},
-            { src: '../audio/07_The_Debate.mp3', type: 'audio/mpeg'},
-            { src: '../audio/08_Working_At_First.mp3', type: 'audio/mpeg'},
-            { src: '../audio/09_Tried_To_Be.mp3', type: 'audio/mpeg'},
-            { src: '../audio/10_The_Basement.mp3', type: 'audio/mpeg'},
-            { src: '../audio/11_One_Level_At_A_Time.mp3', type: 'audio/mpeg'},
-            { src: '../audio/12_Every_Sound_In_A_Row.mp3', type: 'audio/mpeg'},
-            { src: '../audio/13_The_End.mp3', type: 'audio/mpeg'}
-        ];
-
+        $scope.songs = Metadata;
         $scope.metadata = Metadata;
 
 

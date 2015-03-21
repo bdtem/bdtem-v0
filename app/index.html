@@ -92,82 +92,20 @@
 ||<br/>
 </left>
 
-<nav id="menu-container" >
+<nav id="menu-container">
 
     <div id="tracks-menu" class="sidr middle-main" ng-controller="MiddleCtrl as middle">
+            <a class="bdtem-track{{$index}}" ng-repeat="track in tracks" ng-click="skipToTrack($index - 1)">
+                {{track.title}}        <br/>
 
-        <div class="">
-            <div class="words">
-                <div
-                     style="border-top-style: solid; border-top-width: 2px; border-top-color:#ffffff; padding-top: 5px;">
-                    <span class="bdtem-track1 stretched" style="letter-spacing:5px">IF ALL THAT WAS SAID</span><br/>
-                    <span class="bdtem-track1 stretched" style="letter-spacing:3px">ABOUT <em>THOSE THAT ARE DEAD</em></span><br/>
-                    <span class="bdtem-track6 stretched" style="letter-spacing:5px">WAS COMPILED IN A BOOK</span><br/>
-                    <span class="bdtem-track6 stretched" style="letter-spacing:5px"> AND LEFT IN A NOOK</span><br/>
-                    <span class="bdtem-track12 stretched" >I'D BE HAPPY TO READ</span><br/>
-                    <span class="bdtem-track12 stretched" >OF HARROWING DEEDS</span><br/>
-                    <span class="bdtem-track12 stretched" style="letter-spacing:.5px">BUT I'D LIKE NOT TO KNOW THE ENDING</span>
-                </div>
-            </div>
-
-            <div class="words" style="letter-spacing: .6px">
-                <div  style="line-height: 3vmin;">
-                    <a class="bdtem-track2" ng-click="skipToTrack(1)">HESITATING SUN</a>
-
-                    <div class="small-crest">&#xe801;</div>
-
-                    <a class="bdtem-track3" ng-click="skipToTrack(2)">FUTURE IS BLEAKER</a><br/>
-                   <span style="padding-right:3px">
-                       <a class="bdtem-track4" ng-click="skipToTrack(3)">FEEL THE SAME</a>
-                   </span>
-
-                    <div class="small-crest">&#xe801;</div>
-                    <span style="padding-left: 3px">
-                        <a class="bdtem-track5" ng-click="skipToTrack(4)">SIT ON A DREAM</a>
-                    </span><br/>
-                    <a class="bdtem-track7" ng-click="skipToTrack(6)">THE DEBATE</a>
-
-                    <div class="small-crest">&#xe801;</div>
-                    <a class="bdtem-track8" ng-click="skipToTrack(7)">WORKING AT FIRST</a><br/>
-                    <a class="bdtem-track9" ng-click="skipToTrack(8)">TRIED TO BE</a>
-
-                    <div class="small-crest">&#xe801;</div>
-                    <a class="bdtem-track10" ng-click="skipToTrack(9)">THE BASEMENT</a><br/>
-                    <a class="bdtem-track11" ng-click="skipToTrack(10)">ONE LEVEL AT A TIME</a><br/>
-                    <a class="bdtem-track13" ng-click="skipToTrack(12)">THE END</a><br/><br/>
-
-                    <img src="images/SmallerScrollsTransBetter.png" style="max-width: 12vh; max-height: 7vw"/>
-
-                    <br/>
-                    <a class="pull-left" ng-click="skipToTrack(0)">PLAY ALL</a>
-
-                    <a class="pull-right" href="audio/bdtem.zip">DOWNLOAD</a>
-                </div>
-            </div>
-
-            <div class="words-end">
-                <div class="col-md-12"><span style="letter-spacing: 5px"><em>DEY CO. / DEY IND.</em></span><br/>
-                    <span style="letter-spacing: 15px"><strong>PRESENTS</strong></span><br/>
-                    <span style="letter-spacing: 2px">BOB DEY'S TANK ENGINE MAN</span>
-                </div>
-            </div>
-            <br/><br/><br/>
-            <div class="words-bottom">
-                <span style="letter-spacing: 15px;"><em>BEFORE LIFE</em></span><br/>
-                <span style="letter-spacing: 13px;"><em>AFTER DEATH</em></span>
-            </div>
-        </div>
-
-
+            </a>
     </div>
 
 </nav>
 
 
 <div>
-
     <ui-view></ui-view>
-
 </div>
 
 
