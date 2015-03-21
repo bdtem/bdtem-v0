@@ -10,12 +10,7 @@ bdtem.value('Metadata',
             "title": "Funeral March",
             "description": "Included for the purposes of mood.  A peaceful place.  Like a Grave at evening time.",
             "catalog": "Ah. 1, No. 1",
-            src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg',
-            action: {
-                method: function () {
-                    $scope.$parent.skipToTrack(1);
-                }
-            }
+            src: '../audio/01_Funeral_March.mp3', type: 'audio/mpeg'
         },
         {
             "title": "Hesitating Sun",

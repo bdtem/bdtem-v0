@@ -96,39 +96,15 @@
 
     <div id="tracks-menu" class="sidr middle-main" ng-controller="MiddleCtrl as middle">
             <a class="bdtem-track{{$index}}" ng-repeat="track in tracks" ng-click="skipToTrack($index - 1)">
-                {{track.title}}        <br/>
-
+                {{track.title}}<br/>
             </a>
     </div>
 
 </nav>
 
-
 <div>
     <ui-view></ui-view>
 </div>
-
-
-    <!--<div class="middle-video-container" ng-controller="VideoCtrl as controller">-->
-        <!--<videogular vg-player-ready="controller.onPlayerReady" class="middle-video" vg-theme="controller.config.theme">-->
-            <!--<vg-video vg-src="controller.config.sources"-->
-                      <!--vg-tracks="controller.config.tracks">-->
-            <!--</vg-video>-->
-
-            <!--<vg-overlay-play></vg-overlay-play>-->
-            <!--<vg-poster-image vg-url='controller.config.plugins.poster'></vg-poster-image>-->
-
-            <!--<vg-controls vg-autohide="true" vg-autohide-time="500">-->
-                <!--<div class="pull-right pad-right">-->
-                    <!--<vg-volume>-->
-                        <!--<vg-mutebutton></vg-mutebutton>-->
-                        <!--<vg-volumebar></vg-volumebar>-->
-                    <!--</vg-volume>-->
-                <!--</div>-->
-            <!--</vg-controls>-->
-
-        <!--</videogular>-->
-    <!--</div>-->
 
 <nav id="podcasts-container" >
 

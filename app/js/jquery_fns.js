@@ -53,10 +53,8 @@ $(document).ready(function () {
     var tracksMenuToggle = $('#tracks-menu-toggle');
     var leftWords = $('#left-menu-words');
 
-
-
-    var animateLeftIn = function () {
-        tracksMenuToggle.animate(
+    function animateIn (selector) {
+        selector.animate(
             {
                 'letter-spacing': '0.01vw',
                 'padding-right': 0,
@@ -64,15 +62,15 @@ $(document).ready(function () {
                 'width': '3.25vw'
             },
             500, 0, 0);
-    };
+    }
 
-    var animateLeftOut = function () {
-        tracksMenuToggle.animate(
+    function animateOut (selector) {
+        selector.animate(
             {
                 'letter-spacing': '1.5vw',
                 'margin': '0.1w'},
             500, 0, 0);
-    };
+    }
 
     tracksMenuToggle.sidr({
         name: 'tracks-menu',
@@ -83,13 +81,13 @@ $(document).ready(function () {
         onOpen: function () {
             stretchTheText();
             tracksMenuToggle.addClass(ROTATE_CLASS);
-            animateLeftIn();
+            animateIn(tracksMenuToggle);
             leftWords.removeClass('left-menu-words');
             leftWords.css({display: 'none'});
         },
         onClose: function () {
             tracksMenuToggle.removeClass(ROTATE_CLASS);
-            animateLeftOut();
+            animateOut(tracksMenuToggle);
             leftWords.addClass('left-menu-words');
             leftWords.css({display: 'inline'});
         },
@@ -97,29 +95,8 @@ $(document).ready(function () {
         body: 'left'
     });
 
-
     var podcastMenuToggle = $('#podcast-menu-toggle');
     var rightWords = $('.right-menu-words');
-
-
-    var animateRightIn = function () {
-        podcastMenuToggle.animate(
-            {
-                'letter-spacing': '0.01vw',
-                'padding-right': 0,
-                'margin': 0,
-                'width': '3.25vw'
-            },
-            500, 0, 0);
-    };
-
-    var animateRightOut = function () {
-        podcastMenuToggle.animate(
-            {
-                'letter-spacing': '1.5vw',
-                'margin': '0.1w'},
-            500, 0, 0);
-    };
 
 
     podcastMenuToggle.sidr({
@@ -130,7 +107,7 @@ $(document).ready(function () {
         displace: true,
         onOpen: function () {
             podcastMenuToggle.addClass(ROTATE_CLASS);
-            animateRightIn();
+            animateIn(podcastMenuToggle);
             rightWords.removeClass('right-menu-words');
             rightWords.css({display: 'none'});
         },
@@ -138,7 +115,7 @@ $(document).ready(function () {
             podcastMenuToggle.removeClass(ROTATE_CLASS);
 //            podcastMenuToggle.addClass('menu-spaced');
 
-            animateRightOut();
+            animateOut(podcastMenuToggle);
 
 //            rightWords.addClass('right-menu-words');
             rightWords.css({display: 'inline'});
@@ -148,8 +125,8 @@ $(document).ready(function () {
     });
 
 
-    animateLeftOut();
-    animateRightOut();
+    animateOut(podcastMenuToggle);
+    animateOut(tracksMenuToggle);
 });
 
 $(window).resize(function () {
