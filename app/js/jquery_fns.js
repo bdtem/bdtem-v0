@@ -4,11 +4,8 @@
 
 $.fn.stretch_text = function () {
     var element = $(this);
-<<<<<<< HEAD
-        var container_width = element.parent().width();
-=======
     var container_width = element.parent().width();
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
+
 
     var element_width = element.width();
 
@@ -55,8 +52,7 @@ $(document).ready(function () {
     positionTheVolumeBar();
 
     var tracksMenuToggle = $('#tracks-menu-toggle');
-<<<<<<< HEAD
-=======
+
     var leftWords = $('#left-menu-words');
 
 
@@ -80,39 +76,42 @@ $(document).ready(function () {
             500, 0, 0);
     };
 
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
     tracksMenuToggle.sidr({
         name: 'tracks-menu',
         speed: 200,
         side: 'left',
         source: null,
         displace: true,
-<<<<<<< HEAD
-        onOpen: function () {stretchTheText(); tracksMenuToggle.addClass(ROTATE_CLASS);},
-        onClose: function () {tracksMenuToggle.removeClass(ROTATE_CLASS);},
-=======
         onOpen: function () {
             stretchTheText();
             tracksMenuToggle.addClass(ROTATE_CLASS);
+            // var screenSize=window.innerWidth;
+            // if (screenSize > 640){
+            //     animateLeftIn();
+            // }
             animateLeftIn();
             leftWords.removeClass('left-menu-words');
             leftWords.css({display: 'none'});
+            $(".right-menu-button").fadeOut("slow");
+            $(".circle_container").fadeOut("slow");
         },
         onClose: function () {
             tracksMenuToggle.removeClass(ROTATE_CLASS);
-            animateLeftOut();
+            var screenSize=window.innerWidth;
+            if (screenSize > 640){
+                animateLeftOut();
+            }
             leftWords.addClass('left-menu-words');
             leftWords.css({display: 'inline'});
+            $(".right-menu-button").fadeIn("slow");
+            $(".circle_container").fadeIn("slow");
         },
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
         renaming: true,
         body: 'left'
     });
 
 
     var podcastMenuToggle = $('#podcast-menu-toggle');
-<<<<<<< HEAD
-=======
     var rightWords = $('.right-menu-words');
 
 
@@ -135,45 +134,62 @@ $(document).ready(function () {
             500, 0, 0);
     };
 
-
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
     podcastMenuToggle.sidr({
         name: 'podcast-menu',
         speed: 200,
         side: 'right',
         source: null,
         displace: true,
-<<<<<<< HEAD
-        onOpen: function () {podcastMenuToggle.addClass(ROTATE_CLASS);},
-        onClose: function () {podcastMenuToggle.removeClass(ROTATE_CLASS);},
-=======
         onOpen: function () {
             podcastMenuToggle.addClass(ROTATE_CLASS);
             animateRightIn();
             rightWords.removeClass('right-menu-words');
             rightWords.css({display: 'none'});
+            $(".left-menu-button").fadeOut("slow");
+            $(".circle_container").fadeOut("slow");
         },
         onClose: function () {
             podcastMenuToggle.removeClass(ROTATE_CLASS);
 //            podcastMenuToggle.addClass('menu-spaced');
 
-            animateRightOut();
+            var screenSize=window.innerWidth;
+            if (screenSize > 640){
+                animateRightOut();
+            }
 
 //            rightWords.addClass('right-menu-words');
             rightWords.css({display: 'inline'});
+            $(".left-menu-button").fadeIn("slow");
+            $(".circle_container").fadeIn("slow");
         },
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
         renaming: true,
         body: 'right'
     });
 
+    var screenSize=window.innerWidth;
+    if (screenSize > 640){
+        animateLeftOut();
+        animateRightOut();
+    }
 
-<<<<<<< HEAD
 
-=======
-    animateLeftOut();
-    animateRightOut();
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
+    var $elie = $(".circle_container"), degree = 0, timer;
+    rotate();
+    function rotate() {
+
+        $elie.css({ WebkitTransform: 'rotate(' + degree + 'deg)'});
+        $elie.css({ '-moz-transform': 'rotate(' + degree + 'deg)'});
+        timer = setTimeout(function() {
+            ++degree; rotate();
+        },30);
+    }
+
+    $("input").toggle(function() {
+        clearTimeout(timer);
+    }, function() {
+        rotate();
+    });
+
 });
 
 $(window).resize(function () {

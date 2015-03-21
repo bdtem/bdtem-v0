@@ -66,11 +66,6 @@
 
     <nav class="centered navbar navbar-default navbar-fixed-top" role="navigation"
          ng-controller="ButtonsCtrl as buttonsController">
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
         <div class="centered btn-group" ng-repeat="button in buttons">
 
             <button
@@ -92,34 +87,20 @@
 </div>
 
 
-<<<<<<< HEAD
-<left href="#" class="fa left-menu-button superclarendon" id="tracks-menu-toggle">
-=======
 <left href="#" class="fa left-menu-button menu-spaced superclarendon" id="tracks-menu-toggle">
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 ||<br/>
 ||||<br/>
 |||||||<br/>
 ||||||||||<br/>
-<<<<<<< HEAD
-Album<br/>
-=======
-<left-words class="left-menu-words" id="left-menu-words">Album<br/></left-words>
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
+<left-words class="left-menu-words" id="left-menu-words">Album&nbsp;<br/></left-words>
 ||||||||||<br/>
 |||||||<br/>
 ||||<br/>
 ||<br/>
 </left>
-<<<<<<< HEAD
+
 
 <nav id="menu-container" >
-
-=======
-
-<nav id="menu-container" >
-
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
     <div id="tracks-menu" class="sidr middle-main" ng-controller="MiddleCtrl as middle">
 
         <div class="">
@@ -210,25 +191,13 @@ Album<br/>
         </videogular>
     </div>
 
-<<<<<<< HEAD
-    <div class="inner-two container">
+    <div class="inner-two circle_container">
         <div class="inner-two">
             <div class="inner-two">
                 <div class="inner-two">
                     <div class="inner-two">
                         <div class="inner-two">
-                            <div class="transport-bar">
-                                <div class="btn buttonz" ng-click="prevTrack()">
-                                    &#xe807;
-                                </div>
-                                <div class="btn btn_play" ng-click="bdtemPlayPause()">
-                                    <i class="fa fa-play"
-                                       ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
-                                </div>
-                                <div class="btn buttonz" ng-click="nextTrack()">
-                                    &#xe802;
-                                </div>
-                            </div>
+                            <p>I am A Vinyl Record</p>
                         </div>
                     </div>
                 </div>
@@ -236,8 +205,6 @@ Album<br/>
         </div>
     </div>
 
-=======
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
 <nav id="podcasts-container" >
 
     <div id="podcast-menu" class="sidr middle-main" >
@@ -257,20 +224,13 @@ Album<br/>
     </div>
     </nav>
 
-<<<<<<< HEAD
-<right href="#" class="fa right-menu-button pull-right righted" id="podcast-menu-toggle">
-=======
+
 <right class="fa right-menu-button menu-spaced pull-right righted" id="podcast-menu-toggle">
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
     ||<br/>
     ||||<br/>
     |||||||<br/>
     ||||||||||<br/>
-<<<<<<< HEAD
-    Podcast<br/>
-=======
     <right-words class="right-menu-words" id="right-menu-words">Podcast<br/></right-words>
->>>>>>> 54938b80031f8a4b6e465b6251c5cf99e82e6e32
     ||||||||||<br/>
     |||||||<br/>
     ||||<br/>
@@ -318,6 +278,18 @@ Album<br/>
                        max='1' step='0.01' type='range' ng-model='volume'/>
             </div>
 
+        </div>
+        <div class="mini-transport-bar">
+            <div class="btn buttonz" ng-click="prevTrack()">
+                &#xe807;
+            </div>
+            <div class="btn btn_play" ng-click="bdtemPlayPause()">
+                <i class="fa fa-play"
+                   ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
+            </div>
+            <div class="btn buttonz" ng-click="nextTrack()">
+                &#xe802;
+            </div>
         </div>
     </div>
 </nav>
