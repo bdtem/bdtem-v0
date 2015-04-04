@@ -220,7 +220,7 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, Me
 
  bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, Metadata, playerService, $timeout) {
      var player = playerService.getPlayer();
-     setMetadata(0);
+     setMetadata(player ? (player.currentTrack - 1) : 0);
 
      function setMetadata(track) {
         $scope.metadata = Metadata[track];
