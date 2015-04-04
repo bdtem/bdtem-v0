@@ -7713,6 +7713,7 @@ label {
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
+  cursor: pointer;
   text-decoration: none;
 }
 .menu-button:hover,
@@ -7729,6 +7730,7 @@ label {
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
+  cursor: pointer;
   text-decoration: none;
   padding-left: 0.5vw;
 }
@@ -7757,6 +7759,7 @@ right-words {
   top: 40vh;
   z-index: 1000;
   font-family: "Superclarendon";
+  cursor: pointer;
   text-decoration: none;
   float: right;
   right: 0vw;
