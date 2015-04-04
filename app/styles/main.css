@@ -7705,6 +7705,7 @@ label {
   left: -18vw;
   right: auto;
   height: 100%;
+  padding-right: 2vw  ;
 }
 .menu-button {
   position: absolute;
