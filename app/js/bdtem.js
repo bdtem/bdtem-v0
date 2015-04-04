@@ -68,13 +68,13 @@ bdtem.service('playerService', function ($rootScope) {
 
             var highlightedTrackId = idWildcard + trackToHighlight;
 
-            var $tracks = $("[class^='" + idWildcard + "']");
+            var $tracks = $(".track-menu-entry");
 
             var generatedColor = randomColor();
 
             $tracks.each(function () {
                 var trackName = $(this);
-                var id = this.classList.contains(highlightedTrackId);
+                var id = this.id === highlightedTrackId;
 
                 /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
                 trackName.css({color: id ? generatedColor : "#000000"});
@@ -83,7 +83,7 @@ bdtem.service('playerService', function ($rootScope) {
         skipToTrack: function (index) {
 
             //Because angular media player is dumb and 1-based. Remove this correction after changing to videogular.
-            bdtemplayer.play(index + 1, true);
+            bdtemplayer.play(index, true);
 
 
             bdtemplayer.load(true);

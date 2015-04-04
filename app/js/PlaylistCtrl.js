@@ -14,7 +14,7 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter',
         };
 
         $scope.$watch('volume', function (newValue) {
-            if (player && newValue && isNumber(newValue)) {
+            if (player && newValue && !isNaN(newValue)) {
                 player.setVolume(newValue);
             }
         });
@@ -144,12 +144,21 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter',
                 videoAPI.pause();
             }
 
+
+            //Because angular-media-player is 1 based...
             var previousTrack = player.currentTrack - 2;
+
+            console.log("previous to: " + previousTrack)
+
+
             if(previousTrack >= 0) {
                 player.prev(true);
                 $rootScope.$broadcast('trackChange', previousTrack);
                 playerService.setTrackHighlighting(previousTrack);
             }
+
+            console.log("now playing " + player.currentTrack)
+
         };
 
         $scope.nextTrack = function () {
@@ -158,12 +167,19 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter',
                 videoAPI.pause();
             }
 
+            //Because angular-media player is 1 based...
             var nextTrack = player.currentTrack;
+
+            console.log("next track to " + nextTrack)
+
             if (nextTrack < $scope.songs.length) {
                 player.next(true);
                 $rootScope.$broadcast('trackChange', nextTrack);
                 playerService.setTrackHighlighting(nextTrack);
             }
+
+            console.log("now playing " + player.currentTrack)
+
         };
 
         $scope.bdtemPlayPause = function () {
