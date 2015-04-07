@@ -1,5 +1,5 @@
-bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
-    function PlaylistCtrl(Metadata, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
+bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
+    function PlaylistCtrl(AlbumTracks, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
 
         var player;
         var volume = 1;
@@ -20,8 +20,8 @@ bdtem.controller('PlaylistCtrl', ['Metadata', '$rootScope', '$scope', '$filter',
         });
 
 
-        $scope.songs = Metadata;
-        $scope.metadata = Metadata;
+        $scope.songs = AlbumTracks;
+        $scope.metadata = AlbumTracks;
 
 
         $scope.__defineGetter__('player', function () {

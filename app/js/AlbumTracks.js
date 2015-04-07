@@ -1,4 +1,4 @@
-bdtem.value('Metadata',
+bdtem.value('AlbumTracks',
     [
         {
             "title": "Funeral March",

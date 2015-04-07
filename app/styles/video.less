@@ -1,8 +1,6 @@
 @import "variables";
 
 .middle-video-container {
-
-
   max-height: 80vh;
   max-width: 55vw;
   padding-bottom: @navbar-height;
@@ -15,12 +13,6 @@
 
   vertical-align: middle;
 
-}
-
-videogular {
-  max-width: 55vw;
-  max-height: 80vh;
-  margin: auto;
 }
 
 @keyframes play {
@@ -44,26 +36,18 @@ videogular {
   }
 }
 
-.videogular-poster-img-container {
-  min-width: 570px;
-  max-width: 960px;
-  min-height: 40vh;
-  max-height: 70vh;
-  background-color: @background;
-
-  text-align: center;
-  align-content: center;
-  align-items: center;
-  align-self: center;
+ui-view {
+  display: block;
+  margin: auto;
 }
 
-.videogular-poster-img {
+.orb {
 
   align-items: center;
   align-self: center;
   text-align: center;
 
-  display: inline-block;
+  display: block;
   margin: 0 auto;
 
   min-width: 570px;
@@ -72,8 +56,15 @@ videogular {
   min-height: 540px;
   max-height: 540px;
 
-  background: url('http://couleurs.na.tl/rick/spriteSheetTransparent.png');
-  filter: brightness(1.5);
+  background: url('http://couleurs.na.tl/rick/spriteSheet77.png');
+
+  -webkit-filter: invert() blur(2px) brightness(1.45);
+  -moz-filter: invert() blur(2px) brightness(1.45);
+  -o-filter: invert() blur(2px) brightness(1.45);
+  -ms-filter: invert() blur(2px) brightness(1.45);
+  filter: invert() blur(2px) brightness(1.45);
+
+
   animation: play 7s steps(55) infinite;
   -webkit-animation: play 7s steps(55) infinite; /* Safari 4+ */
   -moz-animation: play 7s steps(55, end) infinite; /* Fx 5+ */

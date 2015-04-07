@@ -7,8 +7,6 @@ var bdtem = angular.module('bdtem', [
     "ui.router",
     "com.2fdevs.videogular",
     "com.2fdevs.videogular.plugins.controls",
-    "com.2fdevs.videogular.plugins.overlayplay",
-    "com.2fdevs.videogular.plugins.poster"
 ]);
 
 
@@ -16,11 +14,13 @@ var bdtem = angular.module('bdtem', [
  bdtem.config(['$stateProvider', '$urlRouterProvider',
      function($stateProvider, $urlRouterProvider) {
 
-        // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/");
-        //
-        // Now set up the states
+
         $stateProvider
+            .state('orb', {
+                url: "/",
+                templateUrl: "templates/orb.html"
+            })
             .state('video', {
                 url: "/",
                 templateUrl: "templates/video.html"
@@ -52,32 +52,48 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
             "");
 }]);
 
-bdtem.service('playerService', function ($rootScope) {
-    var bdtemplayer;
+bdtem.service('playerService', function ($rootScope, AlbumTracks, PodcastEpisodes) {
+    const ALBUM = "ALBUM";
+    const PODCAST = "PODCAST";
 
-    var idWildcard = "bdtem-track";
+    const ID_WILDCARD = "bdtem-track";
+
+    var bdtemplayer;
+    var PLAYING = ALBUM;
+
+    var tracks = {
+        "ALBUM": AlbumTracks,
+        "PODCAST": PodcastEpisodes
+    };
 
     return {
+        playAlbum: function() {
+            PLAYING = ALBUM;
+        },
+        playPodcast: function () {
+            PLAYING = PODCAST;
+        },
         getPlayer: function () {
             return bdtemplayer;
         },
         setPlayer: function (player) {
             bdtemplayer = player;
         },
-        setTrackHighlighting: function (trackToHighlight) {
+        getMetadata: function() {
 
-            var highlightedTrackId = idWildcard + trackToHighlight;
+
+
+        },
+
+        setTrackHighlighting: function (trackToHighlight) {
+            var highlightedTrackId = ID_WILDCARD + trackToHighlight;
 
             var $tracks = $(".track-menu-entry");
 
-            var generatedColor = randomColor();
-
             $tracks.each(function () {
                 var trackName = $(this);
-                var id = this.id === highlightedTrackId;
-
                 /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
-                trackName.css({color: id ? generatedColor : "#000000"});
+                trackName.css({color: (this.id === highlightedTrackId) ? randomColor() : "#000000"});
             });
         },
         skipToTrack: function (index) {
@@ -112,6 +128,14 @@ bdtem.service('videoService', function () {
             return (videoAPI && videoAPI.currentState === PLAY);
         }
     };
+});
+
+bdtem.controller("OrbCtrl", function($scope, $state) {
+
+    $scope.startVideo = function () {
+        $state.go("video");
+    }
+
 });
 
 bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
@@ -171,61 +195,28 @@ function randomColor () {
 }
 
 
-bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService) {
 
-    var controller = this;
-    controller.API = null;
+bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, AlbumTracks) {
 
-    controller.onPlayerReady = function (API) {
-        controller.API = API;
-        videoService.setVideoAPI(API);
-    };
-
-    $scope.customClickOverlayPlay = function () {
-        playerService.getPlayer().pause();
-        controller.API.playPause();
-    };
-
-    controller.config = {
-        sources: [
-            {src: $sce.trustAsResourceUrl("../video/about.mp4"), type: "video/mp4"}
-        ],
-        tracks: [
-            {
-            }
-        ],
-        theme: "styles/videogular.css",
-        plugins: {
-            poster: "http://couleurs.na.tl/rick/spriteSheet77.png"
-        }
-    };
-
-
-});
-
-bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, Metadata) {
-
-    $scope.tracks = Metadata;
+    $scope.tracks = AlbumTracks;
 
     $scope.skipToTrack = function (index) {
         videoService.getVideoAPI().pause();
 
-
-        console.log("skip to " + index)
         playerService.skipToTrack(index);
     };
 
 });
 
 
- bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, Metadata, playerService, $timeout) {
+ bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, AlbumTracks, playerService, $timeout) {
      var player = playerService.getPlayer();
      setMetadata(player ? (player.currentTrack - 1) : 0);
 
      $scope.duration = player.currentDuration | 0;
 
      function setMetadata(track) {
-        $scope.metadata = Metadata[track];
+        $scope.metadata = AlbumTracks[track];
 
         $timeout(function () {$scope.duration = player.duration | 0}, 99);
     }

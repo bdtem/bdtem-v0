@@ -1,20 +1,29 @@
-<div class="middle-video-container" ng-controller="VideoCtrl as controller">
-    <videogular vg-player-ready="controller.onPlayerReady" class="middle-video" vg-theme="controller.config.theme">
-        <vg-video vg-src="controller.config.sources"
+<div class="videogular-container middle-video-container" ng-controller="VideoCtrl as controller">
+
+    <videogular vg-player-ready="controller.onPlayerReady($API)"
+                vg-update-state="controller.onPlayerStateChange($state)"
+                vg-theme="controller.config.theme.url">
+
+        <vg-media vg-src="controller.config.sources"
                   vg-tracks="controller.config.tracks">
-        </vg-video>
+        </vg-media>
 
-        <vg-overlay-play></vg-overlay-play>
-        <vg-poster-image vg-url='controller.config.plugins.poster'></vg-poster-image>
-
-        <vg-controls vg-autohide="true" vg-autohide-time="500">
-            <div class="pull-right pad-right">
-                <vg-volume>
-                    <vg-mutebutton></vg-mutebutton>
-                    <vg-volumebar></vg-volumebar>
-                </vg-volume>
-            </div>
+        <vg-controls vg-autohide="controller.config.plugins.controls.autoHide"
+                     vg-autohide-time="controller.config.plugins.controls.autoHideTime">
+            <vg-play-pause-button onClickPlayPause="controller.customClickOverlayPlay"></vg-play-pause-button>
+            <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+            <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            </vg-scrub-bar>
+            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+            <vg-time-display>{{ totalTime | date:'mm:ss' }}</vg-time-display>
+            <vg-volume>
+                <vg-mute-button></vg-mute-button>
+                <vg-volume-bar></vg-volume-bar>
+            </vg-volume>
+            <vg-fullscreen-button></vg-fullscreen-button>
         </vg-controls>
 
     </videogular>
+
 </div>
