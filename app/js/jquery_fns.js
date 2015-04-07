@@ -2,32 +2,6 @@
  * Created by abl on 10/12/14.
  */
 
-$.fn.stretch_text = function () {
-    var element = $(this);
-    var container_width = element.parent().width();
-
-    var element_width = element.width();
-
-    var nb_char = element.text().length;
-
-    var spacing = container_width / nb_char;
-
-    if (element_width <= container_width) {
-
-        var char_width = element_width / nb_char,
-            ltr_spacing = spacing - char_width + (spacing - char_width) / nb_char;
-
-        element.css({'letter-spacing': ltr_spacing});
-    }
-};
-
-function stretchTheText() {
-    var $stretched = $('.stretched');
-
-    $stretched.each(function () {
-        $(this).stretch_text();
-    });
-}
 
 var positionTheVolumeBar = function () {
     var volumeToggle = $('#volumeToggle');
@@ -61,7 +35,7 @@ $(document).ready(function () {
                 'margin': 0,
                 'width': '3.25vw'
             },
-            500, 0, 0);
+            300, 0, 0);
     }
 
     function animateOut (selector) {
@@ -79,9 +53,8 @@ $(document).ready(function () {
         source: null,
         displace: true,
         onOpen: function () {
-            stretchTheText();
-            tracksMenuToggle.addClass(ROTATE_CLASS);
             animateIn(tracksMenuToggle);
+            tracksMenuToggle.addClass(ROTATE_CLASS);
             leftWords.removeClass('left-menu-words');
             leftWords.css({display: 'none'});
         },

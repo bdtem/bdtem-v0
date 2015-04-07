@@ -7450,10 +7450,17 @@ html,
 body {
   height: 90%;
   max-height: 90%;
+  font-size: 2vmin;
+}
+h3 {
+  margin: 0;
+}
+h4 {
+  margin: 0;
 }
 body {
   background-color: #ffffff;
-  font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
+  font-family: "Libre Baskerville", serif;
 }
 .media-body {
   background-color: #ffffff;
@@ -7526,6 +7533,14 @@ label {
   max-width: 8%;
   max-height: 5%;
   z-index: 1030;
+}
+.sans-serif {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  color: #808080;
+}
+.bdtem-title {
+  letter-spacing: 0.75vw;
 }
 .small-crest {
   font: normal normal normal 14px/1 buttonz_bdtem;
@@ -7647,42 +7662,39 @@ label {
   padding-top: 10vh;
 }
 .words {
-  text-align: center;
+  font-size: 3vmin;
   color: #000000;
-  font-size: 1.8vmin;
-  font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
-  width: 53vmin;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #000000;
-  line-height: 3vmin;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.words-end {
-  font-size: 2vmin;
-  text-align: left;
-  color: #000000;
-  font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
-  width: 18vw;
-  line-height: 3vmin;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.words-bottom {
-  font-size: 2.3vmin;
-  text-align: center;
-  color: #000000;
-  font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
-  width: 18vw;
-  border-bottom: 2px solid #000000;
-  border-top: 2px solid #000000;
+  font-family: "Libre Baskerville", serif;
+  width: 21vw;
   margin-bottom: 3vh;
+}
+.words-left {
+  font-size: 3vmin;
+  color: #000000;
+  font-family: "Libre Baskerville", serif;
+  width: 21vw;
+  margin-bottom: 3vh;
+  text-align: left;
+}
+.words-right {
+  font-size: 3vmin;
+  color: #000000;
+  font-family: "Libre Baskerville", serif;
+  width: 21vw;
+  margin-bottom: 3vh;
+  text-align: right;
 }
 .track-menu-entry {
   text-align: right;
   align-self: right;
   align-content: right;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+.podcast-entry {
+  text-align: left;
+  align-self: left;
+  align-content: left;
 }
 .sidr {
   display: none;
@@ -7691,18 +7703,18 @@ label {
   top: 5vh;
   max-height: 90vh;
   z-index: 1000;
-  min-width: 18vw;
-  max-width: 18vw;
+  min-width: 21vw;
+  max-width: 21vw;
   overflow-x: none;
   overflow-y: auto;
 }
 .sidr.right {
   left: auto;
-  right: -18vw;
+  right: -21vw;
   height: 100%;
 }
 .sidr.left {
-  left: -18vw;
+  left: -21vw;
   right: auto;
   height: 100%;
   padding-right: 2vw  ;
@@ -7793,10 +7805,8 @@ right-words {
   max-height: 80vh;
   max-width: 55vw;
   padding-bottom: 5vh;
-  margin: 5vh auto;
-  align-content: center;
-  align-self: center;
-  align-items: center;
+  padding-top: 5vh;
+  margin: 0vh auto;
   vertical-align: middle;
 }
 @keyframes play {
@@ -7824,6 +7834,7 @@ ui-view {
   margin: auto;
 }
 .orb {
+  cursor: pointer;
   align-items: center;
   align-self: center;
   text-align: center;

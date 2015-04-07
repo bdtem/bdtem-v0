@@ -6,7 +6,7 @@ var bdtem = angular.module('bdtem', [
     "ngSanitize",
     "ui.router",
     "com.2fdevs.videogular",
-    "com.2fdevs.videogular.plugins.controls",
+    "com.2fdevs.videogular.plugins.controls"
 ]);
 
 
@@ -118,6 +118,11 @@ bdtem.service('videoService', function () {
     const STOP = "stop";
 
     return {
+        pause: function () {
+            if (videoAPI) {
+                videoAPI.pause();
+            }
+        },
         getVideoAPI: function () {
             return videoAPI;
         },
@@ -144,7 +149,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Contribute',
             glyph: '\ue803',
-            tooltip: 'Contribute',
+            tooltip: 'contribute',
             action: function () {
                 $modal.open({
                     templateUrl: 'templates/donate.html',
@@ -156,7 +161,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
         {
             purpose: 'Archive Updates',
             glyph: '\ue805',
-            tooltip: 'Archive Updates',
+            tooltip: 'updates',
             action: function () {
                 $modal.open({
                     templateUrl: 'templates/newsletter.html',
@@ -196,15 +201,20 @@ function randomColor () {
 
 
 
-bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, AlbumTracks) {
-
+bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, AlbumTracks, PodcastEpisodes) {
     $scope.tracks = AlbumTracks;
+    $scope.episodes = PodcastEpisodes;
 
     $scope.skipToTrack = function (index) {
-        videoService.getVideoAPI().pause();
+        videoService.pause();
 
         playerService.skipToTrack(index);
     };
+
+    $scope.skipToEpisode = function (episodeIndex) {
+
+    };
+
 
 });
 

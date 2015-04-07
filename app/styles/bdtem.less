@@ -8,6 +8,16 @@
   z-index: @zindex-navbar-fixed;
 }
 
+.sans-serif {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  color: lighten(@text-color, 50%);
+}
+
+.bdtem-title {
+  letter-spacing: 0.75vw;
+}
+
 .small-crest {
   .buttonz;
   font-size: 3vmin;
@@ -139,43 +149,21 @@
 }
 
 .words {
-  text-align: center;
+  font-size: 3vmin;
   color: @text-color;
-  font-size: 1.8vmin;
-  font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
-  width: 53vmin;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color:@text-color;
-  line-height: 3vmin;
-  padding-top:5px;
-  padding-bottom: 5px;
-
-}
-
-.words-end {
-  font-size: 2vmin;
-  text-align: left;
-  color: @text-color;
-  font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
+  font-family: "Libre Baskerville", serif;
   width: @sidr-width;
-  line-height: 3vmin;
-  padding-top:5px;
-  padding-bottom: 5px;
-}
-
-.words-bottom {
-  font-size: 2.3vmin;
-  text-align: center;
-  color: @text-color;
-  font-family: "Superclarendon", "Book Antiqua", "Palatino Linotype", serif;
-  width: @sidr-width;
-  border-bottom: 2px solid @text-color;
-  border-top: 2px solid @text-color;
-//  line-height: 4vmin;
-//  margin-top: 4vh;
   margin-bottom: 3vh;
+}
 
+.words-left {
+  .words;
+  text-align: left;
+}
+
+.words-right {
+  .words;
+  text-align: right;
 }
 
 .track-menu-entry {
@@ -183,4 +171,12 @@
   align-self: right;
   align-content: right;
 
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.podcast-entry {
+  text-align: left;
+  align-self: left;
+  align-content: left;
 }
