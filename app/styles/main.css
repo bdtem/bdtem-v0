@@ -7633,18 +7633,29 @@ label {
   .mini-transport-bar .btn_play {
     font-size: 6vw;
   }
+  .middle-main {
+    background: #000000;
+    max-width: 80%;
+    padding-top: 1vh;
+    padding-right: 0px;
+  }
+  .middle-main div div.words,
+  .middle-main div div.words-end,
+  .middle-main div div.words-bottom {
+    width: 100%;
+  }
 }
 @media screen and (min-width: 641px) {
   .inner-two,
   .mini-transport-bar {
     display: none;
   }
-}
-.middle-main {
-  background: #000000;
-  max-width: 33%;
-  padding-top: 1vh;
-  padding-right: 0px;
+  .middle-main {
+    background: #000000;
+    max-width: 33%;
+    padding-top: 1vh;
+    padding-right: 0px;
+  }
 }
 .pad-right {
   padding-right: 1vw;
@@ -7702,27 +7713,58 @@ label {
 .podcasts {
   padding-top: 10vh;
 }
-.sidr {
-  display: none;
-  position: absolute;
-  position: fixed;
-  top: 5vh;
-  max-height: 90vh;
-  z-index: 1000;
-  min-width: 25vw;
-  max-width: 25vw;
-  overflow-x: none;
-  overflow-y: auto;
+@media screen and (max-width: 640px) {
+  .sidr {
+    min-width: 80%;
+    max-width: 80%;
+  }
+  .sidr.right {
+    left: auto;
+    right: -25vw;
+    height: 100%;
+    float: right;
+    position: absolute;
+    top: 0;
+    display: none;
+  }
+  .sidr.left {
+    left: -25vw;
+    right: auto;
+    height: 100%;
+    float: left;
+    position: absolute;
+    top: 0;
+    display: none;
+  }
 }
-.sidr.right {
-  left: auto;
-  right: -25vw;
-  height: 100%;
-}
-.sidr.left {
-  left: -25vw;
-  right: auto;
-  height: 100%;
+@media screen and (min-width: 641px) {
+  .sidr {
+    display: none;
+    position: absolute;
+    position: fixed;
+    top: 5vh;
+    max-height: 90vh;
+    z-index: 1000;
+    min-width: 25vw;
+    max-width: 25vw;
+    overflow-x: none;
+    overflow-y: auto;
+  }
+  .sidr div.tracks,
+  .sidr div.poscasts {
+    position: absolute;
+    top: 69px;
+  }
+  .sidr.right {
+    left: auto;
+    right: -25vw;
+    height: 100%;
+  }
+  .sidr.left {
+    left: -25vw;
+    right: auto;
+    height: 100%;
+  }
 }
 .menu-button {
   position: absolute;

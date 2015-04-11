@@ -2,32 +2,67 @@
 
 @sidr-width: 25vw;
 @sidr-hide-width: -@sidr-width;
+@media screen and (max-width: 640px){
+    .sidr {
+      min-width: 80%;
+      max-width: 80%;
 
-.sidr {
-  display: none;
-  position: absolute;
-  position: fixed;
-  top: @navbar-height;
-  max-height: (100vh - 2*@navbar-height);
-  z-index: 1000;
+    }
+    .sidr.right {
+      left: auto;
+      right: @sidr-hide-width;
+      height: 100%;
+      float:right;
+      position: absolute;;
+      top: 0;
+      display: none;
+    }
+    .sidr.left {
+      left: @sidr-hide-width;
+      right: auto;
+      height: 100%;
+      float:left;
+      position: absolute;;
+      top: 0;
+      display: none;
+    }
+}
+@media screen and (min-width: 641px){
+  .sidr {
+    display: none;
+    position: absolute;
+    position: fixed;
+    top: @navbar-height;
+    max-height: (100vh - 2*@navbar-height);
+    z-index: 1000;
 
-  min-width: @sidr-width;
-  max-width: @sidr-width;
-  overflow-x: none;
-  overflow-y: auto;
+    min-width: @sidr-width;
+    max-width: @sidr-width;
+    overflow-x: none;
+    overflow-y: auto;
+    div{
+      &.tracks,&.poscasts{
+        position: absolute;
+        top: 69px;
+      }
+
+    }
+  }
+  .sidr.right {
+    left: auto;
+    right: @sidr-hide-width;
+    height: 100%;
+  }
+
+  .sidr.left {
+    left: @sidr-hide-width;
+    right: auto;
+    height: 100%;
+  }
 }
 
-.sidr.right {
-  left: auto;
-  right: @sidr-hide-width;
-  height: 100%;
-}
 
-.sidr.left {
-  left: @sidr-hide-width;
-  right: auto;
-  height: 100%;
-}
+
 
 
 .menu-button {
@@ -91,12 +126,6 @@ right-words {
 
   float: right;
   right: 0vw;
-
-// <<<<<<< HEAD
-//   border-top-left-radius: 10vmin;
-//   border-bottom-left-radius: 10vmin;
-//   padding-left: 1vw;
-// =======
   border-top-right-radius: 2vmin;
   border-bottom-right-radius: 2vmin;
   padding-right: 0.5vw;

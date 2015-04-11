@@ -63,7 +63,8 @@ $(document).ready(function () {
                 'letter-spacing': '0.01vw',
                 'padding-right': 0,
                 'margin': 0,
-                'width': '3.25vw'
+                'width': '3.25vw',
+                'left':'88%'
             },
             500, 0, 0);
     };
@@ -121,7 +122,8 @@ $(document).ready(function () {
                 'letter-spacing': '0.01vw',
                 'padding-right': 0,
                 'margin': 0,
-                'width': '3.25vw'
+                'width': '3.25vw',
+                'right':'88%'
             },
             500, 0, 0);
     };

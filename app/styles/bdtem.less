@@ -105,20 +105,34 @@
         font-size:6vw;
       }
     }
+    .middle-main {
+      background: @background;
+      max-width: 80%;
+      padding-top: 1vh;
+      padding-right: 0px;
+      div{
+        div{
+          &.words,&.words-end,&.words-bottom{
+            width:100%
+          }
+        }
+      }
+    }
 
 }
 @media screen and (min-width: 641px) {
     .inner-two,.mini-transport-bar{
         display: none;
     }
+    .middle-main {
+      background: @background;
+      max-width: 33%;
+      padding-top: 1vh;
+      padding-right: 0px;
+    }
 }
 
-.middle-main {
-  background: @background;
-  max-width: 33%;
-  padding-top: 1vh;
-  padding-right: 0px;
-}
+
 
 .pad-right {
   padding-right: 1vw;
