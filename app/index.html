@@ -98,7 +98,7 @@
 </div>
 
 
-<left href="#" class="fa left-menu-button menu-spaced superclarendon" id="tracks-menu-toggle">
+<left href="#" class="fa left-menu-button menu-spaced" id="tracks-menu-toggle">
     ||<br/>
     ||||<br/>
     |||||||<br/>
@@ -111,15 +111,18 @@
 </left>
 
 <nav id="menu-container">
+    <div id="tracks-menu" class="sidr" ng-controller="MiddleCtrl as middle">
 
-    <div id="tracks-menu" class="sidr middle-main" ng-controller="MiddleCtrl as middle">
-
-        <div class="words-left">
+        <div class="drawer-header-left">
             <b>MUSICAL<br/>
                 ARCHIVE<br/>
                 INTERPRETATION<br/></b>
         </div>
 
+        <div class="drawer-subheader-left">
+            BEFORE LIFE<br/>
+            AFTER DEATH
+        </div>
 
         <a id="bdtem-track{{$index}}" class="track-menu-entry" ng-repeat="track in tracks"
            ng-click="skipToTrack($index)">
@@ -134,18 +137,27 @@
 </div>
 
 <nav id="podcasts-container">
+    <div id="podcast-menu" ng-controller="MiddleCtrl as middle" class="sidr">
 
-    <div id="podcast-menu" ng-controller="MiddleCtrl as middle" class="sidr middle-main">
-        <div class="words-right">
+
+        <div class="drawer-header-right">
             <b>NARRATIVE<br/>
                 ARCHIVE<br/>
                 REENACTMENT<br/></b>
         </div>
 
-        <a id="podcast-episode{{$index}}" class="track-menu-entry" ng-repeat="episode in episodes"
+
+        <div class="drawer-subheader-right">
+            TALENT AND <br/>
+            MR. TALENT
+        </div>
+
+        <span id="podcast-episode{{$index}}"
+              ng-class="episode.src ? 'podcast-menu-entry' : 'podcast-menu-entry-inactive'"
+              ng-repeat="episode in episodes"
            ng-click="skipToEpisode($index)">
             {{episode.title | uppercase}}<br/>
-        </a>
+        </span>
 
     </div>
 </nav>

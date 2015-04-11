@@ -1,0 +1,89 @@
+@import "variables";
+@import "fonts";
+
+.drawer-subheader {
+  .sans-serif-light;
+  line-height: 2vh;
+
+}
+
+
+.drawer-subheader-left {
+  .drawer-subheader;
+
+  padding-bottom: 4vh;
+  align-self: right;
+//  align-content: center;
+  text-align: right;
+}
+
+.drawer-subheader-right {
+  .drawer-subheader;
+
+  padding-bottom: 6vh;
+  align-self: left;
+//  align-content: center;
+  text-align: left;
+}
+
+.drawer-header {
+  font-size: 2.75vmin;
+  color: @text-color;
+  font-family: "Libre Baskerville", serif;
+  width: @sidr-width;
+  margin-bottom: 3vh;
+}
+
+.drawer-header-left {
+  .drawer-header;
+  padding-left: 2vw;
+  text-align: left;
+}
+
+.drawer-header-right {
+  .drawer-header;
+
+  padding-right: 2vw;
+  text-align: right;
+}
+
+.menu-entry {
+  font-weight: 700;
+  letter-spacing: 0.15em;
+
+}
+
+.track-menu-entry {
+  .menu-entry;
+
+  text-align: right;
+  align-self: right;
+  align-content: right;
+
+  padding-left: 0.5vw;
+  line-height: 4.5vh;
+}
+
+.podcast-menu-entry {
+  .menu-entry;
+
+  text-align: left;
+  align-self: left;
+  align-content: left;
+
+  padding-left: 1.5vw;
+
+  line-height: 9vh;
+
+  font-size: 3vmin;
+  font-style: oblique;
+
+  cursor: pointer;
+}
+
+.podcast-menu-entry-inactive {
+  .podcast-menu-entry;
+
+  cursor: default;
+  color: lighten(@text-color, 50%);
+}

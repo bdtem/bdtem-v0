@@ -7527,17 +7527,17 @@ label {
     display: none;
   }
 }
+html,
+html a {
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
 .above-navbar {
   position: absolute;
   background: transparent;
   max-width: 8%;
   max-height: 5%;
   z-index: 1030;
-}
-.sans-serif {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 700;
-  color: #808080;
 }
 .bdtem-title {
   letter-spacing: 0.75vw;
@@ -7661,41 +7661,6 @@ label {
 .podcasts {
   padding-top: 10vh;
 }
-.words {
-  font-size: 3vmin;
-  color: #000000;
-  font-family: "Libre Baskerville", serif;
-  width: 21vw;
-  margin-bottom: 3vh;
-}
-.words-left {
-  font-size: 3vmin;
-  color: #000000;
-  font-family: "Libre Baskerville", serif;
-  width: 21vw;
-  margin-bottom: 3vh;
-  text-align: left;
-}
-.words-right {
-  font-size: 3vmin;
-  color: #000000;
-  font-family: "Libre Baskerville", serif;
-  width: 21vw;
-  margin-bottom: 3vh;
-  text-align: right;
-}
-.track-menu-entry {
-  text-align: right;
-  align-self: right;
-  align-content: right;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-}
-.podcast-entry {
-  text-align: left;
-  align-self: left;
-  align-content: left;
-}
 .sidr {
   display: none;
   position: absolute;
@@ -7703,18 +7668,18 @@ label {
   top: 5vh;
   max-height: 90vh;
   z-index: 1000;
-  min-width: 21vw;
-  max-width: 21vw;
-  overflow-x: none;
-  overflow-y: auto;
+  min-width: 23vw;
+  max-width: 23vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 .sidr.right {
   left: auto;
-  right: -21vw;
+  right: -23vw;
   height: 100%;
 }
 .sidr.left {
-  left: -21vw;
+  left: -23vw;
   right: auto;
   height: 100%;
   padding-right: 2vw  ;
@@ -7724,7 +7689,7 @@ label {
   display: inline;
   top: 40vh;
   z-index: 1000;
-  font-family: "Superclarendon";
+  font-family: "Libre Baskerville";
   cursor: pointer;
   text-decoration: none;
 }
@@ -7741,7 +7706,7 @@ label {
   display: inline;
   top: 40vh;
   z-index: 1000;
-  font-family: "Superclarendon";
+  font-family: "Libre Baskerville";
   cursor: pointer;
   text-decoration: none;
   padding-left: 0.5vw;
@@ -7751,13 +7716,7 @@ label {
   color: #000000;
   text-decoration: none;
 }
-left-words {
-  -webkit-transition: letter-spacing 1s;
-  -moz-transition: letter-spacing 1s;
-  -ms-transition: letter-spacing 1s;
-  -o-transition: letter-spacing 1s;
-  transition: letter-spacing 1s;
-}
+left-words,
 right-words {
   -webkit-transition: letter-spacing 1s;
   -moz-transition: letter-spacing 1s;
@@ -7770,7 +7729,7 @@ right-words {
   display: inline;
   top: 40vh;
   z-index: 1000;
-  font-family: "Superclarendon";
+  font-family: "Libre Baskerville";
   cursor: pointer;
   text-decoration: none;
   float: right;
@@ -7801,11 +7760,102 @@ right-words {
     content: 'bloop';
   }
 }
+.drawer-subheader {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  color: #808080;
+  font-weight: 100;
+  line-height: 2vh;
+}
+.drawer-subheader-left {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  color: #808080;
+  font-weight: 100;
+  line-height: 2vh;
+  padding-bottom: 4vh;
+  align-self: right;
+  text-align: right;
+}
+.drawer-subheader-right {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  color: #808080;
+  font-weight: 100;
+  line-height: 2vh;
+  padding-bottom: 6vh;
+  align-self: left;
+  text-align: left;
+}
+.drawer-header {
+  font-size: 2.75vmin;
+  color: #000000;
+  font-family: "Libre Baskerville", serif;
+  width: 23vw;
+  margin-bottom: 3vh;
+}
+.drawer-header-left {
+  font-size: 2.75vmin;
+  color: #000000;
+  font-family: "Libre Baskerville", serif;
+  width: 23vw;
+  margin-bottom: 3vh;
+  padding-left: 2vw;
+  text-align: left;
+}
+.drawer-header-right {
+  font-size: 2.75vmin;
+  color: #000000;
+  font-family: "Libre Baskerville", serif;
+  width: 23vw;
+  margin-bottom: 3vh;
+  padding-right: 2vw;
+  text-align: right;
+}
+.menu-entry {
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+.track-menu-entry {
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-align: right;
+  align-self: right;
+  align-content: right;
+  padding-left: 0.5vw;
+  line-height: 4.5vh;
+}
+.podcast-menu-entry {
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-align: left;
+  align-self: left;
+  align-content: left;
+  padding-left: 1.5vw;
+  line-height: 9vh;
+  font-size: 3vmin;
+  font-style: oblique;
+  cursor: pointer;
+}
+.podcast-menu-entry-inactive {
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-align: left;
+  align-self: left;
+  align-content: left;
+  padding-left: 1.5vw;
+  line-height: 9vh;
+  font-size: 3vmin;
+  font-style: oblique;
+  cursor: pointer;
+  cursor: default;
+  color: #808080;
+}
 .middle-video-container {
   max-height: 80vh;
   max-width: 55vw;
   padding-bottom: 5vh;
-  padding-top: 5vh;
+  padding-top: 10vh;
   margin: 0vh auto;
   vertical-align: middle;
 }
@@ -7856,12 +7906,6 @@ ui-view {
   -webkit-animation-direction: alternate;
 }
 @font-face {
-  font-family: "Superclarendon";
-  src: url('../fonts/superclarendon/superclarendon.eot') format('embedded-opentype'), url('../fonts/superclarendon/superclarendon.woff') format('woff'), url('../fonts/superclarendon/superclarendon.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
   font-family: 'buttonz_bdtem';
   src: url('../fonts/buttonz/buttonz_bdtem.eot?38791276');
   src: url('../fonts/buttonz/buttonz_bdtem.eot?38791276#iefix') format('embedded-opentype'), url('../fonts/buttonz/buttonz_bdtem.woff?38791276') format('woff'), url('../fonts/buttonz/buttonz_bdtem.ttf?38791276') format('truetype'), url('../fonts/buttonz/buttonz_bdtem.svg?38791276#buttonz_bdtem') format('svg');
@@ -7875,6 +7919,17 @@ ui-view {
   font-weight: normal;
   font-style: normal;
 }
+.sans-serif {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  color: #808080;
+}
+.sans-serif-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  color: #808080;
+  font-weight: 100;
+}
 .popover {
   min-width: 20vw;
   max-width: 40vw;
@@ -7883,7 +7938,7 @@ ui-view {
   border-top-right-radius: 30px;
 }
 .popover-title {
-  font-family: "Superclarendon";
+  font-family: "Libre Baskerville";
   margin: 0;
   padding: 8px 14px;
   font-size: 12pt;
@@ -7898,7 +7953,7 @@ ui-view {
   border-left: none;
 }
 .tooltip {
-  font-family: "Superclarendon";
+  font-family: "@serif-font";
   font-size: 12pt;
   color: #7777FF;
   font-weight: normal;
@@ -7906,7 +7961,7 @@ ui-view {
   z-index: 1030;
 }
 .tooltip-inner {
-  font-family: "Superclarendon";
+  font-family: "@serif-font";
   font-size: 1em;
   color: #4d4d4d;
   font-style: italic;
@@ -7914,13 +7969,13 @@ ui-view {
   z-index: 1030;
 }
 .popover-content {
-  font-family: "Superclarendon";
+  font-family: "Libre Baskerville";
   font-style: italic;
   font-size: 10pt;
   padding: 9px 14px;
 }
 .modal-content {
-  font-family: "Superclarendon";
+  font-family: "Libre Baskerville";
   font-size: 1.2vw;
   padding: 2vh 2vw;
   background-color: #ffffff;

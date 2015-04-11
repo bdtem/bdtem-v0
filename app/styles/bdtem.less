@@ -1,4 +1,11 @@
 @import "variables";
+@import "fonts";
+
+html, html a {
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
 
 .above-navbar {
   position: absolute;
@@ -6,12 +13,6 @@
   max-width: 8%;
   max-height: 5%;
   z-index: @zindex-navbar-fixed;
-}
-
-.sans-serif {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 700;
-  color: lighten(@text-color, 50%);
 }
 
 .bdtem-title {
@@ -148,35 +149,3 @@
   padding-top: 10vh;
 }
 
-.words {
-  font-size: 3vmin;
-  color: @text-color;
-  font-family: "Libre Baskerville", serif;
-  width: @sidr-width;
-  margin-bottom: 3vh;
-}
-
-.words-left {
-  .words;
-  text-align: left;
-}
-
-.words-right {
-  .words;
-  text-align: right;
-}
-
-.track-menu-entry {
-  text-align: right;
-  align-self: right;
-  align-content: right;
-
-  font-weight: 700;
-  letter-spacing: 0.15em;
-}
-
-.podcast-entry {
-  text-align: left;
-  align-self: left;
-  align-content: left;
-}

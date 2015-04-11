@@ -151,7 +151,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
             console.log("previous to: " + previousTrack)
 
 
-            if(previousTrack >= 0) {
+            if (previousTrack >= 0) {
                 player.prev(true);
                 $rootScope.$broadcast('trackChange', previousTrack);
                 playerService.setTrackHighlighting(previousTrack);

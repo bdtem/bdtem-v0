@@ -1,6 +1,6 @@
 @import "variables";
 
-@sidr-width: 21vw;
+@sidr-width: 23vw;
 @sidr-hide-width: -@sidr-width;
 
 .sidr {
@@ -13,8 +13,8 @@
 
   min-width: @sidr-width;
   max-width: @sidr-width;
-  overflow-x: none;
-  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .sidr.right {
@@ -36,7 +36,7 @@
   display: inline;
   top: 40vh;
   z-index: 1000;
-  font-family: "Superclarendon";
+  font-family: @serif-font;
   cursor: pointer;
 
   text-decoration: none;
@@ -57,15 +57,7 @@
   padding-left: 0.5vw;
 }
 
-left-words {
-  -webkit-transition: letter-spacing 1s;
-  -moz-transition: letter-spacing 1s;
-  -ms-transition: letter-spacing 1s;
-  -o-transition: letter-spacing 1s;
-  transition: letter-spacing 1s;
-}
-
-right-words {
+left-words, right-words {
   -webkit-transition: letter-spacing 1s;
   -moz-transition: letter-spacing 1s;
   -ms-transition: letter-spacing 1s;
