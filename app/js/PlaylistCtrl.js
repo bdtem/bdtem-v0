@@ -1,6 +1,9 @@
 bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
     function PlaylistCtrl(AlbumTracks, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
 
+        var wasPlayed = false;
+
+
         var player;
         var volume = 1;
         $scope.showVolumeBar = false;
@@ -183,6 +186,13 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
         };
 
         $scope.bdtemPlayPause = function () {
+            if(!wasPlayed) {
+                wasPlayed = true;
+                $.sidr("open", "tracks-menu");
+
+                //Because angular-media player is 1 based...
+                playerService.setTrackHighlighting(player.currentTrack - 1)
+            }
 
             var videoAPI = videoService.getVideoAPI();
 
