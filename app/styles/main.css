@@ -7544,7 +7544,7 @@ html a {
   font-size: 3vmin;
 }
 .bdtem-subtitle {
-  font-weight: 100  ;
+  font-weight: 100;
   letter-spacing: 0.75vw;
   font-size: 1.75vmin;
   line-height: 2.5vmin;
@@ -7768,17 +7768,17 @@ right-words {
   }
 }
 .drawer-subheader {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
-  color: #808080;
-  font-weight: 100;
+  color: #333333;
+  font-weight: 300;
   line-height: 2vh;
 }
 .drawer-subheader-left {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
-  color: #808080;
-  font-weight: 100;
+  color: #333333;
+  font-weight: 300;
   line-height: 2vh;
   padding-bottom: 4vh;
   padding-right: 1.75vw;
@@ -7786,10 +7786,10 @@ right-words {
   text-align: right;
 }
 .drawer-subheader-right {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
-  color: #808080;
-  font-weight: 100;
+  color: #333333;
+  font-weight: 300;
   line-height: 2vh;
   padding-left: 4vw;
   padding-bottom: 6vh;
@@ -7931,15 +7931,15 @@ ui-view {
   font-style: normal;
 }
 .sans-serif {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
-  color: #808080;
+  color: #333333;
 }
 .sans-serif-light {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 700;
-  color: #808080;
-  font-weight: 100;
+  color: #333333;
+  font-weight: 300;
 }
 .popover {
   min-width: 20vw;
