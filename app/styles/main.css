@@ -7868,11 +7868,25 @@ right-words {
   padding-bottom: 5vh;
   margin: 0 auto;
   margin-top: 15vh;
+  overflow: hidden;
   vertical-align: middle;
 }
 .metadata-content {
-  overflow: auto;
+  overflow: hidden;
   height: 55vh;
+}
+.metadata-content:hover,
+.metadata-content:focus {
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 0.5vw;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: solid 1px #000000;
+  height: 0.5vh;
 }
 @keyframes play {
   100% {
