@@ -7451,6 +7451,7 @@ body {
   height: 90%;
   max-height: 90%;
   font-size: 2vmin;
+  overflow: hidden;
 }
 h3 {
   margin: 0;

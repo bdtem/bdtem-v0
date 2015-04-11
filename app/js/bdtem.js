@@ -1,4 +1,4 @@
-var bdtem = angular.module('bdtem', [
+    var bdtem = angular.module('bdtem', [
     'bdtemFilters',
     'mediaPlayer',
     'cfp.hotkeys',
@@ -80,8 +80,6 @@ bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes)
             bdtemplayer = player;
         },
         getMetadata: function() {
-
-
 
         },
 
