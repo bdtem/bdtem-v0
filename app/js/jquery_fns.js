@@ -34,12 +34,14 @@ var positionTheVolumeBar = function () {
     var volumeToggle = $('#volumeToggle');
     var volumeBar = $('#volumeBar');
 
-    var offset = volumeToggle.offset();
-
+    var offset = volumeToggle.position();
     var height = volumeBar.outerHeight();
+    var volumeToggle_width= volumeToggle.find(".buttonz-small").width()/2
+    // minus left&right paddings
+    var paddings = volumeToggle.find(".buttonz-small").innerWidth()- volumeToggle.find(".buttonz-small").width()
+    var left = offset.left+volumeToggle_width-paddings;
 
-    var left = offset.left - (height * 10);
-    var top = -(volumeToggle.height() / 2);
+    var top = -(volumeToggle.height()/1.2);
 
     volumeBar.css({top: top, left: left});
 
@@ -58,15 +60,28 @@ $(document).ready(function () {
 
 
     var animateLeftIn = function () {
-        tracksMenuToggle.animate(
-            {
-                'letter-spacing': '0.01vw',
-                'padding-right': 0,
-                'margin': 0,
-                'width': '3.25vw',
-                'left':'88%'
-            },
-            500, 0, 0);
+        var screenSize=window.innerWidth;
+        if (screenSize > 640){
+            tracksMenuToggle.animate(
+                {
+                    'letter-spacing': '0.01vw',
+                    'padding-right': 0,
+                    'margin': 0,
+                    'width': '3.25vw',
+                },
+                500, 0, 0);
+        }
+        else{
+            tracksMenuToggle.animate(
+                {
+                    'letter-spacing': '0.01vw',
+                    'padding-right': 0,
+                    'margin': 0,
+                    'width': '3.25vw',
+                    'left':'88%'
+                },
+                500, 0, 0);
+        }
     };
 
     var animateLeftOut = function () {
@@ -117,15 +132,28 @@ $(document).ready(function () {
 
 
     var animateRightIn = function () {
-        podcastMenuToggle.animate(
-            {
-                'letter-spacing': '0.01vw',
-                'padding-right': 0,
-                'margin': 0,
-                'width': '3.25vw',
-                'right':'88%'
-            },
-            500, 0, 0);
+        var screenSize=window.innerWidth;
+        if (screenSize > 640){
+            podcastMenuToggle.animate(
+                {
+                    'letter-spacing': '0.01vw',
+                    'padding-right': 0,
+                    'margin': 0,
+                    'width': '3.25vw',
+                },
+                500, 0, 0);
+        }
+        else{
+            podcastMenuToggle.animate(
+                {
+                    'letter-spacing': '0.01vw',
+                    'padding-right': 0,
+                    'margin': 0,
+                    'width': '3.25vw',
+                    'right':'88%'
+                },
+                500, 0, 0);
+        }
     };
 
     var animateRightOut = function () {
