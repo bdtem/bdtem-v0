@@ -33,7 +33,6 @@ $(document).ready(function   () {
                 'top': '88vh',
                 'letter-spacing': '0.01vw',
                 'padding-right': 0,
-                'margin': 0,
                 'width': '3.25vw',
                 'line-height': '1.5vh'
             },
@@ -45,7 +44,6 @@ $(document).ready(function   () {
             {
                 'top': '40vh',
                 'letter-spacing': '1.5vw',
-                'margin': '0.1w',
                 'line-height': "2vh"
             },
             500, 0, 0);
@@ -67,7 +65,7 @@ $(document).ready(function   () {
             tracksMenuToggle.removeClass(ROTATE_CLASS);
             animateOut(tracksMenuToggle);
             leftWords.addClass('left-menu-words');
-            leftWords.css({display: 'inline'});
+            leftWords.css({display: 'inline', });
         },
         renaming: true,
         body: 'left'
@@ -91,11 +89,10 @@ $(document).ready(function   () {
         },
         onClose: function () {
             storyMenuToggle.removeClass(ROTATE_CLASS);
-//            storyMenuToggle.addClass('menu-spaced');
 
             animateOut(storyMenuToggle);
 
-//            rightWords.addClass('right-menu-words');
+            rightWords.addClass('right-menu-words');
             rightWords.css({display: 'inline'});
         },
         renaming: true,

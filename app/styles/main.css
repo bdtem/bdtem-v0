@@ -7826,9 +7826,22 @@ right-words {
   font-weight: 700;
   letter-spacing: 0.15em;
 }
+.menu-words {
+  border-top: transparent 20px;
+  border-bottom: transparent 20px;
+}
+.left-menu-words {
+  border-top: transparent 20px;
+  border-bottom: transparent 20px;
+}
+.right-menu-words {
+  border-top: transparent 20px;
+  border-bottom: transparent 20px;
+}
 .track-menu-entry {
   font-weight: 700;
   letter-spacing: 0.15em;
+  font-size: 0.96em;
   float: right;
   text-align: right;
   align-self: right;
@@ -7920,6 +7933,7 @@ ui-view {
   text-align: center;
   display: block;
   margin: 0 auto;
+  margin-top: 5vh;
   min-width: 570px;
   max-width: 570px;
   min-height: 540px;

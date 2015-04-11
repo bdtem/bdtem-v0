@@ -1,6 +1,8 @@
 bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
     function PlaylistCtrl(AlbumTracks, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
 
+        var controller = this;
+
         var wasPlayed = false;
 
 
@@ -186,7 +188,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
         };
 
         $scope.bdtemPlayPause = function () {
-            if(!wasPlayed && !player.isPlaying()) {
+            if(!wasPlayed && !controller.isPlaying()) {
                 wasPlayed = true;
                 $.sidr("open", "tracks-menu");
 
