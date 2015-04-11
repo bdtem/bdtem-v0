@@ -124,10 +124,14 @@
             AFTER DEATH
         </div>
 
-        <a id="bdtem-track{{$index}}" class="track-menu-entry" ng-repeat="track in tracks"
-           ng-click="skipToTrack($index)">
-            {{track.title | uppercase}}&#09;{{$index + 1}}<br/>
-        </a>
+        <div class="pull-right">
+            <a id="bdtem-track{{$index}}" class="track-menu-entry" ng-repeat="track in tracks"
+               ng-click="skipToTrack($index)">
+                {{track.title | uppercase}}&#09;{{$index + 1}}<br/>
+            </a>
+        </div>
+
+
     </div>
 
 </nav>
@@ -155,7 +159,7 @@
         <span id="story-episode{{$index}}"
               ng-class="episode.src ? 'story-menu-entry' : 'story-menu-entry-inactive'"
               ng-repeat="episode in episodes"
-           ng-click="skipToEpisode($index)">
+              ng-click="skipToEpisode($index)">
             {{episode.title | uppercase}}<br/>
         </span>
 
