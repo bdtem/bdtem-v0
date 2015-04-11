@@ -186,7 +186,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
         };
 
         $scope.bdtemPlayPause = function () {
-            if(!wasPlayed) {
+            if(!wasPlayed && !player.isPlaying()) {
                 wasPlayed = true;
                 $.sidr("open", "tracks-menu");
 

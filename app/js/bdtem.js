@@ -27,7 +27,7 @@ var bdtem = angular.module('bdtem', [
             })
             .state('metadata', {
                 url: "/",
-                templateUrl: "templates/app.html",
+                templateUrl: "templates/metadata.html",
                 controller: 'MetadataCtrl'
             });
     }]);
