@@ -35,7 +35,7 @@
 
     <script src="js/bdtem.js"></script>
     <script src="js/AlbumTracks.js"></script>
-    <script src="js/PodcastEpisodes.js"></script>
+    <script src="js/StoryEpisodes.js"></script>
     <script src="js/PlaylistCtrl.js"></script>
     <script src="js/VideoCtrl.js"></script>
     <script src="js/jquery_fns.js"></script>
@@ -136,8 +136,8 @@
     <ui-view></ui-view>
 </div>
 
-<nav id="podcasts-container">
-    <div id="podcast-menu" ng-controller="MiddleCtrl as middle" class="sidr">
+<nav id="stories-container">
+    <div id="story-menu" ng-controller="MiddleCtrl as middle" class="sidr">
 
 
         <div class="drawer-header-right">
@@ -152,8 +152,8 @@
             MR. TALENT
         </div>
 
-        <span id="podcast-episode{{$index}}"
-              ng-class="episode.src ? 'podcast-menu-entry' : 'podcast-menu-entry-inactive'"
+        <span id="story-episode{{$index}}"
+              ng-class="episode.src ? 'story-menu-entry' : 'story-menu-entry-inactive'"
               ng-repeat="episode in episodes"
            ng-click="skipToEpisode($index)">
             {{episode.title | uppercase}}<br/>
@@ -162,12 +162,12 @@
     </div>
 </nav>
 
-<right class="fa right-menu-button menu-spaced pull-right righted" id="podcast-menu-toggle">
+<right class="fa right-menu-button menu-spaced pull-right righted" id="story-menu-toggle">
     ||<br/>
     ||||<br/>
     |||||||<br/>
     ||||||||||<br/>
-    <right-words class="right-menu-words" id="right-menu-words">Podcast<br/></right-words>
+    <right-words class="right-menu-words" id="right-menu-words">Story<br/></right-words>
     ||||||||||<br/>
     |||||||<br/>
     ||||<br/>

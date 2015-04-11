@@ -233,10 +233,10 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
                     $.sidr('toggle', 'tracks-menu')
                 }
             }).add({
-                combo: 'p',
-                description: 'Toggle podcast menu',
+                combo: 's',
+                description: 'Toggle story menu',
                 callback: function () {
-                    $.sidr('toggle', 'podcast-menu')
+                    $.sidr('toggle', 'story-menu')
                 }
             }).add({
                 combo: 'i',

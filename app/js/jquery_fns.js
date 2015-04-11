@@ -68,27 +68,27 @@ $(document).ready(function () {
         body: 'left'
     });
 
-    var podcastMenuToggle = $('#podcast-menu-toggle');
+    var storyMenuToggle = $('#story-menu-toggle');
     var rightWords = $('.right-menu-words');
 
 
-    podcastMenuToggle.sidr({
-        name: 'podcast-menu',
+    storyMenuToggle.sidr({
+        name: 'story-menu',
         speed: 200,
         side: 'right',
         source: null,
         displace: true,
         onOpen: function () {
-            podcastMenuToggle.addClass(ROTATE_CLASS);
-            animateIn(podcastMenuToggle);
+            storyMenuToggle.addClass(ROTATE_CLASS);
+            animateIn(storyMenuToggle);
             rightWords.removeClass('right-menu-words');
             rightWords.css({display: 'none'});
         },
         onClose: function () {
-            podcastMenuToggle.removeClass(ROTATE_CLASS);
-//            podcastMenuToggle.addClass('menu-spaced');
+            storyMenuToggle.removeClass(ROTATE_CLASS);
+//            storyMenuToggle.addClass('menu-spaced');
 
-            animateOut(podcastMenuToggle);
+            animateOut(storyMenuToggle);
 
 //            rightWords.addClass('right-menu-words');
             rightWords.css({display: 'inline'});
@@ -98,7 +98,7 @@ $(document).ready(function () {
     });
 
 
-    animateOut(podcastMenuToggle);
+    animateOut(storyMenuToggle);
     animateOut(tracksMenuToggle);
 });
 

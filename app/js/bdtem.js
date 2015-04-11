@@ -52,9 +52,9 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
             "");
 }]);
 
-bdtem.service('playerService', function ($rootScope, AlbumTracks, PodcastEpisodes) {
+bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes) {
     const ALBUM = "ALBUM";
-    const PODCAST = "PODCAST";
+    const STORY = "STORY";
 
     const ID_WILDCARD = "bdtem-track";
 
@@ -63,15 +63,15 @@ bdtem.service('playerService', function ($rootScope, AlbumTracks, PodcastEpisode
 
     var tracks = {
         "ALBUM": AlbumTracks,
-        "PODCAST": PodcastEpisodes
+        "STORY": StoryEpisodes
     };
 
     return {
         playAlbum: function() {
             PLAYING = ALBUM;
         },
-        playPodcast: function () {
-            PLAYING = PODCAST;
+        playStory: function () {
+            PLAYING = STORY;
         },
         getPlayer: function () {
             return bdtemplayer;
@@ -201,9 +201,9 @@ function randomColor () {
 
 
 
-bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, AlbumTracks, PodcastEpisodes) {
+bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, AlbumTracks, StoryEpisodes) {
     $scope.tracks = AlbumTracks;
-    $scope.episodes = PodcastEpisodes;
+    $scope.episodes = StoryEpisodes;
 
     $scope.skipToTrack = function (index) {
         videoService.pause();

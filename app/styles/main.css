@@ -7658,7 +7658,7 @@ html a {
   text-align: center;
   margin: 0 auto;
 }
-.podcasts {
+.stories {
   padding-top: 10vh;
 }
 .sidr {
@@ -7825,7 +7825,7 @@ right-words {
   padding-left: 0.5vw;
   line-height: 4.5vh;
 }
-.podcast-menu-entry {
+.story-menu-entry {
   font-weight: 700;
   letter-spacing: 0.15em;
   text-align: left;
@@ -7837,7 +7837,7 @@ right-words {
   font-style: oblique;
   cursor: pointer;
 }
-.podcast-menu-entry-inactive {
+.story-menu-entry-inactive {
   font-weight: 700;
   letter-spacing: 0.15em;
   text-align: left;
