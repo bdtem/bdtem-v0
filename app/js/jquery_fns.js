@@ -30,10 +30,12 @@ $(document).ready(function () {
     function animateIn (selector) {
         selector.animate(
             {
+                'top': '88vh',
                 'letter-spacing': '0.01vw',
                 'padding-right': 0,
                 'margin': 0,
-                'width': '3.25vw'
+                'width': '3.25vw',
+                'line-height': '1.5vh'
             },
             300, 0, 0);
     }
@@ -41,8 +43,11 @@ $(document).ready(function () {
     function animateOut (selector) {
         selector.animate(
             {
+                'top': '40vh',
                 'letter-spacing': '1.5vw',
-                'margin': '0.1w'},
+                'margin': '0.1w',
+                'line-height': "2vh"
+            },
             500, 0, 0);
     }
 
