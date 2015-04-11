@@ -7,12 +7,14 @@ var positionTheVolumeBar = function () {
     var volumeToggle = $('#volumeToggle');
     var volumeBar = $('#volumeBar');
 
-    var offset = volumeToggle.offset();
-
+    var offset = volumeToggle.position();
     var height = volumeBar.outerHeight();
+    var volumeToggle_width= volumeToggle.find(".buttonz-small").width()/2
+    // minus left&right paddings
+    var paddings = volumeToggle.find(".buttonz-small").innerWidth()- volumeToggle.find(".buttonz-small").width()
+    var left = offset.left+volumeToggle_width-paddings;
 
-    var left = offset.left - (height * 10);
-    var top = -(volumeToggle.height() / 2);
+    var top = -(volumeToggle.height()/1.2);
 
     volumeBar.css({top: top, left: left});
 
