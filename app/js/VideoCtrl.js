@@ -12,18 +12,24 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
     };
 
     controller.onPlayerStateChange = function ($state) {
-            if($state === "play") {
+
+        console.log('test');
+
+        if($state === "play") {
                 playerService.getPlayer().pause();
             }
     };
 
+
+    controller.onError = function ($error) {
+
+        console.log($error);
+
+    };
+
     controller.config = {
         sources: [
-            {src: $sce.trustAsResourceUrl("../video/about.mp4"), type: "video/mp4"}
-        ],
-        tracks: [
-            {
-            }
+            {src: $sce.trustAsResourceUrl("video/about.mp4"), type: "video/mp4"}
         ],
         theme: {
             url: "bower_components/videogular-themes-default/videogular.min.css"
@@ -32,16 +38,3 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
 
 
 });
-
-//bdtem.config(function ($provide) {
-//    $provide.decorator('vgPlayPauseButton', function ($delegate, playerService) {
-//        var directive = $delegate[0];
-//        angular.extend(directive.scope, {
-//            onClickPlayPause: function () {
-//                API.playPause();
-//                playerService.getPlayer().pause();
-//            }
-//        });
-//        return $delegate;
-//    });
-//});

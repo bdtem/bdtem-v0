@@ -2,6 +2,7 @@
 
     <videogular vg-player-ready="controller.onPlayerReady($API)"
                 vg-update-state="controller.onPlayerStateChange($state)"
+                vg-error="controller.onError($error)"
                 vg-theme="controller.config.theme.url">
 
         <vg-media vg-src="controller.config.sources"
