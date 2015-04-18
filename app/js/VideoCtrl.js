@@ -1,7 +1,7 @@
 /**
  * Created by abl on 4/6/15.
  */
-bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService, $state) {
+bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService, $state, $timeout) {
 
     var controller = this;
     controller.API = null;
@@ -13,6 +13,7 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
     controller.onPlayerReady = function (API) {
         controller.API = API;
         videoService.setVideoAPI(API);
+        $timeout(function playWithDelay() {API.playPause()}, 250);
     };
 
     controller.onPlayerStateChange = function ($state) {
