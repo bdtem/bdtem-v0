@@ -44,6 +44,7 @@
     <script src="bower_components/bootstrap/js/affix.js"></script>
     <script src="bower_components/bootstrap/js/alert.js"></script>
     <script src="bower_components/bootstrap/js/tooltip.js"></script>
+    <script src="bower_components/bootstrap/js/popover.js"></script>
     <script src="bower_components/bootstrap/js/button.js"></script>
     <script src="bower_components/bootstrap/js/tab.js"></script>
     <!-- endbuild -->
@@ -160,8 +161,12 @@
         <span id="story-episode{{$index}}"
               ng-class="episode.src ? 'story-menu-entry' : 'story-menu-entry-inactive'"
               ng-repeat="episode in episodes"
-              ng-click="skipToEpisode($index)">
-            {{episode.title | uppercase}}<br/>
+              ng-click="skipToEpisode($index)"
+              popover="{{episode.tooltip}}"
+              popover-trigger="mouseenter : blur"
+              popover-placement="right"
+                >
+            {{episode.title | uppercase}} <br/>
         </span>
 
     </div>

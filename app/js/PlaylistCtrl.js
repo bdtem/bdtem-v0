@@ -43,7 +43,6 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             player = $API;
             volume = player.volume;
             playerService.setPlayer(player);
-            console.log('player is ready, current state: ' + $API.currentState);
         };
 
         controller.onChangeSource = function (newValue) {
@@ -55,7 +54,6 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
         };
 
         $scope.$on('trackChange', function changePlayerTrack(event, track) {
-            console.log('track change! ' + track);
             var currentTracks = tracks[PLAYING];
             if (track < 0 || track > currentTracks.length) {
                 return;
@@ -73,11 +71,10 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
 
         $scope.$on('tracklistChange', function changePlayerTracklist(event, changeEvent) {
             var tracklistName = changeEvent["trackList"];
-            console.log('tracklist change! ' + tracklistName);
 
             var newTracklist = tracks[tracklistName];
 
-            if(newTracklist) {
+            if (newTracklist) {
                 PLAYING = tracklistName;
                 skipTo(changeEvent["index"])
             }
