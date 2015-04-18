@@ -4,19 +4,12 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
     function PlaylistCtrl(AlbumTracks, StoryEpisodes, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
 
         var controller = this;
-        var wasPlayed = false;
         var player;
+        var wasPlayed = false;
+        var currentTrack = 0;
 
         var volume = 1;
         $scope.showVolumeBar = false;
-
-
-        var currentTrack = 0;
-
-        const ALBUM = "ALBUM";
-        const STORY = "STORY";
-
-        var PLAYING = ALBUM;
 
 
         function trustAsResource(track) {
@@ -24,12 +17,12 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             return track;
         }
 
+
         var tracks = {
             "ALBUM": AlbumTracks.map(trustAsResource),
             "STORY": StoryEpisodes.map(trustAsResource)
         };
-
-        console.log(tracks);
+        var PLAYING = "ALBUM";
 
 
         controller.config = {
@@ -58,10 +51,11 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
         };
 
         controller.onTrackComplete = function () {
-
+            controller.nextTrack();
         };
 
         $scope.$on('trackChange', function changePlayerTrack(event, track) {
+            console.log('track change! ' + track);
             var currentTracks = tracks[PLAYING];
             if (track < 0 || track > currentTracks.length) {
                 return;
@@ -75,6 +69,18 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             $timeout(player.play.bind(player), 100);
 
             playerService.setTrackHighlighting(track);
+        });
+
+        $scope.$on('tracklistChange', function changePlayerTracklist(event, changeEvent) {
+            var tracklistName = changeEvent["trackList"];
+            console.log('tracklist change! ' + tracklistName);
+
+            var newTracklist = tracks[tracklistName];
+
+            if(newTracklist) {
+                PLAYING = tracklistName;
+                skipTo(changeEvent["index"])
+            }
         });
 
         function getTrackFromQPs() {
@@ -101,9 +107,6 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
                 player.setVolume(newValue);
             }
         });
-
-
-        $scope.songs = AlbumTracks;
 
 
         $scope.__defineGetter__('player', function () {
@@ -167,7 +170,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             }
             console.log("skipping to " + trackIndex);
             if (trackIndex >= 0 && trackIndex < tracks[PLAYING].length) {
-                playerService.skipToTrack(trackIndex);
+                playerService.skipTo(PLAYING, trackIndex);
             }
             console.log("now playing " + trackIndex)
         }

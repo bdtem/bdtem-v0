@@ -2,7 +2,8 @@ bdtem.value('StoryEpisodes',
     [
         {
             "title": "Episode 1",
-            "description": "This is episode one of the BDTEM story series.",
+            "description": "This is episode one of the BDTEM story series." +
+                "<br/>Beware, if you end up listening to it, it is <i>very silly</i>.",
             "catalog": "Ep. 1",
             src: '../episodes/Episode_One.mp3', type: 'audio/mpeg'
         },

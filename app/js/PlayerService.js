@@ -2,28 +2,29 @@
 
 bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes) {
     var bdtemplayer;
-
     var currentTrack = 0;
+
+    const ALBUM_WILDCARD = "bdtem-track";
+    const EPISODE_WILDCARD = "story-episode";
+    /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
+    const DEFAULT_TEXT = "#000000";
 
     const ALBUM = "ALBUM";
     const STORY = "STORY";
 
-    const ID_WILDCARD = "bdtem-track";
-
     var PLAYING = ALBUM;
 
     function switchTo(trackList, optionalIndex) {
-
         currentTrack = optionalIndex ? optionalIndex : 0;
 
         if (PLAYING != trackList && bdtemplayer) {
+            console.log("switchto " + trackList);
 
-            console.log("switchto");
-
-            bdtemplayer.pause();
             PLAYING = trackList;
-            bdtemplayer.$clearSourceList();
-            bdtemplayer.$addSourceList(tracks[trackList]);
+            $rootScope.$broadcast('tracklistChange', {
+                "trackList": trackList,
+                "index": currentTrack
+            });
         }
     }
 
@@ -34,41 +35,59 @@ bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes)
         getCurrentTrack: function () {
             return currentTrack;
         },
-        setCurrentTrack: function (index) {
-            currentTrack = index;
-        },
-        playAlbum: function (index) {
-            switchTo(ALBUM);
-            this.skipToTrack(index);
-        },
-        playStory: function (index) {
-            switchTo(STORY);
-            this.skipToTrack(index);
-        },
         getPlayer: function () {
             return bdtemplayer;
         },
         setPlayer: function (player) {
             bdtemplayer = player;
         },
-        getMetadata: function () {
-            return PLAYING === ALBUM ? AlbumTracks : StoryEpisodes;
-        },
         setTrackHighlighting: function (trackToHighlight) {
             //Why doesn't this work when initialized outside of the function?
             //Figure this out later; doesn't seem to slow things down much.
-            var $tracks = $(".track-menu-entry");
+            var $tracks;
+            var $tracksToClear;
+            var idWildcard;
 
-            var highlightedTrackId = ID_WILDCARD + trackToHighlight;
+            var $albumTracks = $(".track-menu-entry");
+            var $storyTracks = $(".story-menu-entry");
+            switch (PLAYING) {
+                case ALBUM:
+                    idWildcard = ALBUM_WILDCARD;
+                    $tracks = $albumTracks;
+                    $tracksToClear = $storyTracks;
+                    break;
+                case STORY:
+                    idWildcard = EPISODE_WILDCARD;
+                    $tracks = $storyTracks;
+                    $tracksToClear = $albumTracks;
+                    break;
+                default:
+                    return;
+            }
+
+            var highlightedTrackId = idWildcard + trackToHighlight;
 
             $tracks.each(function () {
                 var trackName = $(this);
-                /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
-                trackName.css({color: (this.id === highlightedTrackId) ? randomColor() : "#000000"});
+                trackName.css({color: (this.id === highlightedTrackId) ? randomColor() : DEFAULT_TEXT});
+            });
+            $tracksToClear.each(function () {
+                $(this).css({color: DEFAULT_TEXT});
             });
         },
+        skipTo: function (trackList, index) {
+            if (PLAYING != trackList) {
+                switchTo(trackList, index)
+            } else {
+                currentTrack = index;
+                $rootScope.$broadcast('trackChange', index);
+            }
+        },
+        skipToEpisode: function (index) {
+            this.skipTo(STORY, index);
+        },
         skipToTrack: function (index) {
-            $rootScope.$broadcast('trackChange', index);
+            this.skipTo(ALBUM, index);
         }
     }
 })

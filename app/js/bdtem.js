@@ -155,8 +155,8 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, Al
     };
 
     $scope.skipToEpisode = function (episodeIndex) {
+        videoService.pause();
 
+        playerService.skipToEpisode(episodeIndex);
     };
-
-
 });
