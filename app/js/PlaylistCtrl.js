@@ -47,10 +47,10 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
 
 
         controller.onPlayerReady = function ($API) {
-            console.log('player is ready');
             player = $API;
             volume = player.volume;
             playerService.setPlayer(player);
+            console.log('player is ready, current state: ' + $API.currentState);
         };
 
         controller.onChangeSource = function (newValue) {
@@ -112,12 +112,12 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
 
 
         controller.isPlaying = function () {
-            return player && player.state === "play";
+            return player && player.currentState === "play";
         };
 
-        controller.isPlaying = function (index) {
-            return player && index === player.currentTrack;
-        };
+//        controller.isPlaying = function (index) {
+//            return player && index === player.currentTrack;
+//        };
 
 
         $scope.seekFromProgressBar = function (event) {
@@ -159,48 +159,26 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             }
         };
 
-        $scope.prevTrack = function () {
+
+        function skipTo(trackIndex) {
             var videoAPI = videoService.getVideoAPI();
             if (videoService.isPlaying()) {
                 videoAPI.pause();
             }
-
-
-            //Because angular-media-player is 1 based...
-            var previousTrack = player.currentTrack - 2;
-
-            console.log("previous to: " + previousTrack)
-
-
-            if (previousTrack >= 0) {
-                player.prev(true);
-                $rootScope.$broadcast('trackChange', previousTrack);
-                playerService.setTrackHighlighting(previousTrack);
+            console.log("skipping to " + trackIndex);
+            if (trackIndex >= 0 && trackIndex < tracks[PLAYING].length) {
+                playerService.skipToTrack(trackIndex);
             }
+            console.log("now playing " + trackIndex)
+        }
 
-            console.log("now playing " + player.currentTrack)
 
+        $scope.prevTrack = function () {
+            skipTo(currentTrack - 1);
         };
 
         $scope.nextTrack = function () {
-            var videoAPI = videoService.getVideoAPI();
-            if (videoService.isPlaying()) {
-                videoAPI.pause();
-            }
-
-            //Because angular-media player is 1 based...
-            var nextTrack = player.currentTrack;
-
-            console.log("next track to " + nextTrack)
-
-            if (nextTrack < $scope.songs.length) {
-                player.next(true);
-                $rootScope.$broadcast('trackChange', nextTrack);
-                playerService.setTrackHighlighting(nextTrack);
-            }
-
-            console.log("now playing " + player.currentTrack)
-
+            skipTo(currentTrack + 1);
         };
 
         $scope.bdtemPlayPause = function () {
@@ -208,8 +186,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
                 wasPlayed = true;
                 $.sidr("open", "tracks-menu");
 
-                //Because angular-media player is 1 based...
-                playerService.setTrackHighlighting(player.currentTrack - 1)
+                playerService.setTrackHighlighting(currentTrack)
             }
 
             var videoAPI = videoService.getVideoAPI();

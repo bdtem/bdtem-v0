@@ -8,10 +8,9 @@ bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes)
     const ALBUM = "ALBUM";
     const STORY = "STORY";
 
-    var PLAYING = ALBUM;
-
     const ID_WILDCARD = "bdtem-track";
-    var $tracks = $(".track-menu-entry");
+
+    var PLAYING = ALBUM;
 
     function switchTo(trackList, optionalIndex) {
 
@@ -56,7 +55,9 @@ bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes)
             return PLAYING === ALBUM ? AlbumTracks : StoryEpisodes;
         },
         setTrackHighlighting: function (trackToHighlight) {
-            console.log("highlight track: " + trackToHighlight);
+            //Why doesn't this work when initialized outside of the function?
+            //Figure this out later; doesn't seem to slow things down much.
+            var $tracks = $(".track-menu-entry");
 
             var highlightedTrackId = ID_WILDCARD + trackToHighlight;
 
