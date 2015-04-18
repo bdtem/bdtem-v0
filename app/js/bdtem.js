@@ -1,4 +1,6 @@
-    var bdtem = angular.module('bdtem', [
+'use strict';
+
+var bdtem = angular.module('bdtem', [
     'bdtemFilters',
     'cfp.hotkeys',
     'ui.bootstrap',
@@ -8,10 +10,8 @@
     "com.2fdevs.videogular.plugins.controls"
 ]);
 
-
-
- bdtem.config(['$stateProvider', '$urlRouterProvider',
-     function($stateProvider, $urlRouterProvider) {
+bdtem.config(['$stateProvider', '$urlRouterProvider',
+    function ($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise("/");
 
@@ -77,7 +77,7 @@ bdtem.service('videoService', function () {
     };
 });
 
-bdtem.controller("OrbCtrl", function($scope, $state) {
+bdtem.controller("OrbCtrl", function ($scope, $state) {
 
     $scope.startVideo = function () {
         $state.go("video");
@@ -114,34 +114,6 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
     ];
 
 });
-
-bdtem.controller('DonateCtrl', function ($scope) {
-});
-
-
-bdtem.controller('ShareCtrl', function ($scope) {
-
-    $scope.socialMediaBullshit = [
-        {
-            shareName: 'facebook',
-            shareLink: 'http://www.facebook.com/sharer.php?u=http://www.bdtem.co.in',
-            shareText: 'FACE'
-        },
-        {
-            shareName: 'twitter',
-            shareLink: 'http://twitter.com/share?text=I%20am%20posting%20this%20because%20I%20do%20not%20know%20what%20it%20is.%20&url=http://www.bdtem.co.in',
-            shareText: 'TWIT'
-        }
-    ];
-
-});
-
-
-function randomColor () {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16);
-}
-
-
 
 bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, AlbumTracks, StoryEpisodes) {
     $scope.tracks = AlbumTracks;

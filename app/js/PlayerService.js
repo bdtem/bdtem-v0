@@ -14,6 +14,11 @@ bdtem.service('playerService', function ($rootScope) {
 
     var PLAYING = ALBUM;
 
+
+    function randomColor() {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    }
+
     function switchTo(trackList, optionalIndex) {
         currentTrack = optionalIndex ? optionalIndex : 0;
 
