@@ -31,6 +31,9 @@ bdtem.config(['$stateProvider', '$urlRouterProvider',
             });
     }]);
 
+bdtem.controller('DonateCtrl', function ($scope) {
+});
+
 bdtem.filter('unsafe', ['$sce', function ($sce) {
     return function (val) {
         return $sce.trustAsHtml(val);
