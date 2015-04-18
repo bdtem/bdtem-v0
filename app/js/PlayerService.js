@@ -1,22 +1,26 @@
+'use strict';
+
 bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes) {
     var bdtemplayer;
 
+    var currentTrack = 0;
 
     const ALBUM = "ALBUM";
     const STORY = "STORY";
 
     var PLAYING = ALBUM;
 
-    var tracks = {
-        "ALBUM": AlbumTracks,
-        "STORY": StoryEpisodes
-    };
-
     const ID_WILDCARD = "bdtem-track";
     var $tracks = $(".track-menu-entry");
 
-    function switchTo(trackList) {
+    function switchTo(trackList, optionalIndex) {
+
+        currentTrack = optionalIndex ? optionalIndex : 0;
+
         if (PLAYING != trackList && bdtemplayer) {
+
+            console.log("switchto");
+
             bdtemplayer.pause();
             PLAYING = trackList;
             bdtemplayer.$clearSourceList();
@@ -25,6 +29,15 @@ bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes)
     }
 
     return {
+        currentlyPlaying: function () {
+            return PLAYING;
+        },
+        getCurrentTrack: function () {
+            return currentTrack;
+        },
+        setCurrentTrack: function (index) {
+            currentTrack = index;
+        },
         playAlbum: function (index) {
             switchTo(ALBUM);
             this.skipToTrack(index);
@@ -42,29 +55,20 @@ bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes)
         getMetadata: function () {
             return PLAYING === ALBUM ? AlbumTracks : StoryEpisodes;
         },
-
         setTrackHighlighting: function (trackToHighlight) {
+            console.log("highlight track: " + trackToHighlight);
+
             var highlightedTrackId = ID_WILDCARD + trackToHighlight;
 
             $tracks.each(function () {
                 var trackName = $(this);
                 /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
-                var isTrackToHighlight = (this.id === highlightedTrackId);
-                trackName.css({
-                    color: isTrackToHighlight ? randomColor() : "#000000",
-                    'text-decoration': isTrackToHighlight ? "underline" : "none"
-                });
+                trackName.css({color: (this.id === highlightedTrackId) ? randomColor() : "#000000"});
             });
         },
         skipToTrack: function (index) {
-
-            //Because angular media player is dumb and 1-based. Remove this correction after changing to videogular.
-            bdtemplayer.play(index, true);
-
-            bdtemplayer.load(true);
             $rootScope.$broadcast('trackChange', index);
-
-            this.setTrackHighlighting(index);
         }
     }
-});
+})
+;

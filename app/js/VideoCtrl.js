@@ -12,24 +12,18 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
     };
 
     controller.onPlayerStateChange = function ($state) {
-
-        console.log('test');
-
-        if($state === "play") {
+            if($state === "play") {
                 playerService.getPlayer().pause();
             }
     };
 
-
-    controller.onError = function ($error) {
-
-        console.log($error);
-
-    };
-
     controller.config = {
         sources: [
-            {src: $sce.trustAsResourceUrl("video/about.mp4"), type: "video/mp4"}
+            {src: $sce.trustAsResourceUrl("../video/about.mp4"), type: "video/mp4"}
+        ],
+        tracks: [
+            {
+            }
         ],
         theme: {
             url: "bower_components/videogular-themes-default/videogular.min.css"

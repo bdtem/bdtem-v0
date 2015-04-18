@@ -52,6 +52,62 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
             "");
 }]);
 
+bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes) {
+    const ALBUM = "ALBUM";
+    const STORY = "STORY";
+
+    const ID_WILDCARD = "bdtem-track";
+
+    var bdtemplayer;
+    var PLAYING = ALBUM;
+
+    var tracks = {
+        "ALBUM": AlbumTracks,
+        "STORY": StoryEpisodes
+    };
+
+    return {
+        playAlbum: function() {
+            PLAYING = ALBUM;
+        },
+        playStory: function () {
+            PLAYING = STORY;
+        },
+        getPlayer: function () {
+            return bdtemplayer;
+        },
+        setPlayer: function (player) {
+            bdtemplayer = player;
+        },
+        getMetadata: function() {
+
+        },
+
+        setTrackHighlighting: function (trackToHighlight) {
+            var highlightedTrackId = ID_WILDCARD + trackToHighlight;
+
+            var $tracks = $(".track-menu-entry");
+
+            $tracks.each(function () {
+                var trackName = $(this);
+                /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
+                trackName.css({color: (this.id === highlightedTrackId) ? randomColor() : "#000000"});
+            });
+        },
+        skipToTrack: function (index) {
+
+            //Because angular media player is dumb and 1-based. Remove this correction after changing to videogular.
+            bdtemplayer.play(index, true);
+
+
+            bdtemplayer.load(true);
+            $rootScope.$broadcast('trackChange', index);
+
+            this.setTrackHighlighting(index);
+        }
+    }
+});
+
 bdtem.service('videoService', function () {
     var videoAPI;
 
@@ -149,34 +205,13 @@ bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, Al
 
     $scope.skipToTrack = function (index) {
         videoService.pause();
-        playerService.playAlbum(index);
+
+        playerService.skipToTrack(index);
     };
 
     $scope.skipToEpisode = function (episodeIndex) {
-        videoService.pause();
-        playerService.playStory(episodeIndex);
+
     };
 
+
 });
-
-
- bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, AlbumTracks, playerService, $timeout) {
-     var player = playerService.getPlayer();
-     setMetadata(player ? (player.currentTrack - 1) : 0);
-
-     $scope.duration = player.currentDuration | 0;
-
-     function setMetadata(track) {
-        $scope.metadata = playerService.getMetadata()[track];
-
-        $timeout(function () {$scope.duration = player.duration | 0}, 99);
-    }
-
-     function getCurrentTime() {
-         return player ? (player.currentTime | 0) : 0;
-     }
-
-     $scope.$on('trackChange', function(event, track) {setMetadata(track)});
-
-     $scope.__defineGetter__('currentTime', getCurrentTime);
- });

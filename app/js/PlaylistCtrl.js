@@ -1,14 +1,92 @@
-bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
-    function PlaylistCtrl(AlbumTracks, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
+'use strict';
+
+bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
+    function PlaylistCtrl(AlbumTracks, StoryEpisodes, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
 
         var controller = this;
-
         var wasPlayed = false;
-
-
         var player;
+
         var volume = 1;
         $scope.showVolumeBar = false;
+
+
+        var currentTrack = 0;
+
+        const ALBUM = "ALBUM";
+        const STORY = "STORY";
+
+        var PLAYING = ALBUM;
+
+
+        function trustAsResource(track) {
+            track.src = $sce.trustAsResourceUrl(track.src);
+            return track;
+        }
+
+        var tracks = {
+            "ALBUM": AlbumTracks.map(trustAsResource),
+            "STORY": StoryEpisodes.map(trustAsResource)
+        };
+
+        console.log(tracks);
+
+
+        controller.config = {
+            sources: [
+                tracks[PLAYING][currentTrack]
+            ],
+            tracks: [
+                {
+                }
+            ],
+            theme: {
+                url: "bower_components/videogular-themes-default/videogular.min.css"
+            }
+        };
+
+
+        controller.onPlayerReady = function ($API) {
+            console.log('player is ready');
+            player = $API;
+            volume = player.volume;
+            playerService.setPlayer(player);
+        };
+
+        controller.onChangeSource = function (newValue) {
+            console.log("change source to: " + newValue.src);
+        };
+
+        controller.onTrackComplete = function () {
+
+        };
+
+        $scope.$on('trackChange', function changePlayerTrack(event, track) {
+            var currentTracks = tracks[PLAYING];
+            if (track < 0 || track > currentTracks.length) {
+                return;
+            }
+
+            player.stop();
+            currentTrack = track;
+
+            controller.config.sources = [currentTracks[track]];
+
+            $timeout(player.play.bind(player), 100);
+
+            playerService.setTrackHighlighting(track);
+        });
+
+        function getTrackFromQPs() {
+            var track = parseInt($location.search()['track']);
+
+            if (track > 0 && track < $scope.songs.length) {
+                $timeout(function () {
+                    playerService.skipToTrack(track)
+                });
+            }
+        }
+
 
         $scope.toggleVolumeBar = function () {
             $scope.showVolumeBar = !$scope.showVolumeBar;
@@ -26,51 +104,21 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
 
 
         $scope.songs = AlbumTracks;
-        $scope.metadata = AlbumTracks;
 
 
         $scope.__defineGetter__('player', function () {
             return player | setPlayer();
         });
 
-        function setPlayer() {
-            var scopePlayer = $scope.bdtemplayer;
-            playerService.setPlayer(scopePlayer);
-            player = scopePlayer;
-            volume = scopePlayer.volume;
-            return scopePlayer;
-        }
 
-        $(document).ready(function () {
-            setPlayer();
-
-            var track = parseInt($location.search()['track']);
-
-            if (track > 0 && track < $scope.songs.length) {
-                $timeout(function () {
-                    playerService.skipToTrack(track)
-                });
-            }
-        });
-
-        this.isPlaying = function () {
-            return player.isPlaying;
+        controller.isPlaying = function () {
+            return player && player.state === "play";
         };
 
-        this.isPlaying = function (index) {
-            return index === player.currentTrack;
+        controller.isPlaying = function (index) {
+            return player && index === player.currentTrack;
         };
 
-
-        var getCurrentTime = function () {
-            return player ? (player.currentTime | 0) : 0;
-        };
-        $scope.__defineGetter__('currentTime', getCurrentTime);
-
-        var getDuration = function () {
-            return player ? (player.duration | 0) : 0;
-        };
-        $scope.__defineGetter__('currentDuration', getDuration);
 
         $scope.seekFromProgressBar = function (event) {
             var srcElement = event.srcElement;
@@ -83,7 +131,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
             var pixelsRight = Math.abs(xOffset - clickOffset);
 
             var percentage = pixelsRight / pxWidth;
-            var whereToSeekInDuration = Math.floor(percentage * getDuration());
+            var whereToSeekInDuration = Math.floor(percentage * player.totalTime);
 
             player.seek(whereToSeekInDuration);
         };
@@ -99,7 +147,6 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
 
         var previousState = null;
         const METADATA = 'metadata';
-
         $scope.toggleMetadata = function () {
 
             var currentState = $state.current.name;
@@ -109,37 +156,6 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
             } else {
                 previousState = currentState;
                 $state.go(METADATA);
-            }
-        };
-
-        $scope.getMetadataTitle = function () {
-            var extractedPlayer;
-
-            if (player) {
-                extractedPlayer = player;
-            } else {
-                extractedPlayer = setPlayer();
-            }
-
-            var currentTrack = extractedPlayer.currentTrack | 0;
-
-            var metadata = $scope.metadata[currentTrack];
-
-            if (metadata) {
-
-                var titleComponents = [
-                        '<div class="pull-left">' + metadata.title + '</div>',
-                        '<div class="pull-right">' + metadata.catalog + '</div>',
-                    '<br/>',
-                        '<div class="pull-left">' + $filter('timeFilter')(getCurrentTime()),
-                    "/",
-                        $filter('timeFilter')(getDuration()) + '</div>',
-                    '<div class="pull-right button-font unpadded" >\ue808</div>'
-                ];
-
-                return titleComponents.join("&nbsp;");
-            } else {
-                return "";
             }
         };
 
@@ -188,7 +204,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
         };
 
         $scope.bdtemPlayPause = function () {
-            if(!wasPlayed && !controller.isPlaying()) {
+            if (!wasPlayed && !controller.isPlaying()) {
                 wasPlayed = true;
                 $.sidr("open", "tracks-menu");
 
@@ -228,14 +244,14 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
                 combo: 'ctrl+left',
                 description: 'Seek Back 10 Seconds',
                 callback: function () {
-                    var whereToSeek = getCurrentTime() - 10;
+                    var whereToSeek = player.currentTime - 10000;
                     $scope.seekTo(whereToSeek);
                 }
             }).add({
                 combo: 'ctrl+right',
                 description: 'Seek Forward 10 Seconds',
                 callback: function () {
-                    var whereToSeek = getCurrentTime() + 10;
+                    var whereToSeek = player.currentTime + 10000;
                     $scope.seekTo(whereToSeek);
                 }
             }).add({
@@ -258,4 +274,5 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', '$rootScope', '$scope', '$filte
                 }
             });
 
-    }]);
+    }])
+;

@@ -39,6 +39,7 @@
     <script src="js/StoryEpisodes.js"></script>
     <script src="js/PlaylistCtrl.js"></script>
     <script src="js/VideoCtrl.js"></script>
+    <script src="js/MetadataCtrl.js"></script>
     <script src="js/jquery_fns.js"></script>
 
     <!-- build:js scripts/vendor/bootstrap.js -->
@@ -81,10 +82,10 @@
 
             <br/>
 
-        <div class="bdtem-subtitle sans-serif" style="letter-spacing: 0.4vw">
-            PROJECT NO. 2.0013.B-9.006.1289.11<br/>
-            <i>AKA</i><br/>
-        </div>
+            <div class="bdtem-subtitle sans-serif" style="letter-spacing: 0.4vw">
+                PROJECT NO. 2.0013.B-9.006.1289.11<br/>
+                <i>AKA</i><br/>
+            </div>
 
             <b class="bdtem-title">BOB DEY'S TANK ENGINE MAN</b>
         </div>
@@ -183,10 +184,21 @@
 
 <nav id="playlistnavbar" class="navbar navbar-default navbar-fixed-bottom"
      role="navigation"
-     ng-controller="PlaylistCtrl as playlist">
+     ng-controller="PlaylistCtrl as controller">
 
     <div id="bottomBar">
-        <audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="songs"></audio>
+
+        <!--<audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="songs"></audio>-->
+
+
+        <videogular vg-player-ready="controller.onPlayerReady($API)"
+                    vg-theme="controller.config.theme.url"
+                    vg-update-state="controller.onPlayerStateChange($state)"
+                    vg-change-source="controller.onChangeSource($source)"
+                    class="videogular-container audio">
+            <vg-media vg-src="controller.config.sources" vg-type="audio"></vg-media>
+        </videogular>
+
 
         <div class="transport-bar">
             <div class="btn buttonz" ng-click="prevTrack()">
@@ -197,7 +209,7 @@
             </div>
             <div class="btn" ng-click="bdtemPlayPause()">
                 <i class="fa fa-play"
-                   ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
+                   ng-class="{ 'fa-pause': controller.isPlaying(), 'fa-play': !controller.isPlaying() }"></i>
             </div>
 
             <div class="btn buttonz-small"
