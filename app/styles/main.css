@@ -7926,6 +7926,17 @@ ui-view {
   display: block;
   margin: auto;
 }
+videogular div.custom-button {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: #333333;
+  color: #ffffff;
+  display: table-cell;
+  width: 50px;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+}
 .orb {
   cursor: pointer;
   align-items: center;

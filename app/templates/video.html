@@ -15,13 +15,13 @@
             <vg-scrub-bar>
                 <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
             </vg-scrub-bar>
-            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
             <vg-time-display>{{ totalTime | date:'mm:ss' }}</vg-time-display>
             <vg-volume>
                 <vg-mute-button></vg-mute-button>
                 <vg-volume-bar></vg-volume-bar>
             </vg-volume>
             <vg-fullscreen-button></vg-fullscreen-button>
+            <div class='custom-button' ng-click="controller.closeVideo()">CLOSE</div>
         </vg-controls>
 
     </videogular>

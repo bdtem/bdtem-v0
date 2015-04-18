@@ -1,6 +1,6 @@
 'use strict';
 
-bdtem.service('playerService', function ($rootScope, AlbumTracks, StoryEpisodes) {
+bdtem.service('playerService', function ($rootScope) {
     var bdtemplayer;
     var currentTrack = 0;
 
