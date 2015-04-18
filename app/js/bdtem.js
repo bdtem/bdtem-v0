@@ -1,6 +1,5 @@
     var bdtem = angular.module('bdtem', [
     'bdtemFilters',
-    'mediaPlayer',
     'cfp.hotkeys',
     'ui.bootstrap',
     "ngSanitize",

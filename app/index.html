@@ -25,8 +25,6 @@
     <script src="bower_components/videogular-controls/vg-controls.js"></script>
     <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
 
-    <script src="bower_components/angular-media-player/src/directive.js"></script>
-    <script src="bower_components/angular-media-player/src/helpers.js"></script>
     <script src="bower_components/angular-hotkeys/build/hotkeys.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
@@ -187,9 +185,6 @@
      ng-controller="PlaylistCtrl as controller">
 
     <div id="bottomBar">
-
-        <!--<audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="songs"></audio>-->
-
 
         <videogular vg-player-ready="controller.onPlayerReady($API)"
                     vg-theme="controller.config.theme.url"
