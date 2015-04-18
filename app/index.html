@@ -129,7 +129,7 @@
         <div class="pull-right">
             <a id="bdtem-track{{$index}}" class="track-menu-entry" ng-repeat="track in tracks"
                ng-click="skipToTrack($index)">
-                {{track.title | uppercase}}&#09;{{$index + 1}}<br/>
+                {{track.title | uppercase}}&#09;{{($index + 1) | padWithZero}}<br/>
             </a>
         </div>
 
