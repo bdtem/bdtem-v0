@@ -31,7 +31,7 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
             }
         ],
         theme: {
-            url: "bower_components/videogular-themes-default/videogular.min.css"
+            url: "styles/videogular.css"
         },
         plugins: {
             controls: {
