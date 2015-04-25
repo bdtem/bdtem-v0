@@ -3631,7 +3631,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
   position: relative;
-  min-height: 5vh;
+  min-height: 10vh;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -3728,10 +3728,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand {
   float: left;
-  padding: -7.5vh 15px;
+  padding: -5vh 15px;
   font-size: 18px;
   line-height: 20px;
-  height: 5vh;
+  height: 10vh;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -3748,8 +3748,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: right;
   margin-right: 15px;
   padding: 9px 10px;
-  margin-top: -14.5vh;
-  margin-bottom: -14.5vh;
+  margin-top: -12vh;
+  margin-bottom: -12vh;
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
@@ -3773,7 +3773,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-nav {
-  margin: -3.75vh -15px;
+  margin: -2.5vh -15px;
 }
 .navbar-nav > li > a {
   padding-top: 10px;
@@ -3811,8 +3811,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: -7.5vh;
-    padding-bottom: -7.5vh;
+    padding-top: -5vh;
+    padding-bottom: -5vh;
   }
   .navbar-nav.navbar-right:last-child {
     margin-right: -15px;
@@ -3836,8 +3836,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom: 1px solid transparent;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-top: -14.5vh;
-  margin-bottom: -14.5vh;
+  margin-top: -12vh;
+  margin-bottom: -12vh;
 }
 @media (min-width: 768px) {
   .navbar-form .form-group {
@@ -3904,20 +3904,20 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom-left-radius: 0;
 }
 .navbar-btn {
-  margin-top: -14.5vh;
-  margin-bottom: -14.5vh;
+  margin-top: -12vh;
+  margin-bottom: -12vh;
 }
 .navbar-btn.btn-sm {
-  margin-top: -12.5vh;
-  margin-bottom: -12.5vh;
+  margin-top: -10vh;
+  margin-bottom: -10vh;
 }
 .navbar-btn.btn-xs {
-  margin-top: -8.5vh;
-  margin-bottom: -8.5vh;
+  margin-top: -6vh;
+  margin-bottom: -6vh;
 }
 .navbar-text {
-  margin-top: -7.5vh;
-  margin-bottom: -7.5vh;
+  margin-top: -5vh;
+  margin-bottom: -5vh;
 }
 @media (min-width: 768px) {
   .navbar-text {
@@ -7453,9 +7453,7 @@ body {
   font-size: 2vmin;
   overflow: hidden;
 }
-h3 {
-  margin: 0;
-}
+h3,
 h4 {
   margin: 0;
 }
@@ -7485,17 +7483,27 @@ a:focus {
 }
 .navbar {
   border: none;
-  height: 5vh;
+  height: 10vh;
   max-height: 100%;
 }
 .navbar-default {
   border: none;
 }
 .navbar-container {
-  height: 5vh;
-  min-height: 2%;
-  max-height: 5vh;
+  height: 10vh;
+  min-height: 10vh;
+  max-height: 10vh;
   overflow: hidden;
+}
+.navbar-container-top {
+  height: 10vh;
+  min-height: 10vh;
+  max-height: 10vh;
+  overflow: hidden;
+  height: 18vh;
+  min-height: 18vh;
+  max-height: 18vh;
+  z-index: 1000;
 }
 .navbar-default {
   background-color: transparent;
@@ -7505,7 +7513,6 @@ a:focus {
 }
 .navbar-fixed-bottom {
   background-color: transparent;
-  margin-bottom: 5vh;
 }
 .btn-group {
   background-color: transparent;
@@ -7520,6 +7527,13 @@ a:focus {
 .btn:focus {
   color: #4d4d4d;
 }
+.btn:active,
+.btn.active {
+  outline: 0;
+  background-image: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
 label {
   font-size: 1.2vw;
 }
@@ -7532,6 +7546,9 @@ html,
 html a {
   -webkit-font-smoothing: antialiased;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+.autohide {
+  display: none;
 }
 .above-navbar {
   position: absolute;
@@ -7690,7 +7707,7 @@ html a {
   left: -23vw;
   right: auto;
   height: 100%;
-  padding-right: 2vw  ;
+  padding-right: 2vw;
 }
 .menu-button {
   position: absolute;
@@ -7879,9 +7896,8 @@ right-words {
 .middle-video-container {
   max-height: 65vh;
   max-width: 55vw;
-  padding-bottom: 5vh;
+  z-index: 200;
   margin: 0 auto;
-  margin-top: 15vh;
   overflow: hidden;
   vertical-align: middle;
 }
@@ -7943,12 +7959,10 @@ videogular div.custom-button {
 }
 .orb {
   cursor: pointer;
-  align-items: center;
-  align-self: center;
-  text-align: center;
-  display: block;
   margin: 0 auto;
-  margin-top: 5vh;
+  margin-top: -10vh;
+  display: block;
+  z-index: 200;
   min-width: 570px;
   max-width: 570px;
   min-height: 540px;

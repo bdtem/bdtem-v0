@@ -3,12 +3,14 @@
 @sidr-width: 23vw;
 @sidr-hide-width: -@sidr-width;
 
+@sidr-top: 5vh;
+
 .sidr {
   display: none;
   position: absolute;
   position: fixed;
-  top: @navbar-height;
-  max-height: (100vh - 2*@navbar-height);
+  top: @sidr-top;
+  max-height: (100vh - 2*@sidr-top);
   z-index: 1000;
 
   min-width: @sidr-width;
@@ -27,9 +29,8 @@
   left: @sidr-hide-width;
   right: auto;
   height: 100%;
-  padding-right: 2vw  ;
+  padding-right: 2vw;
 }
-
 
 .menu-button {
   position: absolute;
@@ -76,8 +77,6 @@ left-words, right-words {
   padding-right: 0.5vw;
 }
 
-
-
 @media screen and (max-width: 1000px) {
 
   .left-menu-button {
@@ -90,7 +89,6 @@ left-words, right-words {
       content: 'bleep';
     }
   }
-
 
   .left-menu-button {
 
@@ -108,6 +106,5 @@ left-words, right-words {
       content: 'bloop';
     }
   }
-
 
 }

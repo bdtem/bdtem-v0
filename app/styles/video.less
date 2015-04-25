@@ -3,10 +3,10 @@
 .middle-video-container {
   max-height: 65vh;
   max-width: 55vw;
-  padding-bottom: @navbar-height;
+
+  z-index: 200;
 
   margin: 0 auto;
-  margin-top: 15vh;
 
   overflow: hidden;
 
@@ -22,34 +22,35 @@
   overflow: auto;
 }
 
-
 ::-webkit-scrollbar {
   width: 0.5vw;
   background: transparent;
 }
 
-::-webkit-scrollbar-thumb{
-  background-color:@text-color;
+::-webkit-scrollbar-thumb {
+  background-color: @text-color;
   border: solid 1px @text-color;
   height: 0.5vh;
 }
-
 
 @keyframes play {
   100% {
     background-position: -31350px
   }
 }
+
 @-webkit-keyframes play {
   100% {
     background-position: -31350px
   }
 }
+
 @-moz-keyframes play {
   100% {
     background-position: -31350px
   }
 }
+
 @keyframes play {
   100% {
     background-position: -31350px
@@ -77,15 +78,11 @@ videogular div.custom-button {
 
 .orb {
   cursor: pointer;
-
-  align-items: center;
-  align-self: center;
-  text-align: center;
+  margin: 0 auto;
+  margin-top: -10vh;
 
   display: block;
-
-  margin: 0 auto;
-  margin-top: 5vh;
+  z-index: 200;
 
   min-width: 570px;
   max-width: 570px;
@@ -95,17 +92,11 @@ videogular div.custom-button {
 
   background: url('http://couleurs.na.tl/rick/spriteSheetTransparent.png');
 
-//  -webkit-filter: invert() blur(2px) brightness(1.45);
-//  -moz-filter: invert(100%) blur(2px) brightness(1.45);
-//  -o-filter: invert() blur(2px) brightness(1.45);
-//  -ms-filter: invert() blur(2px) brightness(1.45);
-//  filter: invert(100%) blur(2px) brightness(1.45);
-
-
   animation: play 7s steps(55) infinite;
   -webkit-animation: play 7s steps(55) infinite; /* Safari 4+ */
   -moz-animation: play 7s steps(55, end) infinite; /* Fx 5+ */
   -o-animation: play 7s steps(55) infinite; /* Opera 12+ */
   animation-direction: alternate-reverse;
   -webkit-animation-direction: alternate;
+
 }

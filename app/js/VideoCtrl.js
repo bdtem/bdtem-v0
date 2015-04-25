@@ -36,7 +36,7 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
         plugins: {
             controls: {
                 autoHide: true,
-                autoHideTime: 3000
+                autoHideTime: 2000
             }
         }
     };

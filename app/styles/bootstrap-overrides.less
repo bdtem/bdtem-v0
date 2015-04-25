@@ -7,11 +7,7 @@ html, body {
   overflow: hidden;
 }
 
-h3 {
-  margin: 0;
-}
-
-h4 {
+h3, h4 {
   margin: 0;
 }
 
@@ -55,9 +51,17 @@ a {
 
 .navbar-container {
   height: @navbar-height;
-  min-height: 2%;
+  min-height: @navbar-height;
   max-height: @navbar-height;
   overflow: hidden;
+}
+
+.navbar-container-top {
+  .navbar-container;
+  height: @navbar-top-height;
+  min-height: @navbar-top-height;
+  max-height: @navbar-top-height;
+  z-index: @zindex-navbar;
 }
 
 .navbar-default {
@@ -70,7 +74,6 @@ a {
 
 .navbar-fixed-bottom {
   background-color: transparent;
-  margin-bottom: 5vh;
 }
 
 .btn-group {
@@ -87,6 +90,14 @@ a {
   &:focus {
     color: @link-hover-color;
   }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
 }
 
 label {
@@ -97,4 +108,4 @@ label {
   .navbar-container {
     display: none;
   }
- }
+}
