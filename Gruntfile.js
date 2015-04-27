@@ -120,10 +120,10 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/styles/videogular.css': ['<%= yeoman.app %>/styles/videogular.less']
                 },
                 options: {
-                    sourceMap: true,
-                    sourceMapFilename: '<%= yeoman.app %>/styles/main.css.map',
-                    sourceMapBasepath: '<%= yeoman.app %>/',
-                    sourceMapRootpath: '/'
+//                    sourceMap: true,
+//                    sourceMapFilename: '<%= yeoman.app %>/styles/main.css.map',
+//                    sourceMapBasepath: '<%= yeoman.app %>/',
+//                    sourceMapRootpath: '/'
                 }
             }
         },

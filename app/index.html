@@ -60,6 +60,7 @@
 
     <link href='http://fonts.googleapis.com/css?family=Raleway:500,700,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/videogular.css">
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -186,7 +187,7 @@
 </right>
 
 
-<nav id="playlistnavbar" class="navbar navbar-default navbar-fixed-bottom"
+<nav id="playlistnavbar" class="navbar-fixed-bottom"
      role="navigation"
      ng-controller="PlaylistCtrl as controller">
 
@@ -198,33 +199,39 @@
                     vg-change-source="controller.onChangeSource($source)"
                     class="videogular-container audio">
             <vg-media vg-src="controller.config.sources" vg-type="audio"></vg-media>
+
+            <vg-controls>
+
+                <vg-play-pause-button onClickPlayPause="controller.bdtemPlayPause()"></vg-play-pause-button>
+
+                <div class="custom-button-small" ng-click="prevTrack()">
+                    &#xe807;
+                </div>
+
+
+                <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                </vg-scrub-bar>
+
+
+                <div class="custom-button-small" ng-click="nextTrack()">
+                    &#xe802;
+                </div>
+
+
+                <vg-volume>
+                    <vg-mute-button></vg-mute-button>
+                    <vg-volume-bar></vg-volume-bar>
+                </vg-volume>
+
+                <div class="custom-button-small" ng-click="toggleMetadata()">
+                    &#xe804;
+                </div>
+
+
+            </vg-controls>
         </videogular>
 
-
-        <div class="transport-bar">
-            <div class="btn buttonz" ng-click="prevTrack()">
-                &#xe807;
-            </div>
-            <div class="btn buttonz" ng-click="nextTrack()">
-                &#xe802;
-            </div>
-            <div class="btn" ng-click="bdtemPlayPause()">
-                <i class="fa fa-play"
-                   ng-class="{ 'fa-pause': controller.isPlaying(), 'fa-play': !controller.isPlaying() }"></i>
-            </div>
-
-            <div class="btn buttonz-small"
-                 ng-click="toggleMetadata()">
-                &#xe804;
-            </div>
-
-            <div id="volumeToggle" class="btn buttonz-small">
-                <span class="btn buttonz-small" ng-click="toggleVolumeBar()">&#xe809;</span>
-                <input id="volumeBar" ng-show="showVolumeBar" class='above-navbar fa-rotate-270' value='1' min='0'
-                       max='1' step='0.01' type='range' ng-model='volume'/>
-            </div>
-
-        </div>
     </div>
 </nav>
 

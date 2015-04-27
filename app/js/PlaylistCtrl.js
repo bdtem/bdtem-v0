@@ -34,7 +34,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
                 }
             ],
             theme: {
-                url: "bower_components/videogular-themes-default/videogular.min.css"
+                url: "bower_components/videogular-themes-default/videogular.css"
             }
         };
 
@@ -181,7 +181,8 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             skipTo(currentTrack + 1);
         };
 
-        $scope.bdtemPlayPause = function () {
+
+        controller.bdtemPlayPause = function () {
             if (!wasPlayed && !controller.isPlaying()) {
                 wasPlayed = true;
                 $.sidr("open", "tracks-menu");
@@ -189,10 +190,8 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
                 playerService.setTrackHighlighting(currentTrack)
             }
 
-            var videoAPI = videoService.getVideoAPI();
-
             if (videoService.isPlaying()) {
-                videoAPI.pause();
+                videoService.getVideoAPI().pause();
             }
 
             player.playPause();

@@ -7573,8 +7573,6 @@ html a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 4vw;
-  display: inline-block;
-  z-index: 1030;
   font-size: 3vmin;
   padding: 1px;
   content: "\e801";
@@ -7630,6 +7628,14 @@ html a {
   align-items: right;
   text-align: right;
 }
+#bottomBar {
+  align-self: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 40vw;
+}
 .pad-right {
   padding-right: 1vw;
 }
@@ -7657,18 +7663,21 @@ html a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 4vw;
-  display: inline-block;
-  z-index: 1030;
 }
-.buttonz-small {
+.custom-button-small {
   font: normal normal normal 14px/1 buttonz_bdtem;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 4vw;
-  display: inline-block;
-  z-index: 1030;
+  color: #000000;
   font-size: 3vw;
+  display: table-cell;
+  width: 50px;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  padding-right: 8px;
 }
 .progress {
   background: transparent;
@@ -8151,4 +8160,3 @@ input[type="range"]::-ms-thumb {
   background-image: linear-gradient(to bottom, #000000 0, #000000 100%);
   /* W3C */
 }
-/*# sourceMappingURL=/styles/main.css.map */

@@ -67,7 +67,7 @@ $(document).ready(function () {
     }
 
 
-    positionTheVolumeBar();
+//    positionTheVolumeBar();
 
     tracksMenuToggle.sidr({
         name: 'tracks-menu',

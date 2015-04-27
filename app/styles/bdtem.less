@@ -101,6 +101,12 @@ html, html a {
 
 }
 
+#bottomBar {
+  .centered;
+  margin: 0 auto;
+  max-width: 40vw;
+}
+
 .pad-right {
   padding-right: 1vw;
 }
@@ -132,13 +138,18 @@ html, html a {
 
 .buttonz {
   .button-font;
-  display: inline-block;
-  z-index: @zindex-navbar-fixed;
 }
 
-.buttonz-small {
+.custom-button-small {
   .buttonz;
+  color: @text-color;
   font-size: 3vw;
+  display: table-cell;
+  width: 50px;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  padding-right: 8px;
 }
 
 .progress {
