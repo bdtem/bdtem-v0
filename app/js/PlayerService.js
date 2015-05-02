@@ -4,13 +4,13 @@ bdtem.service('playerService', function ($rootScope) {
     var bdtemplayer;
     var currentTrack = 0;
 
-    const ALBUM_WILDCARD = "bdtem-track";
-    const EPISODE_WILDCARD = "story-episode";
+    var ALBUM_WILDCARD = "bdtem-track";
+    var EPISODE_WILDCARD = "story-episode";
     /*TODO (ABL): Kludge: Should not be using hardcoded value.*/
-    const DEFAULT_TEXT = "#000000";
+    var DEFAULT_TEXT = "#000000";
 
-    const ALBUM = "ALBUM";
-    const STORY = "STORY";
+    var ALBUM = "ALBUM";
+    var STORY = "STORY";
 
     var PLAYING = ALBUM;
 

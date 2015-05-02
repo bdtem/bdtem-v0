@@ -1,7 +1,7 @@
 'use strict';
 
 bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, AlbumTracks, StoryEpisodes, playerService, $timeout) {
-    const tracks = {
+    var tracks = {
         "ALBUM": AlbumTracks,
         "STORY": StoryEpisodes
     };

@@ -20,7 +20,7 @@ var positionTheVolumeBar = function () {
 
 };
 
-const ROTATE_CLASS = "fa-flip-horizontal";
+var ROTATE_CLASS = "fa-flip-horizontal";
 
 
 $(document).ready(function () {

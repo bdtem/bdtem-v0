@@ -3,9 +3,9 @@
 bdtem.service('videoService', function () {
     var videoAPI;
 
-    const PLAY = "play";
-    const PAUSE = "pause";
-    const STOP = "stop";
+    var PLAY = "play";
+    var PAUSE = "pause";
+    var STOP = "stop";
 
     return {
         pause: function () {

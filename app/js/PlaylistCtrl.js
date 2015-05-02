@@ -164,7 +164,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
 
 
         var previousState = null;
-        const METADATA = 'metadata';
+        var METADATA = 'metadata';
         $scope.toggleMetadata = function () {
 
             var currentState = $state.current.name;
