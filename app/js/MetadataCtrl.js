@@ -24,7 +24,7 @@ bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, AlbumTracks
         $scope.metadata = tracks[playerService.currentlyPlaying()][track];
         $timeout(function () {
             $scope.duration = player.totalTime | 0
-        }, 100);
+        }, 200);
     }
 
     function getCurrentTime() {
