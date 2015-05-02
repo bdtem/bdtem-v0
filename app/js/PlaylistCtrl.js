@@ -205,7 +205,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
                 combo: 'space',
                 description: 'Play / Pause',
                 callback: function () {
-                    controller.playPause();
+                    player.playPause();
                 }
             }).add({
                 combo: 'left',

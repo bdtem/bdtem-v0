@@ -54,15 +54,22 @@ videogular vg-time-display, [videogular] vg-time-display {
 }
 
 #bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar .volumeBackground {
-  background: white;
-  border: solid #000000 1px;
+  background: @background;
+  border: solid @text-color 1px;
   width: 1vw;
   height: 14vh;
 }
 
 #bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar .volumeValue {
-  background: black;
-  border: solid #000000 1px;
+  background: @text-color;
+  border: solid @text-color 1px;
   width: 0.9vw;
+}
 
+#bottomBar videogular vg-scrub-bar div {
+  background: @background;
+}
+
+#bottomBar videogular vg-scrub-bar vg-scrub-bar-current-time {
+  background: @text-color;
 }
