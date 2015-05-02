@@ -22,7 +22,8 @@ videogular vg-time-display, [videogular] vg-time-display {
   -webkit-font-smoothing: antialiased;
   background: none;
   padding: 6px;
-  border: none; }
+  border: none;
+}
 
 #bottomBar videogular .iconButton, #bottomBar [videogular] .iconButton {
   color: #000000;
@@ -36,7 +37,8 @@ videogular vg-time-display, [videogular] vg-time-display {
   -webkit-font-smoothing: antialiased;
   background: none;
   padding: 6px;
-  border: none; }
+  border: none;
+}
 
 #bottomBar videogular vg-controls .controls-container, #bottomBar [videogular] vg-controls .controls-container {
   width: 100%;
@@ -44,4 +46,23 @@ videogular vg-time-display, [videogular] vg-time-display {
   background-color: transparent;
   position: absolute;
   display: table;
-  zoom: 1; }
+  zoom: 1;
+}
+
+#bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar {
+  background: transparent;
+}
+
+#bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar .volumeBackground {
+  background: white;
+  border: solid #000000 1px;
+  width: 1vw;
+  height: 14vh;
+}
+
+#bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar .volumeValue {
+  background: black;
+  border: solid #000000 1px;
+  width: 0.9vw;
+
+}
