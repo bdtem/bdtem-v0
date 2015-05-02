@@ -53,6 +53,25 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             controller.nextTrack();
         };
 
+        controller.onPlayerStateChange = function (newState) {
+            var isPlaying = newState === 'play';
+            if(isPlaying) {
+
+
+                if (!wasPlayed && !controller.isPlaying()) {
+                    wasPlayed = true;
+                    $.sidr("open", "tracks-menu");
+
+                    playerService.setTrackHighlighting(currentTrack)
+                }
+
+                if (videoService.isPlaying()) {
+                    videoService.getVideoAPI().pause();
+                }
+
+            }
+        };
+
         $scope.$on('trackChange', function changePlayerTrack(event, track) {
             var currentTracks = tracks[PLAYING];
             if (track < 0 || track > currentTracks.length) {
@@ -181,28 +200,12 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             skipTo(currentTrack + 1);
         };
 
-
-        controller.bdtemPlayPause = function () {
-            if (!wasPlayed && !controller.isPlaying()) {
-                wasPlayed = true;
-                $.sidr("open", "tracks-menu");
-
-                playerService.setTrackHighlighting(currentTrack)
-            }
-
-            if (videoService.isPlaying()) {
-                videoService.getVideoAPI().pause();
-            }
-
-            player.playPause();
-        };
-
         hotkeys.bindTo($scope)
             .add({
                 combo: 'space',
                 description: 'Play / Pause',
                 callback: function () {
-                    $scope.bdtemPlayPause();
+                    controller.playPause();
                 }
             }).add({
                 combo: 'left',
