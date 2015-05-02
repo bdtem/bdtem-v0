@@ -1,6 +1,8 @@
 /**
  * Created by abl on 4/6/15.
  */
+'use strict';
+
 bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService, $state, $timeout) {
 
     var controller = this;

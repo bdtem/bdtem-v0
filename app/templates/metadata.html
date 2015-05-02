@@ -13,7 +13,20 @@
 
 
     <div class="pull-left">
-        <h4>{{ currentTime | date:'mm:ss' }} / {{ duration | date:'mm:ss' }}</h4>
+        <table>
+            <tr>
+                <td style="width: 3.5vw; text-align: left">
+                    {{ currentTime | date:'mm:ss' }}
+                </td>
+
+                <td style="width: 1vw; text-align: center">
+                    /
+                </td>
+                <td style="width: 3.5vw; text-align: center">
+                    {{ duration | date:'mm:ss' }}
+                </td>
+            </tr>
+        </table>
     </div>
     <br/>
     <br/>

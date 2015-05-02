@@ -1,6 +1,7 @@
 /**
  * Created by abl on 10/12/14.
  */
+'use strict';
 
 var positionTheVolumeBar = function () {
     var volumeToggle = $('#volumeToggle');
@@ -34,9 +35,6 @@ $(document).ready(function () {
     });
 
     $navbar.fadeOut(1700);
-//
-//    setTimeout(function initialNavBarHide() {
-//    }, 300);
 
     var tracksMenuToggle = $('#tracks-menu-toggle');
     var leftWords = $('#left-menu-words');
@@ -67,7 +65,6 @@ $(document).ready(function () {
     }
 
 
-//    positionTheVolumeBar();
 
     tracksMenuToggle.sidr({
         name: 'tracks-menu',

@@ -1,3 +1,5 @@
+'use strict';
+
 bdtem.value('AlbumTracks',
     [
         {

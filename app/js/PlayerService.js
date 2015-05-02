@@ -23,8 +23,6 @@ bdtem.service('playerService', function ($rootScope) {
         currentTrack = optionalIndex ? optionalIndex : 0;
 
         if (PLAYING != trackList && bdtemplayer) {
-            console.log("switchto " + trackList);
-
             PLAYING = trackList;
             $rootScope.$broadcast('tracklistChange', {
                 "trackList": trackList,
