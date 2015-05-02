@@ -2,7 +2,7 @@
 
 .middle-video-container {
   max-height: 65vh;
-  max-width: 55vw;
+  max-width: 45vw;
 
   z-index: 200;
 
@@ -13,12 +13,19 @@
   vertical-align: middle;
 }
 
-.metadata-content {
+.metadata-content, .metadata-content-overflow {
+  vertical-align: text-top;
+  font-size: 1.25em;
+  max-width: 100%;
+  line-height: 4vh;
   overflow: hidden;
   height: 55vh;
+
+  padding-right: 2vw;
 }
 
-.metadata-content:hover, .metadata-content:focus {
+.metadata-content-overflow:hover, .metadata-content-overflow:focus {
+  -moz-padding-end: 1vw;
   overflow: auto;
 }
 

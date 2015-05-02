@@ -177,12 +177,12 @@
         <span id="story-episode{{$index}}"
               ng-class="episode.src ? 'story-menu-entry' : 'story-menu-entry-inactive'"
               ng-repeat="episode in episodes"
-              ng-click="skipToEpisode($index)"
+              ng-click="episode.src ? skipToEpisode($index) : $.noop()"
               popover="{{episode.tooltip}}"
               popover-trigger="mouseenter : blur"
               popover-placement="right"
                 >
-            {{episode.title | uppercase}} <br/>
+            {{episode.title|uppercase}}<br/>
         </span>
 
     </div>

@@ -22,7 +22,7 @@ bdtem.service('playerService', function ($rootScope) {
         var colorString = '#';
         for (var i = 0; i < 3; i++) {
             var byteString = randomByte().toString(16);
-            if(byteString.length < 2) {
+            if (byteString.length < 2) {
                 byteString = '0' + byteString;
             }
             colorString = colorString.concat(byteString);
@@ -84,10 +84,17 @@ bdtem.service('playerService', function ($rootScope) {
 
             $tracks.each(function () {
                 var trackName = $(this);
-                trackName.css({color: (this.id === highlightedTrackId) ? randomColor() : DEFAULT_TEXT});
+                var isTrackToHighlight = (this.id === highlightedTrackId);
+
+                trackName.css({
+                    color: ( isTrackToHighlight) ? randomColor() : DEFAULT_TEXT,
+                    'text-decoration': isTrackToHighlight ? 'underline' : 'none'
+                });
             });
             $tracksToClear.each(function () {
-                $(this).css({color: DEFAULT_TEXT});
+                $(this).css({color: DEFAULT_TEXT,
+                    'text-decoration': 'none'
+                });
             });
         },
         skipTo: function (trackList, index) {

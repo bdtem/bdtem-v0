@@ -32,8 +32,9 @@
     <br/>
 
 
-    <h4 class="metadata-content"
-        ng-bind-html="metadata.description"></h4>
+    <div id="metadataContainer" ng-class="isOverflow() ? 'metadata-content-overflow' : 'metadata-content'">
+        <div id="metadataContent" ng-bind-html="metadata.description"></div>
+    </div>
 
 </div>
 
