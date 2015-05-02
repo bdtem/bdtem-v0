@@ -46,7 +46,6 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
         };
 
         controller.onChangeSource = function (newValue) {
-            console.log("change source to: " + newValue.src);
         };
 
         controller.onTrackComplete = function () {
@@ -55,7 +54,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
 
         controller.onPlayerStateChange = function (newState) {
             var isPlaying = newState === 'play';
-            if(isPlaying) {
+            if (isPlaying) {
 
 
                 if (!wasPlayed && !controller.isPlaying()) {
@@ -184,11 +183,9 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             if (videoService.isPlaying()) {
                 videoAPI.pause();
             }
-            console.log("skipping to " + trackIndex);
             if (trackIndex >= 0 && trackIndex < tracks[PLAYING].length) {
                 playerService.skipTo(PLAYING, trackIndex);
             }
-            console.log("now playing " + trackIndex)
         }
 
 

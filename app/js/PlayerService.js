@@ -14,9 +14,21 @@ bdtem.service('playerService', function ($rootScope) {
 
     var PLAYING = ALBUM;
 
+    function randomByte() {
+        return (Math.floor(Math.random() * (0xFF)));
+    }
 
     function randomColor() {
-        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+        var colorString = '#';
+        for (var i = 0; i < 3; i++) {
+            var byteString = randomByte().toString(16);
+            if(byteString.length < 2) {
+                byteString = '0' + byteString;
+            }
+            colorString = colorString.concat(byteString);
+        }
+
+        return colorString;
     }
 
     function switchTo(trackList, optionalIndex) {

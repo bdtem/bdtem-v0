@@ -7777,23 +7777,6 @@ right-words {
   color: #000000;
   text-decoration: none;
 }
-@media screen and (max-width: 1000px) {
-  .left-menu-button ::before {
-    content: "test";
-  }
-  .left-menu-button ::after {
-    content: 'bleep';
-  }
-  .left-menu-button ::before {
-    content: "test";
-  }
-  .left-menu-button ::after {
-    content: 'bleep';
-  }
-  .right-menu-button ::after {
-    content: 'bloop';
-  }
-}
 .drawer-subheader {
   font-family: "Raleway", sans-serif;
   font-weight: 700;
