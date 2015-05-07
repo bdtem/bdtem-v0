@@ -9,7 +9,7 @@ bdtem.value('StoryEpisodes',
             "catalog": "Ep. 1",
             src: '../episodes/Episode_One.mp3',
             type: 'audio/mpeg',
-            "tooltip": "<a href='episodes/Episode_One.mp3' download>DOWNLOAD</a>"
+            "tooltip": "<a class='glyphicon' href='episodes/Episode_One.mp3' download>&#xE166; &#xE175; etc</a>"
         },
         {
             "title": "Episode 2",

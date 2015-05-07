@@ -140,13 +140,14 @@
                         {{($index + 1) | padWithZero}}
                     </td>
                 </tr>
+
+                <tr>
+                    <td>
+                        <a class="sans-serif-light" href="audio/bdtem.zip" download>DOWNLOAD ALL.</a>
+                    </td>
+                </tr>
             </table>
 
-
-            <!--<a id="bdtem-track{{$index}}" class="track-menu-entry" ng-repeat="track in tracks"&ndash;&gt;-->
-            <!--ng-click="skipToTrack($index)">-->
-            <!--{{track.title | uppercase}}&nbsp;{{($index + 1) | padWithZero}}<br/>-->
-            <!--</a>-->
         </div>
 
 
@@ -211,6 +212,7 @@
                     vg-theme="controller.config.theme.url"
                     vg-update-state="controller.onPlayerStateChange($state)"
                     vg-change-source="controller.onChangeSource($source)"
+                    vg-complete="controller.onTrackComplete()"
                     class="videogular-container audio">
             <vg-media vg-src="controller.config.sources" vg-type="audio"></vg-media>
 

@@ -20,11 +20,16 @@ bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, AlbumTracks
         return container && content && contentHeight >= containerHeight;
     };
 
+    function setDuration() {
+        $scope.duration = duration
+    }
+
     function setMetadata(track) {
         $scope.metadata = tracks[playerService.currentlyPlaying()][track];
+        var duration = player.totalTime | 0;
         $timeout(function () {
-            $scope.duration = player.totalTime | 0
-        }, 200);
+            setDuration(duration)
+        }, 400);
     }
 
     function getCurrentTime() {

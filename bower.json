@@ -13,9 +13,9 @@
     "angular-ui-router": "latest",
     "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5",
     "sidr": "~1.2.1",	
-    "videogular": ">=1.1.1",
-    "videogular-controls": ">=1.1.1",
-    "videogular-buffering": ">=1.1.1",
+    "videogular": "latest",
+    "videogular-controls": "latest",
+    "videogular-buffering": "latest",
     "videogular-themes-default": "latest"
   },
   "devDependencies": {}

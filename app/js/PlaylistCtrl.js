@@ -49,7 +49,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
         };
 
         controller.onTrackComplete = function () {
-            controller.nextTrack();
+            $scope.nextTrack();
         };
 
         controller.onPlayerStateChange = function (newState) {
