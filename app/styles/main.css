@@ -7670,6 +7670,12 @@ html a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 4vw;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   color: #000000;
   font-size: 3vw;
   display: table-cell;
@@ -7686,7 +7692,21 @@ html a {
   border: none;
   cursor: pointer;
 }
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .transport-bar {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   align-self: center;
   align-content: center;
   text-align: center;
@@ -7733,6 +7753,12 @@ html a {
   text-decoration: none;
 }
 .menu-spaced {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   letter-spacing: 0.2vw;
 }
 .left-menu-button {
