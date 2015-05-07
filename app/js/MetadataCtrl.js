@@ -20,7 +20,10 @@ bdtem.controller("MetadataCtrl", function MetadataCtrl($scope, $sce, AlbumTracks
         return container && content && contentHeight >= containerHeight;
     };
 
-    function setDuration() {
+
+    $scope.duration = player.totalTime | 0
+
+    function setDuration(duration) {
         $scope.duration = duration
     }
 
