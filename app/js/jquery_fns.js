@@ -59,7 +59,7 @@ $(document).ready(function () {
             {
                 'top': '40vh',
                 'letter-spacing': '1.5vw',
-                'line-height': "2vh"
+                'line-height': "2.2vh"
             },
             500, 0, 0);
     }

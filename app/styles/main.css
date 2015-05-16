@@ -7862,16 +7862,16 @@ right-words {
   letter-spacing: 0.15em;
 }
 .menu-words {
-  border-top: transparent 20px;
-  border-bottom: transparent 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 .left-menu-words {
-  border-top: transparent 20px;
-  border-bottom: transparent 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 .right-menu-words {
-  border-top: transparent 20px;
-  border-bottom: transparent 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 .track-menu-entry {
   font-weight: 700;
@@ -7984,7 +7984,7 @@ videogular div.custom-button {
 .orb {
   cursor: pointer;
   margin: 0 auto;
-  margin-top: -10vh;
+  margin-top: -5%;
   display: block;
   z-index: 200;
   min-width: 570px;
