@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>BDTEM</title>
+
+    <style>
+        .frimage {
+            display: block;
+            margin: auto
+        }
+
+        @media screen and (max-height: 1080px) {
+
+            .sized {
+
+                height: 900px;
+            }
+        }
+
+        @media screen and (max-height: 768px) {
+            .sized {
+                height: 600px;
+            }
+        }
+
+        @media screen and (max-height: 300px) {
+
+            .sized {
+                height: 300px;
+            }
+        }
+
+        img[usemap] {
+            border: none;
+            max-width: 100%;
+            width: auto;
+        }
+    </style>
+</head>
+<body style="background: #000000;">
+
+<div>
+    <map name="fringemap" id="fringemap">
+        <area shape="rect" coords="20, 910, 340, 1080" href="http://bdtem.co.in/#" alt="BDTEM">
+        <area shape="rect" coords="1240, 880, 1600, 1040" href="http://montrealfringe.ca" alt="Montreal Fringe">
+        <area shape="rect" coords="1030, 940, 1240, 1010" href="https://twitter.com/_bdtem" alt="Twitter">
+        <area shape="rect" coords="1030, 1040, 1240, 1080" href="https://www.facebook.com/bdtemarchive" alt="Facebook">
+    </map>
+</div>
+<p>
+    <img src="images/fringe.png" class="frimage sized"
+         usemap="#fringemap">
+</p>
+
+
+<script src="bower_components/jquery/jquery.min.js"></script>
+<script src="bower_components/jQuery-rwdImageMaps/jquery.rwdImageMaps.js"></script>
+<script>
+    $(document).ready(function (e) {
+        $('img[usemap]').rwdImageMaps();
+    });
+</script>
+
+</body>
+</html>
