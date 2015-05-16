@@ -12,13 +12,21 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
         $state.go('orb');
     };
 
+    var playButton;
+
     controller.onPlayerReady = function (API) {
+
         controller.API = API;
         videoService.setVideoAPI(API);
         $timeout(function playWithDelay() {API.playPause()}, 250);
     };
 
     controller.onPlayerStateChange = function ($state) {
+        playButton = document.getElementById("videoPlay");
+        if(playButton) {
+            playButton.children[0].setAttribute("onfocus", "this.blur()");
+        }
+
         if ($state === "play") {
             playerService.getPlayer().pause();
         }

@@ -25,6 +25,9 @@ var ROTATE_CLASS = "fa-flip-horizontal";
 
 $(document).ready(function () {
 
+    //Prevent focus on play button to avoid hotkey bug:
+    document.getElementById("transportPlay").children[0].setAttribute("onfocus", "this.blur()");
+
     var $navbar = $(".navbar-fixed-top");
     var $navbarcontainer = $(".navbar-container-top");
 
