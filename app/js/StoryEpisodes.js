@@ -7,9 +7,10 @@ bdtem.value('StoryEpisodes',
             "description": "This is episode one of the BDTEM story series." +
                 "<br/>Beware, if you end up listening to it, it is <i>very silly</i>.",
             "catalog": "Ep. 1",
-            src: '../episodes/Episode_One.mp3',
+            src: null,
             type: 'audio/mpeg',
-            "tooltip": "<a class='glyphicon' href='episodes/Episode_One.mp3' download>&#xE166; &#xE175; etc</a>"
+            tooltip: "Coming soon. 07/15"
+//            "tooltip": "<a class='glyphicon' href='episodes/Episode_One.mp3' download>&#xE166; &#xE175; etc</a>"
         },
         {
             "title": "Episode 2",

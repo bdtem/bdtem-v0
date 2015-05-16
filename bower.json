@@ -16,8 +16,7 @@
     "videogular": "latest",
     "videogular-controls": "latest",
     "videogular-buffering": "latest",
-    "videogular-themes-default": "latest",
-    "jQuery-rwdImageMaps": "stowball/jQuery-rwdImageMaps#master"
+    "videogular-themes-default": "latest"
   },
   "devDependencies": {}
 }
