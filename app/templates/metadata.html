@@ -1,0 +1,43 @@
+<div class="middle-video-container">
+
+    <div class="pull-left">
+        <h3>{{ metadata.title }}</h3>
+    </div>
+
+    <div class="pull-right">
+        <h3>{{ metadata.catalog }}</h3>
+    </div>
+
+    <br/>
+    <br/>
+
+
+    <div class="pull-left">
+        <table class="sans-serif-light" style="font-size: 1.25em">
+            <tr>
+                <td style="width: 3.5vw; text-align: left">
+                    {{ currentTime | date:'mm:ss' }}
+                </td>
+
+                <td style="width: 1vw; text-align: center">
+                    /
+                </td>
+                <td style="width: 3.5vw; text-align: center">
+                    {{ duration | date:'mm:ss' }}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <br/>
+
+
+    <div id="metadataContainer" ng-class="isOverflow() ? 'metadata-content-overflow' : 'metadata-content'">
+        <div id="metadataContent" ng-bind-html="metadata.description"></div>
+    </div>
+
+</div>
+
+
+
+

@@ -1,0 +1,79 @@
+@import "variables";
+
+@sidr-width: 23vw;
+@sidr-hide-width: -@sidr-width;
+
+@sidr-top: 5vh;
+
+.sidr {
+  display: none;
+  position: absolute;
+  position: fixed;
+  top: @sidr-top;
+  max-height: (100vh - 2*@sidr-top);
+  z-index: 1000;
+
+  min-width: @sidr-width;
+  max-width: @sidr-width;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.sidr.right {
+  left: auto;
+  right: @sidr-hide-width;
+  height: 100%;
+}
+
+.sidr.left {
+  left: @sidr-hide-width;
+  right: auto;
+  height: 100%;
+  padding-right: 2vw;
+}
+
+.menu-button {
+  position: absolute;
+  display: inline;
+  top: 40vh;
+  z-index: 1000;
+  font-family: @serif-font;
+  cursor: pointer;
+
+  text-decoration: none;
+
+  &:hover, &:focus {
+    color: @text-color;
+    text-decoration: none;
+  }
+
+}
+
+.menu-spaced {
+  .noselect;
+  letter-spacing: 0.2vw;
+}
+
+.left-menu-button {
+  .menu-button;
+  padding-left: 0.5vw;
+}
+
+left-words, right-words {
+  -webkit-transition: letter-spacing 1s;
+  -moz-transition: letter-spacing 1s;
+  -ms-transition: letter-spacing 1s;
+  -o-transition: letter-spacing 1s;
+  transition: letter-spacing 1s;
+}
+
+.right-menu-button {
+  .menu-button;
+
+  float: right;
+  right: 0vw;
+
+  border-top-right-radius: 2vmin;
+  border-bottom-right-radius: 2vmin;
+  padding-right: 0.5vw;
+}

@@ -1,0 +1,87 @@
+@import "fonts";
+
+videogular vg-time-display, [videogular] vg-time-display {
+  .sans-serif-light;
+  color: #FFFFFF;
+  display: table-cell;
+  width: 75px;
+  vertical-align: middle;
+  text-align: center;
+  cursor: default;
+}
+
+#bottomBar videogular .iconButton, #bottomBar [videogular] .iconButton {
+  color: #000000;
+  font-family: 'videogular';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  background: none;
+  padding: 6px;
+  border: none;
+}
+
+#bottomBar videogular .iconButton, #bottomBar [videogular] .iconButton {
+  color: #000000;
+  font-family: 'videogular';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  background: none;
+  padding: 6px;
+  border: none;
+}
+
+#bottomBar videogular .iconButton:focus, [videogular] .iconButton:focus {
+  border: none;
+  outline: none;
+}
+
+videogular .iconButton:focus, [videogular] .iconButton:focus {
+  border: none;
+  outline: none;
+
+  -moz-outline:none;
+}
+
+#bottomBar videogular vg-controls .controls-container, #bottomBar [videogular] vg-controls .controls-container {
+  width: 100%;
+  height: 50px;
+  background-color: transparent;
+  position: absolute;
+  display: table;
+  zoom: 1;
+}
+
+#bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar {
+  background: transparent;
+}
+
+#bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar .volumeBackground {
+  background: @background;
+  border: solid @text-color 1px;
+  width: 1vw;
+  height: 14vh;
+}
+
+#bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar .volumeValue {
+  background: @text-color;
+  border: solid @text-color 1px;
+  width: 0.9vw;
+}
+
+#bottomBar videogular vg-scrub-bar div {
+  background: @background;
+}
+
+#bottomBar videogular vg-scrub-bar vg-scrub-bar-current-time {
+  background: @text-color;
+}

@@ -1,4 +1,14 @@
 @import "variables";
+@import "fonts";
+
+html, html a {
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+.autohide {
+  display: none;
+}
 
 .above-navbar {
   position: absolute;
@@ -6,6 +16,18 @@
   max-width: 8%;
   max-height: 5%;
   z-index: @zindex-navbar-fixed;
+}
+
+.bdtem-title {
+  letter-spacing: 0.75vw;
+  font-size: 3vmin;
+}
+
+.bdtem-subtitle {
+  font-weight: 100;
+  letter-spacing: 0.75vw;
+  font-size: 1.75vmin;
+  line-height: 2.5vmin;
 }
 
 .small-crest {
@@ -41,6 +63,14 @@
   text-align: center;
 }
 
+.righted {
+  align-self: right;
+  align-content: right;
+  align-items: right;
+
+  text-align: right;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -53,19 +83,42 @@
   margin-right: 15px;
 }
 
+.menu-container {
+  max-width: 33%;
+}
+
 .middle-main {
   background: @background;
-  zoom: 1;
-  min-height: 90%;
-  max-height: 90%;
   max-width: 33%;
   padding-top: 1vh;
-  padding-left: 8vw;
-  padding-right: 0px;
+  padding-right: 0;
+  line-height: 5vh;
+
+  align-content: right;
+
+  align-items: right;
+  text-align: right;
+
+}
+
+#bottomBar {
+  .centered;
+  margin: 0 auto;
+  max-width: 40vw;
 }
 
 .pad-right {
   padding-right: 1vw;
+}
+
+.padded {
+  padding-left: @pad-width;
+  padding-right: @pad-width;
+}
+
+.unpadded {
+  padding: 0;
+  margin: 0;
 }
 
 .text_line {
@@ -75,20 +128,29 @@
 .button-tooltip {
 }
 
-.buttonz {
-  display: inline-block;
+.button-font {
   font: normal normal normal 14px/1 buttonz_bdtem;
-  font-size: 4vw;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  z-index: @zindex-navbar-fixed;
-  vertical-align: middle;
+  font-size: 4vw;
 }
 
-.buttonz-small {
+.buttonz {
+  .button-font;
+}
+
+.custom-button-small {
   .buttonz;
+  .noselect;
+  color: @text-color;
   font-size: 3vw;
+  display: table-cell;
+  width: 50px;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  padding-right: 8px;
 }
 
 .progress {
@@ -99,9 +161,24 @@
   cursor: pointer;
 }
 
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .transport-bar {
+  .noselect;
   align-self: center;
   align-content: center;
   text-align: center;
   margin: 0 auto;
 }
+
+.stories {
+  padding-top: 10vh;
+}
+
