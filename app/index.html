@@ -15,22 +15,24 @@
     <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
 
+
+    <!-- Angular: -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
-
+    <!-- Videogular: -->
     <script src="bower_components/videogular/videogular.js"></script>
     <script src="bower_components/videogular-controls/vg-controls.js"></script>
     <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
 
+
     <script src="bower_components/angular-hotkeys/build/hotkeys.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
-    <!-- main app -->
+    <!-- BDTEM App: -->
     <script src="js/filters.js"></script>
-
     <script src="js/bdtem.js"></script>
     <script src="js/PlayerService.js"></script>
     <script src="js/AlbumTracks.js"></script>
@@ -40,6 +42,7 @@
     <script src="js/VideoCtrl.js"></script>
     <script src="js/MetadataCtrl.js"></script>
     <script src="js/jquery_fns.js"></script>
+
 
     <!-- build:js scripts/vendor/bootstrap.js -->
     <script src="bower_components/bootstrap/js/affix.js"></script>
@@ -52,15 +55,31 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
+    <title>Bob Dey's Tank Engine Man (BDTEM)</title>
+    <meta name="description" content="This is a web-based, multimedia digital album which tells a complete story in the form of a Contextually Comprehensive Archive.
+
+This is an interactive 'archive' through which you will participate both actively and passively in the story of BDTEM. You will do what Mark Jumper did, see what Mark Jumper saw. You will keep a record of this participation so that you can better analyze the events, their meanings, and their consequences. You will share your analysis with others, thereby participating in a broader interaction.
+
+The content will be varied in type of media, available context (metadata), and length. You have the freedom to pursue, ignore, and construct your own lines of inquiry. And you are free to jump to any conclusions you like.
+
+All content will be housed in a location that represents the 'real-world' location of the original happening and will be accompanied by metadata pop-ups that offer other kinds of context (backstory, explanations, descriptions, instructions).
+
+Like a novel, it tells a story.
+Like a song, it sings.
+Like a movie, it is played by speaking players.
+Like a game, it is to be interacted with.">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' type='text/css'>
 
+    <!-- Fonts: -->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:500,700,300' rel='stylesheet' type='text/css'>
+
+    <!-- CSS: -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/videogular.css">
+
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -107,6 +126,7 @@
     ||||<br/>
     |||||||<br/>
     ||||||||||<br/>
+
     <div class="left-menu-words" id="left-menu-words">
         Album <br/>
     </div>
@@ -223,7 +243,8 @@
 
             <vg-controls>
 
-                <vg-play-pause-button id="transportPlay" onClickPlayPause="controller.bdtemPlayPause()"></vg-play-pause-button>
+                <vg-play-pause-button id="transportPlay"
+                                      onClickPlayPause="controller.bdtemPlayPause()"></vg-play-pause-button>
 
                 <div class="custom-button-small" ng-click="prevTrack()">
                     &#xe807;
