@@ -16,7 +16,8 @@
     "videogular": "latest",
     "videogular-controls": "latest",
     "videogular-buffering": "latest",
-    "videogular-themes-default": "latest"
+    "videogular-themes-default": "latest",
+	"snap.svg": "latest"
   },
   "devDependencies": {}
 }

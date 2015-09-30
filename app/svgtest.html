@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TEST DAT SVG SON</title>
+
+  <script src="bower_components/snap.svg/dist/snap.svg.js"></script>
+
+  <script>
+
+    function randomByte() {
+      return (Math.floor(Math.random() * (0xFF)));
+    }
+
+    function randomColor() {
+      var colorString = '#';
+      for (var i = 0; i < 3; i++) {
+        var byteString = randomByte().toString(16);
+        if (byteString.length < 2) {
+          byteString = '0' + byteString;
+        }
+        colorString = colorString.concat(byteString);
+      }
+
+      return colorString;
+    }
+
+  </script>
+
+</head>
+
+<body>
+
+<svg version="1.1"
+     id="test"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0px"
+     y="0px"
+	 width="512px"
+     height="512px"
+     viewBox="0 0 512 512"
+     xml:space="preserve">
+  </svg>
+
+
+<script type="application/javascript">
+
+  //  var mySvg = Snap("#svg");
+  var mySvg = Snap.select("#test");
+
+  var centerX = 250;
+  var centerY = 250;
+  var radius = 100;
+
+  var bigCircle = mySvg.circle(centerX, centerY, radius);
+  //
+  //  var topRight = mySvg.polygon(centerX, centerY, centerX, (centerY - radius), (centerX + radius), centerY);
+  //  topRight.attr({
+  //    fill: "#F0F"
+  //  });
+  //
+  //  var bottomLeft = mySvg.polygon(centerX, centerY, (centerX - radius), centerY, centerX, (centerY + radius));
+  //  bottomLeft.attr({
+  //    fill: "#F00"
+  //  });
+  //
+  //
+  //  var topLeft = mySvg.polygon(centerX, centerY, (centerX - radius), centerY, centerX, (centerY - radius));
+  //  topLeft.attr({
+  //    fill: "#FF0"
+  //  });
+  //
+  //
+  //  var bottomRight = mySvg.polygon(centerX, centerY, (centerX + radius), centerY, centerX, (centerY + radius));
+  //  bottomRight.attr({
+  //    fill: "#00F"
+  //  });
+  //
+  //
+  //  var ourSet = new Snap.Set([topRight, bottomLeft, topLeft, bottomRight]);
+  //
+  //  var out = true;
+  //
+  //  function buildScaleTransformation() {
+  //    var scale = out ? 0 : 1;
+  //    out = !out;
+  //    return 'S' + scale + ',' + scale;
+  //  }
+  //
+  //  function animateIn() {
+  //    ourSet.animate(
+  //      {
+  //        transform: 'r720,' + centerX + ',' + centerY + buildScaleTransformation(),
+  //        fill: "#F0F"
+  //      },
+  //      5000,
+  //      animateOut
+  //    );
+  //  }
+  //
+  //  function animateOut() {
+  //    ourSet.animate(
+  //      {
+  //        transform: 'r-2160,' + centerX + ',' + centerY + buildScaleTransformation(),
+  //        fill: "#BADA55"
+  //      },
+  //      2500,
+  //      animateIn
+  //    )
+  //  }
+  //
+  //  animateIn();
+
+
+  var desiredWidth = 50;
+  var desiredHeight = 100;
+
+  var theta = Math.asin((1 - ((Math.pow(desiredWidth, 2) / (2 * Math.pow(radius, 2)))))) / 2;
+
+  var theta2 = theta;
+
+  console.log('theta ' + theta2);
+
+  var sin = Math.sin;
+  var cos = Math.cos;
+
+  var rstheta = radius * sin(theta2);
+  var rctheta = radius * cos(theta2);
+
+  console.log(rctheta);
+  console.log(rstheta);
+
+  var height = radius + desiredHeight;
+
+  var pointFiveRadians = Snap.rad(45);
+
+  var Point = function (x, y) {
+    this.x = x;
+    this.y = y;
+
+    this.transform = function (transformationMatrix) {
+      return new Point(
+        transformationMatrix.x(x, y),
+        transformationMatrix.y(x, y)
+      );
+    }
+
+  };
+
+  var Triangle = function (b1, b2, h) {
+    this.b1 = b1;
+    this.b2 = b2;
+    this.h = h;
+
+    this.transform = function (transformationMatrix) {
+      return new Triangle(
+        b1.transform(transformationMatrix),
+        b2.transform(transformationMatrix),
+        h.transform(transformationMatrix)
+      );
+    };
+
+    this.toPath = function () {
+      return [b1.x, b1.y, b2.x, b2.y, h.x, h.y];
+    }
+
+  };
+
+  var x2 = centerX + rctheta;
+  var y2 = centerY + rstheta;
+  var basePoint1 = new Point(x2, y2);
+  var basePoint2 = new Point(centerX + rstheta, centerY + rctheta);
+  var topPoint = new Point(centerX + height * cos(pointFiveRadians), centerY + height * sin(pointFiveRadians));
+  var templateTriangle = new Triangle(basePoint1, basePoint2, topPoint);
+
+
+  var topRightRotator = new Snap.Matrix().rotate(-105, centerX, centerY);
+  var bottomLeftRotator = new Snap.Matrix().rotate(75, centerX, centerY);
+
+  var points = templateTriangle.transform(topRightRotator).toPath();
+
+
+  var topRightTriangle = mySvg.polygon(points);
+  var bottomLeftTriangle = mySvg.polygon(templateTriangle.transform(bottomLeftRotator).toPath());
+
+
+  var triangleSet = new Snap.Set([topRightTriangle, bottomLeftTriangle]);
+
+
+  var rotation = -45;
+  function increaseRotation() {
+    rotation = (rotation - 45);
+    console.log(rotation);
+  }
+  increaseRotation();
+  function animateTriangles() {
+    triangleSet.animate(
+      {
+        transform: 'r' + rotation + ',' + centerX + ',' + centerY
+      },
+      500,
+      mina.easeout,
+      function loopTriangles() {
+
+        if (rotation === 0) {
+          triangleSet.attr({
+            transform: 'r' + rotation + ',' + centerX + ',' + centerY
+          });
+        }
+
+
+        increaseRotation();
+        animateTriangles();
+      }
+    );
+  }
+
+
+  //  animateTriangles();
+
+  var group = mySvg.group(bigCircle, bottomLeftTriangle, topRightTriangle);
+
+  //  var bdtemLogo = new Snap.Set([bigCircle, bottomLeftTriangle, topRightTriangle]);
+
+  var horizFilter = mySvg.filter(Snap.filter.blur(10, 5));
+  var vertFilter = mySvg.filter(Snap.filter.blur(5, 10));
+
+  var filterChild = vertFilter.node.firstChild;
+
+  var animateBlurIn = function () {
+    Snap.animate(5, 10, function (value) {
+        filterChild.attributes[0].value = value + ',' + value;
+      },
+      1000,
+      mina.bounce,
+      function () {
+        animateBlurOut();
+      });
+  };
+
+  var animateBlurOut = function () {
+    Snap.animate(10, 5, function (value) {
+        filterChild.attributes[0].value = value + ',' + value;
+      },
+      1000,
+      mina.elastic,
+      function () {
+        animateBlurIn();
+      });
+  };
+
+  animateBlurIn();
+
+  mySvg.attr({
+    filter: vertFilter
+  });
+
+
+</script>
+
+</body>
+
+</html>

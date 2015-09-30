@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
-    "util": "latest",
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
@@ -32,6 +31,6 @@
     "body-parser": "latest"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=10.0.0"
   }
 }
