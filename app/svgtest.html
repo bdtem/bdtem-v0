@@ -34,7 +34,6 @@
 <svg version="1.1"
      id="test"
      xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
      x="0px"
      y="0px"
 	 width="512px"
@@ -43,93 +42,24 @@
      xml:space="preserve">
   </svg>
 
-
 <script type="application/javascript">
 
-  //  var mySvg = Snap("#svg");
-  var mySvg = Snap.select("#test");
+  var paper = Snap.select("#test");
+
 
   var centerX = 250;
   var centerY = 250;
   var radius = 100;
 
-  var bigCircle = mySvg.circle(centerX, centerY, radius);
-  //
-  //  var topRight = mySvg.polygon(centerX, centerY, centerX, (centerY - radius), (centerX + radius), centerY);
-  //  topRight.attr({
-  //    fill: "#F0F"
-  //  });
-  //
-  //  var bottomLeft = mySvg.polygon(centerX, centerY, (centerX - radius), centerY, centerX, (centerY + radius));
-  //  bottomLeft.attr({
-  //    fill: "#F00"
-  //  });
-  //
-  //
-  //  var topLeft = mySvg.polygon(centerX, centerY, (centerX - radius), centerY, centerX, (centerY - radius));
-  //  topLeft.attr({
-  //    fill: "#FF0"
-  //  });
-  //
-  //
-  //  var bottomRight = mySvg.polygon(centerX, centerY, (centerX + radius), centerY, centerX, (centerY + radius));
-  //  bottomRight.attr({
-  //    fill: "#00F"
-  //  });
-  //
-  //
-  //  var ourSet = new Snap.Set([topRight, bottomLeft, topLeft, bottomRight]);
-  //
-  //  var out = true;
-  //
-  //  function buildScaleTransformation() {
-  //    var scale = out ? 0 : 1;
-  //    out = !out;
-  //    return 'S' + scale + ',' + scale;
-  //  }
-  //
-  //  function animateIn() {
-  //    ourSet.animate(
-  //      {
-  //        transform: 'r720,' + centerX + ',' + centerY + buildScaleTransformation(),
-  //        fill: "#F0F"
-  //      },
-  //      5000,
-  //      animateOut
-  //    );
-  //  }
-  //
-  //  function animateOut() {
-  //    ourSet.animate(
-  //      {
-  //        transform: 'r-2160,' + centerX + ',' + centerY + buildScaleTransformation(),
-  //        fill: "#BADA55"
-  //      },
-  //      2500,
-  //      animateIn
-  //    )
-  //  }
-  //
-  //  animateIn();
-
+  var circle = paper.circle(centerX, centerY, radius);
 
   var desiredWidth = 50;
   var desiredHeight = 100;
 
   var theta = Math.asin((1 - ((Math.pow(desiredWidth, 2) / (2 * Math.pow(radius, 2)))))) / 2;
 
-  var theta2 = theta;
-
-  console.log('theta ' + theta2);
-
-  var sin = Math.sin;
-  var cos = Math.cos;
-
-  var rstheta = radius * sin(theta2);
-  var rctheta = radius * cos(theta2);
-
-  console.log(rctheta);
-  console.log(rstheta);
+  var rstheta = radius * Math.sin(theta);
+  var rctheta = radius * Math.cos(theta);
 
   var height = radius + desiredHeight;
 
@@ -167,22 +97,16 @@
 
   };
 
-  var x2 = centerX + rctheta;
-  var y2 = centerY + rstheta;
-  var basePoint1 = new Point(x2, y2);
+  var basePoint1 = new Point(centerX + rctheta, centerY + rstheta);
   var basePoint2 = new Point(centerX + rstheta, centerY + rctheta);
-  var topPoint = new Point(centerX + height * cos(pointFiveRadians), centerY + height * sin(pointFiveRadians));
+  var topPoint = new Point(centerX + height * Math.cos(pointFiveRadians), centerY + height * Math.sin(pointFiveRadians));
   var templateTriangle = new Triangle(basePoint1, basePoint2, topPoint);
 
+  var topRightRotator = new Snap.Matrix().rotate(-110, centerX, centerY);
+  var bottomLeftRotator = new Snap.Matrix().rotate(70, centerX, centerY);
 
-  var topRightRotator = new Snap.Matrix().rotate(-105, centerX, centerY);
-  var bottomLeftRotator = new Snap.Matrix().rotate(75, centerX, centerY);
-
-  var points = templateTriangle.transform(topRightRotator).toPath();
-
-
-  var topRightTriangle = mySvg.polygon(points);
-  var bottomLeftTriangle = mySvg.polygon(templateTriangle.transform(bottomLeftRotator).toPath());
+  var topRightTriangle = paper.polygon(templateTriangle.transform(topRightRotator).toPath());
+  var bottomLeftTriangle = paper.polygon(templateTriangle.transform(bottomLeftRotator).toPath());
 
 
   var triangleSet = new Snap.Set([topRightTriangle, bottomLeftTriangle]);
@@ -216,45 +140,110 @@
     );
   }
 
+  Snap.filter.turbulence = function () {
+    return '<feTurbulence stitchTiles="stitch" baseFrequency="0.05" type="fractalNoise"/>';
+  };
 
-  //  animateTriangles();
 
-  var group = mySvg.group(bigCircle, bottomLeftTriangle, topRightTriangle);
+  var group = paper.group(circle, bottomLeftTriangle, topRightTriangle);
 
-  //  var bdtemLogo = new Snap.Set([bigCircle, bottomLeftTriangle, topRightTriangle]);
 
-  var horizFilter = mySvg.filter(Snap.filter.blur(10, 5));
-  var vertFilter = mySvg.filter(Snap.filter.blur(5, 10));
+  var blurFilter = Snap.filter.blur(5, 10);
+//
+//  var darkenFilter = Snap.filter.brightness(-100);
+//  var contrastFilter = Snap.filter.contrast(1);
 
-  var filterChild = vertFilter.node.firstChild;
 
-  var animateBlurIn = function () {
-    Snap.animate(5, 10, function (value) {
-        filterChild.attributes[0].value = value + ',' + value;
+  var comboFilter = paper.filter([
+      blurFilter,
+//      Snap.filter.turbulence(),
+//      darkenFilter,
+//      contrastFilter
+    ].join('\n')
+  );
+
+  var blurChild = comboFilter.node.childNodes[0];
+//  var turbulenceChild = comboFilter.node.childNodes[2];
+
+
+  function randomTranslate() {
+    group.animate(
+      {
+        transform: 't' + Math.random() * 5 + ',' + Math.random() * 5
       },
-      1000,
-      mina.bounce,
+      123,
+//      mina.bounce,
+      function loopTranslate() {
+        randomTranslate();
+      }
+    );
+  }
+//    randomTranslate();
+
+
+  function randomBlur() {
+    return Math.random() * 5 + 5;
+  }
+  var blurStart = randomBlur();
+  var blurStop = randomBlur();
+
+  function alterBlur(value) {
+    blurChild.attributes[0].value = value;
+//    turbulenceChild.attributes[1].value = value2 + ',' + value2;
+
+//      clone.attr({fill: randomColor()});
+  }
+
+  function animateBlurIn() {
+
+    blurStop = randomBlur();
+
+    Snap.animate(
+      blurStart,
+      blurStop,
+      alterBlur,
+        1000,
+      mina.easeinout,
       function () {
         animateBlurOut();
       });
-  };
+  }
 
-  var animateBlurOut = function () {
-    Snap.animate(10, 5, function (value) {
-        filterChild.attributes[0].value = value + ',' + value;
-      },
+  function animateBlurOut() {
+    blurStart = randomBlur();
+
+    Snap.animate(
+      blurStop,
+      blurStart,
+      alterBlur,
       1000,
-      mina.elastic,
+      mina.easeinout,
       function () {
         animateBlurIn();
       });
-  };
+  }
+
+//  var clone = group.clone();
+//
+//  comboFilter.attr({
+//    mask: clone
+//  });
+//
+//  group.attr({
+//    mask: clone
+//  });
+
+  group.attr({
+    filter: comboFilter
+  });
+
+//
+//  clone.attr({
+//    fill: '#FFFFFF',
+//    filter: comboFilter
+//  });
 
   animateBlurIn();
-
-  mySvg.attr({
-    filter: vertFilter
-  });
 
 
 </script>
