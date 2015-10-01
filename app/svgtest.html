@@ -141,7 +141,7 @@
   }
 
   Snap.filter.turbulence = function () {
-    return '<feTurbulence stitchTiles="stitch" baseFrequency="0.05" type="fractalNoise"/>';
+    return '<feTurbulence stitchTiles="stitch"  baseFrequency="0.05" numOctaves="2" type="fractalNoise"/>';
   };
 
 
@@ -149,21 +149,28 @@
 
 
   var blurFilter = Snap.filter.blur(5, 10);
-//
-//  var darkenFilter = Snap.filter.brightness(-100);
-//  var contrastFilter = Snap.filter.contrast(1);
+
+  var darkenFilter = Snap.filter.brightness(0);
+  var contrastFilter = Snap.filter.contrast(1);
+
+
+  var blurAndTurbulence = paper.filter([
+      blurFilter,
+      Snap.filter.turbulence()
+    ].join('\n')
+  );
 
 
   var comboFilter = paper.filter([
       blurFilter,
-//      Snap.filter.turbulence(),
-//      darkenFilter,
-//      contrastFilter
+      darkenFilter,
+      contrastFilter
     ].join('\n')
   );
 
   var blurChild = comboFilter.node.childNodes[0];
-//  var turbulenceChild = comboFilter.node.childNodes[2];
+  var hueRotateChild = comboFilter.node.childNodes[6];
+  var turbulenceChild = blurAndTurbulence.node.childNodes[2];
 
 
   function randomTranslate() {
@@ -178,20 +185,22 @@
       }
     );
   }
-//    randomTranslate();
+  //    randomTranslate();
 
 
   function randomBlur() {
-    return Math.random() * 5 + 5;
+    return Math.random() * 16 + 4;
   }
   var blurStart = randomBlur();
   var blurStop = randomBlur();
 
   function alterBlur(value) {
-    blurChild.attributes[0].value = value;
-//    turbulenceChild.attributes[1].value = value2 + ',' + value2;
+    var value2 = value + ',' + value;
+    blurAndTurbulence.node.firstChild.attributes[0].value = value2;
+    blurChild.attributes[0].value = value2;
+    turbulenceChild.attributes[1].value = value + ',' + value;
 
-//      clone.attr({fill: randomColor()});
+    clone.attr({fill: randomColor()});
   }
 
   function animateBlurIn() {
@@ -202,8 +211,8 @@
       blurStart,
       blurStop,
       alterBlur,
-        1000,
-      mina.easeinout,
+      1000,
+//      mina.bounce,
       function () {
         animateBlurOut();
       });
@@ -217,31 +226,25 @@
       blurStart,
       alterBlur,
       1000,
-      mina.easeinout,
+//      mina.bounce,
       function () {
         animateBlurIn();
       });
   }
 
-//  var clone = group.clone();
-//
-//  comboFilter.attr({
-//    mask: clone
-//  });
-//
-//  group.attr({
-//    mask: clone
-//  });
+  var clone = group.clone();
 
-  group.attr({
-    filter: comboFilter
+  clone.attr({
+    transform: 's30',
+    fill: '#FFFFFF',
+    filter: blurAndTurbulence
   });
 
-//
-//  clone.attr({
-//    fill: '#FFFFFF',
-//    filter: comboFilter
-//  });
+  group.attr({
+    mask: clone,
+    fill: '#000',
+    filter: comboFilter
+  });
 
   animateBlurIn();
 
