@@ -2,7 +2,7 @@
 
 bdtem.service('playerService', function ($rootScope) {
     var bdtemplayer;
-    var currentTrack = 0;
+    var currentTrack = -1;
 
     var ALBUM_WILDCARD = "bdtem-track";
     var EPISODE_WILDCARD = "story-episode";
