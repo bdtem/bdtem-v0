@@ -43,6 +43,7 @@
   </svg>
 
 <script type="application/javascript">
+  'use strict';
 
   var paper = Snap.select("#test");
 
@@ -109,7 +110,16 @@
   var bottomLeftTriangle = paper.polygon(templateTriangle.transform(bottomLeftRotator).toPath());
 
 
-  var group = paper.group(circle, bottomLeftTriangle, topRightTriangle);
+  var padLeftPixel = paper.polyline(50, 50);
+  padLeftPixel.attr({
+    fill: '#FFF'
+  });
+  var padRightPixel = paper.polyline(400, 400);
+  padRightPixel.attr({
+    fill: '#FFF'
+  });
+
+  var group = paper.group(circle, bottomLeftTriangle, topRightTriangle, padLeftPixel, padRightPixel);
 
 
   Snap.filter.turbulence = function () {
@@ -137,8 +147,8 @@
   );
 
   var blurChild = comboFilter.node.childNodes[0];
-  var hueRotateChild = comboFilter.node.childNodes[6];
   var turbulenceChild = blurAndTurbulence.node.childNodes[0];
+  var brightnessChild = comboFilter.node.childNodes[2];
 
 
   var scalingFactor = 20;
@@ -167,7 +177,7 @@
     var value2 = value + ',' + value;
 //    blurAndTurbulence.node.firstChild.attributes[1].value = value2;
     blurChild.attributes[0].value = value2;
-    var scalingFactor = 1/8;
+    var scalingFactor = 1 / 8;
     turbulenceChild.attributes[1].value = Math.random() / scalingFactor + ',' + Math.random() / scalingFactor;
 
     cloneMask.attr({fill: randomColor()});
@@ -203,19 +213,21 @@
   }
 
   var sideLength = height + 2 * radius;
-  //
-  //    var maskRect = paper.rect(centerX - height, centerY - height, sideLength, sideLength);
-  //    maskRect.attr({
-  //      fill: '#EEEEEE'
-  //    });
-  //
-      var cloneMask = group.clone();
 
-      cloneMask.attr({
-  //      transform: 'S30',
-        fill: '#FFFFFF',
-        filter: blurAndTurbulence
-      });
+//
+//  var maskRect = paper.rect(centerX - height, centerY - height, sideLength, sideLength);
+//  maskRect.attr({
+//    fill: '#EEEEEE'
+//  });
+
+
+    var cloneMask = group.clone();
+
+    cloneMask.attr({
+            transform: 's1.25',
+      fill: '#FFFFFF',
+      filter: blurAndTurbulence
+    });
 
 
   group.attr({
@@ -225,18 +237,21 @@
   });
 
   animateBlurIn();
-
-  group.mouseenter(function () {
-    cloneMask.attr({
-      fill: '#CCC'
-    });
-  });
-
-  group.mouseleave(function () {
-    cloneMask.attr({
-      fill: '#FFF'
-    });
-  });
+  //
+  //  group.mouseover(function () {
+  //    var childNodes = brightnessChild.childNodes;
+  //
+  //
+  //    for (var node in childNodes) {
+  //      this.attributes[1] = 1;
+  //    }
+  //  });
+  //
+  //  group.unmouseover(function () {
+  //    brightnessChild.childNodes.forEach(function () {
+  //      this.attributes[1] = 0;
+  //    })
+  //  });
 
 </script>
 
