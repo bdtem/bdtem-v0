@@ -159,7 +159,7 @@
   /* === TRANSLATION */
   /* ====================================================================================================*/
 
-  var translactionScalingFactor = 20;
+  var translactionScalingFactor = 5;
   function randomTranslate() {
     group.animate(
       {
@@ -180,7 +180,7 @@
   /* ====================================================================================================*/
 
 
-  var blurScalingFactor = 2;
+  var blurScalingFactor = 1.5;
   function randomBlur() {
     return Math.random() * blurScalingFactor + 4;
   }
@@ -257,13 +257,13 @@
 //        this.attributes[1] = 1;
 //      }
 
-    blurScalingFactor = 4;
+//    blurXScalingFactor = 4;
     turbulenceScalingFactor = 4;
 
   });
 
   group.mouseout(function () {
-    blurScalingFactor = 16;
+//    blurXScalingFactor = 2;
     turbulenceScalingFactor = (1 / 8);
   });
 
