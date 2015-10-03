@@ -122,6 +122,10 @@
   var group = paper.group(circle, bottomLeftTriangle, topRightTriangle, padLeftPixel, padRightPixel);
 
 
+  /* ====================================================================================================*/
+  /* === FILTERS */
+  /* ====================================================================================================*/
+
   Snap.filter.turbulence = function () {
     return '<feTurbulence stitchTiles="stitch"  baseFrequency="0.05" numOctaves="2" type="fractalNoise"/>';
   };
@@ -151,11 +155,15 @@
   var brightnessChild = comboFilter.node.childNodes[2];
 
 
-  var scalingFactor = 20;
+  /* ====================================================================================================*/
+  /* === TRANSLATION */
+  /* ====================================================================================================*/
+
+  var translactionScalingFactor = 20;
   function randomTranslate() {
     group.animate(
       {
-        transform: 't' + Math.random() * scalingFactor + ',' + Math.random() * scalingFactor
+        transform: 't' + Math.random() * translactionScalingFactor + ',' + Math.random() * translactionScalingFactor
       },
       500,
       mina.easeinout,
@@ -167,13 +175,20 @@
   randomTranslate();
 
 
+  /* ====================================================================================================*/
+  /* === ANIMATIONS */
+  /* ====================================================================================================*/
+
+
+  var blurScalingFactor = 2;
   function randomBlur() {
-    return Math.random() * 2 + 4;
+    return Math.random() * blurScalingFactor + 4;
   }
   var blurStart = randomBlur();
   var blurStop = randomBlur();
 
   var turbulenceScalingFactor = 1 / 8;
+
   function alterBlur(value) {
     blurChild.attributes[0].value = value + ',' + value;
 
@@ -191,8 +206,8 @@
       blurStop,
       alterBlur,
       1000,
-      mina.bounce,
-      function () {
+      mina.easeinout,
+      function loopBlurOut() {
         animateBlurOut();
       });
   }
@@ -204,23 +219,22 @@
       blurStop,
       blurStart,
       alterBlur,
-      1000,
+      500,
       mina.bounce,
-      function () {
+      function loopBlurIn() {
         animateBlurIn();
       });
   }
 
-  var sideLength = height + 2 * radius;
+  animateBlurIn();
 
-  //
-  //  var maskRect = paper.rect(centerX - height, centerY - height, sideLength, sideLength);
-  //  maskRect.attr({
-  //    fill: '#EEEEEE'
-  //  });
 
+  /* ====================================================================================================*/
+  /* === MASKING AND ATTRIBUTES */
+  /* ====================================================================================================*/
 
   var cloneMask = group.clone();
+
 
   cloneMask.attr({
     transform: 's1.25',
@@ -228,14 +242,11 @@
     filter: blurAndTurbulence
   });
 
-
   group.attr({
     mask: cloneMask,
     fill: '#000',
     filter: comboFilter
   });
-
-  animateBlurIn();
 
   group.mouseover(function () {
 
@@ -246,12 +257,13 @@
 //        this.attributes[1] = 1;
 //      }
 
+    blurScalingFactor = 4;
     turbulenceScalingFactor = 4;
 
   });
 
-
   group.mouseout(function () {
+    blurScalingFactor = 16;
     turbulenceScalingFactor = (1 / 8);
   });
 
