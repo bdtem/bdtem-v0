@@ -36,9 +36,9 @@
      xmlns="http://www.w3.org/2000/svg"
      x="0px"
      y="0px"
-	 width="512px"
-     height="512px"
-     viewBox="0 0 512 512"
+	 width="700"
+     height="700"
+     viewBox="0 0 512 512" preserveAspectRatio="xMidYMid"
      xml:space="preserve">
   </svg>
 
@@ -109,57 +109,25 @@
   var bottomLeftTriangle = paper.polygon(templateTriangle.transform(bottomLeftRotator).toPath());
 
 
-  var triangleSet = new Snap.Set([topRightTriangle, bottomLeftTriangle]);
+  var group = paper.group(circle, bottomLeftTriangle, topRightTriangle);
 
-
-  var rotation = -45;
-  function increaseRotation() {
-    rotation = (rotation - 45);
-    console.log(rotation);
-  }
-  increaseRotation();
-  function animateTriangles() {
-    triangleSet.animate(
-      {
-        transform: 'r' + rotation + ',' + centerX + ',' + centerY
-      },
-      500,
-      mina.easeout,
-      function loopTriangles() {
-
-        if (rotation === 0) {
-          triangleSet.attr({
-            transform: 'r' + rotation + ',' + centerX + ',' + centerY
-          });
-        }
-
-
-        increaseRotation();
-        animateTriangles();
-      }
-    );
-  }
 
   Snap.filter.turbulence = function () {
     return '<feTurbulence stitchTiles="stitch"  baseFrequency="0.05" numOctaves="2" type="fractalNoise"/>';
   };
 
 
-  var group = paper.group(circle, bottomLeftTriangle, topRightTriangle);
-
-
   var blurFilter = Snap.filter.blur(5, 10);
 
   var darkenFilter = Snap.filter.brightness(0);
   var contrastFilter = Snap.filter.contrast(1);
+  var turbulenceFilter = Snap.filter.turbulence();
 
 
-  var blurAndTurbulence = paper.filter([
-      blurFilter,
-      Snap.filter.turbulence()
-    ].join('\n')
+  var blurAndTurbulence = paper.filter(
+    turbulenceFilter,
+    blurFilter
   );
-
 
   var comboFilter = paper.filter([
       blurFilter,
@@ -170,37 +138,39 @@
 
   var blurChild = comboFilter.node.childNodes[0];
   var hueRotateChild = comboFilter.node.childNodes[6];
-  var turbulenceChild = blurAndTurbulence.node.childNodes[2];
+  var turbulenceChild = blurAndTurbulence.node.childNodes[0];
 
 
+  var scalingFactor = 20;
   function randomTranslate() {
     group.animate(
       {
-        transform: 't' + Math.random() * 5 + ',' + Math.random() * 5
+        transform: 't' + Math.random() * scalingFactor + ',' + Math.random() * scalingFactor
       },
-      123,
-//      mina.bounce,
+      500,
+      mina.easeinout,
       function loopTranslate() {
         randomTranslate();
       }
     );
   }
-  //    randomTranslate();
+  randomTranslate();
 
 
   function randomBlur() {
-    return Math.random() * 16 + 4;
+    return Math.random() * 16 + 8;
   }
   var blurStart = randomBlur();
   var blurStop = randomBlur();
 
   function alterBlur(value) {
     var value2 = value + ',' + value;
-    blurAndTurbulence.node.firstChild.attributes[0].value = value2;
+//    blurAndTurbulence.node.firstChild.attributes[1].value = value2;
     blurChild.attributes[0].value = value2;
-    turbulenceChild.attributes[1].value = value + ',' + value;
+    var scalingFactor = 1/8;
+    turbulenceChild.attributes[1].value = Math.random() / scalingFactor + ',' + Math.random() / scalingFactor;
 
-    clone.attr({fill: randomColor()});
+    cloneMask.attr({fill: randomColor()});
   }
 
   function animateBlurIn() {
@@ -212,7 +182,7 @@
       blurStop,
       alterBlur,
       1000,
-//      mina.bounce,
+      mina.bounce,
       function () {
         animateBlurOut();
       });
@@ -226,28 +196,47 @@
       blurStart,
       alterBlur,
       1000,
-//      mina.bounce,
+      mina.bounce,
       function () {
         animateBlurIn();
       });
   }
 
-  var clone = group.clone();
+  var sideLength = height + 2 * radius;
+  //
+  //    var maskRect = paper.rect(centerX - height, centerY - height, sideLength, sideLength);
+  //    maskRect.attr({
+  //      fill: '#EEEEEE'
+  //    });
+  //
+      var cloneMask = group.clone();
 
-  clone.attr({
-    transform: 's30',
-    fill: '#FFFFFF',
-    filter: blurAndTurbulence
-  });
+      cloneMask.attr({
+  //      transform: 'S30',
+        fill: '#FFFFFF',
+        filter: blurAndTurbulence
+      });
+
 
   group.attr({
-    mask: clone,
+    mask: cloneMask,
     fill: '#000',
     filter: comboFilter
   });
 
   animateBlurIn();
 
+  group.mouseenter(function () {
+    cloneMask.attr({
+      fill: '#CCC'
+    });
+  });
+
+  group.mouseleave(function () {
+    cloneMask.attr({
+      fill: '#FFF'
+    });
+  });
 
 </script>
 
