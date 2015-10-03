@@ -114,7 +114,7 @@
   padLeftPixel.attr({
     fill: '#FFF'
   });
-  var padRightPixel = paper.polyline(400, 400);
+  var padRightPixel = paper.polyline(1000, 400);
   padRightPixel.attr({
     fill: '#FFF'
   });
@@ -168,17 +168,16 @@
 
 
   function randomBlur() {
-    return Math.random() * 16 + 8;
+    return Math.random() * 2 + 4;
   }
   var blurStart = randomBlur();
   var blurStop = randomBlur();
 
+  var turbulenceScalingFactor = 1 / 8;
   function alterBlur(value) {
-    var value2 = value + ',' + value;
-//    blurAndTurbulence.node.firstChild.attributes[1].value = value2;
-    blurChild.attributes[0].value = value2;
-    var scalingFactor = 1 / 8;
-    turbulenceChild.attributes[1].value = Math.random() / scalingFactor + ',' + Math.random() / scalingFactor;
+    blurChild.attributes[0].value = value + ',' + value;
+
+    turbulenceChild.attributes[1].value = Math.random() / turbulenceScalingFactor + ',' + Math.random() / turbulenceScalingFactor;
 
     cloneMask.attr({fill: randomColor()});
   }
@@ -214,20 +213,20 @@
 
   var sideLength = height + 2 * radius;
 
-//
-//  var maskRect = paper.rect(centerX - height, centerY - height, sideLength, sideLength);
-//  maskRect.attr({
-//    fill: '#EEEEEE'
-//  });
+  //
+  //  var maskRect = paper.rect(centerX - height, centerY - height, sideLength, sideLength);
+  //  maskRect.attr({
+  //    fill: '#EEEEEE'
+  //  });
 
 
-    var cloneMask = group.clone();
+  var cloneMask = group.clone();
 
-    cloneMask.attr({
-            transform: 's1.25',
-      fill: '#FFFFFF',
-      filter: blurAndTurbulence
-    });
+  cloneMask.attr({
+    transform: 's1.25',
+    fill: '#FFFFFF',
+    filter: blurAndTurbulence
+  });
 
 
   group.attr({
@@ -237,21 +236,24 @@
   });
 
   animateBlurIn();
-  //
-  //  group.mouseover(function () {
-  //    var childNodes = brightnessChild.childNodes;
-  //
-  //
-  //    for (var node in childNodes) {
-  //      this.attributes[1] = 1;
-  //    }
-  //  });
-  //
-  //  group.unmouseover(function () {
-  //    brightnessChild.childNodes.forEach(function () {
-  //      this.attributes[1] = 0;
-  //    })
-  //  });
+
+  group.mouseover(function () {
+
+//      var childNodes = brightnessChild.childNodes;
+//
+//
+//      for (var node in childNodes) {
+//        this.attributes[1] = 1;
+//      }
+
+    turbulenceScalingFactor = 4;
+
+  });
+
+
+  group.mouseout(function () {
+    turbulenceScalingFactor = (1 / 8);
+  });
 
 </script>
 
