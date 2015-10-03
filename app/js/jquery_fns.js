@@ -85,7 +85,7 @@ $(document).ready(function () {
             tracksMenuToggle.removeClass(ROTATE_CLASS);
             animateOut(tracksMenuToggle);
             leftWords.addClass('left-menu-words');
-            leftWords.css({display: 'inline' });
+            leftWords.css({display: 'block' });
         },
         renaming: true,
         body: 'left'
@@ -109,7 +109,7 @@ $(document).ready(function () {
             animateOut(storyMenuToggle);
 
             rightWords.addClass('right-menu-words');
-            rightWords.css({display: 'inline'});
+            rightWords.css({display: 'block'});
         },
         renaming: true,
         body: 'right'
