@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TEST DAT BRANCHING SON</title>
+
+
+  <script src="bower_components/snap.svg/dist/snap.svg.js"></script>
+  <script src="js/svg_branching.js"></script>
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' type='text/css'>
+
+
+</head>
+<body style="background: black">
+
+<svg version="1.1"
+     id="test"
+     xmlns="http://www.w3.org/2000/svg"
+     x="0px"
+     y="0px"
+	 width="700"
+     height="700"
+     viewBox="0 0 512 512" preserveAspectRatio="xMidYMid"
+     xml:space="preserve">
+  </svg>
+
+<script>
+
+  var paper = Snap.select('#test');
+
+
+  function buildBranchLine(x1, y1, x2, y2) {
+    var line = group.line(x1, y1, x2, y2);
+    line.attr({stroke: '#FFF', 'stroke-width': 2});
+    return line;
+  }
+
+  var Branch = function (startX, startY, endX, endY, text) {
+    var branchLine = buildBranchLine(startX, startY, startX, startY);
+
+
+    var textNode;
+    if (text) {
+      textNode = buildTextNode(text, startX, startY);
+    }
+
+    function animateBranch(line) {
+      Snap.animate(
+        startX,
+        endX,
+        text ? updateHorizontalWithText : updateHorizontal,
+        500,
+        mina.easeout
+      );
+
+      function updateHorizontal(value) {
+        line.attr({x2: value});
+      }
+
+      function updateHorizontalWithText(value) {
+        textNode.attr({x: value});
+        updateHorizontal(value);
+      }
+    }
+
+    animateBranch(branchLine);
+    return branchLine;
+  };
+
+  var BranchGroup = function (group) {
+    var bBox = group.getBBox();
+    var startY = bBox.y2;
+    var startX = bBox.cx;
+    var branchLength = 100;
+
+
+    this.makeBranchTo = function (x, y, branchesOnLine) {
+      var endY = y;
+      var yDistance = (endY - startY);
+      var endX = x;
+      var xDistance = (endX - startX);
+
+      var isVertical = yDistance > 0 && xDistance == 0;
+
+      var branchPoints = branchesOnLine > 0 ? buildBranchPoints() : [];
+
+      function buildBranchPoints() {
+        var branchPoints = new Array(branchesOnLine);
+        for (var i = 1; i <= branchesOnLine; i++) {
+          branchPoints[i - 1] = startY + (i / branchesOnLine) * yDistance
+        }
+        return branchPoints
+      }
+
+      function animateBranch(line) {
+        Snap.animate(
+          startY,
+          endY,
+          isVertical ? updateVertical : updateHorizontal,
+          1000
+        );
+
+
+        function updateHorizontal(value) {
+          line.attr({x2: value});
+        }
+
+        var currentBranch = 0;
+
+        function updateVertical(value) {
+          line.attr({y2: value});
+
+          if (currentBranch < branchesOnLine && value >= branchPoints[currentBranch]) {
+            ++currentBranch;
+            group.append(new Branch(x, value, x + branchLength, value, Math.random().toString(16).substring(2, 10)));
+          }
+        }
+
+      }
+
+      var line = buildBranchLine(bBox.cx, startY, bBox.cx, endY);
+      animateBranch(line);
+    };
+
+
+  };
+
+
+  function buildTextNode(text, centerX, y) {
+    var textNode = paper.text(-1024, -1024, text);
+    var textBBox = textNode.getBBox();
+    var height = textBBox.height;
+    var width = textBBox.width;
+    textNode.attr({
+      'font-family': 'Libre Baskerville',
+      x: (centerX),
+      y: (y + height / 4),
+      fill: '#FFF'
+    });
+    return textNode;
+  }
+
+
+  function graveButton(x, y, radius, text, numberOfCircles) {
+    numberOfCircles = numberOfCircles ? numberOfCircles : 3;
+
+    var group = paper.group();
+    var whiteMultiple = 0xFFFFFF / numberOfCircles;
+    for (var i = 0; i < numberOfCircles; i++) {
+      var fraction = ((numberOfCircles - i) / (numberOfCircles));
+
+      var circle = paper.circle(x, y, (fraction * radius));
+
+      var computedColor = '#' + Math.ceil((numberOfCircles - i) * whiteMultiple).toString(16);
+      circle.attr({fill: computedColor});
+
+      group.append(circle);
+    }
+
+    var bBox = group.getBBox();
+    var centerX = bBox.cx;
+
+    return group;
+
+    var textNode = buildTextNode(text, centerX, bBox.y2);
+    group.append(textNode);
+  }
+
+
+  var blurFilter = paper.filter(Snap.filter.blur(1, 1));
+
+  var group = graveButton(150, 100, 100, 'ello', 3);
+  group.attr({filter: blurFilter});
+
+  var branchButton = new BranchGroup(group);
+  branchButton.makeBranchTo(150, 490, 10, 4);
+
+</script>
+
+
+</body>
+</html>
