@@ -36,21 +36,45 @@
   }
 
   var Branch = function (startX, startY, endX, endY, text) {
-    var branchLine = buildBranchLine(startX, startY, startX, startY);
+
+    this.startX = startX;
+    this.startY = startY;
+    this.endX = endX;
+
+    this.branchLine = buildBranchLine(startX, startY, startX, startY);
 
 
     var textNode;
     if (text) {
-      textNode = buildTextNode(text, startX, startY);
+      textNode = buildTextNode(text, startX, startY, false, true);
     }
 
-    function animateBranch(line) {
+    this.destroyBranch = function () {
+      this.animateBranch(this.branchLine, this.endX, this.startX, true);
+    };
+
+    this.animateBranch = function (line, from, to, destroying) {
+      var branchLine = this.branchLine;
+      to = to || endX;
+      from = from || startX;
       Snap.animate(
-        startX,
-        endX,
+        from,
+        to,
         text ? updateHorizontalWithText : updateHorizontal,
-        500,
-        mina.easeout
+        250,
+        mina.easeout,
+        destroying ? function () {
+          branchLine.remove();
+          if (textNode) {
+            textNode.animate(
+              {opacity: 0},
+              250,
+              function () {
+                textNode.remove()
+              }
+            );
+          }
+        } : null
       );
 
       function updateHorizontal(value) {
@@ -61,10 +85,10 @@
         textNode.attr({x: value});
         updateHorizontal(value);
       }
-    }
+    };
 
-    animateBranch(branchLine);
-    return branchLine;
+    this.animateBranch(this.branchLine);
+    return this;
   };
 
   var BranchGroup = function (group) {
@@ -73,6 +97,21 @@
     var startX = bBox.cx;
     var branchLength = 100;
 
+    var trunk;
+    var branches = [];
+
+    this.destroyBranch = function () {
+      branches.forEach(function (elem) {
+        elem.destroyBranch();
+      });
+      trunk.animate(
+        {opacity: 0},
+        500,
+        function () {
+          trunk.remove();
+        }
+      );
+    };
 
     this.makeBranchTo = function (x, y, branchesOnLine) {
       var endY = y;
@@ -112,29 +151,33 @@
 
           if (currentBranch < branchesOnLine && value >= branchPoints[currentBranch]) {
             ++currentBranch;
-            group.append(new Branch(x, value, x + branchLength, value, Math.random().toString(16).substring(2, 10)));
+            var branch = new Branch(x, value, x + branchLength, value, Math.random().toString(16).substring(2, 10));
+            branches.push(branch);
+            group.append(branch.branchLine);
           }
         }
 
       }
 
-      var line = buildBranchLine(bBox.cx, startY, bBox.cx, endY);
-      animateBranch(line);
+      trunk = buildBranchLine(bBox.cx, startY, bBox.cx, endY);
+      animateBranch(trunk);
+
+      return this;
     };
 
 
   };
 
 
-  function buildTextNode(text, centerX, y) {
+  function buildTextNode(text, x, y, centerX, centerY) {
     var textNode = paper.text(-1024, -1024, text);
     var textBBox = textNode.getBBox();
     var height = textBBox.height;
     var width = textBBox.width;
     textNode.attr({
       'font-family': 'Libre Baskerville',
-      x: (centerX),
-      y: (y + height / 4),
+      x: centerX ? (x - width / 2) : x,
+      y: centerY ? (y + height / 2) : y,
       fill: '#FFF'
     });
     return textNode;
@@ -142,7 +185,7 @@
 
 
   function graveButton(x, y, radius, text, numberOfCircles) {
-    numberOfCircles = numberOfCircles ? numberOfCircles : 3;
+    numberOfCircles = numberOfCircles || 3;
 
     var group = paper.group();
     var whiteMultiple = 0xFFFFFF / numberOfCircles;
@@ -160,20 +203,33 @@
     var bBox = group.getBBox();
     var centerX = bBox.cx;
 
-    return group;
-
-    var textNode = buildTextNode(text, centerX, bBox.y2);
+    var textNode = buildTextNode(text, centerX, bBox.y2 + 20, true);
+    textNode.attr({filter: null});
     group.append(textNode);
+
+    return group;
   }
 
 
   var blurFilter = paper.filter(Snap.filter.blur(1, 1));
 
-  var group = graveButton(150, 100, 100, 'ello', 3);
+  var group = graveButton(150, 100, 100, 'Hello!', 3);
   group.attr({filter: blurFilter});
 
   var branchButton = new BranchGroup(group);
-  branchButton.makeBranchTo(150, 490, 10, 4);
+
+  var wasTriggered = false;
+  var branch;
+  group.click(function () {
+    if (!wasTriggered) {
+      wasTriggered = true;
+      branch = branchButton.makeBranchTo(150, 490, 10, 4);
+    } else {
+      wasTriggered = false;
+      branch.destroyBranch();
+    }
+  });
+
 
 </script>
 
