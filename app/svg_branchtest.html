@@ -188,6 +188,7 @@
     numberOfCircles = numberOfCircles || 3;
 
     var group = paper.group();
+    group.attr({cursor: 'pointer'})
     var whiteMultiple = 0xFFFFFF / numberOfCircles;
     for (var i = 0; i < numberOfCircles; i++) {
       var fraction = ((numberOfCircles - i) / (numberOfCircles));
@@ -222,9 +223,11 @@
   var branch;
   group.click(function () {
     if (!wasTriggered) {
+      group.attr({filter: ''});
       wasTriggered = true;
       branch = branchButton.makeBranchTo(150, 490, 10, 4);
     } else {
+      group.attr({filter: blurFilter});
       wasTriggered = false;
       branch.destroyBranch();
     }
