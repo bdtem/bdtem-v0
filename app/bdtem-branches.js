@@ -13,7 +13,7 @@ function buildBranchLine(x1, y1, x2, y2) {
   return line;
 }
 
-var Branch = function (startX, startY, endX, endY, text) {
+function Branch(startX, startY, endX, endY, text) {
 
   this.startX = startX;
   this.startY = startY;
@@ -28,21 +28,22 @@ var Branch = function (startX, startY, endX, endY, text) {
     this.textNode = textNode;
   }
 
-  this.destroyBranch = function () {
-    this.animateBranch(this.branchLine, this.endX, this.startX, true);
-  };
+  this.animateTrunk(this.branchLine);
+}
 
-  this.animateBranch = function (line, from, to, destroying) {
-    var branchLine = this.branchLine;
-    to = to || endX;
-    from = from || startX;
-    Snap.animate(
-      from,
-      to,
-      text ? updateHorizontalWithText : updateHorizontal,
-      250,
-      mina.easeout,
-      destroying ? function () {
+Branch.prototype.destroyBranch = function () {
+  this.animateTrunk(this.branchLine, true)
+};
+
+Branch.prototype.animateTrunk = function (line, destroyAfter, from, to, callback) {
+  var textNode = this.textNode;
+
+  if (destroyAfter) {
+    from = from || this.endX;
+    to = to || this.startX;
+
+
+    callback = callback || function () {
         branchLine.remove();
         if (textNode) {
           textNode.animate(
@@ -53,107 +54,88 @@ var Branch = function (startX, startY, endX, endY, text) {
             }
           );
         }
-      } : null
-    );
+      }
+  } else {
+    to = to || this.endX;
+    from = from || this.startX;
+  }
 
-    function updateHorizontal(value) {
-      line.attr({x2: value});
-    }
-
-    function updateHorizontalWithText(value) {
-      textNode.attr({x: value});
-      updateHorizontal(value);
-    }
-  };
-
-  this.animateBranch(this.branchLine);
-  return this;
+  var branchLine = this.branchLine;
+  Snap.animate(
+    from,
+    to,
+    this.updateHorizontal(this),
+    250,
+    mina.easeout,
+    callback
+  );
 };
 
-var BranchGroup = function (group) {
+Branch.prototype.updateHorizontal = function (branch) {
+  return function (value) {
+    var txt = branch.textNode;
+    if (txt)
+      txt.attr({x: value});
+    branch.branchLine.attr({x2: value});
+  };
+};
+
+var BranchGroup = function (group, trunkLength, numberOfBranches, branchLength) {
   var bBox = group.getBBox();
-  var startY = bBox.y2;
-  var startX = bBox.cx;
-  var branchLength = 100;
+  this.startY = bBox.y2;
+  this.startX = bBox.cx;
 
-  var trunk;
-  var branches = [];
+  this.numberOfBranches = numberOfBranches || 1;
+  this.trunkLength = trunkLength || 150;
+  this.branchLength = branchLength || 75;
 
-  this.destroyBranch = function () {
-    branches.forEach(function (elem) {
-      elem.destroyBranch();
-    });
-    trunk.animate(
-      {opacity: 0},
-      500,
-      function () {
-        trunk.remove();
-      }
-    );
-  };
+  this.trunk = {};
+  this.branches = [];
+  this.currentBranch = 0;
 
-  this.makeBranchTo = function (x, y, branchesOnLine) {
-    var endY = y;
-    var yDistance = (endY - startY);
-    var endX = x;
-    var xDistance = (endX - startX);
+  this.endY = this.startY + this.trunkLength;
+  this.yDistance = (this.endY - this.startY);
 
-    var isVertical = yDistance > 0 && xDistance == 0;
-
-    var branchPoints = branchesOnLine > 0 ? buildBranchPoints() : [];
-
-    function buildBranchPoints() {
-      var branchPoints = new Array(branchesOnLine);
-      for (var i = 1; i <= branchesOnLine; i++) {
-        branchPoints[i - 1] = startY + (i / branchesOnLine) * yDistance
-      }
-      return branchPoints
-    }
-
-    function animateBranch(line) {
-      Snap.animate(
-        startY,
-        endY,
-        isVertical ? updateVertical : updateHorizontal,
-        1000
-      );
+  var xDistance = (0); //Hmm...
 
 
-      function updateHorizontal(value) {
-        line.attr({x2: value});
-      }
-
-      var currentBranch = 0;
-
-      function updateVertical(value) {
-        line.attr({y2: value});
-
-        if (currentBranch < branchesOnLine && value >= branchPoints[currentBranch]) {
-          ++currentBranch;
-          var branch = new Branch(x, value, x + branchLength, value, Math.random().toString(16).substring(2, 10));
-          branches.push(branch);
-          group.append(branch.branchLine);
-          var textNode = branch.textNode;
-          if (textNode)
-            group.append(textNode);
-        }
-      }
-
-    }
-
-    trunk = buildBranchLine(bBox.cx, startY, bBox.cx, endY);
-    animateBranch(trunk);
-
-    return this;
-  };
+  this.branchPoints = numberOfBranches > 0 ? this.buildBranchPoints() : [];
 
 
+  this.isVertical = this.yDistance > 0 && xDistance == 0;
 };
 
+BranchGroup.prototype.destroySubBranches = function () {
+  this.branches.forEach(function (elem) {
+    elem.destroyBranch();
+  });
+};
 
+BranchGroup.prototype.destroyBranch = function () {
+  this.destroySubBranches();
+  if (this.animationInProgress) {
+    this.animationInProgress.stop();
+  }
+  this.trunk.stop();
+  this.trunk.animate(
+    {opacity: 0},
+    500,
+    removeAfterAnimation(this.trunk)
+  );
+  this.currentBranch = 0;
+};
+
+function removeAfterAnimation(node) {
+  return function () {
+    node.remove()
+  };
+}
+
+
+var OFF_SCREEN = -1024;
 function buildTextNode(text, x, y, centerX, centerY) {
   if (text) {
-    var textNode = paper.text(-1024, -1024, text);
+    var textNode = paper.text(OFF_SCREEN, OFF_SCREEN, text);
     var textBBox = textNode.getBBox();
     var height = textBBox.height;
     var width = textBBox.width;
@@ -168,6 +150,70 @@ function buildTextNode(text, x, y, centerX, centerY) {
     return undefined;
   }
 }
+
+BranchGroup.prototype.buildBranchPoints = function () {
+  var branchPoints = new Array(this.numberOfBranches);
+
+  for (var i = 1; i <= this.numberOfBranches; i++) {
+    branchPoints[i - 1] = this.startY + (i / this.numberOfBranches) * this.yDistance
+  }
+
+  return branchPoints
+};
+
+BranchGroup.prototype.drawTrunkWithBranchesTo = function (x, y) {
+  this.trunk = buildBranchLine(this.startX, this.startY, x || this.startX, y || this.startY);
+
+  this.animateTrunk();
+
+  return this;
+};
+
+BranchGroup.prototype.animateTrunk = function () {
+  this.animationInProgress = Snap.animate(
+    this.startY,
+    this.endY,
+    this.updateVertical(this),
+    1000
+  );
+};
+
+BranchGroup.prototype.updateVertical = function (branchGroup) {
+  return function updateLine(value) {
+    branchGroup.trunk.attr({y2: value});
+
+    console.log('value ' + value)
+    console.log('currentbranch ' + branchGroup.currentBranch)
+    console.log('nextPoint ' + branchGroup.branchPoints[branchGroup.currentBranch])
+
+
+    if (branchGroup.currentBranch < branchGroup.numberOfBranches &&
+      value >= branchGroup.branchPoints[branchGroup.currentBranch]) {
+      branchGroup.addBranch(branchGroup.startX, value);
+    }
+  }
+};
+
+BranchGroup.prototype.addBranch = function (startX, branchY) {
+  branchY = branchY || branchY;
+  startX = startX || this.startX;
+  ++this.currentBranch;
+
+  var branch = new Branch(startX, branchY, startX + this.branchLength, branchY, this.getBranchText());
+
+  this.branches.push(branch);
+
+  group.append(branch.branchLine);
+
+  var textNode = branch.textNode;
+  if (textNode)
+    group.append(textNode);
+};
+
+
+BranchGroup.prototype.getBranchText = function () {
+  return Math.random().toString(16).substring(2, 10);
+};
 
 
 var GraveButton = function (x, y, radius, text, numberOfCircles) {
@@ -202,7 +248,7 @@ var GraveButton = function (x, y, radius, text, numberOfCircles) {
       group.stop();
       group.attr({filter: shadowFilter});
       wasTriggered = true;
-      branch = branchButton.makeBranchTo(150, 490, 10, 4);
+      branch = branchButton.drawTrunkWithBranchesTo(150, 490, 10, 4);
     } else {
 
       group.attr({filter: comboFilter});
@@ -232,29 +278,38 @@ var shadowFilter = paper.filter(shadow);
 var comboFilter = paper.filter([Snap.filter.blur(1, 1), shadow].join('\n'));
 
 var graveButton = new GraveButton(cx, cy, 100, 'Hello!', 15);
-
 var group = graveButton.group;
+var branchButton = new BranchGroup(group, 150, 4, 75);
+
 group.attr({filter: comboFilter});
 
-var branchButton = new BranchGroup(group);
-
 
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
-var scalingFactor = 250;
+var scalingFactor = 2;
 function randomTranslate() {
-  group.animate(
-    {
-      transform: 't' + Math.random() * scalingFactor + ',' + Math.random() * scalingFactor
-    },
-    5000,
-    mina.linear,
+  Snap.animate(
+    0,
+    360,
+    translateGroup,
+    4000,
     function loopTranslate() {
+      group.attr({
+        transform: 't0,0'
+      });
       randomTranslate();
     }
-  );
+  )
+  ;
+
+  function translateGroup(value) {
+    group.attr({
+      transform: 't0,' + (Snap.sin(value) * scalingFactor)
+    });
+  }
 }
+
 randomTranslate();
 
 
