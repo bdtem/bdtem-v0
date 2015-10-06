@@ -75,8 +75,10 @@ Branch.prototype.updateHorizontal = function (branch) {
   return function (value) {
     var txt = branch.textNode;
     if (txt)
-      txt.attr({x: value});
+      txt.attr({x:value, opacity: value});
+
     branch.branchLine.attr({x2: value});
+
   };
 };
 
@@ -109,6 +111,7 @@ BranchGroup.prototype.destroySubBranches = function () {
   this.branches.forEach(function (elem) {
     elem.destroyBranch();
   });
+  this.branches = [];
 };
 
 BranchGroup.prototype.destroyBranch = function () {
@@ -143,7 +146,11 @@ function buildTextNode(text, x, y, centerX, centerY) {
       'font-family': 'Libre Baskerville',
       x: centerX ? (x - width / 2) : x,
       y: centerY ? (y + height / 2) : y,
-      fill: STROKE_COLOR
+      fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : STROKE_COLOR
+    });
+    textNode.click(function (event) {
+      event.stopPropagation();
+      textNode.attr({fill: '#F0F'});
     });
     return textNode;
   } else {
@@ -182,11 +189,6 @@ BranchGroup.prototype.updateVertical = function (branchGroup) {
   return function updateLine(value) {
     branchGroup.trunk.attr({y2: value});
 
-    console.log('value ' + value)
-    console.log('currentbranch ' + branchGroup.currentBranch)
-    console.log('nextPoint ' + branchGroup.branchPoints[branchGroup.currentBranch])
-
-
     if (branchGroup.currentBranch < branchGroup.numberOfBranches &&
       value >= branchGroup.branchPoints[branchGroup.currentBranch]) {
       branchGroup.addBranch(branchGroup.startX, value);
@@ -206,13 +208,14 @@ BranchGroup.prototype.addBranch = function (startX, branchY) {
   group.append(branch.branchLine);
 
   var textNode = branch.textNode;
-  if (textNode)
-    group.append(textNode);
+  if (textNode) {
+    //group.append(textNode);
+  }
 };
 
 
 BranchGroup.prototype.getBranchText = function () {
-  return Math.random().toString(16).substring(2, 10);
+  return Math.random().toString(16).substring(2, 8);
 };
 
 
@@ -238,7 +241,7 @@ var GraveButton = function (x, y, radius, text, numberOfCircles) {
   var centerX = bBox.cx;
 
   var textNode = buildTextNode(text, centerX, bBox.y2 + 20, true, false);
-  textNode.attr({filter: null});
+  textNode.attr({filter: '', opacity: 1});
   group.append(textNode);
 
   var wasTriggered = false;
@@ -275,11 +278,17 @@ var blurFilter = paper.filter(Snap.filter.blur(1, 1));
 var shadow = Snap.filter.shadow(0, 0, 10, '#CCC', 0.5);
 var shadowFilter = paper.filter(shadow);
 
-var comboFilter = paper.filter([Snap.filter.blur(1, 1), shadow].join('\n'));
+var comboFilter = paper.filter(shadow);
 
 var graveButton = new GraveButton(cx, cy, 100, 'Hello!', 15);
 var group = graveButton.group;
-var branchButton = new BranchGroup(group, 150, 4, 75);
+
+
+var trunkLength = 200;
+var NUMBER_OF_BRANCHES = 8;
+var BRANCH_LENGTH = 75;
+
+var branchButton = new BranchGroup(group, trunkLength, NUMBER_OF_BRANCHES, BRANCH_LENGTH);
 
 group.attr({filter: comboFilter});
 
