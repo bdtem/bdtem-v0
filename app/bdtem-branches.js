@@ -75,37 +75,29 @@ Branch.prototype.updateHorizontal = function (branch) {
   return function (value) {
     var txt = branch.textNode;
     if (txt)
-      txt.attr({x:value, opacity: value});
+      txt.attr({x: value, opacity: value});
 
     branch.branchLine.attr({x2: value});
 
   };
 };
 
-var BranchGroup = function (group, trunkLength, numberOfBranches, branchLength) {
-  var bBox = group.getBBox();
-  this.startY = bBox.y2;
-  this.startX = bBox.cx;
-
+function BranchGroup(group, trunkLength, numberOfBranches, branchLength) {
   this.numberOfBranches = numberOfBranches || 1;
+  this.currentBranch = 0;
+
   this.trunkLength = trunkLength || 150;
   this.branchLength = branchLength || 75;
 
-  this.trunk = {};
-  this.branches = [];
-  this.currentBranch = 0;
-
+  var bBox = group.getBBox();
+  this.startY = bBox.y2;
+  this.startX = bBox.cx;
   this.endY = this.startY + this.trunkLength;
   this.yDistance = (this.endY - this.startY);
 
-  var xDistance = (0); //Hmm...
-
-
+  this.branches = [];
   this.branchPoints = numberOfBranches > 0 ? this.buildBranchPoints() : [];
-
-
-  this.isVertical = this.yDistance > 0 && xDistance == 0;
-};
+}
 
 BranchGroup.prototype.destroySubBranches = function () {
   this.branches.forEach(function (elem) {
@@ -150,7 +142,8 @@ function buildTextNode(text, x, y, centerX, centerY) {
     });
     textNode.click(function (event) {
       event.stopPropagation();
-      textNode.attr({fill: '#F0F'});
+      textNode.attr({fill: '#F0F', filter: shadowFilter});
+      textNode.node.innerHTML = 'clicks'
     });
     return textNode;
   } else {
@@ -197,20 +190,19 @@ BranchGroup.prototype.updateVertical = function (branchGroup) {
 };
 
 BranchGroup.prototype.addBranch = function (startX, branchY) {
-  branchY = branchY || branchY;
   startX = startX || this.startX;
   ++this.currentBranch;
 
   var branch = new Branch(startX, branchY, startX + this.branchLength, branchY, this.getBranchText());
 
   this.branches.push(branch);
-
   group.append(branch.branchLine);
 
-  var textNode = branch.textNode;
-  if (textNode) {
-    //group.append(textNode);
-  }
+  //TODO Stylistic decision: apply same effects to text as to the geometric shapes?
+  //var textNode = branch.textNode;
+  //if (textNode) {
+  //  group.append(textNode);
+  //}
 };
 
 
@@ -222,43 +214,72 @@ BranchGroup.prototype.getBranchText = function () {
 var GraveButton = function (x, y, radius, text, numberOfCircles) {
   numberOfCircles = numberOfCircles || 3;
 
-  this.group = paper.group();
-  var group = this.group;
-  group.attr({cursor: 'pointer'});
+  //TODO Make a CSS class for the groups and use that instead of inline styling.
+  this.group = paper.group().attr({cursor: 'pointer'});
+
+
   var whiteMultiple = 0xFFFFFF / numberOfCircles;
+  // Building a gradient string with form described here:
+  // http://snapsvg.io/docs/#Paper.gradient
+  var gradientString = '#000';
+
+  var circle = paper.circle(cx, cy, radius);
+  this.group.append(circle);
   for (var i = 0; i < numberOfCircles; i++) {
-    var fraction = ((numberOfCircles - i) / (numberOfCircles));
-
-    var circle = paper.circle(x, y, (fraction * radius));
-
-    var computedColor = '#' + Math.ceil(((numberOfCircles - i)) * whiteMultiple).toString(16);
-    circle.attr({fill: computedColor});
-
-    group.append(circle);
+    var RGB_value = Math.ceil(((numberOfCircles - i)) * whiteMultiple);
+    gradientString += '-#' + RGB_value.toString(16);
   }
 
-  var bBox = group.getBBox();
+  var bBox = this.group.getBBox();
   var centerX = bBox.cx;
+
+  var gradient = paper.gradient('r(' + [0.5, 0.5, 12].join(',') + ')' + gradientString);
+  circle.attr({fill: gradient});
 
   var textNode = buildTextNode(text, centerX, bBox.y2 + 20, true, false);
   textNode.attr({filter: '', opacity: 1});
-  group.append(textNode);
+  this.group.append(textNode);
 
   var wasTriggered = false;
   var branch;
-  group.click(function () {
+
+  var translationAnimation = randomTranslation(this.group);
+  translationAnimation.startAnimation();
+
+
+  function randomGradientAnimation() {
+    return function () {
+      gradient.animate(
+        {r: wasTriggered ? 12 + Math.random() * 10 : 0.5 + Math.random() * 10},
+        1000
+      );
+    };
+  }
+
+  this.group.click(function () {
     if (!wasTriggered) {
-      group.stop();
-      group.attr({filter: shadowFilter});
+
+
+      gradient.animate(
+        {r: 1},
+        1000
+      );
+
+
+      translationAnimation.pause();
+
+      //group.attr({filter: ''});
       wasTriggered = true;
-      branch = branchButton.drawTrunkWithBranchesTo(150, 490, 10, 4);
+      branch = branchButton.drawTrunkWithBranchesTo(centerX, bBox.cy + 150, 10, 4);
     } else {
 
-      group.attr({filter: comboFilter});
+      randomGradientAnimation()();
+
+      //group.attr({filter: shadowFilter});
       wasTriggered = false;
       branch.destroyBranch();
 
-      randomTranslate();
+      translationAnimation.resume();
     }
   });
 
@@ -270,17 +291,13 @@ var GraveButton = function (x, y, radius, text, numberOfCircles) {
 //////////////////////////////////////////
 
 var cx = 150;
-var cy = 100;
+var cy = 125;
 
-var blurFilter = paper.filter(Snap.filter.blur(1, 1));
-//  var shadowFilter = paper.filter(Snap.filter.sha);
 
 var shadow = Snap.filter.shadow(0, 0, 10, '#CCC', 0.5);
 var shadowFilter = paper.filter(shadow);
 
-var comboFilter = paper.filter(shadow);
-
-var graveButton = new GraveButton(cx, cy, 100, 'Hello!', 15);
+var graveButton = new GraveButton(cx, cy, 100, 'Hello!', Math.random() * 100);
 var group = graveButton.group;
 
 
@@ -290,35 +307,52 @@ var BRANCH_LENGTH = 75;
 
 var branchButton = new BranchGroup(group, trunkLength, NUMBER_OF_BRANCHES, BRANCH_LENGTH);
 
-group.attr({filter: comboFilter});
+group.attr({filter: shadowFilter});
 
 
 ////////////////////////////////////////
 ////////////////////////////////////////
 ////////////////////////////////////////
-var scalingFactor = 2;
-function randomTranslate() {
-  Snap.animate(
-    0,
-    360,
-    translateGroup,
-    4000,
-    function loopTranslate() {
-      group.attr({
-        transform: 't0,0'
-      });
-      randomTranslate();
-    }
-  )
-  ;
 
-  function translateGroup(value) {
+
+function randomTranslation(group, scalingFactor) {
+  var animation = {
+    scalingFactor: scalingFactor || 2,
+    animation: null
+  };
+  var self = animation;
+
+  animation.startAnimation = function () {
+    self.animation = Snap.animate(
+      0,
+      360,
+      self.translateGroup,
+      4000,
+      self.loopAnimation
+    );
+  };
+
+  animation.translateGroup = function (value) {
+    var transformString = 't0,' + (Snap.sin(value) * self.scalingFactor);
     group.attr({
-      transform: 't0,' + (Snap.sin(value) * scalingFactor)
+      transform: transformString
     });
-  }
+  };
+
+  animation.loopAnimation = function () {
+    group.attr({
+      transform: 't0,0'
+    });
+    self.startAnimation();
+  };
+
+  animation.pause = function () {
+    if (self.animation) self.animation.pause();
+  };
+
+  animation.resume = function () {
+    if (self.animation) self.animation.resume();
+  };
+
+  return animation;
 }
-
-randomTranslate();
-
-

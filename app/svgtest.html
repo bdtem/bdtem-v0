@@ -123,7 +123,7 @@
 
 
   Snap.filter.turbulence = function () {
-    return '<feTurbulence stitchTiles="stitch"  baseFrequency="0.05" numOctaves="2" type="fractalNoise"/>';
+    return '<feTurbulence baseFrequency="0.05" numOctaves="1" type="fractalNoise"/>';
   };
 
 
@@ -176,9 +176,9 @@
   function alterBlur(value) {
     var value2 = value + ',' + value;
 //    blurAndTurbulence.node.firstChild.attributes[1].value = value2;
-    blurChild.attributes[0].value = value2;
+    blurChild.attributes['stdDeviation'].value = value2;
     var scalingFactor = 1 / 8;
-    turbulenceChild.attributes[1].value = Math.random() / scalingFactor + ',' + Math.random() / scalingFactor;
+    turbulenceChild.attributes['baseFrequency'].value = Math.random() / scalingFactor + ',' + Math.random() / scalingFactor;
 
     cloneMask.attr({fill: randomColor()});
   }
