@@ -93,7 +93,8 @@ videogular .iconButton:focus,
   background: #ffffff;
   border: solid #000000 1px;
   width: 1vw;
-  height: 14vh;
+  top: 30%;
+  height: 80%;
 }
 #bottomBar videogular vg-volume vg-volume-bar .verticalVolumeBar .volumeValue {
   background: #000000;

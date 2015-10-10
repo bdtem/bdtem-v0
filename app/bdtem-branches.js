@@ -82,6 +82,7 @@ Branch.prototype.updateHorizontal = function (branch) {
   };
 };
 
+
 function BranchGroup(group, trunkLength, numberOfBranches, branchLength) {
   this.numberOfBranches = numberOfBranches || 1;
   this.currentBranch = 0;
@@ -93,6 +94,8 @@ function BranchGroup(group, trunkLength, numberOfBranches, branchLength) {
   this.startY = bBox.y2;
   this.startX = bBox.cx;
   this.endY = this.startY + this.trunkLength;
+
+
   this.yDistance = (this.endY - this.startY);
 
   this.branches = [];
@@ -106,16 +109,23 @@ BranchGroup.prototype.destroySubBranches = function () {
   this.branches = [];
 };
 
-BranchGroup.prototype.destroyBranch = function () {
-  this.destroySubBranches();
+BranchGroup.prototype.stopAnimation = function () {
   if (this.animationInProgress) {
     this.animationInProgress.stop();
   }
-  this.trunk.stop();
-  this.trunk.animate(
+};
+
+BranchGroup.prototype.destroyBranch = function () {
+  this.destroySubBranches();
+  var trunk = this.trunk;
+
+  this.stopAnimation();
+
+  trunk.stop();
+  trunk.animate(
     {opacity: 0},
     500,
-    removeAfterAnimation(this.trunk)
+    removeAfterAnimation(trunk)
   );
   this.currentBranch = 0;
 };
@@ -134,12 +144,14 @@ function buildTextNode(text, x, y, centerX, centerY) {
     var textBBox = textNode.getBBox();
     var height = textBBox.height;
     var width = textBBox.width;
+
     textNode.attr({
       'font-family': 'Libre Baskerville',
       x: centerX ? (x - width / 2) : x,
       y: centerY ? (y + height / 2) : y,
       fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : STROKE_COLOR
     });
+
     textNode.click(function (event) {
       event.stopPropagation();
       textNode.attr({fill: '#F0F', filter: shadowFilter});
