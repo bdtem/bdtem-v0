@@ -82,8 +82,12 @@ Branch.prototype.updateHorizontal = function (branch) {
   };
 };
 
-
-function BranchGroup(group, trunkLength, numberOfBranches, branchLength) {
+function BranchGroup(group,
+                     trunkLength,
+                     numberOfBranches,
+                     branchLength,
+                     animationDuration) {
+  this.animationDuration = animationDuration || 1000;
   this.numberOfBranches = numberOfBranches || 1;
   this.currentBranch = 0;
 
@@ -98,7 +102,9 @@ function BranchGroup(group, trunkLength, numberOfBranches, branchLength) {
 
   this.yDistance = (this.endY - this.startY);
 
+
   this.branches = [];
+  this.branchTimeOffsets = numberOfBranches > 0 ? this.buildBranchTimeOffsets() : [];
   this.branchPoints = numberOfBranches > 0 ? this.buildBranchPoints() : [];
 }
 
@@ -163,6 +169,16 @@ function buildTextNode(text, x, y, centerX, centerY) {
   }
 }
 
+BranchGroup.prototype.buildBranchTimeOffsets = function () {
+  var branchTimes = new Array(this.numberOfBranches);
+
+  for (var i = 1; i <= this.numberOfBranches; i++) {
+    branchTimes[i - 1] = (i / this.numberOfBranches) * this.animationDuration;
+  }
+
+  return branchTimes
+};
+
 BranchGroup.prototype.buildBranchPoints = function () {
   var branchPoints = new Array(this.numberOfBranches);
 
@@ -186,18 +202,20 @@ BranchGroup.prototype.animateTrunk = function () {
     this.startY,
     this.endY,
     this.updateVertical(this),
-    1000
+    this.animationDuration
   );
 };
 
 BranchGroup.prototype.updateVertical = function (branchGroup) {
+
+  this.branchTimeOffsets.forEach(function (timeOffset, index) {
+    setTimeout(function () {
+      branchGroup.addBranch(branchGroup.startX, branchGroup.branchPoints[index])
+    }, timeOffset)
+  });
+
   return function updateLine(value) {
     branchGroup.trunk.attr({y2: value});
-
-    if (branchGroup.currentBranch < branchGroup.numberOfBranches &&
-      value >= branchGroup.branchPoints[branchGroup.currentBranch]) {
-      branchGroup.addBranch(branchGroup.startX, value);
-    }
   }
 };
 
