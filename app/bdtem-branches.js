@@ -2,9 +2,21 @@
 
 var STROKE_COLOR = '#FFF';
 
+var cx = 150;
+var cy = 125;
+var radius = 100;
+
+var shadow = Snap.filter.shadow(0, 0, 10, '#CCC', 0.5);
+
+var trunkLength = 200;
+var NUMBER_OF_BRANCHES = 8;
+var BRANCH_LENGTH = 75;
+
 
 //TODO OBVIOUSLY CHANGE THIS:
 var paper = Snap.select('#test');
+
+var shadowFilter = paper.filter(shadow);
 
 
 function buildBranchLine(x1, y1, x2, y2) {
@@ -18,6 +30,8 @@ function Branch(startX, startY, endX, endY, text) {
   this.startX = startX;
   this.startY = startY;
   this.endX = endX;
+
+  this.length = endX - startX;
 
   this.branchLine = buildBranchLine(startX, startY, startX, startY);
   this.textNode = undefined;
@@ -73,16 +87,17 @@ Branch.prototype.animateTrunk = function (line, destroyAfter, from, to, callback
 
 Branch.prototype.updateHorizontal = function (branch) {
   return function (value) {
+
     var txt = branch.textNode;
-    if (txt)
-      txt.attr({x: value, opacity: value});
+    if (txt) {
+      txt.attr({x: branch.length < 0 ? value - (txt.getBBox().width + 1) : value, opacity: value});
+    }
 
     branch.branchLine.attr({x2: value});
-
   };
 };
 
-function BranchGroup(group,
+function BranchGroup(svgGroup,
                      trunkLength,
                      numberOfBranches,
                      branchLength,
@@ -94,7 +109,7 @@ function BranchGroup(group,
   this.trunkLength = trunkLength || 150;
   this.branchLength = branchLength || 75;
 
-  var bBox = group.getBBox();
+  var bBox = svgGroup.getBBox();
   this.startY = bBox.y2;
   this.startX = bBox.cx;
   this.endY = this.startY + this.trunkLength;
@@ -223,7 +238,13 @@ BranchGroup.prototype.addBranch = function (startX, branchY) {
   startX = startX || this.startX;
   ++this.currentBranch;
 
-  var branch = new Branch(startX, branchY, startX + this.branchLength, branchY, this.getBranchText());
+  var branch = new Branch(
+    startX,
+    branchY,
+    Math.random() >= 0.5 ? startX - this.branchLength : startX + this.branchLength,
+    branchY,
+    this.getBranchText()
+  );
 
   this.branches.push(branch);
   group.append(branch.branchLine);
@@ -242,7 +263,7 @@ BranchGroup.prototype.getBranchText = function () {
 
 
 var GraveButton = function (x, y, radius, text, numberOfCircles) {
-  numberOfCircles = numberOfCircles || 3;
+  this.numberOfCircles = numberOfCircles || 3;
 
   //TODO Make a CSS class for the groups and use that instead of inline styling.
   this.group = paper.group().attr({cursor: 'pointer'});
@@ -253,61 +274,52 @@ var GraveButton = function (x, y, radius, text, numberOfCircles) {
   // http://snapsvg.io/docs/#Paper.gradient
   var gradientString = '#000';
 
-  var circle = paper.circle(cx, cy, radius);
+  var circle = paper.circle(x, y, radius);
   this.group.append(circle);
-  for (var i = 0; i < numberOfCircles; i++) {
-    var RGB_value = Math.ceil(((numberOfCircles - i)) * whiteMultiple);
+  for (var i = 0; i < this.numberOfCircles; i++) {
+    var RGB_value = Math.ceil(((this.numberOfCircles - i)) * whiteMultiple);
     gradientString += '-#' + RGB_value.toString(16);
   }
 
   var bBox = this.group.getBBox();
   var centerX = bBox.cx;
 
-  var gradient = paper.gradient('r(' + [0.5, 0.5, 12].join(',') + ')' + gradientString);
-  circle.attr({fill: gradient});
+  this.gradient = paper.gradient('r(' + [0.5, 0.5, 12].join(',') + ')' + gradientString);
+  circle.attr({fill: this.gradient});
 
   var textNode = buildTextNode(text, centerX, bBox.y2 + 20, true, false);
   textNode.attr({filter: '', opacity: 1});
   this.group.append(textNode);
 
-  var wasTriggered = false;
-  var branch;
+  this.wasTriggered = false;
+  this.branch = {};
 
   var translationAnimation = randomTranslation(this.group);
   translationAnimation.startAnimation();
 
+  this.branchGroup = new BranchGroup(this.group, trunkLength, NUMBER_OF_BRANCHES, BRANCH_LENGTH);
 
-  function randomGradientAnimation() {
-    return function () {
-      gradient.animate(
-        {r: wasTriggered ? 12 + Math.random() * 10 : 0.5 + Math.random() * 10},
-        1000
-      );
-    };
-  }
-
+  var self = this;
   this.group.click(function () {
-    if (!wasTriggered) {
+    if (!self.wasTriggered) {
 
-
-      gradient.animate(
+      self.gradient.animate(
         {r: 1},
         1000
       );
 
-
       translationAnimation.pause();
 
       //group.attr({filter: ''});
-      wasTriggered = true;
-      branch = branchButton.drawTrunkWithBranchesTo(centerX, bBox.cy + 150, 10, 4);
+      self.wasTriggered = true;
+      self.branch = self.branchGroup.drawTrunkWithBranchesTo(centerX, bBox.cy + 150, 10, 4);
     } else {
 
-      randomGradientAnimation()();
+      self.randomGradientAnimation();
 
       //group.attr({filter: shadowFilter});
-      wasTriggered = false;
-      branch.destroyBranch();
+      self.wasTriggered = false;
+      self.branch.destroyBranch();
 
       translationAnimation.resume();
     }
@@ -315,29 +327,26 @@ var GraveButton = function (x, y, radius, text, numberOfCircles) {
 
 };
 
+GraveButton.prototype.randomGradientAnimation = function () {
+  this.gradient.animate(
+    {r: this.wasTriggered ? 12 + Math.random() * 10 : 0.5 + Math.random() * 10},
+    1000
+  );
+};
+
+
 //////////////////////////////////////////
 //////////////////////////////////////////
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-var cx = 150;
-var cy = 125;
 
-
-var shadow = Snap.filter.shadow(0, 0, 10, '#CCC', 0.5);
-var shadowFilter = paper.filter(shadow);
-
-var graveButton = new GraveButton(cx, cy, 100, 'Hello!', Math.random() * 100);
+var graveButton = new GraveButton(cx, cy, radius, 'Horizontal!', Math.random() * 100);
 var group = graveButton.group;
-
-
-var trunkLength = 200;
-var NUMBER_OF_BRANCHES = 8;
-var BRANCH_LENGTH = 75;
-
-var branchButton = new BranchGroup(group, trunkLength, NUMBER_OF_BRANCHES, BRANCH_LENGTH);
-
 group.attr({filter: shadowFilter});
+
+
+var verticalGraveButton = new GraveButton(cx + 2 * radius + 100, cy, radius, 'Vertical!', Math.random() * 100);
 
 
 ////////////////////////////////////////
