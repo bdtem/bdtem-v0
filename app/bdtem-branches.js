@@ -160,15 +160,20 @@ function BranchGroup(svgGroup,
 
 
   this.branches = [];
-  this.branchTimeOffsets = numberOfBranches > 0 ? this.buildBranchTimeOffsets() : [];
-  this.branchPoints = numberOfBranches > 0 ? this.buildBranchPoints() : [];
+  this.buildBranchTimeOffsetsAndPoints();
+  this.pendingBranchAnimations = new Array(numberOfBranches);
 }
 
 BranchGroup.prototype.destroySubBranches = function () {
+  this.pendingBranchAnimations.forEach(function(elem){
+    clearTimeout(elem);
+  });
+
   this.branches.forEach(function (elem) {
     elem.destroyBranch();
   });
   this.branches = [];
+  this.pendingBranchAnimations = [];
 };
 
 BranchGroup.prototype.stopAnimation = function () {
@@ -225,24 +230,15 @@ function buildTextNode(text, x, y, centerX, centerY) {
   }
 }
 
-BranchGroup.prototype.buildBranchTimeOffsets = function () {
-  var branchTimes = new Array(this.numberOfBranches);
+BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
+  this.branchTimeOffsets = new Array(this.numberOfBranches);
+  this.branchPoints = new Array(this.numberOfBranches);
 
   for (var i = 1; i <= this.numberOfBranches; i++) {
-    branchTimes[i - 1] = (i / this.numberOfBranches) * this.animationDuration;
+    this.branchTimeOffsets[i - 1] = (i / this.numberOfBranches) * this.animationDuration;
+    this.branchPoints[i - 1] = this.startY + (i / this.numberOfBranches) * this.yDistance
+
   }
-
-  return branchTimes
-};
-
-BranchGroup.prototype.buildBranchPoints = function () {
-  var branchPoints = new Array(this.numberOfBranches);
-
-  for (var i = 1; i <= this.numberOfBranches; i++) {
-    branchPoints[i - 1] = this.startY + (i / this.numberOfBranches) * this.yDistance
-  }
-
-  return branchPoints
 };
 
 BranchGroup.prototype.drawTrunkWithBranchesTo = function (x, y) {
@@ -263,11 +259,14 @@ BranchGroup.prototype.animateTrunk = function () {
 };
 
 BranchGroup.prototype.updateVertical = function (branchGroup) {
+  var branchAnimations = this.pendingBranchAnimations;
 
   this.branchTimeOffsets.forEach(function (timeOffset, index) {
-    setTimeout(function () {
+    var asyncAnimation = setTimeout(function () {
       branchGroup.addBranch(branchGroup.startX, branchGroup.branchPoints[index])
-    }, timeOffset)
+    }, timeOffset);
+
+    branchAnimations.push(asyncAnimation)
   });
 
   return function updateLine(value) {
@@ -383,12 +382,12 @@ GraveButton.prototype.randomGradientAnimation = function () {
 //////////////////////////////////////////
 
 
-var graveButton = new GraveButton(cx, cy, radius, 'Horizontal!', 5+Math.random() * 10);
+var graveButton = new GraveButton(cx, cy, radius, 'Horizontal!', 5 + Math.random() * 10);
 var group = graveButton.group;
 group.attr({filter: shadowFilter});
 
 
-var verticalGraveButton = new GraveButton(cx + 2 * radius + 100, cy, radius, 'Vertical!', 5+Math.random() * 10);
+var verticalGraveButton = new GraveButton(cx + 2 * radius + 100, cy, radius, 'Vertical!', 5 + Math.random() * 10);
 
 
 ////////////////////////////////////////
