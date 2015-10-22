@@ -25,75 +25,115 @@ function buildBranchLine(x1, y1, x2, y2) {
   return line;
 }
 
-function Branch(startX, startY, endX, endY, text) {
+var BRANCH_TYPE = {
+  HORIZONTAL: {
+    value: 0,
+    name: 'Horizontal',
+    shortName: 'H',
+    updateAnimation: function () {
+      var self = this;
+      return function (value) {
 
+        var txt = self.textNode;
+        if (txt) {
+          txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
+        }
+
+        self.branchLine.attr({x2: value});
+      };
+    }
+  },
+  HORIZONTAL_SPAN: {
+    value: 1,
+    name: "Horizontal Span",
+    shortName: "Hs",
+    updateAnimation: function () {
+      var self = this;
+      return function (value) {
+
+        var txt = self.textNode;
+        if (txt) {
+          txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
+        }
+
+        self.branchLine.attr({x1: 2 * self.startX - value, x2: value});
+      };
+    }
+
+  },
+  VERTICAL: {
+    value: 2,
+    name: "Vertical",
+    shortName: "V"
+  },
+  VERTICAL_SPAN: {
+    value: 3,
+    name: "Vertical Span",
+    shortName: "Vs"
+  }
+};
+
+
+function Branch(startX, startY, endX, endY, text, branchType) {
   this.startX = startX;
   this.startY = startY;
   this.endX = endX;
 
+  if (branchType) {
+    this.updateAnimation = branchType.updateAnimation;
+  }
+
   this.length = endX - startX;
 
   this.branchLine = buildBranchLine(startX, startY, startX, startY);
-  this.textNode = undefined;
 
-  var textNode = this.textNode;
-  if (text) {
-    textNode = buildTextNode(text, startX, startY, false, true);
-    this.textNode = textNode;
-  }
+  this.textNode = text && buildTextNode(text, startX, startY, false, true);
 
-  this.animateTrunk(this.branchLine);
+  this.animateTrunk(startX, endX);
 }
 
 Branch.prototype.destroyBranch = function () {
-  this.animateTrunk(this.branchLine, true)
+  this.animateTrunk(this.endX, this.startX, this.getRemovalAnimation());
 };
 
-Branch.prototype.animateTrunk = function (line, destroyAfter, from, to, callback) {
-  var textNode = this.textNode;
-
-  if (destroyAfter) {
-    from = from || this.endX;
-    to = to || this.startX;
-
-
-    callback = callback || function () {
-        branchLine.remove();
-        if (textNode) {
-          textNode.animate(
-            {opacity: 0},
-            250,
-            function () {
-              textNode.remove()
-            }
-          );
+Branch.prototype.getRemovalAnimation = function () {
+  var self = this;
+  return function () {
+    self.branchLine.remove();
+    if (self.textNode) {
+      self.textNode.animate(
+        {opacity: 0},
+        250,
+        function () {
+          self.textNode.remove()
         }
-      }
-  } else {
-    to = to || this.endX;
-    from = from || this.startX;
+      );
+    }
   }
 
-  var branchLine = this.branchLine;
+};
+
+Branch.prototype.animateTrunk = function (from, to, callback) {
   Snap.animate(
     from,
     to,
-    this.updateHorizontal(this),
+    this.updateAnimation(),
     250,
     mina.easeout,
     callback
   );
 };
 
-Branch.prototype.updateHorizontal = function (branch) {
+Branch.prototype.updateAnimation = function () {
+  var self = this;
   return function (value) {
 
-    var txt = branch.textNode;
+    var txt = self.textNode;
     if (txt) {
-      txt.attr({x: branch.length < 0 ? value - (txt.getBBox().width + 1) : value, opacity: value});
+      txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
     }
 
-    branch.branchLine.attr({x2: value});
+    self.branchLine.attr({x2: value});
   };
 };
 
@@ -101,7 +141,8 @@ function BranchGroup(svgGroup,
                      trunkLength,
                      numberOfBranches,
                      branchLength,
-                     animationDuration) {
+                     animationDuration,
+                     vertical) {
   this.animationDuration = animationDuration || 1000;
   this.numberOfBranches = numberOfBranches || 1;
   this.currentBranch = 0;
@@ -243,7 +284,8 @@ BranchGroup.prototype.addBranch = function (startX, branchY) {
     branchY,
     Math.random() >= 0.5 ? startX - this.branchLength : startX + this.branchLength,
     branchY,
-    this.getBranchText()
+    this.getBranchText(),
+    BRANCH_TYPE.HORIZONTAL
   );
 
   this.branches.push(branch);
@@ -294,8 +336,8 @@ var GraveButton = function (x, y, radius, text, numberOfCircles) {
   this.wasTriggered = false;
   this.branch = {};
 
-  var translationAnimation = randomTranslation(this.group);
-  translationAnimation.startAnimation();
+  this.translationAnimation = randomTranslation(this.group);
+  this.translationAnimation.startAnimation();
 
   this.branchGroup = new BranchGroup(this.group, trunkLength, NUMBER_OF_BRANCHES, BRANCH_LENGTH);
 
@@ -308,7 +350,7 @@ var GraveButton = function (x, y, radius, text, numberOfCircles) {
         1000
       );
 
-      translationAnimation.pause();
+      self.translationAnimation.pause();
 
       //group.attr({filter: ''});
       self.wasTriggered = true;
@@ -321,7 +363,7 @@ var GraveButton = function (x, y, radius, text, numberOfCircles) {
       self.wasTriggered = false;
       self.branch.destroyBranch();
 
-      translationAnimation.resume();
+      self.translationAnimation.resume();
     }
   });
 
@@ -341,12 +383,12 @@ GraveButton.prototype.randomGradientAnimation = function () {
 //////////////////////////////////////////
 
 
-var graveButton = new GraveButton(cx, cy, radius, 'Horizontal!', Math.random() * 100);
+var graveButton = new GraveButton(cx, cy, radius, 'Horizontal!', 5+Math.random() * 10);
 var group = graveButton.group;
 group.attr({filter: shadowFilter});
 
 
-var verticalGraveButton = new GraveButton(cx + 2 * radius + 100, cy, radius, 'Vertical!', Math.random() * 100);
+var verticalGraveButton = new GraveButton(cx + 2 * radius + 100, cy, radius, 'Vertical!', 5+Math.random() * 10);
 
 
 ////////////////////////////////////////
