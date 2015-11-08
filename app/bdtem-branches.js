@@ -11,7 +11,7 @@ var shadow = Snap.filter.shadow(0, 0, 10, '#CCC', 0.5);
 var NUMBER_OF_BRANCHES = 8;
 var TRUNK_LENGTH = 150;
 var BRANCH_LENGTH = 75;
-var DURATION_MS = 250;
+var DURATION_MS = 750;
 
 //TODO OBVIOUSLY CHANGE THIS:
 var paper = Snap.select('#test');
@@ -121,7 +121,12 @@ function Branch(svgGroup, startX, startY, endX, endY, text, branchType) {
 }
 
 Branch.prototype.destroyBranch = function () {
-  this.animateTrunk(this.endX, this.startX, this.getRemovalAnimation());
+  this.animateTrunk(this.branchLine.attr('x2'), this.startX, this.getRemovalAnimation());
+};
+
+Branch.prototype.animateIn = function () {
+  this.textNode && this.textNode.attr({opacity: 1});
+  this.animateTrunk(this.startX, this.endX);
 };
 
 Branch.prototype.buildBranchLine = function (x1, y1, x2, y2) {
@@ -134,7 +139,8 @@ Branch.prototype.getRemovalAnimation = function () {
   var self = this;
   return function () {
     self.branchLine.remove();
-    if (self.textNode) {
+
+    if (self.textNode && self.textNode.attr('opacity') > 0) {
       self.textNode.animate(
         {opacity: 0},
         250,
@@ -147,7 +153,6 @@ Branch.prototype.getRemovalAnimation = function () {
 };
 
 Branch.prototype.animateTrunk = function (from, to, callback) {
-  this.textNode && this.textNode.attr({opacity: 1});
 
   Snap.animate(
     from,
@@ -211,16 +216,13 @@ BranchGroup.prototype.getEndX = function () {
 };
 
 BranchGroup.prototype.destroySubBranches = function () {
-  this.pendingBranchAnimations.forEach(function (elem) {
-    clearTimeout(elem);
-  });
+  this.pendingBranchAnimations.forEach(clearTimeout);
   this.branches.forEach(function (elem) {
     elem.destroyBranch();
   });
 
   this.branches = [];
   this.pendingBranchAnimations = [];
-
 
   //Pre-rebuild branches for next run:
   this.buildBranchTimeOffsetsAndPoints();
@@ -328,7 +330,7 @@ BranchGroup.prototype.updateVertical = function (branchGroup) {
   this.branchTimeOffsets.forEach(function (timeOffset, index) {
     var asyncAnimation = setTimeout(function () {
       var branch = branchGroup.branches[index];
-      branch.animateTrunk(branch.startX, branch.endX);
+      branch.animateIn();
     }, timeOffset);
 
     branchAnimations.push(asyncAnimation)
