@@ -43,6 +43,7 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
             player = $API;
             volume = player.volume;
             playerService.setPlayer(player);
+          getTrackFromQPs();
         };
 
         controller.onChangeSource = function (newValue) {
@@ -99,9 +100,9 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
         });
 
         function getTrackFromQPs() {
-            var track = parseInt($location.search()['track']);
+            var track = parseInt($location.search()['track']) - 1;
 
-            if (track > 0 && track < $scope.songs.length) {
+            if (track >= 0 && track < tracks[PLAYING].length) {
                 $timeout(function () {
                     playerService.skipToTrack(track)
                 });
