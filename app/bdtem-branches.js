@@ -177,7 +177,9 @@ function BranchGroup(svgGroup,
                      numberOfBranches,
                      branchLength,
                      animationDuration,
-                     vertical) {
+                     branchParameters) {
+
+  this.branchParameters = branchParameters;
   this.svgGroup = svgGroup;
   this.animationDuration = animationDuration || 1000;
   this.numberOfBranches = numberOfBranches || 1;
@@ -278,16 +280,29 @@ function buildTextNode(text, x, y, centerX, centerY) {
 }
 
 BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
-  this.branchTimeOffsets = new Array(this.numberOfBranches);
-  this.branchPoints = new Array(this.numberOfBranches);
+  var self = this;
 
-  for (var i = 1; i <= this.numberOfBranches; i++) {
-    this.branchTimeOffsets[i - 1] = (i / this.numberOfBranches) * this.animationDuration;
-    var branchPoint = this.startY + (i / this.numberOfBranches) * this.yDistance;
-    this.branchPoints[i - 1] = branchPoint;
+  if (this.branchParameters) {
 
-    this.addBranch(this.startX, branchPoint)
+    this.branches = this.branchParameters.branches;
+    this.branches.forEach(function (branch) {
+      self.svgGroup.append(branch);
+    });
+
+  } else {
+
+    var numberOfBranches = this.numberOfBranches;
+    for (var i = 1; i <= numberOfBranches; i++) {
+      var branchPoint = this.startY + (i / numberOfBranches) * this.yDistance;
+      this.addBranch(this.startX, branchPoint);
+    }
+
   }
+
+  this.branchTimeOffsets = new Array(numberOfBranches);
+  this.branches.forEach(function (elem, index) {
+    self.branchTimeOffsets[index] = (index + 1) / numberOfBranches * self.animationDuration;
+  })
 };
 
 BranchGroup.prototype.drawTrunkWithBranchesTo = function (x, y) {
@@ -343,17 +358,18 @@ BranchGroup.prototype.addBranch = function (startX, branchY) {
 
 
 BranchGroup.prototype.getBranchText = function () {
-  return Math.random().toString(16).substring(2, 8);
+  return randomColor();
 };
 
+function randomColor() {
+  return Math.random().toString(16).substring(2, 8);
+}
 
 var GraveButton = function (circleCoordinates,
                             text,
-                            numberOfCircles,
-                            numberOfBranches) {
+                            numberOfCircles) {
 
   this.numberOfCircles = numberOfCircles || 3;
-  this.numberOfBranches = numberOfBranches || 0;
 
   //TODO Make a CSS class for the groups and use that instead of inline styling.
   this.group = paper.group().attr({cursor: 'pointer'});
@@ -453,9 +469,9 @@ var CircleCoordinates = function (x, y, radius) {
 
 var circleCoordinates = new CircleCoordinates(cx, cy, radius);
 
-var graveButton = new GraveButton(circleCoordinates, 'Helo/Ehlo', 5, 1);
+var graveButton = new GraveButton(circleCoordinates, 'Helo/Ehlo', 5);
 
-var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 1, BRANCH_LENGTH, DURATION_MS);
+var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 4, BRANCH_LENGTH, DURATION_MS);
 
 graveButton.setBranchGroup(branchGroup);
 
