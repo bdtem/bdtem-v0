@@ -19,12 +19,20 @@ function BranchGroup(svgGroup,
   this.endX = this.getEndX();
   this.endY = this.getEndY();
 
+  this.branchLine = this.buildBranchLine(this.startX, this.startY, this.startX, this.startY);
+
   this.yDistance = (this.endY - this.startY);
 
   this.branches = [];
   this.buildBranchTimeOffsetsAndPoints();
   this.pendingBranchAnimations = new Array(numberOfBranches);
 }
+
+BranchGroup.prototype.buildBranchLine = function (x1, y1, x2, y2) {
+  var line = this.svgGroup.line(x1, y1, x2, y2);
+  line.attr({stroke: STROKE_COLOR, 'stroke-width': 2});
+  return line;
+};
 
 BranchGroup.prototype.getEndY = function () {
   //TODO GET THIS FROM THE BRANCH TYPE
@@ -57,7 +65,7 @@ BranchGroup.prototype.stopAnimation = function () {
 
 BranchGroup.prototype.destroyBranch = function () {
   this.destroySubBranches();
-  var trunk = this.trunk;
+  var trunk = this.branchLine;
 
   this.stopAnimation();
 
@@ -70,7 +78,7 @@ BranchGroup.prototype.destroyBranch = function () {
 };
 
 BranchGroup.prototype. removeAfterAnimation = function() {
-  var trunk = this.trunk;
+  var trunk = this.branchLine;
   return function () {
     trunk.remove()
   };
@@ -102,8 +110,7 @@ BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
   })
 };
 
-BranchGroup.prototype.drawTrunkWithBranchesTo = function (x, y) {
-  this.trunk = new Branch(this.svgGroup, this.startX, this.startY, x || this.startX, y || this.startY, '', BRANCH_TYPE.VERTICAL).branchLine;
+BranchGroup.prototype.drawTrunkWithBranchesTo = function () {
 
   this.animateTrunk();
 
@@ -114,17 +121,18 @@ BranchGroup.prototype.animateTrunk = function () {
   this.animationInProgress = Snap.animate(
     this.startY,
     this.endY,
-    this.updateVertical(this),
+    this.updateAnimation(),
     this.animationDuration
   );
 };
 
-BranchGroup.prototype.updateVertical = function (branchGroup) {
+BranchGroup.prototype.updateAnimation = function () {
   var branchAnimations = this.pendingBranchAnimations;
+  var self = this;
 
   this.branchTimeOffsets.forEach(function (timeOffset, index) {
     var asyncAnimation = setTimeout(function () {
-      var branch = branchGroup.branches[index];
+      var branch = self.branches[index];
       branch.animateIn();
     }, timeOffset);
 
@@ -132,7 +140,7 @@ BranchGroup.prototype.updateVertical = function (branchGroup) {
   });
 
   return function updateLine(value) {
-    branchGroup.trunk.attr({y2: value});
+    self.branchLine.attr({y2: value});
   }
 };
 

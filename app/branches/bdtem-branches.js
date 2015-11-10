@@ -159,7 +159,6 @@ var GraveButton = function (circleCoordinates,
   this.group.append(textNode);
 
   this.wasTriggered = false;
-  this.branch = {};
 
   this.translationAnimation = randomTranslation(this.group);
   this.translationAnimation.startAnimation();
@@ -189,13 +188,13 @@ GraveButton.prototype.buildClickAnimation = function () {
 
       self.translationAnimation.pause();
 
-      self.branch = branchGroup.drawTrunkWithBranchesTo(bBox.cx, bBox.cy + branchGroup.branchLength, 10, 4);
+      branchGroup.drawTrunkWithBranchesTo();
     } else {
       self.wasTriggered = false;
 
       self.randomGradientAnimation();
 
-      self.branch.destroyBranch();
+      branchGroup.destroyBranch();
 
       self.translationAnimation.resume();
     }

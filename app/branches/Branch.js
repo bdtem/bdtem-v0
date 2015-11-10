@@ -64,6 +64,7 @@ Branch.prototype.animateTrunk = function (from, to, callback) {
     mina.easeout,
     callback
   );
+
 };
 
 Branch.prototype.updateAnimation = function () {
