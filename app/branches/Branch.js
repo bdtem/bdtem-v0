@@ -22,6 +22,12 @@ function Branch(svgGroup,
   this.textNode = text && buildTextNode(text, startX, startY, false, true).attr({opacity: 0});
 }
 
+Branch.prototype.buildBranchLine = function (x1, y1, x2, y2) {
+  var line = this.svgGroup.line(x1, y1, x2, y2);
+  line.attr({stroke: STROKE_COLOR, 'stroke-width': 2});
+  return line;
+};
+
 Branch.prototype.destroyBranch = function () {
   this.animateTrunk(this.branchLine.attr('x2'), this.startX, this.getRemovalAnimation());
 };
@@ -29,12 +35,6 @@ Branch.prototype.destroyBranch = function () {
 Branch.prototype.animateIn = function () {
   this.textNode && this.textNode.attr({opacity: 1});
   this.animateTrunk(this.startX, this.endX);
-};
-
-Branch.prototype.buildBranchLine = function (x1, y1, x2, y2) {
-  var line = this.svgGroup.line(x1, y1, x2, y2);
-  line.attr({stroke: STROKE_COLOR, 'stroke-width': 2});
-  return line;
 };
 
 Branch.prototype.getRemovalAnimation = function () {
@@ -61,7 +61,7 @@ Branch.prototype.animateTrunk = function (from, to, callback) {
     to,
     this.updateAnimation(),
     250,
-    mina.easeout,
+    null,
     callback
   );
 

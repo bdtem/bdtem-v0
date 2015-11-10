@@ -44,6 +44,20 @@ BranchGroup.prototype.getEndX = function () {
   return this.startX;
 };
 
+BranchGroup.prototype.destroyBranch = function () {
+  this.destroySubBranches();
+  var trunk = this.branchLine;
+
+  this.stopAnimation();
+
+  trunk.stop();
+  trunk.animate(
+    {opacity: 0},
+    500,
+    this.resetBranchLine()
+  );
+};
+
 BranchGroup.prototype.destroySubBranches = function () {
   this.pendingBranchAnimations.forEach(clearTimeout);
   this.branches.forEach(function (elem) {
@@ -63,24 +77,18 @@ BranchGroup.prototype.stopAnimation = function () {
   }
 };
 
-BranchGroup.prototype.destroyBranch = function () {
-  this.destroySubBranches();
-  var trunk = this.branchLine;
-
-  this.stopAnimation();
-
-  trunk.stop();
-  trunk.animate(
-    {opacity: 0},
-    500,
-    this.removeAfterAnimation()
-  );
-};
-
-BranchGroup.prototype. removeAfterAnimation = function() {
-  var trunk = this.branchLine;
+BranchGroup.prototype.resetBranchLine = function () {
+  var self = this;
   return function () {
-    trunk.remove()
+    self.branchLine.attr(
+      {
+        'x1': self.startX,
+        'x2': self.startX,
+        'y1': self.startY,
+        'y2': self.startY,
+        'opacity': 1
+      }
+    );
   };
 };
 
@@ -110,19 +118,15 @@ BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
   })
 };
 
-BranchGroup.prototype.drawTrunkWithBranchesTo = function () {
 
-  this.animateTrunk();
-
-  return this;
-};
-
-BranchGroup.prototype.animateTrunk = function () {
+BranchGroup.prototype.animateTrunk = function (from, to, callback) {
   this.animationInProgress = Snap.animate(
-    this.startY,
-    this.endY,
+    from || this.startY,
+    to || this.endY,
     this.updateAnimation(),
-    this.animationDuration
+    this.animationDuration,
+    null,
+    callback
   );
 };
 

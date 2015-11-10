@@ -188,7 +188,7 @@ GraveButton.prototype.buildClickAnimation = function () {
 
       self.translationAnimation.pause();
 
-      branchGroup.drawTrunkWithBranchesTo();
+      branchGroup.animateTrunk();
     } else {
       self.wasTriggered = false;
 
