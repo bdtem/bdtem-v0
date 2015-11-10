@@ -1,4 +1,11 @@
-function Branch(svgGroup, startX, startY, endX, endY, text, branchType) {
+function Branch(svgGroup,
+                startX,
+                startY,
+                endX,
+                endY,
+                text,
+                branchType) {
+
   this.svgGroup = svgGroup;
   this.startX = startX;
   this.startY = startY;

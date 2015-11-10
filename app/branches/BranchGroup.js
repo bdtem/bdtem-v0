@@ -5,8 +5,8 @@ function BranchGroup(svgGroup,
                      animationDuration,
                      branchParameters) {
 
-  this.branchParameters = branchParameters;
   this.svgGroup = svgGroup;
+  this.branchParameters = branchParameters;
   this.animationDuration = animationDuration || 1000;
   this.numberOfBranches = numberOfBranches || 1;
 
@@ -65,15 +65,16 @@ BranchGroup.prototype.destroyBranch = function () {
   trunk.animate(
     {opacity: 0},
     500,
-    removeAfterAnimation(trunk)
+    this.removeAfterAnimation()
   );
 };
 
-function removeAfterAnimation(node) {
+BranchGroup.prototype. removeAfterAnimation = function() {
+  var trunk = this.trunk;
   return function () {
-    node.remove()
+    trunk.remove()
   };
-}
+};
 
 BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
   var self = this;
