@@ -19,7 +19,7 @@ function BranchGroup(svgGroup,
   this.endX = this.getEndX();
   this.endY = this.getEndY();
 
-  this.branchLine = this.buildBranchLine(this.startX, this.startY, this.startX, this.startY);
+  this.trunk = this.buildTrunk();
 
   this.yDistance = (this.endY - this.startY);
 
@@ -28,10 +28,10 @@ function BranchGroup(svgGroup,
   this.pendingBranchAnimations = new Array(numberOfBranches);
 }
 
-BranchGroup.prototype.buildBranchLine = function (x1, y1, x2, y2) {
-  var line = this.svgGroup.line(x1, y1, x2, y2);
-  line.attr({stroke: STROKE_COLOR, 'stroke-width': 2});
-  return line;
+
+BranchGroup.prototype.buildTrunk = function () {
+  var branch = new Branch(this.svgGroup, this.startX, this.startY, this.trunkLength, null, this.branchParameters.branchType);
+  return branch;
 };
 
 BranchGroup.prototype.getEndY = function () {
@@ -41,17 +41,17 @@ BranchGroup.prototype.getEndY = function () {
 
 BranchGroup.prototype.getEndX = function () {
   //TODO GET THIS FROM THE BRANCH TYPE
-  return this.startX;
+  return this.branchParameters.branchType.getEndX(this);
 };
 
 BranchGroup.prototype.destroyBranch = function () {
   this.destroySubBranches();
-  var trunk = this.branchLine;
+  var trunkLine = this.trunk.branchLine;
 
   this.stopAnimation();
 
-  trunk.stop();
-  trunk.animate(
+  trunkLine.stop();
+  trunkLine.animate(
     {opacity: 0},
     500,
     this.resetBranchLine()
@@ -80,7 +80,7 @@ BranchGroup.prototype.stopAnimation = function () {
 BranchGroup.prototype.resetBranchLine = function () {
   var self = this;
   return function () {
-    self.branchLine.attr(
+    self.trunk.branchLine.attr(
       {
         'x1': self.startX,
         'x2': self.startX,
@@ -95,7 +95,7 @@ BranchGroup.prototype.resetBranchLine = function () {
 BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
   var self = this;
 
-  if (this.branchParameters) {
+  if (this.branchParameters && this.branchParameters.branches) {
 
     this.branches = this.branchParameters.branches;
     this.branches.forEach(function (branch) {
@@ -105,9 +105,11 @@ BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
   } else {
 
     var numberOfBranches = this.numberOfBranches;
-    for (var i = 1; i <= numberOfBranches; i++) {
-      var branchPoint = this.startY + (i / numberOfBranches) * this.yDistance;
-      this.addBranch(this.startX, branchPoint);
+    if (numberOfBranches > 0) {
+      for (var i = 1; i <= numberOfBranches; i++) {
+        var branchPoint = this.startY + (i / numberOfBranches) * this.yDistance;
+        this.addBranch(this.startX, branchPoint);
+      }
     }
 
   }
@@ -121,8 +123,8 @@ BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
 
 BranchGroup.prototype.animateTrunk = function (from, to, callback) {
   this.animationInProgress = Snap.animate(
-    from || this.startY,
-    to || this.endY,
+    from || this.trunk.start,
+    to || this.trunk.start + this.trunk.length,
     this.updateAnimation(),
     this.animationDuration,
     null,
@@ -143,9 +145,12 @@ BranchGroup.prototype.updateAnimation = function () {
     branchAnimations.push(asyncAnimation)
   });
 
-  return function updateLine(value) {
-    self.branchLine.attr({y2: value});
-  }
+
+  var trunkAnimation = self.trunk.updateAnimation();
+
+  console.log(trunkAnimation)
+
+  return trunkAnimation
 };
 
 BranchGroup.prototype.addBranch = function (startX, branchY) {
@@ -153,10 +158,9 @@ BranchGroup.prototype.addBranch = function (startX, branchY) {
 
   var branch = new Branch(
     this.svgGroup,
+    branchY,
     startX,
-    branchY,
-    Math.random() >= 0.5 ? startX - this.branchLength : startX + this.branchLength,
-    branchY,
+    Math.random() >= 0.5 ? this.branchLength : -this.branchLength,
     this.getBranchText(),
     BRANCH_TYPE.HORIZONTAL
   );

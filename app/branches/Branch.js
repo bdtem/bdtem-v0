@@ -1,26 +1,40 @@
 function Branch(svgGroup,
-                startX,
-                startY,
-                endX,
-                endY,
+                fixed,
+                start,
+                length,
                 text,
                 branchType) {
 
   this.svgGroup = svgGroup;
-  this.startX = startX;
-  this.startY = startY;
-  this.endX = endX;
 
-  if (branchType) {
-    this.updateAnimation = branchType.updateAnimation;
-  }
+  this.fixed = fixed;
+  this.start = start;
+  this.length = length;
 
-  this.length = endX - startX;
+  this.branchType = branchType;
+
+  this.updateAnimation = branchType.updateAnimation;
+
+  var startX = this.getStartX();
+  var startY = this.getStartY();
 
   this.branchLine = this.buildBranchLine(startX, startY, startX, startY);
 
   this.textNode = text && buildTextNode(text, startX, startY, false, true).attr({opacity: 0});
 }
+
+Branch.prototype.getStartX = function () {
+  return this.branchType.getStartX(this);
+};
+Branch.prototype.getStartY = function () {
+  return this.branchType.getStartY(this);
+};
+Branch.prototype.getEndX = function () {
+  return this.branchType.getEndX(this);
+};
+Branch.prototype.getEndY = function () {
+  return this.branchType.getEndY(this);
+};
 
 Branch.prototype.buildBranchLine = function (x1, y1, x2, y2) {
   var line = this.svgGroup.line(x1, y1, x2, y2);
@@ -29,12 +43,16 @@ Branch.prototype.buildBranchLine = function (x1, y1, x2, y2) {
 };
 
 Branch.prototype.destroyBranch = function () {
-  this.animateTrunk(this.branchLine.attr('x2'), this.startX, this.getRemovalAnimation());
+  var animationParam = this.branchType.animationParam;
+  this.animateTrunk(this.branchLine.attr(animationParam), this.start, this.getRemovalAnimation());
 };
 
 Branch.prototype.animateIn = function () {
   this.textNode && this.textNode.attr({opacity: 1});
-  this.animateTrunk(this.startX, this.endX);
+  var start = this.start;
+  var end = this.start + this.length;
+
+  this.animateTrunk(start, end);
 };
 
 Branch.prototype.getRemovalAnimation = function () {
@@ -56,26 +74,27 @@ Branch.prototype.getRemovalAnimation = function () {
 
 Branch.prototype.animateTrunk = function (from, to, callback) {
 
+  var duration = 250;
   Snap.animate(
     from,
     to,
     this.updateAnimation(),
-    250,
+    duration,
     null,
     callback
   );
 
 };
 
-Branch.prototype.updateAnimation = function () {
-  var self = this;
-  return function (value) {
-
-    var txt = self.textNode;
-    if (txt) {
-      txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
-    }
-
-    self.branchLine.attr({x2: value});
-  };
-};
+//Branch.prototype.updateAnimation = function () {
+//  var self = this;
+//  return function (value) {
+//
+//    var txt = self.textNode;
+//    if (txt) {
+//      txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
+//    }
+//
+//    self.branchLine.attr({x2: value});
+//  };
+//};

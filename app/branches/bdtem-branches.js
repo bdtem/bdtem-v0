@@ -24,6 +24,19 @@ var BRANCH_TYPE = {
     value: 0,
     name: 'Horizontal',
     shortName: 'H',
+    animationParam: 'x2',
+    getStartX: function (branch) {
+      return branch.start;
+    },
+    getStartY: function (branch) {
+      return branch.fixed;
+    },
+    getEndX: function (branch) {
+      return branch.length ? branch.start + branch.length : branch.start;
+    },
+    getEndY: function (branch) {
+      return branch.fixed;
+    },
     updateAnimation: function () {
       var self = this;
       return function (value) {
@@ -43,6 +56,19 @@ var BRANCH_TYPE = {
     value: 1,
     name: "Horizontal Span",
     shortName: "Hs",
+    animationParam: 'x2',
+    getStartX: function (branch) {
+      return branch.start;
+    },
+    getStartY: function (branch) {
+      return branch.fixed;
+    },
+    getEndX: function (branch) {
+      return branch.length ? branch.start + branch.length : branch.start;
+    },
+    getEndY: function (branch) {
+      return branch.fixed;
+    },
     updateAnimation: function () {
       var self = this;
       return function (value) {
@@ -64,6 +90,19 @@ var BRANCH_TYPE = {
     value: 2,
     name: "Vertical",
     shortName: "V",
+    animationParam: 'y2',
+    getStartX: function (branch) {
+      return branch.fixed;
+    },
+    getStartY: function (branch) {
+      return branch.start;
+    },
+    getEndX: function (branch) {
+      return branch.fixed;
+    },
+    getEndY: function (branch) {
+      return branch.length ? branch.start + branch.length : branch.start;
+    },
     updateAnimation: function () {
       var self = this;
       return function (value) {
@@ -74,7 +113,7 @@ var BRANCH_TYPE = {
         }
 
         self.branchLine.attr({
-          y2: 2 * self.startY - value
+          y2: value
         });
       };
     }
@@ -84,6 +123,19 @@ var BRANCH_TYPE = {
     value: 3,
     name: "Vertical Span",
     shortName: "Vs",
+    animationParam: 'y2',
+    getStartX: function (branch) {
+      return branch.fixed;
+    },
+    getStartY: function (branch) {
+      return branch.start;
+    },
+    getEndX: function (branch) {
+      return branch.fixed;
+    },
+    getEndY: function (branch) {
+      return branch.length ? branch.start + branch.length : branch.start;
+    },
     updateAnimation: function () {
       var self = this;
       return function (value) {
@@ -102,8 +154,6 @@ var BRANCH_TYPE = {
 
   }
 };
-
-
 
 
 var OFF_SCREEN = -1024;
@@ -242,7 +292,10 @@ var circleCoordinates = new CircleCoordinates(cx, cy, radius);
 
 var graveButton = new GraveButton(circleCoordinates, 'Helo/Ehlo', 5);
 
-var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 4, BRANCH_LENGTH, DURATION_MS);
+var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, {branchType: BRANCH_TYPE.VERTICAL});
+
+var verticalBranchGroup = Object.create(branchGroup);
+
 
 graveButton.setBranchGroup(branchGroup);
 
