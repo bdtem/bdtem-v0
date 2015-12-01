@@ -127,7 +127,7 @@ var circleCoordinates = new CircleCoordinates(cx, cy, radius);
 
 var graveButton = new GraveButton(circleCoordinates, 'Helo/Ehlo', 5);
 
-var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, {branchType: BRANCH_TYPE.HORIZONTAL});
+var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, {branchType: BRANCH_TYPE.HORIZONTAL_SPAN});
 
 var verticalBranchGroup = Object.create(branchGroup);
 

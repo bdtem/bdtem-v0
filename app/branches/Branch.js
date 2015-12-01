@@ -60,6 +60,72 @@ Branch.prototype.destroyBranch = function () {
   this.animateTrunk(this.branchLine.attr(animationParam), this.start, this.getRemovalAnimation());
 };
 
+
+Branch.prototype.buildPointsAndOffsets = function (numberOfPoints, animationDuration) {
+  var points = [];
+  var timeOffsets = [];
+
+  var i = 0;
+  var lengthProportion;
+  var currentProportion;
+  var timeOffset;
+
+  if (this.branchType.span) {
+
+    if (numberOfPoints % 2 != 0) {
+      var center = {
+        fixed: this.start,
+        start: this.fixed
+      };
+
+      currentProportion = ((i + 1) / numberOfPoints);
+
+      timeOffsets.push(currentProportion * animationDuration);
+      points.push(center);
+
+      --numberOfPoints;
+    }
+
+    numberOfPoints /= 2;
+
+    for (i; i < numberOfPoints; ++i) {
+      currentProportion = ((i + 1) / numberOfPoints);
+      lengthProportion = currentProportion * this.length;
+
+      timeOffset = currentProportion * animationDuration;
+
+      var posPoint = {
+          fixed: this.start + lengthProportion,
+          start: this.fixed
+        },
+        negPoint = {
+          fixed: this.start - lengthProportion,
+          start: this.fixed
+        };
+
+      points.push(posPoint, negPoint);
+      timeOffsets.push(timeOffset, timeOffset);
+    }
+  } else {
+    for (i; i < numberOfPoints; ++i) {
+      currentProportion = ((i + 1) / numberOfPoints);
+
+      lengthProportion = currentProportion * this.length;
+      timeOffset = currentProportion * animationDuration;
+
+      var point = {
+        fixed: this.start + lengthProportion,
+        start: this.fixed
+      };
+
+      points.push(point);
+      timeOffsets.push(timeOffset);
+    }
+  }
+
+  return {points: points, offsets: timeOffsets};
+};
+
 Branch.prototype.animateIn = function () {
   this.textNode && this.textNode.attr({opacity: 1});
   var start = this.start;

@@ -19,7 +19,7 @@ function BranchGroup(svgGroup,
   this.endX = this.getEndX();
   this.endY = this.getEndY();
 
-  this.trunk = this.buildTrunk();
+  this.trunk = this.branchParameters.trunk || this.buildTrunk();
 
   this.yDistance = (this.endY - this.startY);
 
@@ -86,6 +86,9 @@ BranchGroup.prototype.resetBranchLine = function () {
 
 BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
   var self = this;
+  var numberOfBranches = this.numberOfBranches;
+
+  var pointsAndOffsets = this.trunk.buildPointsAndOffsets(numberOfBranches, this.animationDuration);
 
   if (this.branchParameters && this.branchParameters.branches) {
 
@@ -93,24 +96,15 @@ BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
     this.branches.forEach(function (branch) {
       self.svgGroup.append(branch);
     });
-
   } else {
 
-    var numberOfBranches = this.numberOfBranches;
-    if (numberOfBranches > 0) {
-      for (var i = 1; i <= numberOfBranches; i++) {
-        var branchPoint = this.startY + (i / numberOfBranches) * this.yDistance;
-        this.addBranch(this.startX, branchPoint);
-      }
-    }
-
+    pointsAndOffsets.points.forEach(function (elem) {
+      console.log('adding ' + elem.start + ' ' + elem.fixed)
+      self.addBranch(elem.start, elem.fixed);
+    });
   }
 
-  this.branchTimeOffsets = new Array(numberOfBranches);
-  this.branches.forEach(function (elem, index) {
-      self.branchTimeOffsets[index] = (index + 1) / numberOfBranches * self.animationDuration;
-    }
-  );
+  this.branchTimeOffsets = pointsAndOffsets.offsets;
 };
 
 
@@ -138,16 +132,16 @@ BranchGroup.prototype.updateAnimation = function () {
     branchAnimations.push(asyncAnimation)
   });
 
-  return self.trunk.updateAnimation()
+  return self.trunk.updateAnimation();
 };
 
-BranchGroup.prototype.addBranch = function (startX, branchY) {
-  startX = startX || this.startX;
+BranchGroup.prototype.addBranch = function (start, fixed) {
+  start = start || this.startX;
 
   var branch = new Branch(
     this.svgGroup,
-    branchY,
-    startX,
+    fixed,
+    start,
     Math.random() >= 0.5 ? this.branchLength : -this.branchLength, //Just fo' fun.
     this.getBranchText(),
     this.branchParameters.branchType.orthogonal

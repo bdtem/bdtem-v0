@@ -37,6 +37,7 @@ var BRANCH_TYPE = {
     }
   },
   HORIZONTAL_SPAN: {
+    span: true,
     value: 1,
     name: "Horizontal Span",
     shortName: "Hs",
@@ -63,7 +64,7 @@ var BRANCH_TYPE = {
         }
 
         self.branchLine.attr({
-          x1: 2 * self.startX - value,
+          x1: 2 * self.start - value,
           x2: value
         });
       };
@@ -93,7 +94,7 @@ var BRANCH_TYPE = {
 
         var txt = self.textNode;
         if (txt) {
-          txt.attr({y: self.length < 0 ? value - (txt.getBBox().height + 1) : value});
+          txt.attr({y: self.length < 0 ? value - (txt.getBBox().height) : value});
         }
 
         self.branchLine.attr({
@@ -104,6 +105,7 @@ var BRANCH_TYPE = {
 
   },
   VERTICAL_SPAN: {
+    span: true,
     value: 3,
     name: "Vertical Span",
     shortName: "Vs",
@@ -126,11 +128,11 @@ var BRANCH_TYPE = {
 
         var txt = self.textNode;
         if (txt) {
-          txt.attr({y: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
+          txt.attr({y: self.length < 0 ? value - (txt.getBBox().height) : value});
         }
 
         self.branchLine.attr({
-          y1: 2 * self.startY - value,
+          y1: 2 * self.start - value,
           y2: value
         });
       };
