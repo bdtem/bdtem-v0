@@ -26,12 +26,14 @@ function Branch(svgGroup,
 
 Branch.prototype.stopAnimation = function () {
   this.branchLine.stop();
+  var resetCallback = this.reset.bind(this);
+
   this.branchLine.animate(
     {opacity: 0},
     500,
-    this.resetBranchLine()
+    resetCallback
   )
-}
+};
 
 Branch.prototype.reset = function () {
   var startX = this.getStartX();

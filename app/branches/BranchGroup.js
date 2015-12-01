@@ -16,12 +16,9 @@ function BranchGroup(svgGroup,
   var bBox = svgGroup.getBBox();
   this.startY = bBox.y2;
   this.startX = bBox.cx;
-  this.endX = this.getEndX();
-  this.endY = this.getEndY();
 
   this.trunk = this.branchParameters.trunk || this.buildTrunk();
 
-  this.yDistance = (this.endY - this.startY);
 
   this.branches = [];
   this.buildBranchTimeOffsetsAndPoints();
@@ -30,32 +27,15 @@ function BranchGroup(svgGroup,
 
 
 BranchGroup.prototype.buildTrunk = function () {
-  var branch = new Branch(this.svgGroup, this.startX, this.startY, this.trunkLength, null, this.branchParameters.branchType);
-  return branch;
-};
-
-BranchGroup.prototype.getEndY = function () {
-  //TODO GET THIS FROM THE BRANCH TYPE
-  return this.startY + this.trunkLength;
-};
-
-BranchGroup.prototype.getEndX = function () {
-  //TODO GET THIS FROM THE BRANCH TYPE
-  return this.branchParameters.branchType.getEndX(this);
+  return new Branch(this.svgGroup, this.startX, this.startY, this.trunkLength, null, this.branchParameters.branchType);
 };
 
 BranchGroup.prototype.destroyBranch = function () {
   this.destroySubBranches();
-  var trunkLine = this.trunk.branchLine;
 
   this.stopAnimation();
 
-  trunkLine.stop();
-  trunkLine.animate(
-    {opacity: 0},
-    500,
-    this.resetBranchLine()
-  );
+  this.trunk.stopAnimation();
 };
 
 BranchGroup.prototype.destroySubBranches = function () {
@@ -75,13 +55,6 @@ BranchGroup.prototype.stopAnimation = function () {
   if (this.animationInProgress) {
     this.animationInProgress.stop();
   }
-};
-
-BranchGroup.prototype.resetBranchLine = function () {
-  var self = this;
-  return function () {
-    self.trunk.reset();
-  };
 };
 
 BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
