@@ -23,6 +23,19 @@ function Branch(svgGroup,
   this.textNode = text && buildTextNode(text, startX, startY, false, true).attr({opacity: 0});
 }
 
+
+Branch.prototype.reset = function () {
+  var startX = this.getStartX();
+  var startY = this.getStartY();
+  this.branchLine.attr({
+    x1: startX,
+    y1: startY,
+    x2: startX,
+    y2: startY,
+    opacity: 1
+  });
+};
+
 Branch.prototype.getStartX = function () {
   return this.branchType.getStartX(this);
 };
@@ -85,16 +98,3 @@ Branch.prototype.animateTrunk = function (from, to, callback) {
   );
 
 };
-
-//Branch.prototype.updateAnimation = function () {
-//  var self = this;
-//  return function (value) {
-//
-//    var txt = self.textNode;
-//    if (txt) {
-//      txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
-//    }
-//
-//    self.branchLine.attr({x2: value});
-//  };
-//};

@@ -93,7 +93,7 @@ var BRANCH_TYPE = {
 
         var txt = self.textNode;
         if (txt) {
-          txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
+          txt.attr({y: self.length < 0 ? value - (txt.getBBox().height + 1) : value});
         }
 
         self.branchLine.attr({

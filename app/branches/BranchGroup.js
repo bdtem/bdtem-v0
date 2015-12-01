@@ -80,15 +80,7 @@ BranchGroup.prototype.stopAnimation = function () {
 BranchGroup.prototype.resetBranchLine = function () {
   var self = this;
   return function () {
-    self.trunk.branchLine.attr(
-      {
-        'x1': self.startX,
-        'x2': self.startX,
-        'y1': self.startY,
-        'y2': self.startY,
-        'opacity': 1
-      }
-    );
+    self.trunk.reset();
   };
 };
 
@@ -116,8 +108,9 @@ BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
 
   this.branchTimeOffsets = new Array(numberOfBranches);
   this.branches.forEach(function (elem, index) {
-    self.branchTimeOffsets[index] = (index + 1) / numberOfBranches * self.animationDuration;
-  })
+      self.branchTimeOffsets[index] = (index + 1) / numberOfBranches * self.animationDuration;
+    }
+  );
 };
 
 
