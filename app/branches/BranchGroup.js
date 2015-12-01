@@ -145,12 +145,7 @@ BranchGroup.prototype.updateAnimation = function () {
     branchAnimations.push(asyncAnimation)
   });
 
-
-  var trunkAnimation = self.trunk.updateAnimation();
-
-  console.log(trunkAnimation)
-
-  return trunkAnimation
+  return self.trunk.updateAnimation()
 };
 
 BranchGroup.prototype.addBranch = function (startX, branchY) {
@@ -160,9 +155,9 @@ BranchGroup.prototype.addBranch = function (startX, branchY) {
     this.svgGroup,
     branchY,
     startX,
-    Math.random() >= 0.5 ? this.branchLength : -this.branchLength,
+    Math.random() >= 0.5 ? this.branchLength : -this.branchLength, //Just fo' fun.
     this.getBranchText(),
-    BRANCH_TYPE.HORIZONTAL
+    this.branchParameters.branchType.orthogonal
   );
 
   this.branches.push(branch);
