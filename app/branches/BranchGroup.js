@@ -99,7 +99,6 @@ BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
   } else {
 
     pointsAndOffsets.points.forEach(function (elem) {
-      console.log('adding ' + elem.start + ' ' + elem.fixed)
       self.addBranch(elem.start, elem.fixed);
     });
   }
@@ -142,9 +141,9 @@ BranchGroup.prototype.addBranch = function (start, fixed) {
     this.svgGroup,
     fixed,
     start,
-    Math.random() >= 0.5 ? this.branchLength : -this.branchLength, //Just fo' fun.
+    this.branchLength,
     this.getBranchText(),
-    this.branchParameters.branchType.orthogonal
+    this.trunk.branchType.orthogonal
   );
 
   this.branches.push(branch);

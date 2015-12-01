@@ -24,6 +24,15 @@ function Branch(svgGroup,
 }
 
 
+Branch.prototype.stopAnimation = function () {
+  this.branchLine.stop();
+  this.branchLine.animate(
+    {opacity: 0},
+    500,
+    this.resetBranchLine()
+  )
+}
+
 Branch.prototype.reset = function () {
   var startX = this.getStartX();
   var startY = this.getStartY();

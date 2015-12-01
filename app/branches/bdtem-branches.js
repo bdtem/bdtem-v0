@@ -2,7 +2,7 @@
 
 var STROKE_COLOR = '#FFF';
 
-var cx = 150;
+var cx = 250;
 var cy = 125;
 var radius = 100;
 
@@ -127,9 +127,10 @@ var circleCoordinates = new CircleCoordinates(cx, cy, radius);
 
 var graveButton = new GraveButton(circleCoordinates, 'Helo/Ehlo', 5);
 
-var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, {branchType: BRANCH_TYPE.HORIZONTAL_SPAN});
+var branchParameters = {branchType: BRANCH_TYPE.VERTICAL};
 
-var verticalBranchGroup = Object.create(branchGroup);
+var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, branchParameters);
+
 
 
 graveButton.setBranchGroup(branchGroup);
