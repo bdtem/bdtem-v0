@@ -127,10 +127,17 @@ var circleCoordinates = new CircleCoordinates(cx, cy, radius);
 
 var graveButton = new GraveButton(circleCoordinates, 'Helo/Ehlo', 5);
 
-var branchParameters = {branchType: BRANCH_TYPE.VERTICAL};
+
+var bBox = graveButton.group.getBBox();
+
+var preTrunk = new Branch(graveButton.group, bBox.cx, bBox.y2, BRANCH_LENGTH, null, BRANCH_TYPE.VERTICAL);
+var realTrunk = new Branch(graveButton.group, bBox.y2 + BRANCH_LENGTH, bBox.cx, TRUNK_LENGTH, null, BRANCH_TYPE.HORIZONTAL_SPAN);
+
+var crazyTrunk = new AdHocBranchGroup([preTrunk, realTrunk]);
+
+var branchParameters = {trunk: crazyTrunk};
 
 var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, branchParameters);
-
 
 
 graveButton.setBranchGroup(branchGroup);

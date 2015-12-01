@@ -68,7 +68,7 @@ Branch.prototype.buildBranchLine = function (x1, y1, x2, y2) {
 
 Branch.prototype.destroyBranch = function () {
   var animationParam = this.branchType.animationParam;
-  this.animateTrunk(this.branchLine.attr(animationParam), this.start, this.getRemovalAnimation());
+  this.animateTrunk(this.branchLine.attr(animationParam), this.start, null, this.getRemovalAnimation());
 };
 
 
@@ -137,12 +137,12 @@ Branch.prototype.buildPointsAndOffsets = function (numberOfPoints, animationDura
   return {points: points, offsets: timeOffsets};
 };
 
-Branch.prototype.animateIn = function () {
+Branch.prototype.animateIn = function (duration) {
   this.textNode && this.textNode.attr({opacity: 1});
   var start = this.start;
   var end = this.start + this.length;
 
-  this.animateTrunk(start, end);
+  this.animateTrunk(start, end, duration);
 };
 
 Branch.prototype.getRemovalAnimation = function () {
@@ -162,9 +162,10 @@ Branch.prototype.getRemovalAnimation = function () {
   }
 };
 
-Branch.prototype.animateTrunk = function (from, to, callback) {
+Branch.prototype.animateTrunk = function (from, to, duration, callback) {
 
-  var duration = 250;
+  duration = duration || 250;
+
   Snap.animate(
     from,
     to,
