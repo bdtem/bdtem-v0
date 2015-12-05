@@ -53,11 +53,10 @@ AdHocBranchGroup.prototype.buildPointsAndOffsets = function (numberOfPoints, ani
   return this.master.buildPointsAndOffsets(numberOfPoints, animationDuration || this.DEFAULT_ANIMATION_DURATION);
 };
 
+AdHocBranchGroup.prototype.DEFAULT_ANIMATION_DURATION = Branch.prototype.DEFAULT_ANIMATION_DURATION;
 
 AdHocBranchGroup.prototype.animateIn = function (duration) {
   var durationFraction = (duration || this.DEFAULT_ANIMATION_DURATION) / this.branches.length;
-
-  console.log(durationFraction);
 
   this.branches.forEach(function (elem, index) {
     setTimeout(function () {

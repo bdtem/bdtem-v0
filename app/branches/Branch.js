@@ -13,8 +13,6 @@ function Branch(svgGroup,
 
   this.branchType = branchType;
 
-  this.updateAnimation = branchType.updateAnimation;
-
   var startX = this.getStartX();
   var startY = this.getStartY();
 
@@ -23,40 +21,39 @@ function Branch(svgGroup,
   this.textNode = text && this.buildTextNode(text, startX, startY).attr({opacity: 0});
 }
 
-Branch.prototype.DEFAULT_ANIMATION_DURATION = 250;
+Branch.prototype.DEFAULT_ANIMATION_DURATION = 1000;
+
+Branch.prototype.updateAnimation = function () {
+  return this.branchType.updateAnimation.bind(this)();
+};
 
 Branch.prototype.buildTextNode = function (text, x, y) {
   var centerX, centerY = false;
-
+  text = text || '';
   if (this.branchType.name[0] === 'H') {
     centerY = true;
   }
   centerX = !centerY;
 
-  if (text) {
-    var textNode = paper.text(OFF_SCREEN, OFF_SCREEN, text);
-    var textBBox = textNode.getBBox();
-    var width = textBBox.width;
-    var heightOffset = textBBox.height;
+  var textNode = paper.text(OFF_SCREEN, OFF_SCREEN, text);
+  var textBBox = textNode.getBBox();
+  var width = textBBox.width;
+  var height = textBBox.height;
 
-    console.log(heightOffset);
+  textNode.attr({
+    'font-family': 'Libre Baskerville',
+    x: centerX ? (x - width / 2) : x,
+    y: centerY ? (y + height / 2) : y,
+    fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : STROKE_COLOR
+  });
 
-    textNode.attr({
-      'font-family': 'Libre Baskerville',
-      x: centerX ? (x - width / 2) : x,
-      y: centerY ? (y + heightOffset) : y + heightOffset,
-      fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : STROKE_COLOR
-    });
+  textNode.click(function (event) {
+    event.stopPropagation();
+    textNode.attr({fill: '#F0F', filter: shadowFilter});
+    textNode.node.innerHTML = 'clicks'
+  });
+  return textNode;
 
-    textNode.click(function (event) {
-      event.stopPropagation();
-      textNode.attr({fill: '#F0F', filter: shadowFilter});
-      textNode.node.innerHTML = 'clicks'
-    });
-    return textNode;
-  } else {
-    return null;
-  }
 };
 
 

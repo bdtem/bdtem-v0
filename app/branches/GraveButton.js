@@ -2,17 +2,17 @@
  * Created by alacasse on 12/5/15.
  */
 
-var GraveButton = function (circleCoordinates,
+var GraveButton = function (shapeTemplate,
                             text,
-                            numberOfCircles) {
+                            gradientSteps) {
 
-  this.numberOfCircles = numberOfCircles || 3;
+  this.gradientSteps = gradientSteps || 3;
 
   //TODO Make a CSS class for the groups and use that instead of inline styling.
   this.group = paper.group().attr({cursor: 'pointer'});
 
-
-  this.buildSvgCircle(circleCoordinates);
+  this.buildGradient();
+  this.buildSvgShape(shapeTemplate);
 
 
   var bBox = this.group.getBBox();
@@ -25,7 +25,7 @@ var GraveButton = function (circleCoordinates,
 
   this.wasTriggered = false;
 
-  this.translationAnimation = randomTranslation(this.group, Math.random() * 10 - Math.random() );
+  this.translationAnimation = randomTranslation(this.group, Math.random() * 10 - Math.random());
   this.translationAnimation.startAnimation();
 };
 
@@ -35,7 +35,6 @@ GraveButton.prototype.buildTextNode = function (text, x, y) {
   if (text) {
     var textNode = paper.text(OFF_SCREEN, OFF_SCREEN, text);
     var textBBox = textNode.getBBox();
-    var height = textBBox.height;
     var width = textBBox.width;
 
     textNode.attr({
@@ -94,33 +93,32 @@ GraveButton.prototype.buildClickAnimation = function () {
 var SCALING_FACTOR = 2;
 
 GraveButton.prototype.randomGradientAnimation = function () {
-    this.gradient.animate(
+  this.gradient.animate(
     {r: this.wasTriggered ? 10 + Math.random() * SCALING_FACTOR : 8 + Math.random() * SCALING_FACTOR},
     500
   );
 };
 
-GraveButton.prototype.buildSvgCircle = function (circleCoordinates) {
-  var whiteMultiple = 0xFFFFFF / this.numberOfCircles;
+GraveButton.prototype.buildSvgShape = function (shapeTemplate) {
+  var svgShape = shapeTemplate.build(paper);
+
+  this.group.append(svgShape);
+  svgShape.attr({fill: this.gradient});
+};
+
+GraveButton.prototype.buildGradient = function () {
+  var whiteMultiple = 0xFFFFFF / this.gradientSteps;
   // Building a gradient string with form described here:
   // http://snapsvg.io/docs/#Paper.gradient
   var gradientString = '#000';
 
-  var circle = paper.circle(circleCoordinates.x, circleCoordinates.y, circleCoordinates.radius);
-  this.group.append(circle);
-  for (var i = 0; i < this.numberOfCircles; i++) {
-    var RGB_value = Math.ceil(((this.numberOfCircles - i)) * whiteMultiple);
+  for (var i = 0; i < this.gradientSteps; i++) {
+    var RGB_value = Math.ceil(((this.gradientSteps - i)) * whiteMultiple);
     gradientString += '-#' + RGB_value.toString(16);
   }
 
   this.gradient = paper.gradient('r(' + [0.5, 0.5, 12].join(',') + ')' + gradientString);
-  circle.attr({fill: this.gradient});
-
 };
 
-var CircleCoordinates = function (x, y, radius) {
-  this.x = x;
-  this.y = y;
-  this.radius = radius;
-};
+
 

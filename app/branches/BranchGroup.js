@@ -57,9 +57,9 @@ BranchGroup.prototype.destroySubBranches = function () {
 };
 
 BranchGroup.prototype.stopAnimation = function () {
-  if (this.animationInProgress) {
-    this.animationInProgress.stop();
-  }
+  //if (this.animationInProgress) {
+  //  this.animationInProgress.stop();
+  //}
 };
 
 BranchGroup.prototype.buildPointsAndOffsets = function () {
@@ -67,7 +67,6 @@ BranchGroup.prototype.buildPointsAndOffsets = function () {
   var numberOfBranches = this.numberOfBranches;
 
   var pointsAndOffsets = this.trunk.buildPointsAndOffsets(numberOfBranches, this.animationDuration);
-  console.log(pointsAndOffsets.offsets);
 
   if (this.branchParameters && this.branchParameters.branches) {
 
@@ -96,7 +95,7 @@ BranchGroup.prototype.animateIn = function () {
   this.branchTimeOffsets.forEach(function (timeOffset, index) {
     var asyncAnimation = setTimeout(function () {
       var branch = self.branches[index];
-      branch.animateIn();
+      branch.animateIn(self.animationDuration * 5);
     }, timeOffset);
 
     branchAnimations.push(asyncAnimation)

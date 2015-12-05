@@ -29,9 +29,10 @@ function randomColor() {
 //////////////////////////////////////////
 
 var circleCoordinates = new CircleCoordinates(cx, cy, radius);
+var svgCircle = new SvgCircle(circleCoordinates);
 
 var buttonText = 'Gr. 1';
-var graveButton = new GraveButton(circleCoordinates, buttonText, 5);
+var graveButton = new GraveButton(svgCircle, buttonText, 5);
 
 
 var svgGroup = graveButton.group;
@@ -50,7 +51,8 @@ var leftCrossTrunk = new Branch(svgGroup, heightOffset + leftSubBranch.length, l
 var leftCross = new BranchGroup(svgGroup, BRANCH_LENGTH, 3, BRANCH_LENGTH, 250, {trunk: leftCrossTrunk});
 
 var rightSubBranch = new Branch(svgGroup, realTrunk.start + TRUNK_LENGTH, heightOffset, BRANCH_LENGTH + 50, null, VERT);
-var rightCross = new Branch(svgGroup, heightOffset + rightSubBranch.length, rightSubBranch.getStartX(), BRANCH_LENGTH, null, HSPAN);
+var rightCrossTrunk = new Branch(svgGroup, heightOffset + rightSubBranch.length, rightSubBranch.getStartX(), BRANCH_LENGTH, null, HSPAN);
+var rightCross = new BranchGroup(svgGroup, BRANCH_LENGTH, 2, BRANCH_LENGTH - Math.random() * 10, 250, {trunk: rightCrossTrunk});
 
 
 var crazyTrunk = new AdHocBranchGroup([preTrunk, realTrunk]);
@@ -75,8 +77,12 @@ svgGroup.attr({filter: shadowFilter});
 ////////////////////////////////////////
 
 var secondButtonText = 'Gr. 2';
-var secondGraveButton = new GraveButton(new CircleCoordinates(cx * 2, cy * 1.5, radius), secondButtonText, 5);
 
+var secondGraveButton = new GraveButton(
+  new SvgEquilateralTriangle(new CircleCoordinates(cx * 2, cy * 1.5, radius)),
+  secondButtonText,
+  5
+);
 
 var secondSvgGroup = secondGraveButton.group;
 
