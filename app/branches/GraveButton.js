@@ -25,7 +25,7 @@ var GraveButton = function (circleCoordinates,
 
   this.wasTriggered = false;
 
-  this.translationAnimation = randomTranslation(this.group);
+  this.translationAnimation = randomTranslation(this.group, Math.random() * 10 - Math.random() );
   this.translationAnimation.startAnimation();
 };
 
@@ -74,10 +74,7 @@ GraveButton.prototype.buildClickAnimation = function () {
     if (!self.wasTriggered) {
       self.wasTriggered = true;
 
-      self.gradient.animate(
-        {r: 1},
-        1000
-      );
+      self.randomGradientAnimation();
 
       self.translationAnimation.pause();
 
@@ -94,10 +91,12 @@ GraveButton.prototype.buildClickAnimation = function () {
   }
 };
 
+var SCALING_FACTOR = 2;
+
 GraveButton.prototype.randomGradientAnimation = function () {
-  this.gradient.animate(
-    {r: this.wasTriggered ? 12 + Math.random() * 10 : 0.5 + Math.random() * 10},
-    1000
+    this.gradient.animate(
+    {r: this.wasTriggered ? 10 + Math.random() * SCALING_FACTOR : 8 + Math.random() * SCALING_FACTOR},
+    500
   );
 };
 

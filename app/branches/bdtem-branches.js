@@ -2,9 +2,9 @@
 
 var STROKE_COLOR = '#FFF';
 
-var cx = 250;
+var cx = 350;
 var cy = 125;
-var radius = 100;
+var radius = 66;
 
 var shadow = Snap.filter.shadow(0, 0, 10, '#CCC', 0.5);
 
@@ -21,7 +21,6 @@ var shadowFilter = paper.filter(shadow);
 function randomColor() {
   return Math.random().toString(16).substring(2, 8);
 }
-
 
 
 //////////////////////////////////////////
@@ -69,8 +68,22 @@ var branchGroup = new BranchGroup(svgGroup, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURA
 
 graveButton.setBranchGroup(branchGroup);
 
-var group = svgGroup;
-group.attr({filter: shadowFilter});
+svgGroup.attr({filter: shadowFilter});
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+var secondButtonText = 'Gr. 2';
+var secondGraveButton = new GraveButton(new CircleCoordinates(cx * 2, cy * 1.5, radius), secondButtonText, 5);
+
+
+var secondSvgGroup = secondGraveButton.group;
+
+var secondBranchGroup = new BranchGroup(secondSvgGroup, TRUNK_LENGTH, 2, BRANCH_LENGTH, 250, {branchType: VERT});
+secondGraveButton.setBranchGroup(secondBranchGroup);
+
+secondSvgGroup.attr({filter: shadowFilter});
 
 ////////////////////////////////////////
 ////////////////////////////////////////
@@ -94,8 +107,10 @@ function randomTranslation(group, scalingFactor) {
     );
   };
 
+  var randomPhase = Math.random() * 360;
+
   animation.translateGroup = function (value) {
-    var transformString = 't0,' + (Snap.sin(value) * self.scalingFactor);
+    var transformString = 't0,' + (Snap.sin(value + randomPhase) * self.scalingFactor);
     group.attr({
       transform: transformString
     });
