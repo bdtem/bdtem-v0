@@ -30,7 +30,7 @@ var BRANCH_TYPE = {
           txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
         }
 
-        self.branchLine.attr({
+        self.trunk.attr({
           x2: value
         });
       };
@@ -63,7 +63,7 @@ var BRANCH_TYPE = {
           txt.attr({x: self.length < 0 ? value - (txt.getBBox().width + 1) : value});
         }
 
-        self.branchLine.attr({
+        self.trunk.attr({
           x1: 2 * self.start - value,
           x2: value
         });
@@ -90,19 +90,30 @@ var BRANCH_TYPE = {
     },
     updateAnimation: function () {
       var self = this;
-      return function (value) {
+      var txt = self.textNode;
 
-        var txt = self.textNode;
-        if (txt) {
-          txt.attr({y: self.length < 0 ? value - (txt.getBBox().height) : value});
+      if (txt) {
+        var bBox = txt.getBBox();
+        var heightOffset = self.length > 0 ? bBox.height : -bBox.height;
+
+        return function (value) {
+          txt.attr({y: value + heightOffset});
+          self.trunk.attr({
+            y2: value
+          });
+        };
+
+      } else {
+
+        return function (value) {
+          self.trunk.attr({
+            y2: value
+          });
         }
 
-        self.branchLine.attr({
-          y2: value
-        });
-      };
-    }
+      }
 
+    }
   },
   VERTICAL_SPAN: {
     span: true,
@@ -131,7 +142,7 @@ var BRANCH_TYPE = {
           txt.attr({y: self.length < 0 ? value - (txt.getBBox().height) : value});
         }
 
-        self.branchLine.attr({
+        self.trunk.attr({
           y1: 2 * self.start - value,
           y2: value
         });
@@ -143,30 +154,8 @@ var BRANCH_TYPE = {
 
 
 var OFF_SCREEN = -1024;
-function buildTextNode(text, x, y, centerX, centerY) {
-  if (text) {
-    var textNode = paper.text(OFF_SCREEN, OFF_SCREEN, text);
-    var textBBox = textNode.getBBox();
-    var height = textBBox.height;
-    var width = textBBox.width;
 
-    textNode.attr({
-      'font-family': 'Libre Baskerville',
-      x: centerX ? (x - width / 2) : x,
-      y: centerY ? (y + height / 2) : y,
-      fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : STROKE_COLOR
-    });
 
-    textNode.click(function (event) {
-      event.stopPropagation();
-      textNode.attr({fill: '#F0F', filter: shadowFilter});
-      textNode.node.innerHTML = 'clicks'
-    });
-    return textNode;
-  } else {
-    return undefined;
-  }
-}
 //Define orthogonalities:
 BRANCH_TYPE.HORIZONTAL.orthogonal = BRANCH_TYPE.VERTICAL;
 BRANCH_TYPE.HORIZONTAL_SPAN.orthogonal = BRANCH_TYPE.VERTICAL;

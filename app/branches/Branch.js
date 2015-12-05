@@ -18,17 +18,53 @@ function Branch(svgGroup,
   var startX = this.getStartX();
   var startY = this.getStartY();
 
-  this.branchLine = this.buildBranchLine(startX, startY, startX, startY);
+  this.trunk = this.buildBranchLine(startX, startY, startX, startY);
 
-  this.textNode = text && buildTextNode(text, startX, startY, false, true).attr({opacity: 0});
+  this.textNode = text && this.buildTextNode(text, startX, startY).attr({opacity: 0});
 }
+
+Branch.prototype.DEFAULT_ANIMATION_DURATION = 250;
+
+Branch.prototype.buildTextNode = function (text, x, y) {
+  var centerX, centerY = false;
+
+  if (this.branchType.name[0] === 'H') {
+    centerY = true;
+  }
+  centerX = !centerY;
+
+  if (text) {
+    var textNode = paper.text(OFF_SCREEN, OFF_SCREEN, text);
+    var textBBox = textNode.getBBox();
+    var width = textBBox.width;
+    var heightOffset = textBBox.height;
+
+    console.log(heightOffset);
+
+    textNode.attr({
+      'font-family': 'Libre Baskerville',
+      x: centerX ? (x - width / 2) : x,
+      y: centerY ? (y + heightOffset) : y + heightOffset,
+      fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : STROKE_COLOR
+    });
+
+    textNode.click(function (event) {
+      event.stopPropagation();
+      textNode.attr({fill: '#F0F', filter: shadowFilter});
+      textNode.node.innerHTML = 'clicks'
+    });
+    return textNode;
+  } else {
+    return null;
+  }
+};
 
 
 Branch.prototype.stopAnimation = function () {
-  this.branchLine.stop();
+  this.trunk.stop();
   var resetCallback = this.reset.bind(this);
 
-  this.branchLine.animate(
+  this.trunk.animate(
     {opacity: 0},
     500,
     resetCallback
@@ -38,7 +74,7 @@ Branch.prototype.stopAnimation = function () {
 Branch.prototype.reset = function () {
   var startX = this.getStartX();
   var startY = this.getStartY();
-  this.branchLine.attr({
+  this.trunk.attr({
     x1: startX,
     y1: startY,
     x2: startX,
@@ -68,7 +104,7 @@ Branch.prototype.buildBranchLine = function (x1, y1, x2, y2) {
 
 Branch.prototype.destroyBranch = function () {
   var animationParam = this.branchType.animationParam;
-  this.animateTrunk(this.branchLine.attr(animationParam), this.start, null, this.getRemovalAnimation());
+  this.animateTrunk(this.trunk.attr(animationParam), this.start, null, this.getRemovalAnimation());
 };
 
 
@@ -148,14 +184,14 @@ Branch.prototype.animateIn = function (duration) {
 Branch.prototype.getRemovalAnimation = function () {
   var self = this;
   return function () {
-    self.branchLine.remove();
+    self.reset();
 
     if (self.textNode && self.textNode.attr('opacity') > 0) {
       self.textNode.animate(
         {opacity: 0},
         250,
         function () {
-          self.textNode.remove()
+          self.textNode.attr({opacity: 0})
         }
       );
     }

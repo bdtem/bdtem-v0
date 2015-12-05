@@ -8,7 +8,7 @@ function BranchGroup(svgGroup,
   this.svgGroup = svgGroup;
   this.branchParameters = branchParameters;
   this.animationDuration = animationDuration || 1000;
-  this.numberOfBranches = numberOfBranches || 1;
+  this.numberOfBranches = this.branchParameters.branches ? this.branchParameters.branches.length : (numberOfBranches || 1);
 
   this.trunkLength = trunkLength || 150;
   this.branchLength = branchLength || 75;
@@ -19,7 +19,7 @@ function BranchGroup(svgGroup,
 
 
   this.branches = [];
-  this.buildBranchTimeOffsetsAndPoints();
+  this.buildPointsAndOffsets();
   this.pendingBranchAnimations = new Array(numberOfBranches);
 }
 
@@ -50,11 +50,10 @@ BranchGroup.prototype.destroySubBranches = function () {
     elem.destroyBranch();
   });
 
-  this.branches = [];
   this.pendingBranchAnimations = [];
 
   //Pre-rebuild branches for next run:
-  this.buildBranchTimeOffsetsAndPoints();
+  this.buildPointsAndOffsets();
 };
 
 BranchGroup.prototype.stopAnimation = function () {
@@ -63,30 +62,34 @@ BranchGroup.prototype.stopAnimation = function () {
   }
 };
 
-BranchGroup.prototype.buildBranchTimeOffsetsAndPoints = function () {
+BranchGroup.prototype.buildPointsAndOffsets = function () {
   var self = this;
   var numberOfBranches = this.numberOfBranches;
 
   var pointsAndOffsets = this.trunk.buildPointsAndOffsets(numberOfBranches, this.animationDuration);
+  console.log(pointsAndOffsets.offsets);
 
   if (this.branchParameters && this.branchParameters.branches) {
 
     this.branches = this.branchParameters.branches;
-    this.branches.forEach(function (branch) {
-      self.svgGroup.append(branch);
-    });
+
   } else {
 
     pointsAndOffsets.points.forEach(function (elem) {
       self.addBranch(elem.start, elem.fixed);
     });
+
   }
+
+  this.branches.forEach(function (branch) {
+    self.svgGroup.append(branch.trunk);
+  });
 
   this.branchTimeOffsets = pointsAndOffsets.offsets;
 };
 
 
-BranchGroup.prototype.animateTrunk = function () {
+BranchGroup.prototype.animateIn = function () {
   var branchAnimations = this.pendingBranchAnimations;
   var self = this;
 
@@ -115,7 +118,6 @@ BranchGroup.prototype.addBranch = function (start, fixed) {
   );
 
   this.branches.push(branch);
-  this.svgGroup.append(branch.branchLine);
 };
 
 

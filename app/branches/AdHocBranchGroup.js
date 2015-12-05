@@ -50,20 +50,12 @@ AdHocBranchGroup.prototype.destroyBranch = function () {
 
 
 AdHocBranchGroup.prototype.buildPointsAndOffsets = function (numberOfPoints, animationDuration) {
-  var pointsAndOffsets = this.master.buildPointsAndOffsets(numberOfPoints, animationDuration);
-
-  var numberOfBranches = this.branches.length;
-  var adjustment = animationDuration / numberOfBranches;
-
-  pointsAndOffsets.offsets = pointsAndOffsets.offsets.map(function (elem) {
-    return elem + ( adjustment);
-  });
-
-  return pointsAndOffsets;
+  return this.master.buildPointsAndOffsets(numberOfPoints, animationDuration || this.DEFAULT_ANIMATION_DURATION);
 };
 
+
 AdHocBranchGroup.prototype.animateIn = function (duration) {
-  var durationFraction = duration / this.branches.length;
+  var durationFraction = (duration || this.DEFAULT_ANIMATION_DURATION) / this.branches.length;
 
   console.log(durationFraction);
 

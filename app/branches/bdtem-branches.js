@@ -22,100 +22,6 @@ function randomColor() {
   return Math.random().toString(16).substring(2, 8);
 }
 
-var GraveButton = function (circleCoordinates,
-                            text,
-                            numberOfCircles) {
-
-  this.numberOfCircles = numberOfCircles || 3;
-
-  //TODO Make a CSS class for the groups and use that instead of inline styling.
-  this.group = paper.group().attr({cursor: 'pointer'});
-
-
-  this.buildSvgCircle(circleCoordinates);
-
-
-  var bBox = this.group.getBBox();
-  var centerX = bBox.cx;
-
-
-  var textNode = buildTextNode(text, centerX, bBox.y2 + 20, true, false);
-  textNode.attr({filter: '', opacity: 1});
-  this.group.append(textNode);
-
-  this.wasTriggered = false;
-
-  this.translationAnimation = randomTranslation(this.group);
-  this.translationAnimation.startAnimation();
-};
-
-GraveButton.prototype.setBranchGroup = function (branchGroup) {
-  branchGroup.group = this.group;
-
-  this.branchGroup = branchGroup;
-
-  this.group.click(this.buildClickAnimation());
-};
-
-GraveButton.prototype.buildClickAnimation = function () {
-  var self = this;
-  var bBox = self.group.getBBox();
-  var branchGroup = self.branchGroup;
-
-  return function () {
-    if (!self.wasTriggered) {
-      self.wasTriggered = true;
-
-      self.gradient.animate(
-        {r: 1},
-        1000
-      );
-
-      self.translationAnimation.pause();
-
-      branchGroup.animateTrunk();
-    } else {
-      self.wasTriggered = false;
-
-      self.randomGradientAnimation();
-
-      branchGroup.destroyBranch();
-
-      self.translationAnimation.resume();
-    }
-  }
-};
-
-GraveButton.prototype.randomGradientAnimation = function () {
-  this.gradient.animate(
-    {r: this.wasTriggered ? 12 + Math.random() * 10 : 0.5 + Math.random() * 10},
-    1000
-  );
-};
-
-GraveButton.prototype.buildSvgCircle = function (circleCoordinates) {
-  var whiteMultiple = 0xFFFFFF / this.numberOfCircles;
-  // Building a gradient string with form described here:
-  // http://snapsvg.io/docs/#Paper.gradient
-  var gradientString = '#000';
-
-  var circle = paper.circle(circleCoordinates.x, circleCoordinates.y, circleCoordinates.radius);
-  this.group.append(circle);
-  for (var i = 0; i < this.numberOfCircles; i++) {
-    var RGB_value = Math.ceil(((this.numberOfCircles - i)) * whiteMultiple);
-    gradientString += '-#' + RGB_value.toString(16);
-  }
-
-  this.gradient = paper.gradient('r(' + [0.5, 0.5, 12].join(',') + ')' + gradientString);
-  circle.attr({fill: this.gradient});
-
-};
-
-var CircleCoordinates = function (x, y, radius) {
-  this.x = x;
-  this.y = y;
-  this.radius = radius;
-};
 
 
 //////////////////////////////////////////
@@ -125,24 +31,45 @@ var CircleCoordinates = function (x, y, radius) {
 
 var circleCoordinates = new CircleCoordinates(cx, cy, radius);
 
-var graveButton = new GraveButton(circleCoordinates, 'Helo/Ehlo', 5);
+var buttonText = 'Gr. 1';
+var graveButton = new GraveButton(circleCoordinates, buttonText, 5);
 
 
-var bBox = graveButton.group.getBBox();
+var svgGroup = graveButton.group;
+var bBox = svgGroup.getBBox();
 
-var preTrunk = new Branch(graveButton.group, bBox.cx, bBox.y2, BRANCH_LENGTH, null, BRANCH_TYPE.VERTICAL);
-var realTrunk = new Branch(graveButton.group, bBox.y2 + BRANCH_LENGTH, bBox.cx, TRUNK_LENGTH, null, BRANCH_TYPE.HORIZONTAL_SPAN);
+var VERT = BRANCH_TYPE.VERTICAL;
+var HSPAN = BRANCH_TYPE.HORIZONTAL_SPAN;
+
+var preTrunk = new Branch(svgGroup, bBox.cx, bBox.y2, BRANCH_LENGTH, null, VERT);
+var heightOffset = bBox.y2 + BRANCH_LENGTH;
+var realTrunk = new Branch(svgGroup, heightOffset, bBox.cx, TRUNK_LENGTH, null, HSPAN);
+
+
+var leftSubBranch = new Branch(svgGroup, realTrunk.start - TRUNK_LENGTH, heightOffset, BRANCH_LENGTH, null, VERT);
+var leftCrossTrunk = new Branch(svgGroup, heightOffset + leftSubBranch.length, leftSubBranch.getStartX(), BRANCH_LENGTH, null, HSPAN);
+var leftCross = new BranchGroup(svgGroup, BRANCH_LENGTH, 3, BRANCH_LENGTH, 250, {trunk: leftCrossTrunk});
+
+var rightSubBranch = new Branch(svgGroup, realTrunk.start + TRUNK_LENGTH, heightOffset, BRANCH_LENGTH + 50, null, VERT);
+var rightCross = new Branch(svgGroup, heightOffset + rightSubBranch.length, rightSubBranch.getStartX(), BRANCH_LENGTH, null, HSPAN);
+
 
 var crazyTrunk = new AdHocBranchGroup([preTrunk, realTrunk]);
 
-var branchParameters = {trunk: crazyTrunk};
+var branchParameters = {
+  trunk: crazyTrunk,
+  branches: [
+    new AdHocBranchGroup([leftSubBranch, leftCross]),
+    new AdHocBranchGroup([rightSubBranch, rightCross])
+  ]
+};
 
-var branchGroup = new BranchGroup(graveButton.group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, branchParameters);
+var branchGroup = new BranchGroup(svgGroup, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, branchParameters);
 
 
 graveButton.setBranchGroup(branchGroup);
 
-var group = graveButton.group;
+var group = svgGroup;
 group.attr({filter: shadowFilter});
 
 ////////////////////////////////////////
