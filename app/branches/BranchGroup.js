@@ -6,7 +6,7 @@ function BranchGroup(svgGroup,
                      branchParameters) {
 
   this.svgGroup = svgGroup;
-  this.branchParameters = branchParameters;
+  this.branchParameters = branchParameters || {};
   this.animationDuration = animationDuration || 1000;
   this.numberOfBranches = this.branchParameters.branches ? this.branchParameters.branches.length : (numberOfBranches || 1);
 
@@ -19,8 +19,9 @@ function BranchGroup(svgGroup,
 
 
   this.branches = [];
+  this.pendingBranchAnimations = [];
+
   this.buildPointsAndOffsets();
-  this.pendingBranchAnimations = new Array(numberOfBranches);
 }
 
 BranchGroup.prototype.determineStart = function () {
@@ -37,11 +38,8 @@ BranchGroup.prototype.buildTrunk = function () {
 };
 
 BranchGroup.prototype.destroyBranch = function () {
-  this.destroySubBranches();
-
   this.stopAnimation();
-
-  this.trunk.stopAnimation();
+  this.destroySubBranches();
 };
 
 BranchGroup.prototype.destroySubBranches = function () {
@@ -51,15 +49,13 @@ BranchGroup.prototype.destroySubBranches = function () {
   });
 
   this.pendingBranchAnimations = [];
-
-  //Pre-rebuild branches for next run:
-  this.buildPointsAndOffsets();
 };
 
 BranchGroup.prototype.stopAnimation = function () {
-  //if (this.animationInProgress) {
-  //  this.animationInProgress.stop();
-  //}
+  this.trunk.stopAnimation();
+  if (this.animationInProgress) {
+    this.animationInProgress.stop();
+  }
 };
 
 BranchGroup.prototype.buildPointsAndOffsets = function () {
@@ -85,6 +81,8 @@ BranchGroup.prototype.buildPointsAndOffsets = function () {
   });
 
   this.branchTimeOffsets = pointsAndOffsets.offsets;
+
+  return pointsAndOffsets;
 };
 
 
@@ -101,7 +99,7 @@ BranchGroup.prototype.animateIn = function () {
     branchAnimations.push(asyncAnimation)
   });
 
-  self.trunk.animateIn(this.animationDuration);
+  this.animationInProgress = self.trunk.animateIn(this.animationDuration);
 };
 
 BranchGroup.prototype.addBranch = function (start, fixed) {

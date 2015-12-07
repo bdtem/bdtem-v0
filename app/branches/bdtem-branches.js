@@ -26,7 +26,6 @@ function randomColor() {
 //////////////////////////////////////////
 //////////////////////////////////////////
 //////////////////////////////////////////
-//////////////////////////////////////////
 
 var circleCoordinates = new CircleCoordinates(cx, cy, radius);
 var svgCircle = new SvgCircle(circleCoordinates);
@@ -86,7 +85,7 @@ var secondGraveButton = new GraveButton(
 
 var secondSvgGroup = secondGraveButton.group;
 
-var secondBranchGroup = new BranchGroup(secondSvgGroup, TRUNK_LENGTH, 2, BRANCH_LENGTH, 250, {branchType: VERT});
+var secondBranchGroup = new BranchGroup(secondSvgGroup, TRUNK_LENGTH, 2, BRANCH_LENGTH, DURATION_MS, {branchType: VERT});
 secondGraveButton.setBranchGroup(secondBranchGroup);
 
 secondSvgGroup.attr({filter: shadowFilter});

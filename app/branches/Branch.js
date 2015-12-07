@@ -49,7 +49,7 @@ Branch.prototype.buildTextNode = function (text, x, y) {
 
   textNode.click(function (event) {
     event.stopPropagation();
-    textNode.attr({fill: '#F0F', filter: shadowFilter});
+    textNode.attr({fill: '#F0F'});
     textNode.node.innerHTML = 'clicks'
   });
   return textNode;
@@ -100,6 +100,7 @@ Branch.prototype.buildBranchLine = function (x1, y1, x2, y2) {
 };
 
 Branch.prototype.destroyBranch = function () {
+  this.stopAnimation();
   var animationParam = this.branchType.animationParam;
   this.animateTrunk(this.trunk.attr(animationParam), this.start, null, this.getRemovalAnimation());
 };
@@ -175,13 +176,18 @@ Branch.prototype.animateIn = function (duration) {
   var start = this.start;
   var end = this.start + this.length;
 
-  this.animateTrunk(start, end, duration);
+  this.pendingAnimation = this.animateTrunk(start, end, duration);
 };
 
 Branch.prototype.getRemovalAnimation = function () {
   var self = this;
   return function () {
-    self.reset();
+    if(self.pendingAnimation) {
+      self.pendingAnimation.stop();
+      self.pendingAnimation = null;
+    } else {
+      self.reset();
+    }
 
     if (self.textNode && self.textNode.attr('opacity') > 0) {
       self.textNode.animate(
