@@ -3,13 +3,13 @@
  */
 'use strict';
 
-bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService, $state, $timeout) {
+bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoService, stateService, $timeout) {
 
     var controller = this;
     controller.API = null;
 
     controller.closeVideo = function () {
-        $state.go('orb');
+        stateService.toggleTo('orb');
     };
 
     var playButton;

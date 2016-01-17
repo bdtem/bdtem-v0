@@ -34,6 +34,7 @@
     <!-- BDTEM App: -->
     <script src="js/filters.js"></script>
     <script src="js/bdtem.js"></script>
+    <script src="js/StateService.js"></script>
     <script src="js/PlayerService.js"></script>
     <script src="js/AlbumTracks.js"></script>
     <script src="js/StoryEpisodes.js"></script>
@@ -42,6 +43,18 @@
     <script src="js/VideoCtrl.js"></script>
     <script src="js/MetadataCtrl.js"></script>
     <script src="js/jquery_fns.js"></script>
+
+
+    <script src="bower_components/snap.svg/dist/snap.svg-min.js"></script>
+
+    <script src="branches/ShapeTemplates.js"></script>
+    <script src="branches/BranchTypes.js"></script>
+    <script src="branches/GraveButton.js"></script>
+    <script src="branches/Branch.js"></script>
+    <script src="branches/AdHocBranchGroup.js"></script>
+    <script src="branches/BranchGroup.js"></script>
+
+    <script src="js/GraveCtrl.js"></script>
 
 
     <!-- build:js scripts/vendor/bootstrap.js -->
@@ -197,6 +210,10 @@ Like a game, it is to be interacted with.">
             MR. TALENT
         </div>
 
+        <span class="story-menu-entry" ng-click="graveButton()">Needs more dots!</span>
+
+        <br/>
+
         <span id="story-episode{{$index}}"
               ng-class="episode.src ? 'story-menu-entry' : 'story-menu-entry-inactive'"
               ng-repeat="episode in episodes"
@@ -284,5 +301,6 @@ Like a game, it is to be interacted with.">
 
 
 </body>
+
 
 </html>

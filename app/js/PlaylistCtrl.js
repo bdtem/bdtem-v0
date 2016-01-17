@@ -1,7 +1,7 @@
 'use strict';
 
-bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', '$state',
-    function PlaylistCtrl(AlbumTracks, StoryEpisodes, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, $state) {
+bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', 'stateService',
+    function PlaylistCtrl(AlbumTracks, StoryEpisodes, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, stateService) {
 
         var controller = this;
         var player;
@@ -164,20 +164,10 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
         };
 
 
-        var previousState = null;
         var METADATA = 'metadata';
         $scope.toggleMetadata = function () {
-
-            var currentState = $state.current.name;
-            if (currentState === METADATA) {
-                $state.go(previousState);
-                previousState = null;
-            } else {
-                previousState = currentState;
-                $state.go(METADATA);
-            }
+            stateService.toggleTo(METADATA);
         };
-
 
         function skipTo(trackIndex) {
             var videoAPI = videoService.getVideoAPI();

@@ -2,14 +2,65 @@
  * Created by alacasse on 12/5/15.
  */
 
-var GraveButton = function (shapeTemplate,
+var STROKE_COLOR = '#F0F';
+
+
+function randomTranslation(group, scalingFactor) {
+  var animation = {
+    scalingFactor: scalingFactor || 2,
+    animation: null
+  };
+  var self = animation;
+
+  animation.startAnimation = function () {
+    self.animation = Snap.animate(
+        0,
+        360,
+        self.translateGroup,
+        4000,
+        self.loopAnimation
+    );
+  };
+
+  var randomPhase = Math.random() * 360;
+
+  animation.translateGroup = function (value) {
+    var transformString = 't0,' + (Snap.sin(value + randomPhase) * self.scalingFactor);
+    group.attr({
+      transform: transformString
+    });
+  };
+
+  animation.loopAnimation = function () {
+    group.attr({
+      transform: 't0,0'
+    });
+    self.startAnimation();
+  };
+
+  animation.pause = function () {
+    if (self.animation) self.animation.pause();
+  };
+
+  animation.resume = function () {
+    if (self.animation) self.animation.resume();
+  };
+
+  return animation;
+}
+
+
+var GraveButton = function (svgContext,
+                            shapeTemplate,
                             text,
                             gradientSteps) {
+
+  this.svgContext = svgContext;
 
   this.gradientSteps = gradientSteps || 3;
 
   //TODO Make a CSS class for the groups and use that instead of inline styling.
-  this.group = paper.group().attr({cursor: 'pointer'});
+  this.group = svgContext.group().attr({cursor: 'pointer'});
 
   this.buildGradient();
   this.buildSvgShape(shapeTemplate);
@@ -33,7 +84,7 @@ GraveButton.prototype.buildTextNode = function (text, x, y) {
   var centerX = true;
 
   if (text) {
-    var textNode = paper.text(OFF_SCREEN, OFF_SCREEN, text);
+    var textNode = this.svgContext.text(OFF_SCREEN, OFF_SCREEN, text);
     var textBBox = textNode.getBBox();
     var width = textBBox.width;
 
@@ -100,7 +151,7 @@ GraveButton.prototype.randomGradientAnimation = function () {
 };
 
 GraveButton.prototype.buildSvgShape = function (shapeTemplate) {
-  var svgShape = shapeTemplate.build(paper);
+  var svgShape = shapeTemplate.build(this.svgContext);
 
   this.group.append(svgShape);
   svgShape.attr({fill: this.gradient});
@@ -117,7 +168,7 @@ GraveButton.prototype.buildGradient = function () {
     gradientString += '-#' + RGB_value.toString(16);
   }
 
-  this.gradient = paper.gradient('r(' + [0.5, 0.5, 12].join(',') + ')' + gradientString);
+  this.gradient = this.svgContext.gradient('r(' + [0.5, 0.5, 12].join(',') + ')' + gradientString);
 };
 
 

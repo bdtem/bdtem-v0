@@ -10,27 +10,6 @@ var bdtem = angular.module('bdtem', [
     "com.2fdevs.videogular.plugins.controls"
 ]);
 
-bdtem.config(['$stateProvider', '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
-
-        $urlRouterProvider.otherwise("/");
-
-        $stateProvider
-            .state('orb', {
-                url: "/",
-                templateUrl: "templates/orb.html"
-            })
-            .state('video', {
-                url: "/",
-                templateUrl: "templates/video.html"
-            })
-            .state('metadata', {
-                url: "/",
-                templateUrl: "templates/metadata.html",
-                controller: 'MetadataCtrl'
-            });
-    }]);
-
 bdtem.controller('DonateCtrl', function ($scope) {
 });
 
@@ -43,15 +22,15 @@ bdtem.filter('unsafe', ['$sce', function ($sce) {
 // update popover template for binding unsafe html
 angular.module("template/popover/popover.html", []).run(["$templateCache", function ($templateCache) {
     $templateCache.put("template/popover/popover.html",
-            "<div class=\"popover {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" +
-            "  <div class=\"arrow\"></div>\n" +
-            "\n" +
-            "  <div class=\"popover-inner\">\n" +
-            "      <h3 class=\"popover-title\" ng-bind-html=\"title | unsafe\" ng-show=\"title\"></h3>\n" +
-            "      <div class=\"popover-content\" ng-bind-html=\"content | unsafe\"></div>\n" +
-            "  </div>\n" +
-            "</div>\n" +
-            "");
+        "<div class=\"popover {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" +
+        "  <div class=\"arrow\"></div>\n" +
+        "\n" +
+        "  <div class=\"popover-inner\">\n" +
+        "      <h3 class=\"popover-title\" ng-bind-html=\"title | unsafe\" ng-show=\"title\"></h3>\n" +
+        "      <div class=\"popover-content\" ng-bind-html=\"content | unsafe\"></div>\n" +
+        "  </div>\n" +
+        "</div>\n" +
+        "");
 }]);
 
 
@@ -80,10 +59,10 @@ bdtem.service('videoService', function () {
     };
 });
 
-bdtem.controller("OrbCtrl", function ($scope, $state) {
+bdtem.controller('OrbCtrl', function ($scope, stateService) {
 
     $scope.startVideo = function () {
-        $state.go("video");
+        stateService.go('grave');
     }
 
 });
@@ -118,9 +97,13 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 
 });
 
-bdtem.controller('MiddleCtrl', function ($scope, playerService, videoService, AlbumTracks, StoryEpisodes) {
+bdtem.controller('MiddleCtrl', function ($scope, stateService, playerService, videoService, AlbumTracks, StoryEpisodes) {
     $scope.tracks = AlbumTracks;
     $scope.episodes = StoryEpisodes;
+
+    $scope.graveButton = function () {
+        stateService.go('grave');
+    };
 
     $scope.skipToTrack = function (index) {
         videoService.pause();
