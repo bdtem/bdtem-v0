@@ -31,7 +31,7 @@ var circleCoordinates = new CircleCoordinates(cx, cy, radius);
 var svgCircle = new SvgCircle(circleCoordinates);
 
 var buttonText = 'Gr. 1';
-var graveButton = new GraveButton(svgCircle, buttonText, 5);
+var graveButton = new GraveButton(paper, svgCircle, buttonText, 5);
 
 
 var svgGroup = graveButton.group;

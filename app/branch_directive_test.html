@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST DAT BRANCHING SON</title>
+
+
+    <script src="bower_components/snap.svg/dist/snap.svg.js"></script>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' type='text/css'>
+
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/bdtem-branch.js"></script>
+
+</head>
+<body ng-app="bdtem.branches" style="background: black; color: white" ng-controller="BranchCtrl">
+
+<!--<svg version="1.1"-->
+     <!--id="test"-->
+     <!--xmlns="http://www.w3.org/2000/svg"-->
+     <!--x="0px"-->
+     <!--y="0px"-->
+	 <!--width="1000"-->
+     <!--height="700"-->
+     <!--viewBox="50 -50 800 600" preserveAspectRatio="xMidYMid"-->
+     <!--xml:space="preserve">-->
+
+    <!--<line x1="300" x2="100" y1="100" y2="300" stroke="#FFF"></line>-->
+
+
+<!--</svg>-->
+
+x1="{{startX}}" x2="{{endX}}"<br/>y1="{{startY}}" y2="{{endY}}"<br/>stroke="{{stroke}}"
+
+
+<bdtem-circle text="thickbrownpaper"></bdtem-circle>
+
+
+</body>
+</html>
