@@ -15,71 +15,46 @@
     <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.sidr.min.js"></script>
 
-
-    <!-- Angular: -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
-    <!-- Videogular: -->
+
     <script src="bower_components/videogular/videogular.js"></script>
-    <script src="bower_components/videogular-controls/vg-controls.js"></script>
-    <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
+    <script src="scripts/videogular/controls.js"></script>
+    <script src="scripts/videogular/overlay-play.js"></script>
+    <script src="scripts/videogular/poster.js"></script>
+    <script src="bower_components/videogular-buffering/buffering.js"></script>
 
-
+    <script src="bower_components/angular-media-player/src/directive.js"></script>
+    <script src="bower_components/angular-media-player/src/helpers.js"></script>
     <script src="bower_components/angular-hotkeys/build/hotkeys.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
-    <!-- BDTEM App: -->
+    <!-- main app -->
     <script src="js/filters.js"></script>
-    <script src="js/bdtem.js"></script>
-    <script src="js/PlayerService.js"></script>
-    <script src="js/AlbumTracks.js"></script>
-    <script src="js/StoryEpisodes.js"></script>
-    <script src="js/PlaylistCtrl.js"></script>
-    <script src="js/VideoService.js"></script>
-    <script src="js/VideoCtrl.js"></script>
-    <script src="js/MetadataCtrl.js"></script>
-    <script src="js/jquery_fns.js"></script>
 
+    <script src="js/bdtem.js"></script>
+    <script src="js/metadata.js"></script>
+    <script src="js/PlaylistCtrl.js"></script>
+    <script src="js/jquery_fns.js"></script>
 
     <!-- build:js scripts/vendor/bootstrap.js -->
     <script src="bower_components/bootstrap/js/affix.js"></script>
     <script src="bower_components/bootstrap/js/alert.js"></script>
     <script src="bower_components/bootstrap/js/tooltip.js"></script>
-    <script src="bower_components/bootstrap/js/popover.js"></script>
     <script src="bower_components/bootstrap/js/button.js"></script>
     <script src="bower_components/bootstrap/js/tab.js"></script>
     <!-- endbuild -->
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bob Dey's Tank Engine Man (BDTEM)</title>
-    <meta name="description" content="This is a web-based, multimedia digital album which tells a complete story in the form of a Contextually Comprehensive Archive.
-
-This is an interactive 'archive' through which you will participate both actively and passively in the story of BDTEM. You will do what Mark Jumper did, see what Mark Jumper saw. You will keep a record of this participation so that you can better analyze the events, their meanings, and their consequences. You will share your analysis with others, thereby participating in a broader interaction.
-
-The content will be varied in type of media, available context (metadata), and length. You have the freedom to pursue, ignore, and construct your own lines of inquiry. And you are free to jump to any conclusions you like.
-
-All content will be housed in a location that represents the 'real-world' location of the original happening and will be accompanied by metadata pop-ups that offer other kinds of context (backstory, explanations, descriptions, instructions).
-
-Like a novel, it tells a story.
-Like a song, it sings.
-Like a movie, it is played by speaking players.
-Like a game, it is to be interacted with.">
-
+    <title></title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-    <!-- Fonts: -->
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:500,700,300' rel='stylesheet' type='text/css'>
-
-    <!-- CSS: -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/videogular.css">
-
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
@@ -89,31 +64,15 @@ Like a game, it is to be interacted with.">
 
 <body>
 
-<div class="container centered navbar-container-top">
+<div class="container centered navbar-container">
 
     <nav class="centered navbar navbar-default navbar-fixed-top" role="navigation"
          ng-controller="ButtonsCtrl as buttonsController">
 
-        <div class="bdtem-title">
+        <div class="centered btn-group" ng-repeat="button in buttons">
 
-            <span style="font-size: 1.8vmin; letter-spacing: 0.6vw">
-                WELCOME TO THE DEPARTMENT OF ARCHIVES
-            </span>
-
-            <br/>
-
-            <div class="bdtem-subtitle sans-serif" style="font-size: 1.5vmin; letter-spacing: 0.4vw">
-                PROJECT NO. 2.0013.B-9.006.1289.11<br/>
-                <i>AKA</i><br/>
-            </div>
-
-            <b class="bdtem-title">BOB DEY'S TANK ENGINE MAN</b>
-        </div>
-
-        <div class="ng-cloak sans-serif centered btn-group" ng-repeat="button in buttons">
-
-            <button id="button-{{button.purpose}}" class="sans-serif btn padded" ng-click="button.action()">
-                <b>{{button.tooltip}}</b>
+            <button id="button-{{button.purpose}}" class="btn padded" ng-click="button.action()">
+                {{button.tooltip}}
             </button>
 
         </div>
@@ -121,58 +80,30 @@ Like a game, it is to be interacted with.">
 </div>
 
 
-<left href="#" class="left-menu-button menu-spaced" id="tracks-menu-toggle">
-    ||<br/>
-    ||||<br/>
-    |||||||<br/>
-    ||||||||||<br/>
-
-    <div class="left-menu-words" id="left-menu-words">
-        Album <br/>
-    </div>
-    ||||||||||<br/>
-    |||||||<br/>
-    ||||<br/>
-    ||<br/>
+<left href="#" class="fa left-menu-button menu-spaced superclarendon" id="tracks-menu-toggle">
+||<br/>
+||||<br/>
+|||||||<br/>
+||||||||||<br/>
+<left-words class="left-menu-words" id="left-menu-words">Album<br/></left-words>
+||||||||||<br/>
+|||||||<br/>
+||||<br/>
+||<br/>
 </left>
 
 <nav id="menu-container">
-    <div id="tracks-menu" class="sidr" ng-controller="MiddleCtrl as middle">
 
-        <div class="drawer-header-left">
-            <b>MUSICAL<br/>
-                ARCHIVE<br/>
-                INTERPRETATION<br/></b>
-        </div>
-
-        <div class="drawer-subheader-left">
-            BEFORE LIFE<br/>
-            AFTER DEATH
-        </div>
-
-        <div class="pull-right">
-            <table>
-                <tr ng-repeat="track in tracks">
-                    <td>
-                        <a id="bdtem-track{{$index}}" class="track-menu-entry" ng-click="skipToTrack($index)">
-                            {{track.title | uppercase}}
-                        </a>
-                    </td>
-                    <td class="sans-serif-light" style="width: 2vw; text-align: right">
-                        {{($index + 1) | padWithZero}}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <a class="sans-serif-light" href="audio/bdtem.zip" download>DOWNLOAD ALL.</a>
-                    </td>
-                </tr>
-            </table>
-
+    <div id="tracks-menu" class="sidr middle-main" ng-controller="MiddleCtrl as middle">
+        <div class="words-bottom">
+            <span style="letter-spacing: 0.5vw;"><em>BEFORE LIFE</em></span><br/>
+            <span style="letter-spacing: 0.4vw;"><em>AFTER DEATH</em></span>
         </div>
 
 
+        <a id="bdtem-track{{$index}}" class="track-menu-entry" ng-repeat="track in tracks" ng-click="skipToTrack($index)">
+                {{track.title | uppercase}}<br/>
+            </a>
     </div>
 
 </nav>
@@ -181,45 +112,31 @@ Like a game, it is to be interacted with.">
     <ui-view></ui-view>
 </div>
 
-<nav id="stories-container">
-    <div id="story-menu" ng-controller="MiddleCtrl as middle" class="sidr">
+<nav id="podcasts-container" >
 
+    <div id="podcast-menu" class="sidr middle-main" >
 
-        <div class="drawer-header-right">
-            <b>NARRATIVE<br/>
-                ARCHIVE<br/>
-                REENACTMENT<br/></b>
+        <div class="podcasts">
+
+            There are definitely going to be some podcasts here.<br/>
+            <br/>
+            At some point.<br/>
+            <br/>
+            They'll probably be fun to listen to.
+
+            <br/><br/><br/><br/>
+            Lorem ipsum, motherfucker.
         </div>
-
-
-        <div class="drawer-subheader-right">
-            TALENT AND <br/>
-            MR. TALENT
-        </div>
-
-        <span id="story-episode{{$index}}"
-              ng-class="episode.src ? 'story-menu-entry' : 'story-menu-entry-inactive'"
-              ng-repeat="episode in episodes"
-              ng-click="episode.src ? skipToEpisode($index) : $.noop()"
-              popover="{{episode.tooltip}}"
-              popover-trigger="mouseenter : blur"
-              popover-placement="right"
-                >
-            {{episode.title|uppercase}}<br/>
-        </span>
 
     </div>
-</nav>
+    </nav>
 
-<right class="right-menu-button menu-spaced pull-right righted" id="story-menu-toggle">
+<right class="fa right-menu-button menu-spaced pull-right righted" id="podcast-menu-toggle">
     ||<br/>
     ||||<br/>
     |||||||<br/>
     ||||||||||<br/>
-
-    <div class="right-menu-words" id="right-menu-words">
-        Story<br/>
-    </div>
+    <right-words class="right-menu-words" id="right-menu-words">Podcast<br/></right-words>
     ||||||||||<br/>
     |||||||<br/>
     ||||<br/>
@@ -227,53 +144,40 @@ Like a game, it is to be interacted with.">
 </right>
 
 
-<nav id="playlistnavbar" class="navbar-fixed-bottom"
+
+
+
+<nav id="playlistnavbar" class="navbar navbar-default navbar-fixed-bottom"
      role="navigation"
-     ng-controller="PlaylistCtrl as controller">
+     ng-controller="PlaylistCtrl as playlist">
 
     <div id="bottomBar">
+        <audio id="bdtemplayer" media-player="bdtemplayer" data-playlist="songs"></audio>
 
-        <videogular vg-player-ready="controller.onPlayerReady($API)"
-                    vg-theme="controller.config.theme.url"
-                    vg-update-state="controller.onPlayerStateChange($state)"
-                    vg-change-source="controller.onChangeSource($source)"
-                    vg-complete="controller.onTrackComplete()"
-                    class="videogular-container audio">
-            <vg-media vg-src="controller.config.sources" vg-type="audio"></vg-media>
+        <div class="transport-bar">
+            <div class="btn buttonz" ng-click="prevTrack()">
+                &#xe807;
+            </div>
+            <div class="btn buttonz" ng-click="nextTrack()">
+                &#xe802;
+            </div>
+            <div class="btn" ng-click="bdtemPlayPause()">
+                <i class="fa fa-play"
+                   ng-class="{ 'fa-pause': bdtemplayer.playing, 'fa-play': !bdtemplayer.playing }"></i>
+            </div>
 
-            <vg-controls>
+            <div class="btn buttonz-small"
+                    ng-click="toggleMetadata()">
+                &#xe804;
+            </div>
 
-                <vg-play-pause-button id="transportPlay"
-                                      onClickPlayPause="controller.bdtemPlayPause()"></vg-play-pause-button>
+            <div id="volumeToggle" class="btn buttonz-small">
+                <span class="btn buttonz-small" ng-click="toggleVolumeBar()">&#xe809;</span>
+                <input id="volumeBar" ng-show="showVolumeBar" class='above-navbar fa-rotate-270' value='1' min='0'
+                       max='1' step='0.01' type='range' ng-model='volume'/>
+            </div>
 
-                <div class="custom-button-small" ng-click="prevTrack()">
-                    &#xe807;
-                </div>
-
-
-                <vg-scrub-bar>
-                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                </vg-scrub-bar>
-
-
-                <div class="custom-button-small" ng-click="nextTrack()">
-                    &#xe802;
-                </div>
-
-
-                <vg-volume>
-                    <vg-mute-button></vg-mute-button>
-                    <vg-volume-bar></vg-volume-bar>
-                </vg-volume>
-
-                <div class="custom-button-small" ng-click="toggleMetadata()">
-                    &#xe804;
-                </div>
-
-
-            </vg-controls>
-        </videogular>
-
+        </div>
     </div>
 </nav>
 

@@ -1,22 +1,20 @@
 @import "variables";
 
-@sidr-width: 23vw;
+@sidr-width: 18vw;
 @sidr-hide-width: -@sidr-width;
-
-@sidr-top: 5vh;
 
 .sidr {
   display: none;
   position: absolute;
   position: fixed;
-  top: @sidr-top;
-  max-height: (100vh - 2*@sidr-top);
+  top: @navbar-height;
+  max-height: (100vh - 2*@navbar-height);
   z-index: 1000;
 
   min-width: @sidr-width;
   max-width: @sidr-width;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-x: none;
+  overflow-y: auto;
 }
 
 .sidr.right {
@@ -29,15 +27,16 @@
   left: @sidr-hide-width;
   right: auto;
   height: 100%;
-  padding-right: 2vw;
+  padding-right: 2vw  ;
 }
+
 
 .menu-button {
   position: absolute;
   display: inline;
   top: 40vh;
   z-index: 1000;
-  font-family: @serif-font;
+  font-family: "Superclarendon";
   cursor: pointer;
 
   text-decoration: none;
@@ -50,7 +49,6 @@
 }
 
 .menu-spaced {
-  .noselect;
   letter-spacing: 0.2vw;
 }
 
@@ -59,7 +57,15 @@
   padding-left: 0.5vw;
 }
 
-left-words, right-words {
+left-words {
+  -webkit-transition: letter-spacing 1s;
+  -moz-transition: letter-spacing 1s;
+  -ms-transition: letter-spacing 1s;
+  -o-transition: letter-spacing 1s;
+  transition: letter-spacing 1s;
+}
+
+right-words {
   -webkit-transition: letter-spacing 1s;
   -moz-transition: letter-spacing 1s;
   -ms-transition: letter-spacing 1s;
@@ -76,4 +82,40 @@ left-words, right-words {
   border-top-right-radius: 2vmin;
   border-bottom-right-radius: 2vmin;
   padding-right: 0.5vw;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+
+  .left-menu-button {
+
+    ::before {
+      content: "test";
+    }
+
+    ::after {
+      content: 'bleep';
+    }
+  }
+
+
+  .left-menu-button {
+
+    ::before {
+      content: "test";
+    }
+
+    ::after {
+      content: 'bleep';
+    }
+  }
+
+  .right-menu-button {
+    ::after {
+      content: 'bloop';
+    }
+  }
+
+
 }
