@@ -3,19 +3,14 @@
  */
 
 function AdHocBranchGroup(branches) {
-
-  this.branches = [];
-
-  var branch;
-  for (var i = 0; i < branches.length; i++) {
-    branch = branches[i];
-    this.branches.push(branch);
-  }
-
-  this.master = branch;
-  this.branchType = this.master.branchType;
+  this.branches = branches;
+  this.setMasterBranch(branches[0]);
 }
 
+AdHocBranchGroup.prototype.setMasterBranch = function (branch) {
+  this.master = branch;
+  this.branchType = branch.branchType;
+};
 
 AdHocBranchGroup.prototype.stopAnimation = function () {
   this.branches.forEach(function (e) {

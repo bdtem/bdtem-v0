@@ -17,7 +17,6 @@ function BranchGroup(svgGroup,
 
     this.trunk = this.branchParameters.trunk || this.buildTrunk();
 
-
     this.branches = [];
     this.pendingBranchAnimations = [];
 
@@ -25,16 +24,19 @@ function BranchGroup(svgGroup,
 }
 
 BranchGroup.prototype.determineStart = function () {
-
     var bBox = this.svgGroup.getBBox();
     this.startY = bBox.y2;
     this.startX = bBox.cx;
-
 };
 
 
 BranchGroup.prototype.buildTrunk = function () {
-    return new Branch(this.svgGroup, this.startX, this.startY, this.trunkLength, null, this.branchParameters.branchType);
+    return new Branch(this.svgGroup,
+        this.startX,
+        this.startY,
+        this.trunkLength,
+        null,
+        this.branchParameters.branchType);
 };
 
 BranchGroup.prototype.destroyBranch = function () {
@@ -79,6 +81,8 @@ BranchGroup.prototype.buildPointsAndOffsets = function () {
     this.branches.forEach(function (branch) {
         self.svgGroup.append(branch.trunk);
     });
+
+    this.branchPointOffsets = pointsAndOffsets.points;
 
     this.branchTimeOffsets = pointsAndOffsets.offsets;
 

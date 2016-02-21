@@ -35,9 +35,7 @@ Branch.prototype.buildTextNode = function (text, x, y) {
     }
     centerX = !centerY;
 
-    var paper = Snap.select('#test');
-
-    var textNode = paper.text(OFF_SCREEN, OFF_SCREEN, text);
+    var textNode = this.svgGroup.text(OFF_SCREEN, OFF_SCREEN, text);
     var textBBox = textNode.getBBox();
     var width = textBBox.width;
     var height = textBBox.height;
