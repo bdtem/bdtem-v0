@@ -1,0 +1,187 @@
+.email-header {
+    font-family: "Calibri";
+    color: #8c8c8c;
+}
+
+
+.indent {
+    margin-left: 2em;
+}
+
+.indent-two {
+    margin-left: 4em;
+}
+
+.sender {
+    font-weight: bold;
+}
+
+.email-body-wernicke {
+    font-family: "Libre Baskerville";
+    margin-left: 2em;
+    font-size: .8em;
+    margin-right: 40em;
+}
+
+.extra-indent {
+    padding-left: 10em;
+}
+
+.far-indent {
+    padding-left: 11em;
+}
+
+.wernicke-sig {
+    font-family: "Libre Baskerville";
+    font-size: .7em;
+    padding-left: 6em;
+
+}
+
+
+
+.signature-images {
+    max-width: 9%;
+    padding-top: .5em;
+
+}
+
+
+
+.email-body-secondlooks {
+    font-family: "Courier New";
+    margin-left: 2em;
+    font-size: 1.1em;
+    margin-right: 30em;
+}
+
+.secondlooks-sig {
+    font-family: "Courier New";
+    font-size: .9em;
+    margin-left: 6em;
+    font-weight: bold;
+
+}
+
+
+
+.email-body-ratified {
+    font-family: "Tahoma";
+    margin-left: 2em;
+    font-size: 1.1em;
+    margin-right: 30em;
+}
+
+.first-letter {
+    font-size:1.2em;
+}
+
+.ratified-sig {
+    font-family: "Tahoma";
+    font-size: .9em;
+    margin-left: 6em;
+
+}
+
+
+
+.email-body-standards {
+    font-family: "Eurostile";
+    margin-left: 2em;
+    font-size: 1.1em;
+    margin-right: 30em;
+}
+
+
+
+.standards-sig {
+    font-family: "Eurostile";
+    font-size: .9em;
+    margin-left: 6em;
+
+}
+
+
+
+.email-body-archives {
+    font-family: "Avenir Next";
+    margin-left: 2em;
+    font-size: 1.1em;
+    margin-right: 30em;
+}
+
+
+
+.archives-sig {
+    font-family: "Avenir Next";
+    font-size: .9em;
+    margin-left: 6em;
+
+}
+
+
+
+.email-body-innovations {
+    font-family: "Arial";
+    font-style: italic;
+    margin-left: 2em;
+    font-size: 1.1em;
+    margin-right: 30em;
+}
+
+
+
+.innovations-sig {
+    font-family: "Arial";
+    font-style: italic;
+    font-size: .9em;
+    margin-left: 6em;
+
+}
+
+
+
+
+.email-body-data {
+    font-family: "OCR A Std";
+    margin-left: 2em;
+    font-size: 1.1em;
+    margin-right: 27em;
+}
+
+
+
+.data-sig {
+    font-family: "OCR A Std";
+    font-size: .9em;
+    margin-left: 6em;
+
+}
+
+
+.prologue {
+    font-family: "Calibri";
+    color: #8c8c8c;
+    font-size: .7em;
+    margin-left: 5em;
+    margin-right: 55em;
+}
+
+.attachment-declare {
+    font-family: "Calibri";
+    font-size: 1.2em;
+    margin-left: 10em;
+}
+
+.attachment-list {
+    font-family: "Calibri";
+    font-size: 1em;
+    margin-left: 8em;
+}
+
+
+.attachment-images {
+    max-width: 20%;
+    padding-top: .5em;
+}
+
