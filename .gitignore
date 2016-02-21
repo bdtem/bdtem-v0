@@ -31,5 +31,5 @@ dist
 .tmp
 app/bower_components
 app/resources
-
+styles/videogular.css
 
