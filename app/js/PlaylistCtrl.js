@@ -1,7 +1,7 @@
 'use strict';
 
-bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', 'stateService',
-    function PlaylistCtrl(AlbumTracks, StoryEpisodes, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, stateService) {
+bdtem.controller('PlaylistCtrl', ['graveTracks', 'AlbumTracks', 'StoryEpisodes', '$rootScope', '$scope', '$filter', 'hotkeys', '$sce', '$location', 'playerService', 'videoService', '$timeout', 'stateService',
+    function PlaylistCtrl(graveTracks, AlbumTracks, StoryEpisodes, $rootScope, $scope, $filter, hotkeys, $sce, $location, playerService, videoService, $timeout, stateService) {
 
         var controller = this;
         var player;
@@ -20,7 +20,8 @@ bdtem.controller('PlaylistCtrl', ['AlbumTracks', 'StoryEpisodes', '$rootScope', 
 
         var tracks = {
             "ALBUM": AlbumTracks.map(trustAsResource),
-            "STORY": StoryEpisodes.map(trustAsResource)
+            "STORY": StoryEpisodes.map(trustAsResource),
+            "GRAVE": graveTracks['Gr. 01'].tracks.map(trustAsResource)
         };
         var PLAYING = "ALBUM";
 

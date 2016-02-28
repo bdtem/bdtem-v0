@@ -320,7 +320,11 @@ branchesModule
         $scope.stroke = '#FFFFFF';
 
     }])
-    .directive('bdtemCircle', ['branchesConfig', 'branchTypes', function (branchesConfig, branchTypes) {
+    .directive('bdtemCircle',
+    ['branchesConfig', 'branchTypes', 'graveTracks', 'playerService', function (branchesConfig,
+                                                                                branchTypes,
+                                                                                graveTracks,
+                                                                                playerService) {
         var gradientSteps = branchesConfig.gradientSteps;
         var svgContext = Snap(600, 800);
         svgContext.attr({display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
@@ -382,22 +386,31 @@ branchesModule
                 var bdtemButton = group.circle(centerX, centerY, radius).attr({fill: gradient});
 
                 group.append(bdtemButton);
-                var text = attrs['text'];
 
                 var bBox = group.getBBox();
                 var cx = bBox.cx;
                 var cy = bBox.cy;
 
-                if (text) {
-                    var textNode = buildTextNode(text, cx, bBox.y2 + 20);
+                var catalog = attrs['catalog'];
+
+                if (catalog) {
+                    var textNode = buildTextNode(catalog, cx, bBox.y2 + 20);
                     group.append(textNode);
                     bBox = group.getBBox();
                 }
 
                 var type = branchTypes[attrs['type'] || 'VERTICAL'];
+
+
                 var branchPattern = attrs['branchPattern'] || '';
 
-                var tree = parseNewickTree(branchPattern);
+                var tree;
+
+                if (catalog) {
+                    tree = graveTracks[catalog];
+                } else {
+                    tree = parseNewickTree(branchPattern);
+                }
 
                 var isHorizontal = type.name[0] === 'H';
                 var fixed = isHorizontal ? cy : cx;
@@ -513,13 +526,24 @@ branchesModule
                     node.start = offset.start || start;
                     node.length = node.length || BRANCH_LENGTH;
 
-                    return new Branch(group,
+                    var branch = new Branch(group,
                         node.fixed,
                         node.start,
                         node.length,
                         node.name,
                         type
                     );
+
+                    var textNode = branch.textNode;
+                    if (textNode) {
+                        textNode.click(function (event) {
+                            event.stopPropagation();
+                            playerService.skipTo("GRAVE", node.position)
+                        });
+                    }
+
+                    return branch;
+
                 }
 
                 function crossBar(node) {
@@ -595,25 +619,7 @@ branchesModule
             }
         }
     }])
-    .directive('bdtemBranch', ['branchesConfig', function (branchesConfig) {
-        return {
-            restrict: 'EA',
-            require: '^^bdtemCircle',
-            controller: 'BranchCtrl',
-            controllerAs: 'ctrl',
-            templateNamespace: 'svg',
-            templateUrl: 'templates/bdtem-branch.html',
-
-            link: function (scope, element, attrs, ctrl) {
-                var group = ctrl.svgGroup;
-
-                var branchType = attrs['type'];
-
-
-            }
-        }
-    }]
-);
+;
 
 
 function parseNewickTree(string) {

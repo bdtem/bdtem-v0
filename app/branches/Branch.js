@@ -47,11 +47,6 @@ Branch.prototype.buildTextNode = function (text, x, y) {
         fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : STROKE_COLOR
     });
 
-    textNode.click(function (event) {
-        event.stopPropagation();
-        textNode.attr({fill: '#F0F'});
-        textNode.node.innerHTML = 'clicks'
-    });
     return textNode;
 
 };
