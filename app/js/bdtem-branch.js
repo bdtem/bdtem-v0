@@ -1,4 +1,4 @@
-var branchesModule = angular.module('bdtem.branches', []);
+var branchesModule = bdtem;
 /**
  * Created by alacasse on 1/17/16.
  */
@@ -7,7 +7,7 @@ var OFF_SCREEN = -1024;
 var TRUNK_LENGTH = 150;
 var BRANCH_LENGTH = 75;
 var DURATION_MS = 750;
-var STROKE_COLOR = '#F0F';
+var STROKE_COLOR = '#000';
 
 
 var BRANCH_TYPE = {
@@ -191,7 +191,7 @@ branchesModule
         branchLength: 75,
         animationDuration: 750,
         animationScale: 2,
-        strokeColor: '#FFFFFF'
+        strokeColor: '#000'
     })
     // might be useful to bypass Snap if we need to...
     //
@@ -322,7 +322,8 @@ branchesModule
     }])
     .directive('bdtemCircle', ['branchesConfig', 'branchTypes', function (branchesConfig, branchTypes) {
         var gradientSteps = branchesConfig.gradientSteps;
-        var svgContext = Snap(800, 600);
+        var svgContext = Snap(600, 800);
+        svgContext.attr({display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
 
         function buildGradient(svgContext) {
             var whiteMultiple = 0xFFFFFF / gradientSteps;
@@ -383,11 +384,14 @@ branchesModule
                 group.append(bdtemButton);
                 var text = attrs['text'];
 
-
                 var bBox = group.getBBox();
+                var cx = bBox.cx;
+                var cy = bBox.cy;
+
                 if (text) {
-                    var textNode = buildTextNode(text, centerX, bBox.y2 + 20);
+                    var textNode = buildTextNode(text, cx, bBox.y2 + 20);
                     group.append(textNode);
+                    bBox = group.getBBox();
                 }
 
                 var type = branchTypes[attrs['type'] || 'VERTICAL'];
@@ -396,11 +400,11 @@ branchesModule
                 var tree = parseNewickTree(branchPattern);
 
                 var isHorizontal = type.name[0] === 'H';
-                var fixed = isHorizontal ? bBox.cy : bBox.cx;
+                var fixed = isHorizontal ? cy : cx;
                 var start = isHorizontal ? bBox.x2 : bBox.y2;
 
                 console.log('fixed: ' + fixed + ' ' + 'start: ' + start);
-                var circle = group.circle(fixed, start, 5);
+                var circle = group.circle(fixed, start, 2);
                 circle.attr({fill: '#FFF'});
 
                 var branchParams = {
@@ -420,28 +424,26 @@ branchesModule
 
                     branchParams.trunk = branchFromNode(tree);
 
-                    console.log(branchParams.trunk.node);
-
-                    console.log('trunk')
-                    console.log(branchParams.trunk)
-
                     if (tree.branchset) {
                         level++;
 
                         var length = tree.branchset.length;
+                        var subBranches = [];
 
-                        branchParams.branches.push(crossBar(length));
-
+                        subBranches.push(crossBar(tree));
                         var levelStart = (levelHeights[level - 1] || start);
-                        console.log('level ' + level + ' is starting at ' + levelStart)
+
+                        console.log('level ' + level + ' is starting at ' + levelStart);
 
                         tree.branchset.forEach(function (e, i) {
                             e.fixed = fixed;
                             e.start = levelStart;
                             e.position = i;
                             e.levelWidth = length;
-                            branchParams.branches.push(branchGroupFromNode(e));
+                            subBranches.push(branchGroupFromNode(e));
                         });
+
+                        branchParams.branches.push(new AdHocBranchGroup(subBranches));
                     }
 
                     return new BranchGroup(group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, branchParams);
@@ -449,26 +451,30 @@ branchesModule
 
                 function branchGroupFromNode(node) {
                     var branches = [];
-                    branches.push(branchFromNode(node));
+
+                    var items = branchFromNode(node);
+
+                    branches.push(items);
 
                     if (node.branchset) {
+                        var parent = node;
+
+
+                        console.log('node ' + node.name + ' has a branchset');
+
                         level++;
 
                         console.log(level);
                         var length = node.branchset.length;
                         var subBranches = [];
+                        subBranches.push(crossBar(node));
 
                         node.branchset.forEach(function (e, i) {
-                            e.fixed = fixed;
-                            e.start = levelHeights[level - 1] || start;
+                            e.fixed = parent.fixed;
+                            e.start = parent.start + parent.length;
                             e.position = i;
                             e.levelWidth = length;
-                            console.log(e);
-
-                            var groupFromNode = branchGroupFromNode(e);
-
-                            subBranches.push(groupFromNode);
-
+                            subBranches.push(branchGroupFromNode(e));
                         });
 
                         branches.push(new AdHocBranchGroup(subBranches));
@@ -478,6 +484,10 @@ branchesModule
                     }
 
                     return branches.length > 1 ? new AdHocBranchGroup(branches) : branches[0];
+                }
+
+                function widthForCurrentLevel(width) {
+                    return width * (BRANCH_LENGTH / (level + 1));
                 }
 
                 function branchFromNode(node) {
@@ -495,41 +505,44 @@ branchesModule
                     var offset = calculatePointOffset(
                         node.position,
                         node.levelWidth,
-                        BRANCH_LENGTH * node.levelWidth,
                         node.fixed || fixed,
                         nodeStart,
                         true);
 
-                    var branchStart = offset.start || start;
-                    var branchLength = node.length || BRANCH_LENGTH;
+                    node.fixed = offset.fixed || fixed;
+                    node.start = offset.start || start;
+                    node.length = node.length || BRANCH_LENGTH;
 
                     return new Branch(group,
-                        offset.fixed || fixed,
-                        branchStart,
-                        branchLength,
+                        node.fixed,
+                        node.start,
+                        node.length,
                         node.name,
                         type
                     );
                 }
 
-                function crossBar(numberofbranches) {
-                    console.log('crossbar for ' + level + ' ' + numberofbranches)
-                    var crossBar = new Branch(group,
-                        start + level * BRANCH_LENGTH,
-                        fixed,
-                        BRANCH_LENGTH * numberofbranches,
+                function crossBar(node) {
+                    var width = node.branchset.length;
+
+                    console.log('crossbar for ' + level + ' ' + width);
+
+                    var crossBar = new Branch(
+                        group,
+                        node.start + node.length,
+                        node.fixed,
+                        widthForCurrentLevel(width),
                         null,
                         type.orthogonalSpan
                     );
 
-                    console.log(crossBar.trunk.node)
+                    console.log(crossBar.trunk.node);
                     return crossBar;
-
-
                 }
 
-                function calculatePointOffset(position, numberOfPoints, length, fixed, start, isSpan) {
-                    debugger;
+                function calculatePointOffset(position, numberOfPoints, fixed, start, isSpan) {
+
+                    var length = widthForCurrentLevel(numberOfPoints);
 
                     if (!numberOfPoints || numberOfPoints < 2)
                         return {fixed: fixed, start: start};
@@ -552,12 +565,14 @@ branchesModule
                                 return {fixed: fixed, start: start};
                             }
 
-                            --numberOfPoints;
+                            ++position;
                         }
+
+                        --numberOfPoints;
 
                     }
 
-                    var currentProportion = ((position + 1) / numberOfPoints);
+                    var currentProportion = ((position) / numberOfPoints);
                     console.log('current proportion: ' + currentProportion)
 
                     var lengthProportion = currentProportion * length;
@@ -576,7 +591,6 @@ branchesModule
                 ctrl.setBranchGroup(converted);
                 console.log(converted);
 
-                angular.element(svgContext).append(element[0].childNodes);
                 element.replaceWith(svgContext.node);
             }
         }

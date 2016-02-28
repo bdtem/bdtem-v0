@@ -81,10 +81,9 @@ videogular div.custom-button {
   padding-right: 8px;
 }
 
-.orb {
+.middle-display {
   cursor: pointer;
-  margin: 0 auto;
-  margin-top: -5%;
+  margin: -5% auto 0;
 
   display: block;
   z-index: 200;
@@ -94,6 +93,10 @@ videogular div.custom-button {
 
   min-height: 540px;
   max-height: 540px;
+}
+
+.orb {
+  .middle-display;
 
   background: url('http://192.3.134.38/rick/spriteSheetTransparent.png');
 

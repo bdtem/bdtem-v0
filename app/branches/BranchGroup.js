@@ -10,7 +10,6 @@ function BranchGroup(svgGroup,
     this.animationDuration = animationDuration || 1000;
     this.numberOfBranches = this.branchParameters.branches ? this.branchParameters.branches.length : (numberOfBranches || 1);
 
-    this.trunkLength = trunkLength || 150;
     this.branchLength = branchLength || 75;
 
     this.determineStart();
