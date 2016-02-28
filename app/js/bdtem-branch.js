@@ -152,6 +152,11 @@ BRANCH_TYPE.HORIZONTAL_SPAN.orthogonal = BRANCH_TYPE.VERTICAL;
 BRANCH_TYPE.VERTICAL.orthogonal = BRANCH_TYPE.HORIZONTAL;
 BRANCH_TYPE.VERTICAL_SPAN.orthogonal = BRANCH_TYPE.HORIZONTAL;
 
+BRANCH_TYPE.HORIZONTAL.orthogonalSpan = BRANCH_TYPE.VERTICAL_SPAN;
+BRANCH_TYPE.HORIZONTAL_SPAN.orthogonalSpan = BRANCH_TYPE.VERTICAL_SPAN;
+BRANCH_TYPE.VERTICAL.orthogonalSpan = BRANCH_TYPE.HORIZONTAL_SPAN;
+BRANCH_TYPE.VERTICAL_SPAN.orthogonalSpan = BRANCH_TYPE.HORIZONTAL_SPAN;
+
 branchesModule.value('branchTypes', BRANCH_TYPE);
 
 
@@ -217,16 +222,12 @@ branchesModule
             self.svgGroup = group;
 
             self.translationAnimation = randomTranslation(group, Math.random() * 10 - Math.random());
+            self.translationAnimation.startAnimation();
 
-            setTimeout(function () {
-                    self.translationAnimation.startAnimation()
-                },
-                Math.random() * 2000);
-        }.bind(this);
-
-        this.setBranchGroup = function (group) {
-            this.branchGroup = group;
-        }.bind(this);
+            this.setBranchGroup = function (group) {
+                this.branchGroup = group;
+            }.bind(this);
+        };
 
 
         function randomGradientAnimation() {
@@ -307,8 +308,10 @@ branchesModule
             }
         }.bind(this);
 
-    }])
-    .controller('BranchCtrl', ['$scope', function ($scope) {
+    }
+    ])
+    .
+    controller('BranchCtrl', ['$scope', function ($scope) {
 
         $scope.startX = 200;
         $scope.endX = 400;
@@ -396,12 +399,17 @@ branchesModule
                 var fixed = isHorizontal ? bBox.cy : bBox.cx;
                 var start = isHorizontal ? bBox.x2 : bBox.y2;
 
+                console.log('fixed: ' + fixed + ' ' + 'start: ' + start);
+                var circle = group.circle(fixed, start, 5);
+                circle.attr({fill: '#FFF'});
+
                 var branchParams = {
                     trunk: null,
                     branches: []
                 };
 
                 var level = 0;
+                var levelHeights = {};
 
                 function convertToBranches(tree) {
 
@@ -412,11 +420,24 @@ branchesModule
 
                     branchParams.trunk = branchFromNode(tree);
 
+                    console.log(branchParams.trunk.node);
+
+                    console.log('trunk')
+                    console.log(branchParams.trunk)
+
                     if (tree.branchset) {
+                        level++;
+
                         var length = tree.branchset.length;
+
+                        branchParams.branches.push(crossBar(length));
+
+                        var levelStart = (levelHeights[level - 1] || start);
+                        console.log('level ' + level + ' is starting at ' + levelStart)
+
                         tree.branchset.forEach(function (e, i) {
                             e.fixed = fixed;
-                            e.start = level * start;
+                            e.start = levelStart;
                             e.position = i;
                             e.levelWidth = length;
                             branchParams.branches.push(branchGroupFromNode(e));
@@ -429,65 +450,125 @@ branchesModule
                 function branchGroupFromNode(node) {
                     var branches = [];
                     branches.push(branchFromNode(node));
+
                     if (node.branchset) {
                         level++;
+
                         console.log(level);
                         var length = node.branchset.length;
+                        var subBranches = [];
+
                         node.branchset.forEach(function (e, i) {
                             e.fixed = fixed;
-                            e.start = level * start;
+                            e.start = levelHeights[level - 1] || start;
                             e.position = i;
                             e.levelWidth = length;
                             console.log(e);
-                            branches.push(branchGroupFromNode(e));
+
+                            var groupFromNode = branchGroupFromNode(e);
+
+                            subBranches.push(groupFromNode);
+
                         });
+
+                        branches.push(new AdHocBranchGroup(subBranches));
+
                         level--;
+
                     }
 
                     return branches.length > 1 ? new AdHocBranchGroup(branches) : branches[0];
                 }
 
                 function branchFromNode(node) {
+                    console.log("level: " + level + " width: " + node.levelWidth);
+
+                    var nodeStart = node.start || start;
+                    console.log(nodeStart);
+
+                    var nodeEnd = (nodeStart + (node.length || BRANCH_LENGTH));
+                    if (nodeEnd > (levelHeights[level] || 0)) {
+                        levelHeights[level] = nodeEnd;
+                        console.log('updated height for level ' + level + ' to ' + nodeEnd);
+                    }
 
                     var offset = calculatePointOffset(
                         node.position,
                         node.levelWidth,
-                        BRANCH_LENGTH,
+                        BRANCH_LENGTH * node.levelWidth,
                         node.fixed || fixed,
-                        node.start || start,
-                        false);
+                        nodeStart,
+                        true);
+
+                    var branchStart = offset.start || start;
+                    var branchLength = node.length || BRANCH_LENGTH;
 
                     return new Branch(group,
                         offset.fixed || fixed,
-                        offset.start || start,
-                        node.length || BRANCH_LENGTH,
-                        null,
+                        branchStart,
+                        branchLength,
+                        node.name,
                         type
                     );
                 }
 
-                function calculatePointOffset(position, numberOfPoints, length, fixed, start, isSpan) {
+                function crossBar(numberofbranches) {
+                    console.log('crossbar for ' + level + ' ' + numberofbranches)
+                    var crossBar = new Branch(group,
+                        start + level * BRANCH_LENGTH,
+                        fixed,
+                        BRANCH_LENGTH * numberofbranches,
+                        null,
+                        type.orthogonalSpan
+                    );
 
-                    var currentProportion = ((position + 1) / numberOfPoints);
-                    var lengthProportion = currentProportion * length;
-                    var offset;
+                    console.log(crossBar.trunk.node)
+                    return crossBar;
+
+
+                }
+
+                function calculatePointOffset(position, numberOfPoints, length, fixed, start, isSpan) {
+                    debugger;
+
+                    if (!numberOfPoints || numberOfPoints < 2)
+                        return {fixed: fixed, start: start};
+
 
                     if (isSpan) {
+                        fixed -= length;
+                        length *= 2;
+
+                        console.log(position + '/' + numberOfPoints)
+
                         var hasCenter = numberOfPoints % 2 != 0;
-                        var centerPosition = Math.floor(numberOfPoints / 2) + 1;
-                        if (hasCenter && position === centerPosition) {
-                            offset = 0;
-                        } else {
-                            offset = position >= centerPosition ? lengthProportion : -lengthProportion;
+                        console.log('has center? ' + hasCenter);
+
+                        if (hasCenter) {
+                            var centerPosition = Math.floor(numberOfPoints / 2) + 1;
+                            console.log('center: ' + centerPosition);
+
+                            if (position === centerPosition) {
+                                return {fixed: fixed, start: start};
+                            }
+
+                            --numberOfPoints;
                         }
-                    } else {
-                        offset = lengthProportion;
+
                     }
 
-                    return {
-                        fixed: start + offset,
-                        start: fixed
+                    var currentProportion = ((position + 1) / numberOfPoints);
+                    console.log('current proportion: ' + currentProportion)
+
+                    var lengthProportion = currentProportion * length;
+                    console.log('length proportion: ' + lengthProportion)
+
+                    var ret = {
+                        fixed: fixed + lengthProportion,
+                        start: start
                     };
+                    console.log(ret)
+                    return ret;
                 }
 
                 console.log(tree);
