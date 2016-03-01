@@ -326,8 +326,6 @@ branchesModule
                                                                                 graveTracks,
                                                                                 playerService) {
         var gradientSteps = branchesConfig.gradientSteps;
-        var svgContext = Snap(600, 800);
-        svgContext.attr({display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
 
         function buildGradient(svgContext) {
             var whiteMultiple = 0xFFFFFF / gradientSteps;
@@ -343,26 +341,6 @@ branchesModule
             return svgContext.gradient('r(' + [0.5, 0.5, 12].join(',') + ')' + gradientString);
         }
 
-        function buildTextNode(text, x, y) {
-            var textNode = svgContext.text(OFF_SCREEN, OFF_SCREEN, text);
-            var textBBox = textNode.getBBox();
-            var width = textBBox.width;
-
-            textNode.attr({
-                'font-family': 'Libre Baskerville',
-                x: x - (width / 2),
-                y: y,
-                fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : branchesConfig.strokeColor
-            });
-
-            textNode.click(function (event) {
-                event.stopPropagation();
-                textNode.attr({fill: '#F0F'});
-                textNode.node.innerHTML = 'clicks'
-            });
-
-            return textNode;
-        }
 
         return {
             restrict: 'EA',
@@ -370,6 +348,9 @@ branchesModule
             controllerAs: 'ctrl',
 
             link: function (scope, element, attrs, ctrl) {
+
+                var svgContext = Snap(600, 800);
+                svgContext.attr({display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
 
                 var centerX = attrs['cx'] || branchesConfig.cx;
                 var centerY = attrs['cy'] || branchesConfig.cy;
@@ -427,6 +408,27 @@ branchesModule
 
                 var level = 0;
                 var levelHeights = {};
+
+                function buildTextNode(text, x, y) {
+                    var textNode = svgContext.text(OFF_SCREEN, OFF_SCREEN, text);
+                    var textBBox = textNode.getBBox();
+                    var width = textBBox.width;
+
+                    textNode.attr({
+                        'font-family': 'Libre Baskerville',
+                        x: x - (width / 2),
+                        y: y,
+                        fill: (text.length === 6 && Number('0x' + text) > 0) ? ('#' + text) : branchesConfig.strokeColor
+                    });
+
+                    textNode.click(function (event) {
+                        event.stopPropagation();
+                        textNode.attr({fill: '#F0F'});
+                        textNode.node.innerHTML = 'clicks'
+                    });
+
+                    return textNode;
+                }
 
                 function convertToBranches(tree) {
 
@@ -615,7 +617,7 @@ branchesModule
                 ctrl.setBranchGroup(converted);
                 console.log(converted);
 
-                element.replaceWith(svgContext.node);
+                $(element).replaceWith(svgContext.node);
             }
         }
     }])
