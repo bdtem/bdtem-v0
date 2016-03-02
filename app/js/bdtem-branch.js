@@ -211,23 +211,37 @@ branchesModule
     //})
     .controller('GraveCtrl', ['$scope', '$attrs', function ($scope) {
         var self = this;
-        this.svgGroup = null; //Initialized by link... this smells! We should probably do the group init here and have the directive get it.
+
+        this.wasTriggered = false;
+        this.clickHandler = function () {
+            if (!this.wasTriggered) {
+                this.wasTriggered = true;
+
+                randomGradientAnimation();
+
+                this.translationAnimation.pause();
+
+                this.branchGroup.animateIn();
+
+            } else {
+                this.wasTriggered = false;
+
+                randomGradientAnimation();
+
+                this.branchGroup.destroyBranch();
+
+                this.translationAnimation.resume();
+            }
+        }.bind(this);
+
+        this.svgContext = Snap(600, 800).attr({display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
+        this.svgGroup = this.svgContext.group()
+            .attr({cursor: 'pointer'})
+            .click(this.clickHandler);
+
         this.svgGradient = null;
         this.branchGroup = null;
         this.translationAnimation = {};
-
-        this.wasTriggered = false;
-
-        this.setSvgGroup = function (group) {
-            self.svgGroup = group;
-
-            self.translationAnimation = randomTranslation(group, Math.random() * 10 - Math.random());
-            self.translationAnimation.startAnimation();
-
-            this.setBranchGroup = function (group) {
-                this.branchGroup = group;
-            }.bind(this);
-        };
 
 
         function randomGradientAnimation() {
@@ -286,40 +300,15 @@ branchesModule
             return animation;
         }
 
-
-        this.clickHandler = function () {
-            if (!this.wasTriggered) {
-                this.wasTriggered = true;
-
-                randomGradientAnimation();
-
-                this.translationAnimation.pause();
-
-                this.branchGroup.animateIn();
-
-            } else {
-                this.wasTriggered = false;
-
-                randomGradientAnimation();
-
-                this.branchGroup.destroyBranch();
-
-                this.translationAnimation.resume();
-            }
-        }.bind(this);
-
     }
     ])
-    .
-    controller('BranchCtrl', ['$scope', function ($scope) {
+    .service('branchConverter', function () {
 
-        $scope.startX = 200;
-        $scope.endX = 400;
-        $scope.startY = 200;
-        $scope.endY = 400;
-        $scope.stroke = '#FFFFFF';
 
-    }])
+
+
+
+    })
     .directive('bdtemCircle',
     ['branchesConfig', 'branchTypes', 'graveTracks', 'playerService', function (branchesConfig,
                                                                                 branchTypes,
@@ -349,8 +338,7 @@ branchesModule
 
             link: function (scope, element, attrs, ctrl) {
 
-                var svgContext = Snap(600, 800);
-                svgContext.attr({display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
+                var svgContext = ctrl.svgContext;
 
                 var centerX = attrs['cx'] || branchesConfig.cx;
                 var centerY = attrs['cy'] || branchesConfig.cy;
@@ -358,11 +346,7 @@ branchesModule
 
                 var gradient = buildGradient(svgContext);
                 ctrl.svgGradient = gradient;
-
-                var group = svgContext.group()
-                    .attr({cursor: 'pointer'})
-                    .click(ctrl.clickHandler);
-                ctrl.setSvgGroup(group);
+                var group = ctrl.svgGroup;
 
                 var bdtemButton = group.circle(centerX, centerY, radius).attr({fill: gradient});
 
@@ -373,6 +357,7 @@ branchesModule
                 var cy = bBox.cy;
 
                 var catalog = attrs['catalog'];
+                var config;
 
                 if (catalog) {
                     var textNode = buildTextNode(catalog, cx, bBox.y2 + 20);
@@ -385,13 +370,8 @@ branchesModule
 
                 var branchPattern = attrs['branchPattern'] || '';
 
-                var tree;
+                var tree = catalog ? graveTracks[catalog] : parseNewickTree(branchPattern);
 
-                if (catalog) {
-                    tree = graveTracks[catalog];
-                } else {
-                    tree = parseNewickTree(branchPattern);
-                }
 
                 var isHorizontal = type.name[0] === 'H';
                 var fixed = isHorizontal ? cy : cx;
@@ -614,7 +594,7 @@ branchesModule
 
                 console.log(tree);
                 var converted = convertToBranches(tree);
-                ctrl.setBranchGroup(converted);
+                ctrl.branchGroup = converted;
                 console.log(converted);
 
                 $(element).replaceWith(svgContext.node);

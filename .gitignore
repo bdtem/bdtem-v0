@@ -13,7 +13,6 @@
 *.mp4
 *.mp3
 *.map
-*.css.map
 *.iml
 
 # OS folders
@@ -32,5 +31,4 @@ dist
 .tmp
 app/bower_components
 app/resources
-
-
+app/styles/main.css
