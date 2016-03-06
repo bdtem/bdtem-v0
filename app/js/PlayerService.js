@@ -12,7 +12,7 @@ bdtem.service('playerService', ['$rootScope', 'tracklistService', function playe
     var ALBUM = "ALBUM";
     var STORY = "STORY";
 
-    var PLAYING = tracklistService.getCurrentTracklist();
+    var PLAYING = tracklistService.getCurrentTrackList();
 
     function randomByte() {
         return (Math.floor(Math.random() * (0xFF)));

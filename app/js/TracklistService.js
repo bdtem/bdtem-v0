@@ -36,7 +36,7 @@ bdtem.service('tracklistService',
                         return currentlyPlaying;
                     }
                 },
-                getCurrentTracklist: function getCurrentTracklist() {
+                getCurrentTrackList: function getCurrentTrackList() {
                     return currentlyPlaying;
                 },
                 getCurrentTracklistName: function getCurrentTracklistName() {

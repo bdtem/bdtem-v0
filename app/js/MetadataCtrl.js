@@ -6,7 +6,7 @@ bdtem.controller("MetadataCtrl",
         var player = playerService.getPlayer();
 
 
-        $scope.metadata = playerService.isPlaying() ? tracklistService.getCurrentTracklist()[playerService.getCurrentTrack()] : {
+        $scope.metadata = playerService.isPlaying() ? tracklistService.getCurrentTrackList()[playerService.getCurrentTrack()] : {
             title: "",
             catalog: "",
             description: "<div class='centered' style='text-align: center; align-content: center'>" +
@@ -42,7 +42,7 @@ bdtem.controller("MetadataCtrl",
 
 
         function setMetadata(track) {
-            var tracklist = tracklistService.getCurrentTracklist();
+            var tracklist = tracklistService.getCurrentTrackList();
             console.log('setting metadata for ' + tracklistService.getCurrentTracklistName() + ' ' + track);
             $scope.metadata = tracklist[track];
             var duration = player.totalTime | 0;

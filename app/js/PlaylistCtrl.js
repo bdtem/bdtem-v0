@@ -2,29 +2,21 @@
 
 bdtem.controller('PlaylistCtrl',
     [
-        'graveTracks',
-        'AlbumTracks',
-        'StoryEpisodes',
         'tracklistService',
         '$rootScope',
         '$scope',
         '$filter',
         'hotkeys',
-        '$sce',
         '$location',
         'playerService',
         'videoService',
         '$timeout',
         'stateService',
-        function PlaylistCtrl(graveTracks,
-                              AlbumTracks,
-                              StoryEpisodes,
-                              tracklistService,
+        function PlaylistCtrl(tracklistService,
                               $rootScope,
                               $scope,
                               $filter,
                               hotkeys,
-                              $sce,
                               $location,
                               playerService,
                               videoService,
@@ -40,12 +32,9 @@ bdtem.controller('PlaylistCtrl',
             $scope.showVolumeBar = false;
 
 
-            var PLAYING = "ALBUM";
-
-
             controller.config = {
                 sources: [
-                    tracklistService.getCurrentTracklist()[currentTrack]
+                    tracklistService.getCurrentTrackList()[currentTrack]
                 ],
                 tracks: [
                     {}
@@ -88,7 +77,7 @@ bdtem.controller('PlaylistCtrl',
             };
 
             $scope.$on('trackChange', function changePlayerTrack(event, track) {
-                var currentTracks = tracklistService.getCurrentTracklist();
+                var currentTracks = tracklistService.getCurrentTrackList();
                 if (track < 0 || track > currentTracks.length) {
                     return;
                 }
@@ -106,7 +95,7 @@ bdtem.controller('PlaylistCtrl',
             function getTrackFromQPs() {
                 var track = parseInt($location.search()['track']) - 1;
 
-                if (track >= 0 && track < tracklistService.getCurrentTracklist().length) {
+                if (track >= 0 && track < tracklistService.getCurrentTrackList().length) {
                     $timeout(function () {
                         playerService.skipToTrack(track)
                     });
@@ -164,15 +153,12 @@ bdtem.controller('PlaylistCtrl',
             };
 
             function skipTo(trackIndex) {
-                var videoAPI = videoService.getVideoAPI();
-                if (videoService.isPlaying()) {
-                    videoAPI.pause();
-                }
-                if (trackIndex >= 0 && trackIndex < tracklistService.getCurrentTracklist().length) {
-                    playerService.skipTo(PLAYING, trackIndex);
+                videoService.pause();
+                var trackList = tracklistService.getCurrentTrackList();
+                if (trackIndex >= 0 && trackIndex < trackList.length) {
+                    playerService.skipTo(trackList, trackIndex);
                 }
             }
-
 
             $scope.prevTrack = function () {
                 skipTo(currentTrack - 1);
@@ -235,5 +221,6 @@ bdtem.controller('PlaylistCtrl',
                     }
                 });
 
-        }])
-;
+        }
+    ]
+);

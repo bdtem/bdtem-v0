@@ -8,8 +8,11 @@ bdtem.service('videoService', function () {
     var STOP = "stop";
 
     return {
+        isPlaying: function () {
+            return (videoAPI && videoAPI.currentState === PLAY);
+        },
         pause: function () {
-            if (videoAPI) {
+            if (this.isPlaying()) {
                 videoAPI.pause();
             }
         },
@@ -18,9 +21,6 @@ bdtem.service('videoService', function () {
         },
         setVideoAPI: function (API) {
             videoAPI = API;
-        },
-        isPlaying: function () {
-            return (videoAPI && videoAPI.currentState === PLAY);
         }
     };
 });
