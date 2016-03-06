@@ -15,15 +15,16 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
     var playButton;
 
     controller.onPlayerReady = function (API) {
-
         controller.API = API;
         videoService.setVideoAPI(API);
-        $timeout(function playWithDelay() {API.playPause()}, 250);
+        $timeout(function playWithDelay() {
+            API.playPause()
+        }, 250);
     };
 
     controller.onPlayerStateChange = function ($state) {
         playButton = document.getElementById("videoPlay");
-        if(playButton) {
+        if (playButton) {
             playButton.children[0].setAttribute("onfocus", "this.blur()");
         }
 
@@ -36,10 +37,7 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
         sources: [
             {src: $sce.trustAsResourceUrl("../video/about.mp4"), type: "video/mp4"}
         ],
-        tracks: [
-            {
-            }
-        ],
+        tracks: [{}],
         theme: {
             url: "styles/videogular.css"
         },
