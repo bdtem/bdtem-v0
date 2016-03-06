@@ -185,7 +185,7 @@ branchesModule
     .constant('branchesConfig', {
         gradientSteps: 5,
         cx: 350,
-        cy: 125,
+        cy: 250,
         radius: 66,
         trunkLength: 150,
         branchLength: 75,
@@ -242,6 +242,7 @@ branchesModule
         this.svgGradient = null;
         this.branchGroup = null;
         this.translationAnimation = randomTranslation(this.svgGroup);
+        this.translationAnimation.startAnimation();
 
 
         function randomGradientAnimation() {
