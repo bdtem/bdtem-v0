@@ -8,12 +8,12 @@ bdtem.config(['$stateProvider', '$urlRouterProvider',
         $urlRouterProvider.otherwise("/");
 
         $stateProvider
-            .state("orb", {
+            .state('orb', {
                 url: "/",
                 templateUrl: "templates/orb.html"
             })
-            .state("grave", {
-                url: "/",
+            .state('grave', {
+                url: "/grave",
                 templateUrl: "templates/svg_branchtest.html"
             })
             .state("video", {
@@ -23,7 +23,12 @@ bdtem.config(['$stateProvider', '$urlRouterProvider',
             .state("metadata", {
                 url: "/",
                 templateUrl: "templates/metadata.html",
-                controller: 'MetadataCtrl'
+                controller: "MetadataCtrl"
+            })
+            .state("mission", {
+                url: "/mission",
+                templateUrl: "templates/email_chain.html",
+                controller: "EmailChainCtrl"
             });
     }]);
 
@@ -36,6 +41,7 @@ bdtem.service('stateService', function ($state) {
         var currentState = $state.current.name;
         if (currentState != targetState) {
             self.previousState = currentState;
+
             $state.go(targetState);
         }
     };

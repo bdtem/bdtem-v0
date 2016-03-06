@@ -58,6 +58,8 @@
 
     <script src="js/bdtem-branch.js"></script>
 
+    <script src="js/EmailChainCtrl.js"></script>
+
 
     <!-- build:js scripts/vendor/bootstrap.js -->
     <script src="bower_components/bootstrap/js/affix.js"></script>
@@ -212,20 +214,8 @@ Like a game, it is to be interacted with.">
             MR. TALENT
         </div>
 
-        <span class="story-menu-entry" ng-click="graveButton()">Needs more dots!</span>
-
-        <br/>
-
-        <span id="story-episode{{$index}}"
-              ng-class="episode.src ? 'story-menu-entry' : 'story-menu-entry-inactive'"
-              ng-repeat="episode in episodes"
-              ng-click="episode.src ? skipToEpisode($index) : $.noop()"
-              popover="{{episode.tooltip}}"
-              popover-trigger="mouseenter : blur"
-              popover-placement="right"
-                >
-            {{episode.title|uppercase}}<br/>
-        </span>
+        <span class="story-menu-entry" ng-click="goTo('grave')">Needs more dots!</span>
+        <span class="story-menu-entry" ng-click="goTo('mission')">Mission Control</span>
 
     </div>
 </nav>
@@ -237,7 +227,7 @@ Like a game, it is to be interacted with.">
     ||||||||||<br/>
 
     <div class="right-menu-words" id="right-menu-words">
-        Story<br/>
+        Menu<br/>
     </div>
     ||||||||||<br/>
     |||||||<br/>

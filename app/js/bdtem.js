@@ -77,8 +77,8 @@ bdtem.controller('MiddleCtrl',
         $scope.tracks = AlbumTracks;
         $scope.episodes = StoryEpisodes;
 
-        $scope.graveButton = function () {
-            stateService.go('grave');
+        $scope.goTo = function goTo(state) {
+            stateService.go(state);
         };
 
         $scope.skipToTrack = function (index) {

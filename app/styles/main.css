@@ -7706,6 +7706,14 @@ html a {
   -ms-user-select: none;
   user-select: none;
 }
+.selectable {
+  -webkit-touch-callout: initial;
+  -webkit-user-select: initial;
+  -khtml-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+}
 .transport-bar {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -7987,9 +7995,8 @@ videogular div.custom-button {
   cursor: pointer;
   padding-right: 8px;
 }
-.middle-display {
-  cursor: pointer;
-  margin: -5% auto 0;
+.ui-view-positioning {
+  margin: 0 auto;
   display: block;
   z-index: 200;
   min-width: 570px;
@@ -7997,15 +8004,36 @@ videogular div.custom-button {
   min-height: 540px;
   max-height: 540px;
 }
-.orb {
-  cursor: pointer;
-  margin: -5% auto 0;
+.ui-view-wide {
+  margin: 0 auto;
   display: block;
   z-index: 200;
   min-width: 570px;
   max-width: 570px;
   min-height: 540px;
   max-height: 540px;
+  max-width: 60%;
+  max-height: 65vh;
+}
+.middle-display {
+  margin: 0 auto;
+  display: block;
+  z-index: 200;
+  min-width: 570px;
+  max-width: 570px;
+  min-height: 540px;
+  max-height: 540px;
+  cursor: pointer;
+}
+.orb {
+  margin: 0 auto;
+  display: block;
+  z-index: 200;
+  min-width: 570px;
+  max-width: 570px;
+  min-height: 540px;
+  max-height: 540px;
+  cursor: pointer;
   background: url('http://192.3.134.38/rick/spriteSheetTransparent.png');
   animation: play 7s steps(55) infinite;
   -webkit-animation: play 7s steps(55) infinite;
@@ -8188,4 +8216,166 @@ input[type="range"]::-ms-thumb {
   border: 0;
   background-image: linear-gradient(to bottom, #000000 0, #000000 100%);
   /* W3C */
+}
+.email-header {
+  font-family: "Calibri", sans-serif;
+  color: #8c8c8c;
+}
+.indent {
+  margin-left: 2vw;
+}
+.indent-two {
+  margin-left: 4em;
+}
+.sender {
+  font-weight: bold;
+}
+.email-body {
+  margin-left: 2vw;
+  font-size: 1.1em;
+  margin-right: 5vw;
+}
+.signature {
+  padding-left: 6em;
+  font-size: .9em;
+}
+.wernicke-font {
+  font-family: "Libre Baskerville", serif;
+}
+.email-body-wernicke {
+  margin-left: 2vw;
+  font-size: 1.1em;
+  margin-right: 5vw;
+  font-family: "Libre Baskerville", serif;
+  font-size: .8em;
+  margin-right: 40em;
+}
+.extra-indent {
+  padding-left: 10em;
+}
+.far-indent {
+  padding-left: 11em;
+}
+.wernicke-sig {
+  padding-left: 6em;
+  font-size: .9em;
+  font-family: "Libre Baskerville", serif;
+  font-size: .7em;
+}
+.signature-images {
+  max-width: 9%;
+  padding-top: .5em;
+}
+.secondlooks-font {
+  font-family: "Courier New", monospace, serif;
+}
+.email-body-secondlooks {
+  margin-left: 2vw;
+  font-size: 1.1em;
+  margin-right: 5vw;
+  font-family: "Courier New", monospace, serif;
+}
+.secondlooks-sig {
+  padding-left: 6em;
+  font-size: .9em;
+  font-family: "Courier New", monospace, serif;
+  font-weight: bold;
+}
+.ratified-font {
+  font-family: "Tahoma", sans-serif;
+}
+.email-body-ratified {
+  margin-left: 2vw;
+  font-size: 1.1em;
+  margin-right: 5vw;
+  font-family: "Tahoma", sans-serif;
+}
+.first-letter {
+  font-size: 1.2em;
+}
+.ratified-sig {
+  padding-left: 6em;
+  font-size: .9em;
+  font-family: "Tahoma", sans-serif;
+}
+.standards-font {
+  font-family: 'Eurostile', sans-serif;
+}
+.email-body-standards {
+  margin-left: 2vw;
+  font-size: 1.1em;
+  margin-right: 5vw;
+  font-family: 'Eurostile', sans-serif;
+}
+.standards-sig {
+  padding-left: 6em;
+  font-size: .9em;
+  font-family: 'Eurostile', sans-serif;
+}
+.archives-font {
+  font-family: "Avenir Next", sans-serif;
+}
+.email-body-archives {
+  margin-left: 2vw;
+  font-size: 1.1em;
+  margin-right: 5vw;
+  font-family: "Avenir Next", sans-serif;
+}
+.archives-sig {
+  padding-left: 6em;
+  font-size: .9em;
+  font-family: "Avenir Next", sans-serif;
+}
+.innovations-font {
+  font-family: "Arial", sans-serif;
+  font-style: italic;
+}
+.email-body-innovations {
+  margin-left: 2vw;
+  font-size: 1.1em;
+  margin-right: 5vw;
+  font-family: "Arial", sans-serif;
+  font-style: italic;
+}
+.innovations-sig {
+  padding-left: 6em;
+  font-size: .9em;
+  font-family: "Arial", sans-serif;
+  font-style: italic;
+}
+.data-font {
+  font-family: "OCR A Std", monospace;
+}
+.email-body-data {
+  margin-left: 2vw;
+  font-size: 1.1em;
+  margin-right: 5vw;
+  font-family: "OCR A Std", monospace;
+  margin-right: 27em;
+}
+.data-sig {
+  font-family: "OCR A Std", monospace;
+  padding-left: 6em;
+  font-size: .9em;
+}
+.prologue {
+  font-family: "Calibri", sans-serif;
+  color: #8c8c8c;
+  font-size: .7em;
+  margin-left: 5em;
+  margin-right: 55em;
+}
+.attachment-declare {
+  font-family: "Calibri";
+  font-size: 1.2em;
+  margin-left: 10em;
+}
+.attachment-list {
+  font-family: "Calibri";
+  font-size: 1em;
+  margin-left: 8em;
+}
+.attachment-images {
+  max-width: 20%;
+  padding-top: .5em;
 }
