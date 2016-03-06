@@ -1,14 +1,18 @@
+@right-indent: 5vw;
+@left-indent: 2vw;
+
+
 .email-header {
   font-family: "Calibri", sans-serif;
   color: #8c8c8c;
 }
 
 .indent {
-  margin-left: 2vw;
+  margin-left: @left-indent;
 }
 
 .indent-two {
-  margin-left: 4em;
+  margin-left: 2 * @left-indent;
 }
 
 .sender {
@@ -18,7 +22,7 @@
 .email-body {
   .indent;
   font-size: 1.1em;
-  margin-right: 5vw;
+  margin-right: @right-indent;
 }
 
 .signature {
@@ -34,7 +38,7 @@
   .email-body;
   .wernicke-font;
   font-size: .8em;
-  margin-right: 40em;
+  margin-right: (4/3) * @right-indent;
 }
 
 .extra-indent {
@@ -140,7 +144,7 @@
 .email-body-data {
   .email-body;
   .data-font;
-  margin-right: 27em;
+  margin-right: (27 / 30) @right-indent;
 }
 
 .data-sig {
@@ -151,19 +155,23 @@
 .prologue {
   .email-header;
   font-size: .7em;
-  margin-left: 5em;
-  margin-right: 55em;
+  width: 100%;
+}
+
+@attachment-font-size: 1.2em;
+.attachment-font {
+  font-family: "Calibri", sans-serif;
+  font-size: @attachment-font-size;
 }
 
 .attachment-declare {
-  font-family: "Calibri";
-  font-size: 1.2em;
-  margin-left: 10em;
+  .attachment-font;
+  margin-left: 5 * @left-indent;
 }
 
 .attachment-list {
-  font-family: "Calibri";
-  font-size: 1em;
+  .attachment-font;
+  font-size: (1/1.2) * @attachment-font-size;
   margin-left: 8em;
 }
 
@@ -171,4 +179,3 @@
   max-width: 20%;
   padding-top: .5em;
 }
-
