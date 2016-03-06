@@ -25,7 +25,7 @@ bdtem.value('graveTracks', {
         branchset: [
             {
                 name: "Gr. 1 No. 1",
-                length: 60,
+                length: 60
             },
             {
                 name: "Gr. 1 No. 2",

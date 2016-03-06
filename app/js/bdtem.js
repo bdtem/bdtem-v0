@@ -34,31 +34,6 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
 }]);
 
 
-bdtem.service('videoService', function () {
-    var videoAPI;
-
-    var PLAY = "play";
-    var PAUSE = "pause";
-    var STOP = "stop";
-
-    return {
-        pause: function () {
-            if (videoAPI) {
-                videoAPI.pause();
-            }
-        },
-        getVideoAPI: function () {
-            return videoAPI;
-        },
-        setVideoAPI: function (API) {
-            videoAPI = API;
-        },
-        isPlaying: function () {
-            return (videoAPI && videoAPI.currentState === PLAY);
-        }
-    };
-});
-
 bdtem.controller('OrbCtrl', function ($scope, stateService) {
 
     $scope.startVideo = function () {
@@ -97,23 +72,24 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
 
 });
 
-bdtem.controller('MiddleCtrl', function ($scope, stateService, playerService, videoService, AlbumTracks, StoryEpisodes) {
-    $scope.tracks = AlbumTracks;
-    $scope.episodes = StoryEpisodes;
+bdtem.controller('MiddleCtrl',
+    function ($scope, stateService, playerService, videoService, AlbumTracks, StoryEpisodes) {
+        $scope.tracks = AlbumTracks;
+        $scope.episodes = StoryEpisodes;
 
-    $scope.graveButton = function () {
-        stateService.go('grave');
-    };
+        $scope.graveButton = function () {
+            stateService.go('grave');
+        };
 
-    $scope.skipToTrack = function (index) {
-        videoService.pause();
+        $scope.skipToTrack = function (index) {
+            videoService.pause();
 
-        playerService.skipToTrack(index);
-    };
+            playerService.skipToTrack(index);
+        };
 
-    $scope.skipToEpisode = function (episodeIndex) {
-        videoService.pause();
+        $scope.skipToEpisode = function (episodeIndex) {
+            videoService.pause();
 
-        playerService.skipToEpisode(episodeIndex);
-    };
-});
+            playerService.skipToEpisode(episodeIndex);
+        };
+    });

@@ -1,6 +1,6 @@
 'use strict';
 
-bdtem.service('playerService', function ($rootScope) {
+bdtem.service('playerService', ['$rootScope', 'tracklistService', function playerService($rootScope, tracklistService) {
     var bdtemplayer;
     var currentTrack = -1;
 
@@ -12,7 +12,7 @@ bdtem.service('playerService', function ($rootScope) {
     var ALBUM = "ALBUM";
     var STORY = "STORY";
 
-    var PLAYING = ALBUM;
+    var PLAYING = tracklistService.getCurrentTracklist();
 
     function randomByte() {
         return (Math.floor(Math.random() * (0xFF)));
@@ -31,21 +31,9 @@ bdtem.service('playerService', function ($rootScope) {
         return colorString;
     }
 
-    function switchTo(trackList, optionalIndex) {
-        currentTrack = optionalIndex ? optionalIndex : 0;
-
-        if (PLAYING != trackList && bdtemplayer) {
-            PLAYING = trackList;
-            $rootScope.$broadcast('tracklistChange', {
-                "trackList": trackList,
-                "index": currentTrack
-            });
-        }
-    }
-
     return {
-        currentlyPlaying: function () {
-            return PLAYING;
+        isPlaying: function isPlaying() {
+            return bdtemplayer && bdtemplayer.currentState === "play";
         },
         getCurrentTrack: function () {
             return currentTrack;
@@ -92,18 +80,26 @@ bdtem.service('playerService', function ($rootScope) {
                 });
             });
             $tracksToClear.each(function () {
-                $(this).css({color: DEFAULT_TEXT,
+                $(this).css({
+                    color: DEFAULT_TEXT,
                     'text-decoration': 'none'
                 });
             });
         },
         skipTo: function (trackList, index) {
-            if (PLAYING != trackList) {
-                switchTo(trackList, index)
+            var actualIndex;
+            if (arguments.length > 1) {
+                actualIndex = index;
+                tracklistService.changeToTracklist(trackList);
+                console.log('skipping to ' + trackList + ' ' + actualIndex);
+
             } else {
-                currentTrack = index;
-                $rootScope.$broadcast('trackChange', index);
+                actualIndex = tracklistService;
+                console.log('skipping to ' + actualIndex)
             }
+
+            currentTrack = actualIndex;
+            $rootScope.$broadcast('trackChange', actualIndex);
         },
         skipToEpisode: function (index) {
             this.skipTo(STORY, index);
@@ -112,5 +108,4 @@ bdtem.service('playerService', function ($rootScope) {
             this.skipTo(ALBUM, index);
         }
     }
-})
-;
+}]);
