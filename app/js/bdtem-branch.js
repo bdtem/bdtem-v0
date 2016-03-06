@@ -6,7 +6,7 @@ var SCALING_FACTOR = 2;
 var OFF_SCREEN = -1024;
 var TRUNK_LENGTH = 150;
 var BRANCH_LENGTH = 75;
-var DURATION_MS = 750;
+var DURATION_MS = 500;
 var STROKE_COLOR = '#000';
 
 
@@ -241,7 +241,7 @@ branchesModule
 
         this.svgGradient = null;
         this.branchGroup = null;
-        this.translationAnimation = {};
+        this.translationAnimation = randomTranslation(this.svgGroup);
 
 
         function randomGradientAnimation() {
