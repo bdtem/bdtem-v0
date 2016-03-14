@@ -7953,6 +7953,12 @@ right-words {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
+  -webkit-touch-callout: initial;
+  -webkit-user-select: initial;
+  -khtml-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
   background-color: #000000;
   border: solid 1px #000000;
   height: 0.5vh;
@@ -8012,7 +8018,7 @@ videogular div.custom-button {
   max-width: 570px;
   min-height: 540px;
   max-height: 540px;
-  max-width: 60%;
+  max-width: 55%;
   max-height: 65vh;
 }
 .middle-display {
@@ -8225,7 +8231,13 @@ input[type="range"]::-ms-thumb {
   margin-left: 2vw;
 }
 .indent-two {
-  margin-left: 4em;
+  margin-left: 4vw;
+}
+.extra-indent {
+  padding-left: 10vw;
+}
+.far-indent {
+  padding-left: 12vw;
 }
 .sender {
   font-weight: bold;
@@ -8237,10 +8249,18 @@ input[type="range"]::-ms-thumb {
 }
 .signature {
   padding-left: 6em;
-  font-size: .9em;
+  font-size: 0.9em;
+}
+.signature #after {
+  max-width: 9%;
+  padding-top: 0.5em;
 }
 .wernicke-font {
   font-family: "Libre Baskerville", serif;
+}
+.signature-images {
+  max-width: 9%;
+  padding-top: 0.5em;
 }
 .email-body-wernicke {
   margin-left: 2vw;
@@ -8248,23 +8268,20 @@ input[type="range"]::-ms-thumb {
   margin-right: 5vw;
   font-family: "Libre Baskerville", serif;
   font-size: .8em;
-  margin-right: 40em;
-}
-.extra-indent {
-  padding-left: 10em;
-}
-.far-indent {
-  padding-left: 11em;
+  margin-right: 6.666666666666666vw;
 }
 .wernicke-sig {
   padding-left: 6em;
-  font-size: .9em;
+  font-size: 0.9em;
   font-family: "Libre Baskerville", serif;
   font-size: .7em;
 }
-.signature-images {
+.wernicke-sig #after {
   max-width: 9%;
-  padding-top: .5em;
+  padding-top: 0.5em;
+}
+.wernicke-sig #after {
+  content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/WernickeFinal.png);
 }
 .secondlooks-font {
   font-family: "Courier New", monospace, serif;
@@ -8277,9 +8294,16 @@ input[type="range"]::-ms-thumb {
 }
 .secondlooks-sig {
   padding-left: 6em;
-  font-size: .9em;
+  font-size: 0.9em;
   font-family: "Courier New", monospace, serif;
   font-weight: bold;
+}
+.secondlooks-sig #after {
+  max-width: 9%;
+  padding-top: 0.5em;
+}
+.secondlooks-sig #after {
+  content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/2ndLooksFinal_1.png);
 }
 .ratified-font {
   font-family: "Tahoma", sans-serif;
@@ -8295,8 +8319,15 @@ input[type="range"]::-ms-thumb {
 }
 .ratified-sig {
   padding-left: 6em;
-  font-size: .9em;
+  font-size: 0.9em;
   font-family: "Tahoma", sans-serif;
+}
+.ratified-sig #after {
+  max-width: 9%;
+  padding-top: 0.5em;
+}
+.ratified-sig #after {
+  content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/RatifiedFinal.png);
 }
 .standards-font {
   font-family: 'Eurostile', sans-serif;
@@ -8309,8 +8340,15 @@ input[type="range"]::-ms-thumb {
 }
 .standards-sig {
   padding-left: 6em;
-  font-size: .9em;
+  font-size: 0.9em;
   font-family: 'Eurostile', sans-serif;
+}
+.standards-sig #after {
+  max-width: 9%;
+  padding-top: 0.5em;
+}
+.standards-sig #after {
+  content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/StandardsFinal2.png);
 }
 .archives-font {
   font-family: "Avenir Next", sans-serif;
@@ -8323,8 +8361,15 @@ input[type="range"]::-ms-thumb {
 }
 .archives-sig {
   padding-left: 6em;
-  font-size: .9em;
+  font-size: 0.9em;
   font-family: "Avenir Next", sans-serif;
+}
+.archives-sig #after {
+  max-width: 9%;
+  padding-top: 0.5em;
+}
+.archives-sig #after {
+  content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/Archivesagain2.png);
 }
 .innovations-font {
   font-family: "Arial", sans-serif;
@@ -8339,9 +8384,16 @@ input[type="range"]::-ms-thumb {
 }
 .innovations-sig {
   padding-left: 6em;
-  font-size: .9em;
+  font-size: 0.9em;
   font-family: "Arial", sans-serif;
   font-style: italic;
+}
+.innovations-sig #after {
+  max-width: 9%;
+  padding-top: 0.5em;
+}
+.innovations-sig #after {
+  content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/WernickeFinal.png);
 }
 .data-font {
   font-family: "OCR A Std", monospace;
@@ -8351,31 +8403,42 @@ input[type="range"]::-ms-thumb {
   font-size: 1.1em;
   margin-right: 5vw;
   font-family: "OCR A Std", monospace;
-  margin-right: 27em;
+  margin-right: 0.9 5vw;
 }
 .data-sig {
   font-family: "OCR A Std", monospace;
   padding-left: 6em;
-  font-size: .9em;
+  font-size: 0.9em;
+}
+.data-sig #after {
+  max-width: 9%;
+  padding-top: 0.5em;
+}
+.data-sig #after {
+  content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/DataFinal.png);
 }
 .prologue {
   font-family: "Calibri", sans-serif;
   color: #8c8c8c;
   font-size: .7em;
-  margin-left: 5em;
-  margin-right: 55em;
+  width: 100%;
+}
+.attachment-font {
+  font-family: "Calibri", sans-serif;
+  font-size: 1.2em;
 }
 .attachment-declare {
-  font-family: "Calibri";
+  font-family: "Calibri", sans-serif;
   font-size: 1.2em;
-  margin-left: 10em;
+  margin-left: 10vw;
 }
 .attachment-list {
-  font-family: "Calibri";
+  font-family: "Calibri", sans-serif;
+  font-size: 1.2em;
   font-size: 1em;
   margin-left: 8em;
 }
 .attachment-images {
   max-width: 20%;
-  padding-top: .5em;
+  padding-top: 0.5em;
 }

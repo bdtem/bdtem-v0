@@ -1,5 +1,15 @@
 @right-indent: 5vw;
 @left-indent: 2vw;
+@extra-left-indent: 5 * @left-indent;
+@far-left-indent: 6 * @left-indent;
+
+@signature-font-size: .9em;
+@signature-left-indent: 6em;
+
+@attachment-font-size: 1.2em;
+
+@section-separation-size: .5em;
+
 
 
 .email-header {
@@ -15,6 +25,14 @@
   margin-left: 2 * @left-indent;
 }
 
+.extra-indent {
+  padding-left: @extra-left-indent;
+}
+
+.far-indent {
+  padding-left: @far-left-indent;
+}
+
 .sender {
   font-weight: bold;
 }
@@ -26,13 +44,22 @@
 }
 
 .signature {
-  padding-left: 6em;
-  font-size: .9em;
+  padding-left: @signature-left-indent;
+  font-size: @signature-font-size;
+  #after {
+    .signature-images;
+  }
 }
 
 .wernicke-font {
   font-family: "Libre Baskerville", serif;
 }
+
+.signature-images {
+  max-width: 9%;
+  padding-top: @section-separation-size;
+}
+
 
 .email-body-wernicke {
   .email-body;
@@ -41,24 +68,16 @@
   margin-right: (4/3) * @right-indent;
 }
 
-.extra-indent {
-  padding-left: 10em;
-}
-
-.far-indent {
-  padding-left: 11em;
-}
-
 .wernicke-sig {
   .signature;
   .wernicke-font;
   font-size: .7em;
+
+  #after {
+    content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/WernickeFinal.png);
+  }
 }
 
-.signature-images {
-  max-width: 9%;
-  padding-top: .5em;
-}
 
 .secondlooks-font {
   font-family: "Courier New", monospace, serif;
@@ -73,6 +92,10 @@
   .signature;
   .secondlooks-font;
   font-weight: bold;
+
+  #after {
+    content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/2ndLooksFinal_1.png);
+  }
 }
 
 
@@ -85,6 +108,7 @@
   .ratified-font;
 }
 
+//TODO, maybe this can be done better?
 .first-letter {
   font-size: 1.2em;
 }
@@ -92,7 +116,12 @@
 .ratified-sig {
   .signature;
   .ratified-font;
+
+  #after {
+    content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/RatifiedFinal.png);
+  }
 }
+
 
 .standards-font {
   font-family: 'Eurostile', sans-serif;
@@ -106,7 +135,12 @@
 .standards-sig {
   .signature;
   .standards-font;
+
+  #after {
+    content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/StandardsFinal2.png);
+  }
 }
+
 
 .archives-font {
   font-family: "Avenir Next", sans-serif;
@@ -120,7 +154,12 @@
 .archives-sig {
   .signature;
   .archives-font;
+
+  #after {
+    content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/Archivesagain2.png);
+  }
 }
+
 
 .innovations-font {
   font-family: "Arial", sans-serif;
@@ -135,7 +174,12 @@
 .innovations-sig {
   .signature;
   .innovations-font;
+
+  #after {
+    content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/WernickeFinal.png);
+  }
 }
+
 
 .data-font {
   font-family: "OCR A Std", monospace;
@@ -150,7 +194,12 @@
 .data-sig {
   .data-font;
   .signature;
+
+  #after {
+    content: url(http://i183.photobucket.com/albums/x129/tylercannan/Signatures/DataFinal.png);
+  }
 }
+
 
 .prologue {
   .email-header;
@@ -158,7 +207,6 @@
   width: 100%;
 }
 
-@attachment-font-size: 1.2em;
 .attachment-font {
   font-family: "Calibri", sans-serif;
   font-size: @attachment-font-size;
@@ -177,5 +225,5 @@
 
 .attachment-images {
   max-width: 20%;
-  padding-top: .5em;
+  padding-top: @section-separation-size;
 }
