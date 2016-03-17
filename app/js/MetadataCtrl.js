@@ -1,5 +1,15 @@
 'use strict';
 
+var DEFAULT_METADATA = "<div class='centered' style='text-align: center; align-content: center'>" +
+    "IF ALL THAT WAS SAID<br/>" +
+    "<i>ABOUT THOSE WHO ARE DEAD</i><br/>" +
+    "WAS COMPILED IN A BOOK<br/>" +
+    "AND LEFT IN A NOOK<br/>" +
+    "I'D BE HAPPY TO READ<br/>" +
+    "OF HARROWING DEEDS<br/>" +
+    "<i>BUT I'D LIKE NOT TO KNOW THE ENDING</i><br/>" +
+    "</div>";
+
 bdtem.controller("MetadataCtrl",
     function MetadataCtrl($scope, $timeout, playerService, tracklistService) {
 
@@ -9,15 +19,7 @@ bdtem.controller("MetadataCtrl",
         $scope.metadata = playerService.isPlaying() ? tracklistService.getCurrentTrackList()[playerService.getCurrentTrack()] : {
             title: "",
             catalog: "",
-            description: "<div class='centered' style='text-align: center; align-content: center'>" +
-            "IF ALL THAT WAS SAID<br/>" +
-            "<i>ABOUT THOSE WHO ARE DEAD</i><br/>" +
-            "WAS COMPILED IN A BOOK<br/>" +
-            "AND LEFT IN A NOOK<br/>" +
-            "I'D BE HAPPY TO READ<br/>" +
-            "OF HARROWING DEEDS<br/>" +
-            "<i>BUT I'D LIKE NOT TO KNOW THE ENDING</i><br/>" +
-            "</div>"
+            description: DEFAULT_METADATA
         };
 
 
@@ -43,7 +45,7 @@ bdtem.controller("MetadataCtrl",
 
         function setMetadata(track) {
             var tracklist = tracklistService.getCurrentTrackList();
-            console.log('setting metadata for ' + tracklistService.getCurrentTracklistName() + ' ' + track);
+            //console.log('setting metadata for ' + tracklistService.getCurrentTracklistName() + ' ' + track);
             $scope.metadata = tracklist[track];
             var duration = player.totalTime | 0;
             $timeout(function () {
@@ -56,9 +58,10 @@ bdtem.controller("MetadataCtrl",
         }
 
         $scope.$on('trackChange', function (event, track) {
-            console.log('track change!');
+            //console.log('track change!');
             setMetadata(track)
         });
 
+        //HACKY! Change this asap...
         $scope.__defineGetter__('currentTime', getCurrentTime);
     });

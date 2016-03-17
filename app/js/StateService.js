@@ -17,11 +17,11 @@ bdtem.config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: "templates/svg_branchtest.html"
             })
             .state("video", {
-                url: "/",
+                url: "/v",
                 templateUrl: "templates/video.html"
             })
             .state("metadata", {
-                url: "/",
+                url: "/m",
                 templateUrl: "templates/metadata.html",
                 controller: "MetadataCtrl"
             })
@@ -32,37 +32,40 @@ bdtem.config(['$stateProvider', '$urlRouterProvider',
             });
     }]);
 
-bdtem.service('stateService', function ($state) {
+bdtem.service('stateService', ['$state',
+    function ($state) {
+        this.previousState = null;
+        var self = this;
 
-    this.previousState = null;
-    var self = this;
+        self.go = function (targetState) {
+            var currentState = $state.current.name;
+            if (currentState != targetState) {
+                self.previousState = currentState;
 
-    self.go = function (targetState) {
-        var currentState = $state.current.name;
-        if (currentState != targetState) {
-            self.previousState = currentState;
+                $state.go(targetState);
+            }
+        };
 
-            $state.go(targetState);
-        }
-    };
+        self.goToLast = function () {
+            self.go(self.previousState);
+        };
 
-    self.goToLast = function () {
-        self.go(self.previousState);
-    };
+        self.toggleTo = function (targetState) {
 
-    self.toggleTo = function (targetState) {
+            if ($state.current.name != targetState) {
+                self.go(targetState);
+            } else {
+                self.goToLast();
+            }
+        };
 
-        if ($state.current.name != targetState) {
-            self.go(targetState);
-        } else {
-            self.goToLast();
-        }
-    };
 
-    return {
-        go: self.go,
-        goToLast: self.goToLast,
-        toggleTo: self.toggleTo
-    };
+        var publicMethods = {
+            go: self.go,
+            goToLast: self.goToLast,
+            toggleTo: self.toggleTo
+        };
 
-});
+        return publicMethods;
+
+    }]);

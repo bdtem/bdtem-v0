@@ -23,7 +23,7 @@ bdtem.controller('VideoCtrl', function ($scope, $sce, playerService, videoServic
     };
 
     controller.onPlayerStateChange = function ($state) {
-        playButton = document.getElementById("videoPlay");
+        playButton = document.getElementById("videoPlay"); //This is bad. We should not be doing DOM queries from controllers.
         if (playButton) {
             playButton.children[0].setAttribute("onfocus", "this.blur()");
         }
