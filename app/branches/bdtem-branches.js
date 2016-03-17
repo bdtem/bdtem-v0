@@ -47,7 +47,7 @@ var realTrunk = new Branch(svgGroup, heightOffset, bBox.cx, TRUNK_LENGTH, null, 
 
 var leftSubBranch = new Branch(svgGroup, realTrunk.start - TRUNK_LENGTH, heightOffset, BRANCH_LENGTH, null, VERT);
 var leftCrossTrunk = new Branch(svgGroup, heightOffset + leftSubBranch.length, leftSubBranch.getStartX(), BRANCH_LENGTH, null, HSPAN);
-var leftCross = new BranchGroup(svgGroup, BRANCH_LENGTH, 3, BRANCH_LENGTH, 250, {trunk: leftCrossTrunk});
+var leftCross = new BranchGroup(svgGroup, 3, BRANCH_LENGTH, 250, {trunk: leftCrossTrunk});
 
 var rightSubBranch = new Branch(svgGroup, realTrunk.start + TRUNK_LENGTH, heightOffset, BRANCH_LENGTH + 50, null, VERT);
 var rightCrossTrunk = new Branch(svgGroup, heightOffset + rightSubBranch.length, rightSubBranch.getStartX(), BRANCH_LENGTH, null, HSPAN);
@@ -67,7 +67,7 @@ var branchParameters = {
   ]
 };
 
-var branchGroup = new BranchGroup(svgGroup, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, branchParameters);
+var branchGroup = new BranchGroup(svgGroup, 5, BRANCH_LENGTH, DURATION_MS, branchParameters);
 
 
 graveButton.setBranchGroup(branchGroup);
@@ -89,7 +89,7 @@ var secondGraveButton = new GraveButton(
 
 var secondSvgGroup = secondGraveButton.group;
 
-var secondBranchGroup = new BranchGroup(secondSvgGroup, TRUNK_LENGTH, 2, BRANCH_LENGTH, DURATION_MS, {branchType: VERT});
+var secondBranchGroup = new BranchGroup(secondSvgGroup, 2, BRANCH_LENGTH, DURATION_MS, {branchType: VERT});
 secondGraveButton.setBranchGroup(secondBranchGroup);
 
 secondSvgGroup.attr({filter: shadowFilter});

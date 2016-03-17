@@ -21,7 +21,7 @@ function Branch(svgGroup,
     this.textNode = text && this.buildTextNode(text, startX, startY).attr({opacity: 0});
 }
 
-Branch.prototype.DEFAULT_ANIMATION_DURATION = 250;
+Branch.prototype.DEFAULT_ANIMATION_DURATION = 500;
 
 Branch.prototype.updateAnimation = function () {
     return this.branchType.updateAnimation.bind(this)();

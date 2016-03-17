@@ -1,5 +1,4 @@
 function BranchGroup(svgGroup,
-                     trunkLength,
                      numberOfBranches,
                      branchLength,
                      animationDuration,
@@ -7,7 +6,7 @@ function BranchGroup(svgGroup,
 
     this.svgGroup = svgGroup;
     this.branchParameters = branchParameters || {};
-    this.animationDuration = animationDuration || 1000;
+    this.animationDuration = animationDuration || 500;
     this.numberOfBranches = this.branchParameters.branches ? this.branchParameters.branches.length : (numberOfBranches || 1);
 
     this.branchLength = branchLength || 75;
@@ -70,7 +69,6 @@ BranchGroup.prototype.buildPointsAndOffsets = function () {
         this.branches = this.branchParameters.branches;
 
     } else {
-
         pointsAndOffsets.points.forEach(function (elem) {
             self.addBranch(elem.start, elem.fixed);
         });
@@ -80,8 +78,6 @@ BranchGroup.prototype.buildPointsAndOffsets = function () {
     this.branches.forEach(function (branch) {
         self.svgGroup.append(branch.trunk);
     });
-
-    this.branchPointOffsets = pointsAndOffsets.points;
 
     this.branchTimeOffsets = pointsAndOffsets.offsets;
 

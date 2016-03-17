@@ -1,12 +1,8 @@
 var branchesModule = bdtem;
-/**
- * Created by alacasse on 1/17/16.
- */
 var SCALING_FACTOR = 2;
 var OFF_SCREEN = -1024;
-var TRUNK_LENGTH = 150;
 var BRANCH_LENGTH = 75;
-var DURATION_MS = 500;
+var DURATION_MS = 250;
 var STROKE_COLOR = '#000';
 
 
@@ -157,7 +153,7 @@ BRANCH_TYPE.HORIZONTAL_SPAN.orthogonalSpan = BRANCH_TYPE.VERTICAL_SPAN;
 BRANCH_TYPE.VERTICAL.orthogonalSpan = BRANCH_TYPE.HORIZONTAL_SPAN;
 BRANCH_TYPE.VERTICAL_SPAN.orthogonalSpan = BRANCH_TYPE.HORIZONTAL_SPAN;
 
-branchesModule.value('branchTypes', BRANCH_TYPE);
+bdtem.value('branchTypes', BRANCH_TYPE);
 
 
 function randomColor() {
@@ -176,7 +172,7 @@ angular.forEach(['x1', 'x2', 'y1', 'y2'], function (name) {
 });
 
 
-branchesModule
+bdtem
     .constant('trigValues', {
         c120: Snap.cos(120),
         s120: Snap.sin(120),
@@ -262,7 +258,6 @@ branchesModule
                 var cy = bBox.cy;
 
                 var catalog = attrs['catalog'];
-                var config;
 
                 if (catalog) {
                     var textNode = buildTextNode(catalog, cx, bBox.y2 + 20);
@@ -346,7 +341,7 @@ branchesModule
                         branchParams.branches.push(new AdHocBranchGroup(subBranches));
                     }
 
-                    return new BranchGroup(group, TRUNK_LENGTH, 5, BRANCH_LENGTH, DURATION_MS, branchParams);
+                    return new BranchGroup(group, 5, BRANCH_LENGTH, DURATION_MS, branchParams);
                 }
 
                 function branchGroupFromNode(node) {
@@ -359,12 +354,8 @@ branchesModule
                     if (node.branchset) {
                         var parent = node;
 
-
-                        console.log('node ' + node.name + ' has a branchset');
-
                         level++;
 
-                        console.log(level);
                         var length = node.branchset.length;
                         var subBranches = [];
                         subBranches.push(crossBar(node));
@@ -380,7 +371,6 @@ branchesModule
                         branches.push(new AdHocBranchGroup(subBranches));
 
                         level--;
-
                     }
 
                     return branches.length > 1 ? new AdHocBranchGroup(branches) : branches[0];
@@ -391,15 +381,11 @@ branchesModule
                 }
 
                 function branchFromNode(node) {
-                    console.log("level: " + level + " width: " + node.levelWidth);
-
                     var nodeStart = node.start || start;
-                    console.log(nodeStart);
 
                     var nodeEnd = (nodeStart + (node.length || BRANCH_LENGTH));
                     if (nodeEnd > (levelHeights[level] || 0)) {
                         levelHeights[level] = nodeEnd;
-                        console.log('updated height for level ' + level + ' to ' + nodeEnd);
                     }
 
                     var offset = calculatePointOffset(
@@ -436,8 +422,6 @@ branchesModule
                 function crossBar(node) {
                     var width = node.branchset.length;
 
-                    console.log('crossbar for ' + level + ' ' + width);
-
                     var crossBar = new Branch(
                         group,
                         node.start + node.length,
@@ -463,14 +447,10 @@ branchesModule
                         fixed -= length;
                         length *= 2;
 
-                        console.log(position + '/' + numberOfPoints)
-
                         var hasCenter = numberOfPoints % 2 != 0;
-                        console.log('has center? ' + hasCenter);
 
                         if (hasCenter) {
                             var centerPosition = Math.floor(numberOfPoints / 2) + 1;
-                            console.log('center: ' + centerPosition);
 
                             if (position === centerPosition) {
                                 return {fixed: fixed, start: start};
@@ -480,28 +460,18 @@ branchesModule
                         }
 
                         --numberOfPoints;
-
                     }
 
                     var currentProportion = ((position) / numberOfPoints);
-                    console.log('current proportion: ' + currentProportion)
-
                     var lengthProportion = currentProportion * length;
-                    console.log('length proportion: ' + lengthProportion)
 
-                    var ret = {
+                    return {
                         fixed: fixed + lengthProportion,
                         start: start
                     };
-                    console.log(ret)
-                    return ret;
                 }
 
-                console.log(tree);
-                var converted = convertToBranches(tree);
-                ctrl.branchGroup = converted;
-                console.log(converted);
-
+                ctrl.branchGroup = convertToBranches(tree);
                 element.replaceWith(svgContext.node);
             }
         }

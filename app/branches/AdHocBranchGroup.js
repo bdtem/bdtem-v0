@@ -51,7 +51,7 @@ AdHocBranchGroup.prototype.buildPointsAndOffsets = function (numberOfPoints, ani
 AdHocBranchGroup.prototype.DEFAULT_ANIMATION_DURATION = Branch.prototype.DEFAULT_ANIMATION_DURATION;
 
 AdHocBranchGroup.prototype.animateIn = function (duration) {
-  var durationFraction = (duration || this.DEFAULT_ANIMATION_DURATION) / this.branches.length;
+  var durationFraction = (duration || this.DEFAULT_ANIMATION_DURATION) / PHI;
 
   this.branches.forEach(function (elem, index) {
     setTimeout(function () {
