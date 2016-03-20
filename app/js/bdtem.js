@@ -26,74 +26,45 @@ bdtem.controller('OrbCtrl', function ($scope, stateService) {
     }
 });
 
-bdtem.controller('ButtonsCtrl', function ($scope, $uibModal) {
-
-    $scope.buttons = [
-        {
-            purpose: 'Contribute',
-            glyph: '\ue803',
-            tooltip: 'contribute',
-            action: function () {
-                $uibModal.open({
-                    animation: true,
-                    templateUrl: 'templates/donate.html',
-                    controller: 'DonateCtrl',
-                    size: 'med'
-                });
-            }
-        },
-        {
-            purpose: 'Archive Updates',
-            glyph: '\ue805',
-            tooltip: 'updates',
-            action: function () {
-                $uibModal.open({
-                    animation: true,
-                    templateUrl: 'templates/newsletter.html',
-                    size: 'med'
-                });
-            }
-        }
-    ];
-
-});
-
 bdtem.controller('MiddleCtrl',
-    function ($scope, stateService, playerService, videoService, AlbumTracks, StoryEpisodes) {
+    function ($scope, $uibModal, stateService, playerService, videoService, AlbumTracks, StoryEpisodes) {
         $scope.tracks = AlbumTracks;
         $scope.episodes = StoryEpisodes;
 
 
-        //$scope.buttons = [
-        //    {
-        //        purpose: 'Contribute',
-        //        glyph: '\ue803',
-        //        tooltip: 'contribute',
-        //        action: function () {
-        //            $uibModal.open({
-        //                templateUrl: 'templates/donate.html',
-        //                controller: 'DonateCtrl',
-        //                size: 'med'
-        //            });
-        //        }
-        //    },
-        //    {
-        //        purpose: 'Archive Updates',
-        //        glyph: '\ue805',
-        //        tooltip: 'updates',
-        //        action: function () {
-        //            $uibModal.open({
-        //                templateUrl: 'templates/newsletter.html',
-        //                size: 'med'
-        //            });
-        //        }
-        //    }
-        //];
-
-
-        $scope.goTo = function goTo(state) {
-            stateService.go(state);
-        };
+        $scope.entries = [
+            {
+                purpose: "Needs more buttons!",
+                action: function () {
+                    stateService.go('grave');
+                }
+            },
+            {
+                purpose: "Mission Control",
+                action: function () {
+                    stateService.go('mission');
+                }
+            },
+            {
+                purpose: 'Contribute',
+                action: function () {
+                    $uibModal.open({
+                        templateUrl: 'templates/donate.html',
+                        controller: 'DonateCtrl',
+                        size: 'med'
+                    });
+                }
+            },
+            {
+                purpose: 'Archive Updates',
+                action: function () {
+                    $uibModal.open({
+                        templateUrl: 'templates/newsletter.html',
+                        size: 'med'
+                    });
+                }
+            }
+        ];
 
         $scope.skipToTrack = function (index) {
             videoService.pause();

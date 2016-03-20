@@ -99,8 +99,7 @@ Like a game, it is to be interacted with.">
 
 <div class="container centered navbar-container-top">
 
-    <nav class="centered navbar navbar-default navbar-fixed-top" role="navigation"
-         ng-controller="ButtonsCtrl as buttonsController">
+    <nav class="centered navbar navbar-default navbar-fixed-top" role="navigation">
 
         <div class="bdtem-title">
 
@@ -118,13 +117,6 @@ Like a game, it is to be interacted with.">
             <b class="bdtem-title">BOB DEY'S TANK ENGINE MAN</b>
         </div>
 
-        <div class="ng-cloak sans-serif centered btn-group" ng-repeat="button in buttons">
-
-            <button id="button-{{button.purpose}}" class="sans-serif btn padded" ng-click="button.action()">
-                <b>{{button.tooltip}}</b>
-            </button>
-
-        </div>
     </nav>
 </div>
 
@@ -180,18 +172,18 @@ Like a game, it is to be interacted with.">
 
         </div>
 
-
     </div>
 
 </nav>
+
 
 <div>
     <ui-view></ui-view>
 </div>
 
+
 <nav id="stories-container">
     <div id="story-menu" ng-controller="MiddleCtrl as middle" class="sidr">
-
 
         <div class="drawer-header-right">
             <b>NARRATIVE<br/>
@@ -199,25 +191,18 @@ Like a game, it is to be interacted with.">
                 REENACTMENT<br/></b>
         </div>
 
-
         <div class="drawer-subheader-right">
             TALENT AND <br/>
             MR. TALENT
         </div>
 
-        <span class="story-menu-entry" ng-click="goTo('grave')">Needs more dots!</span>
-        <span class="story-menu-entry" ng-click="goTo('mission')">Mission Control</span>
-
-        <div class="ng-cloak sans-serif centered btn-group" ng-repeat="button in buttons">
-
-            <button id="button-{{button.purpose}}2" class="sans-serif btn padded" ng-click="button.action()">
-                <b>{{button.tooltip}}</b>
-            </button>
-
+        <div ng-repeat="entry in entries">
+            <span class="story-menu-entry" ng-click="entry.action()">{{entry.purpose}}</span>
         </div>
 
     </div>
 </nav>
+
 
 <right class="right-menu-button menu-spaced pull-right righted" id="story-menu-toggle">
     ||<br/>
