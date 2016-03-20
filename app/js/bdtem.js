@@ -26,13 +26,26 @@ bdtem.controller('OrbCtrl', function ($scope, stateService) {
     }
 });
 
-bdtem.controller('MiddleCtrl',
-    function ($scope, $uibModal, stateService, playerService, videoService, AlbumTracks, StoryEpisodes) {
-        $scope.tracks = AlbumTracks;
-        $scope.episodes = StoryEpisodes;
 
+bdtem.controller('AlbumCtrl',
+    function (playerService, videoService, AlbumTracks) {
+        var controller = this;
 
-        $scope.entries = [
+        controller.tracks = AlbumTracks;
+
+        controller.skipToTrack = function (index) {
+            videoService.pause();
+
+            playerService.skipToTrack(index);
+        };
+
+    });
+
+bdtem.controller('MenuCtrl',
+    function ($uibModal, stateService) {
+        var controller = this;
+
+        controller.entries = [
             {
                 purpose: "Needs more buttons!",
                 action: function () {
@@ -66,15 +79,4 @@ bdtem.controller('MiddleCtrl',
             }
         ];
 
-        $scope.skipToTrack = function (index) {
-            videoService.pause();
-
-            playerService.skipToTrack(index);
-        };
-
-        $scope.skipToEpisode = function (episodeIndex) {
-            videoService.pause();
-
-            playerService.skipToEpisode(episodeIndex);
-        };
     });

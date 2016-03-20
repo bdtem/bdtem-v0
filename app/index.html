@@ -137,7 +137,7 @@ Like a game, it is to be interacted with.">
 </left>
 
 <nav id="menu-container">
-    <div id="tracks-menu" class="sidr" ng-controller="MiddleCtrl as middle">
+    <div id="tracks-menu" class="sidr" ng-controller="AlbumCtrl as album">
 
         <div class="drawer-header-left">
             <b>MUSICAL<br/>
@@ -152,9 +152,9 @@ Like a game, it is to be interacted with.">
 
         <div class="pull-right">
             <table>
-                <tr ng-repeat="track in tracks">
+                <tr ng-repeat="track in album.tracks">
                     <td>
-                        <a id="bdtem-track{{$index}}" class="track-menu-entry" ng-click="skipToTrack($index)">
+                        <a id="bdtem-track{{$index}}" class="track-menu-entry" ng-click="album.skipToTrack($index)">
                             {{track.title | uppercase}}
                         </a>
                     </td>
@@ -183,7 +183,7 @@ Like a game, it is to be interacted with.">
 
 
 <nav id="stories-container">
-    <div id="story-menu" ng-controller="MiddleCtrl as middle" class="sidr">
+    <div id="story-menu" ng-controller="MenuCtrl as menu" class="sidr">
 
         <div class="drawer-header-right">
             <b>NARRATIVE<br/>
@@ -196,7 +196,7 @@ Like a game, it is to be interacted with.">
             MR. TALENT
         </div>
 
-        <div ng-repeat="entry in entries">
+        <div ng-repeat="entry in menu.entries">
             <span class="story-menu-entry" ng-click="entry.action()">{{entry.purpose}}</span>
         </div>
 
