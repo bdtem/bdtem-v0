@@ -218,6 +218,14 @@ Like a game, it is to be interacted with.">
         <span class="story-menu-entry" ng-click="goTo('grave')">Needs more dots!</span>
         <span class="story-menu-entry" ng-click="goTo('mission')">Mission Control</span>
 
+        <div class="ng-cloak sans-serif centered btn-group" ng-repeat="button in buttons">
+
+            <button id="button-{{button.purpose}}2" class="sans-serif btn padded" ng-click="button.action()">
+                <b>{{button.tooltip}}</b>
+            </button>
+
+        </div>
+
     </div>
 </nav>
 

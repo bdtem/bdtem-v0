@@ -42,7 +42,7 @@ bdtem.controller('OrbCtrl', function ($scope, stateService) {
 
 });
 
-bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
+bdtem.controller('ButtonsCtrl', function ($scope, $uibModal) {
 
     $scope.buttons = [
         {
@@ -50,7 +50,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
             glyph: '\ue803',
             tooltip: 'contribute',
             action: function () {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: 'templates/donate.html',
                     controller: 'DonateCtrl',
                     size: 'med'
@@ -62,7 +62,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $modal) {
             glyph: '\ue805',
             tooltip: 'updates',
             action: function () {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: 'templates/newsletter.html',
                     size: 'med'
                 });
@@ -76,6 +76,34 @@ bdtem.controller('MiddleCtrl',
     function ($scope, stateService, playerService, videoService, AlbumTracks, StoryEpisodes) {
         $scope.tracks = AlbumTracks;
         $scope.episodes = StoryEpisodes;
+
+
+        //$scope.buttons = [
+        //    {
+        //        purpose: 'Contribute',
+        //        glyph: '\ue803',
+        //        tooltip: 'contribute',
+        //        action: function () {
+        //            $uibModal.open({
+        //                templateUrl: 'templates/donate.html',
+        //                controller: 'DonateCtrl',
+        //                size: 'med'
+        //            });
+        //        }
+        //    },
+        //    {
+        //        purpose: 'Archive Updates',
+        //        glyph: '\ue805',
+        //        tooltip: 'updates',
+        //        action: function () {
+        //            $uibModal.open({
+        //                templateUrl: 'templates/newsletter.html',
+        //                size: 'med'
+        //            });
+        //        }
+        //    }
+        //];
+
 
         $scope.goTo = function goTo(state) {
             stateService.go(state);
