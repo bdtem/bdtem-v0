@@ -19,27 +19,11 @@ bdtem.filter('unsafe', ['$sce', function ($sce) {
     };
 }]);
 
-// update popover template for binding unsafe html
-angular.module("template/popover/popover.html", []).run(["$templateCache", function ($templateCache) {
-    $templateCache.put("template/popover/popover.html",
-        "<div class=\"popover {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" +
-        "  <div class=\"arrow\"></div>\n" +
-        "\n" +
-        "  <div class=\"popover-inner\">\n" +
-        "      <h3 class=\"popover-title\" ng-bind-html=\"title | unsafe\" ng-show=\"title\"></h3>\n" +
-        "      <div class=\"popover-content\" ng-bind-html=\"content | unsafe\"></div>\n" +
-        "  </div>\n" +
-        "</div>\n" +
-        "");
-}]);
-
 
 bdtem.controller('OrbCtrl', function ($scope, stateService) {
-
     $scope.startVideo = function () {
-        stateService.go('grave');
+        stateService.go('video');
     }
-
 });
 
 bdtem.controller('ButtonsCtrl', function ($scope, $uibModal) {
@@ -51,6 +35,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $uibModal) {
             tooltip: 'contribute',
             action: function () {
                 $uibModal.open({
+                    animation: true,
                     templateUrl: 'templates/donate.html',
                     controller: 'DonateCtrl',
                     size: 'med'
@@ -63,6 +48,7 @@ bdtem.controller('ButtonsCtrl', function ($scope, $uibModal) {
             tooltip: 'updates',
             action: function () {
                 $uibModal.open({
+                    animation: true,
                     templateUrl: 'templates/newsletter.html',
                     size: 'med'
                 });
