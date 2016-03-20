@@ -13,17 +13,31 @@ bdtem.controller('EmailChainCtrl', function EmailChainCtrl() {
 
     function findSvgContext() {
         var existing = Snap.select('#mission');
-        return existing ? existing :  Snap('100%', '100%').attr({viewBox: '0 0 550 550', id: 'mission', display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
+        if (existing) {
+            existing.clear();
+            return existing;
+        } else {
+            return Snap('100%', '100%').attr({
+                viewBox: '0 0 600 600',
+                id: 'mission',
+                display: 'block',
+                margin: '0 auto',
+                preserveAspectRatio: 'none'
+            });
+        }
     }
 
-    var cx = 250;
-    var cy = 250;
+    var cx = 300;
+    var cy = 300;
     var r = 250;
     var tinyR = r / 10 - 5;
 
+    var blurStrength = 0.3;
+    var blurFilter = controller.svgContext.filter(Snap.filter.blur(blurStrength, blurStrength));
+
     var group = controller.svgContext.group();
 
-    group.circle(cx, cy, r).attr({fill: '#000'});
+    group.circle(cx, cy, r).attr({filter: blurFilter, fill: '#000'});
     var text = group.text({
         text: [
             "I denigrate myself and blame myself,",
