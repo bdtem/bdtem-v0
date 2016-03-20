@@ -1,19 +1,14 @@
 @import "variables";
 
-@middle-max-height: 65vh;
+@middle-max-height: 85vh;
 @middle-max-width: 45vw;
-
 
 .middle-video-container {
   max-height: @middle-max-height;
   max-width: @middle-max-width;
-
   z-index: 200;
-
   margin: 0 auto;
-
   overflow: hidden;
-
   vertical-align: middle;
 }
 
@@ -26,6 +21,12 @@
   height: 51vh;
 
   padding-right: 2vw;
+}
+
+.center-align-contents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .metadata-content-overflow:hover, .metadata-content-overflow:focus {
@@ -71,7 +72,7 @@
 
 ui-view {
   display: block;
-  margin: auto;
+  margin: 0 auto;
 }
 
 videogular div.custom-button {
@@ -88,21 +89,14 @@ videogular div.custom-button {
 
 .ui-view-positioning {
   margin: 0 auto;
-
-  display: block;
   z-index: 200;
-
-  min-width: 570px;
-  max-width: 570px;
-
-  min-height: 540px;
-  max-height: 540px;
 }
 
 .ui-view-wide {
   .ui-view-positioning;
   max-width: 55%;
   max-height: @middle-max-height;
+  min-height: @middle-max-height;
 }
 
 .middle-display {
@@ -111,6 +105,9 @@ videogular div.custom-button {
 }
 
 .orb {
+  width: 570px;
+  height: 540px;
+
   .middle-display;
   background: url('http://192.3.134.38/rick/spriteSheetTransparent.png');
 

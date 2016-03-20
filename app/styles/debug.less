@@ -1,0 +1,17 @@
+.randomColor() {
+  @randomColor: `(Math.random()*0xFFFFFF<<0).toString(16)`;
+  @colorHex: e(@randomColor);
+  @color: ~"#@{colorHex}";
+}
+
+.navbar-container-top {
+  background: deeppink !important;
+}
+
+.navbar-fixed-bottom {
+  background: darkred !important;
+}
+
+ui-view {
+  background: lightseagreen !important;
+}
