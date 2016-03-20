@@ -13,12 +13,12 @@ bdtem.controller('EmailChainCtrl', function EmailChainCtrl() {
 
     function findSvgContext() {
         var existing = Snap.select('#mission');
-        return existing ? existing :  Snap(800, 800).attr({id: 'mission', display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
+        return existing ? existing :  Snap('100%', '100%').attr({viewBox: '0 0 550 550', id: 'mission', display: 'block', margin: '0 auto', preserveAspectRatio: 'none'});
     }
 
-    var cx = 450;
-    var cy = 300;
-    var r = 275;
+    var cx = 250;
+    var cy = 250;
+    var r = 250;
     var tinyR = r / 10 - 5;
 
     var group = controller.svgContext.group();
