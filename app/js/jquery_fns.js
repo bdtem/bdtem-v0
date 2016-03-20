@@ -48,11 +48,11 @@ $(document).ready(function () {
     function animateIn(selector) {
         selector.animate(
             {
-                'top': '88vh',
-                'letter-spacing': '0.01vw',
+                'top': '92vh',
+                'letter-spacing': '0vw',
                 'padding-right': 0,
-                'width': '3.25vw',
-                'line-height': '1.5vh'
+                'width': '3.5vw',
+                'line-height': '1vh'
             },
             300, 0, 0);
     }
@@ -61,8 +61,8 @@ $(document).ready(function () {
         selector.animate(
             {
                 'top': '40vh',
-                'letter-spacing': '1.5vw',
-                'line-height': "2.2vh"
+                'letter-spacing': '0.5vw',
+                'line-height': "2vh"
             },
             500, 0, 0);
     }
