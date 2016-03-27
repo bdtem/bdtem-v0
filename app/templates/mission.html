@@ -1,0 +1,19 @@
+<svg height="100%" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" id="mission2"
+     margin="0 auto" preserveAspectRatio="none" style="display: block;">
+    <defs>
+        <filter id="blurFilter" filterUnits="userSpaceOnUse">
+            <feGaussianBlur stdDeviation="0.3,0.3"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="mission-circle"
+       ng-click="ctrl.animationClickHandler()"
+       ng-mouseenter="ctrl.showText()"
+       ng-mouseleave="ctrl.hideText()">
+        <circle cx="300" cy="300" r="250" filter="url('#blurFilter')" fill="#000000"></circle>
+        <text fill="#ffffff" style="font-size: 12pt; display: none;" class="noselect">
+            <tspan x="145.4915028125363" y="280">I denigrate myself and blame myself,</tspan>
+            <tspan x="145.4915028125363" y="300">And what I presume you shall presume</tspan>
+            <tspan x="145.4915028125363" y="320">For every neuron belonging to me as good belongs to you</tspan>
+        </text>
+    </g>
+</svg>

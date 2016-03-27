@@ -10,7 +10,7 @@ bdtem.config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
             .state('orb', {
                 url: "/",
-                templateUrl: "templates/orb.html"
+                templateUrl: "templates/info.html"
             })
             .state('grave', {
                 url: "/grave",

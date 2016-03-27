@@ -12,46 +12,28 @@ bdtem.controller('EmailChainCtrl', function EmailChainCtrl() {
     controller.svgContext = findSvgContext();
 
     function findSvgContext() {
-        var existing = Snap.select('#mission');
+        var existing = Snap.select('#mission2');
         if (existing) {
             existing.clear();
             return existing;
         } else {
-            return Snap('100%', '100%').attr({
-                viewBox: '0 0 600 600',
-                id: 'mission',
-                display: 'block',
-                margin: '0 auto',
-                preserveAspectRatio: 'none'
-            });
+            //return Snap('100%', '100%').attr({
+            //    viewBox: '0 0 600 600',
+            //    id: 'mission',
+            //    display: 'block',
+            //    margin: '0 auto',
+            //    preserveAspectRatio: 'none'
+            //});
+            return {};
         }
     }
 
+
+    //These should be in the directive!
     var cx = 300;
     var cy = 300;
     var r = 250;
     var tinyR = r / 10 - 5;
-
-    var blurStrength = 0.3;
-    var blurFilter = controller.svgContext.filter(Snap.filter.blur(blurStrength, blurStrength));
-
-    var group = controller.svgContext.group();
-
-    group.circle(cx, cy, r).attr({filter: blurFilter, fill: '#000'});
-    var text = group.text({
-        text: [
-            "I denigrate myself and blame myself,",
-            "And what I presume you shall presume",
-            "For every neuron belonging to me as good belongs to you"]
-    }).attr({fill: '#FFF', fontSize: "12px", display: 'none', class: 'noselect'});
-    text.selectAll("tspan").forEach(function (tspan, i) {
-        tspan.attr({x: (cx - (r / PHI)), y: (cy - 40) + ((20) * (i + 1))});
-    });
-
-    group.mouseover(showText);
-    group.mouseout(hideText);
-    group.click(animationClickHandler);
-
 
     function showText() {
         text.attr({display: 'block'});
@@ -109,7 +91,10 @@ bdtem.controller('EmailChainCtrl', function EmailChainCtrl() {
         controller.animation.paused = false;
     }
 
-
+    controller.animationClickHandler = animationClickHandler;
+    controller.showText = showText;
+    controller.hidetext = hideText;
+    return controller;
 });
 
 bdtem.directive('bdtemEmailChainDot', function () {
@@ -117,8 +102,7 @@ bdtem.directive('bdtemEmailChainDot', function () {
         restrict: 'EA',
         controller: 'EmailChainCtrl',
         controllerAs: 'ctrl',
-        link: function (scope, element, attrs, ctrl) {
-            element.replaceWith(ctrl.svgContext.node);
-        }
+        templateUrl: 'templates/mission.html',
+        replace: true
     };
 });

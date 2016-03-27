@@ -23,6 +23,19 @@
   color: #333333;
   font-weight: 300;
 }
+.stretch {
+  display: inline-block;
+  -webkit-transform: scale(1, 2);
+  /* Safari and Chrome */
+  -moz-transform: scale(1, 2);
+  /* Firefox */
+  -ms-transform: scale(1, 2);
+  /* IE 9 */
+  -o-transform: scale(1, 2);
+  /* Opera */
+  transform: scale(1, 2);
+  /* W3C */
+}
 videogular vg-time-display,
 [videogular] vg-time-display {
   font-family: "Raleway", sans-serif;
