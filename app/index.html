@@ -251,6 +251,59 @@ Like a game, it is to be interacted with.">
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
+<script>
+
+    var letters = [];
+
+    function getLetters() {
+        return initLetters();
+    }
+
+    function initLetters() {
+        letters = $('.info-page-letter');
+        return letters;
+    }
+
+    function highlightAllExcept(eventTriggerer) {
+
+        var allLetters = getLetters();
+
+        console.log(allLetters);
+
+        var elem = $(eventTriggerer);
+
+        console.log(elem);
+
+        var idToSkip = elem[0].id;
+        console.log('skipping ' + idToSkip)
+        for (var i = 0; i < allLetters.length; i++) {
+            var id = allLetters[i].id;
+            console.log(id);
+            if (id != idToSkip) {
+                allLetters[i].style['display'] = 'none';
+            } else {
+                var infoPageBigLetter = $(allLetters[i]).find('.info-page');
+
+                infoPageBigLetter[0].attributes['fill'].value = '#000';
+
+                console.log($(infoPageBigLetter))
+            }
+        }
+    }
+
+    function resetAllLetters() {
+        getLetters().map(function reset(idx, elem) {
+            console.log(elem)
+            var elementSelector = $(elem);
+            console.log(elementSelector)
+            elementSelector[0].style['display'] = 'inline-block';
+            elementSelector.find('.info-page')[0].attributes['fill'].value = '#EAEAEA';
+        })
+    }
+
+
+</script>
+
 
 </body>
 
