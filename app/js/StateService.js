@@ -8,7 +8,7 @@ bdtem.config(['$stateProvider', '$urlRouterProvider',
         $urlRouterProvider.otherwise("/");
 
         $stateProvider
-            .state('orb', {
+            .state('info', {
                 url: "/",
                 templateUrl: "templates/info.html"
             })

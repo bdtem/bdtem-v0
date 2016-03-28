@@ -76,6 +76,11 @@ bdtem.controller('MenuCtrl',
                         size: 'med'
                     });
                 }
+            }, {
+                purpose: 'Info Page',
+                action: function () {
+                    stateService.go('info')
+                }
             }
         ];
 
