@@ -1,24 +1,12 @@
-// TODO FOR THE FIRST SITE VERSION //
-------------------------------------
+This is a web-based, multimedia digital album which tells a complete story in the form of a Contextually Comprehensive Archive.
 
-// MUST DO:
+This is an interactive 'archive' through which you will participate both actively and passively in the story of BDTEM. You will do what Mark Jumper did, see what Mark Jumper saw. You will keep a record of this participation so that you can better analyze the events, their meanings, and their consequences. You will share your analysis with others, thereby participating in a broader interaction.
 
-Link Buttons:
+The content will be varied in type of media, available context (metadata), and length. You have the freedom to pursue, ignore, and construct your own lines of inquiry. And you are free to jump to any conclusions you like.
 
-- Get the share button to work
-- Get the contact button to work
-- Make info video or use a placeholder video
+All content will be housed in a location that represents the 'real-world' location of the original happening and will be accompanied by metadata pop-ups that offer other kinds of context (backstory, explanations, descriptions, instructions).
 
-Style:
-
-- Extract all that nasty in-line CSS to the .less files + class up those divs.
-- Correctly position / size 'the box' within the page
-- Polish up the transport bar
-- Get / position the updated background image
-
-
-// NICE TO DO:
-
-- Test the site on other browsers / resolutions / screen sizes to make sure positioning etc doesn't get effed up
-- Get that totally sweet generated static effect in the background instead of depending on GIF artifacts
-- Find a way to properly include 'the box' from external source rather than keeping it in-line (or, more generally, de-clutter index.html by extracting code)
+Like a novel, it tells a story.
+Like a song, it sings.
+Like a movie, it is played by speaking players.
+Like a game, it is to be interacted with.
