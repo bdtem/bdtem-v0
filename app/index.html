@@ -252,53 +252,87 @@ Like a game, it is to be interacted with.">
 <![endif]-->
 
 <script>
-
     var letters = [];
+    var largeLetters = [];
 
-    function getLetters() {
-        return initLetters();
-    }
+    //Letter color animation:
+    var animation;
+    var startColor = 0xFA;
+    var endColor = 0xFF;
+    var currentFill = startColor;
+    var currentFillString = toGrayscaleColorString(startColor);
 
-    function initLetters() {
-        letters = $('.info-page-letter');
-        return letters;
-    }
+    $(document).ready(function () {
+        setTimeout(function() {
+            letters = $('.info-page-letter');
+            largeLetters = $('.info-page').toArray();
+            animation = animateColor();
+        }, 0);
+    });
 
-    function highlightAllExcept(eventTriggerer) {
 
-        var allLetters = getLetters();
+    function highlightAllExcept(groupSelector) {
+        animation && animation.pause();
 
-        console.log(allLetters);
-
-        var elem = $(eventTriggerer);
-
-        console.log(elem);
-
+        var elem = $(groupSelector);
         var idToSkip = elem[0].id;
-        console.log('skipping ' + idToSkip)
-        for (var i = 0; i < allLetters.length; i++) {
-            var id = allLetters[i].id;
-            console.log(id);
+        for (var i = 0; i < letters.length; i++) {
+            var id = letters[i].id;
             if (id != idToSkip) {
-                allLetters[i].style['display'] = 'none';
+                letters[i].style['display'] = 'none';
             } else {
-                var infoPageBigLetter = $(allLetters[i]).find('.info-page');
+                var infoPageBigLetter = $(letters[i]).find('.info-page');
 
                 infoPageBigLetter[0].attributes['fill'].value = '#000';
 
-                console.log($(infoPageBigLetter))
             }
         }
     }
 
     function resetAllLetters() {
-        getLetters().map(function reset(idx, elem) {
-            console.log(elem)
+        //Hacky Workaround for https://github.com/adobe-webplatform/Snap.svg/issues/139
+        Snap.select('.info-page').animate({dummy: 0}, 1);
+        animation && animation.resume();
+
+        letters.map(function reset(idx, elem) {
             var elementSelector = $(elem);
-            console.log(elementSelector)
             elementSelector[0].style['display'] = 'inline-block';
-            elementSelector.find('.info-page')[0].attributes['fill'].value = '#FAFAFA';
+            elementSelector.find('.info-page')[0].attributes['fill'].value = toGrayscaleColorString(currentFill);
         })
+    }
+
+    function animateColor() {
+        return Snap.animate(
+                startColor,
+                endColor,
+                updateColor,
+                10000,
+                function swapAndLoop() {
+                    endColor = startColor;
+                    startColor = currentFill;
+                    animation = animateColor();
+                }
+        )
+    }
+
+    function updateColor(value) {
+        var newValue = Math.floor(value);
+
+        if (newValue != currentFill) {
+            currentFill = newValue;
+            currentFillString = toGrayscaleColorString(newValue);
+            largeLetters.forEach(letterUpdateFunction);
+        }
+
+    }
+
+    function letterUpdateFunction(elem) {
+            $(elem).attr('fill', currentFillString);
+    }
+
+    function toGrayscaleColorString(value) {
+        var asString = value.toString(16);
+        return '#' + asString + asString + asString;
     }
 
 

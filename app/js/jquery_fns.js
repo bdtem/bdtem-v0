@@ -68,7 +68,6 @@ $(document).ready(function () {
     }
 
 
-
     tracksMenuToggle.sidr({
         name: 'tracks-menu',
         speed: 200,
@@ -85,7 +84,7 @@ $(document).ready(function () {
             tracksMenuToggle.removeClass(ROTATE_CLASS);
             animateOut(tracksMenuToggle);
             leftWords.addClass('left-menu-words');
-            leftWords.css({display: 'block' });
+            leftWords.css({display: 'block'});
         },
         renaming: true,
         body: 'left'
@@ -118,5 +117,4 @@ $(document).ready(function () {
 
     animateOut(storyMenuToggle);
     animateOut(tracksMenuToggle);
-})
-;
+});

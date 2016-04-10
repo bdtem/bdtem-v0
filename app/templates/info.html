@@ -42,29 +42,29 @@
         <!--M0 420 H 600"-->
               <!--stroke="#000" stroke-width="1"/>-->
 
-        <g id="mission" class="info-page-letter" onmouseover="highlightAllExcept(this)" onmouseout="resetAllLetters()">
+        <g id="mission" class="info-page-letter">
             <text class="info-page-small" style="text-anchor: middle" x="4.5%" y="49.5%">MISS</text><!--
-                            --><text x="6%" y="33%" fill="#FAFAFA" class="info-page">I</text><!--
+                            --><text x="6%" y="33%" fill="#F0F0F0" class="info-page">I</text><!--
                             --><text class="info-page-small" style="text-anchor: middle" x="15%" y="49.5%">ON</text>
-            </g>
-
-        <g id="analysis" class="info-page-letter" onmouseover="highlightAllExcept(this)" onmouseout="resetAllLetters()">
-            <text class="info-page-small" style="text-anchor: middle" x="22%" y="59.5%">
-                <tspan dx="13.5%">A</tspan>
-                <tspan dx="18%">ALYSIS</tspan>
-            </text><!--
-                            --><text x="20%" y="33%" fill="#FAFAFA" class="info-page">N</text>
         </g>
 
-        <g id="faq" class="info-page-letter" onmouseover="highlightAllExcept(this)" onmouseout="resetAllLetters()">
-            <text x="50%" y="33%" fill="#FAFAFA" class="info-page">F</text><!--
+        <g id="analysis" class="info-page-letter">
+            <text class="info-page-small" style="text-anchor: middle" x="22%" y="59.5%">
+                <tspan dx="13.5%">A</tspan>
+                <tspan dx="19.5%">ALYSIS</tspan>
+            </text><!--
+            --><text x="20%" y="33%" fill="#F0F0F0" class="info-page">N</text>
+        </g>
+
+        <g id="faq" class="info-page-letter" >
+            <text x="50%" y="33%" fill="#F0F0F0" class="info-page">F</text><!--
             --><text class="info-page-small" style="text-anchor: middle" x="59.5%" y="49.5%">AQ</text>
         </g>
 
-        <g id="about" class="info-page-letter" onmouseover="highlightAllExcept(this)" onmouseout="resetAllLetters()">
+        <g id="about" class="info-page-letter">
             <text class="info-page-small" style="text-anchor: middle" x="74%" y="59.5%">AB</text><!--
-                            --><text x="72%" y="33%" fill="#FAFAFA" class="info-page">O</text><!--
-                            --><text class="info-page-small" style="text-anchor: middle" x="95.5%" y="59.5%">UT</text>
+         --><text x="72.5%" y="33%" fill="#F0F0F0" class="info-page">O</text><!--
+         --><text class="info-page-small" style="text-anchor: middle" x="95.5%" y="59.5%">UT</text>
         </g>
 
             <path d="M0 100 H 600
@@ -86,6 +86,18 @@
         M0 420 H 600"
                   stroke="#000" stroke-width="1"/>
 
-        </g>
+        <rect class="info-page-cover" x="0%" y="0%" width="20%"
+              onmouseover="highlightAllExcept('#mission')"
+              onmouseout="resetAllLetters()"></rect>
+        <rect class="info-page-cover" x="20%" y="0%" width="25%"
+              onmouseover="highlightAllExcept('#analysis')"
+              onmouseout="resetAllLetters()"></rect>
+        <rect class="info-page-cover" x="45%" y="0%" width="25%"
+              onmouseover="highlightAllExcept('#faq')"
+              onmouseout="resetAllLetters()"></rect>
+        <rect class="info-page-cover" x="70%" y="0%" width="30%"
+              onmouseover="highlightAllExcept('#about')"
+              onmouseout="resetAllLetters()"></rect>
+
     </svg>
 </div>
