@@ -4,6 +4,56 @@
 bdtem.controller('GraveCtrl', ['$attrs', function () {
     var self = this;
 
+    // Simple sine wave oscillator
+    function sineWithFrequency(frequency) {
+        frequency = frequency || 440;
+        return flock.synth({
+            synthDef: {
+                ugen: "flock.ugen.sinOsc",
+                freq: frequency,
+                mul: 0.25,
+                start: 1,
+                end: 50,
+                duration: 100
+            },
+            time: 0.2
+        });
+    }
+
+    function sawWithFrequency(frequency) {
+        frequency = frequency || 440;
+        return flock.synth({
+            synthDef: {
+                ugen: "flock.ugen.saw",
+                freq: frequency,
+                mul: 0.25,
+                start: 1,
+                end: 100,
+                duration: 200
+            },
+            time: 0.4
+        });
+    }
+
+    function squareWithFrequency(frequency) {
+        frequency = frequency || 440;
+        return flock.synth({
+            synthDef: {
+                ugen: "flock.ugen.square",
+                freq: frequency,
+                mul: 0.25,
+                start: 1,
+                end: 150,
+                duration: 300
+            },
+            time: 0.6
+        });
+    }
+
+    var baseSynth = sineWithFrequency(440);
+    var thirdSynth;
+    var fifthSynth;
+
     this.wasTriggered = false;
     this.clickHandler = function () {
         if (!this.wasTriggered) {
@@ -13,9 +63,22 @@ bdtem.controller('GraveCtrl', ['$attrs', function () {
 
             this.translationAnimation.pause();
 
+            flock.enviro.shared.play();
+
+
             this.branchGroup.animateIn();
 
         } else {
+
+            flock.enviro.shared.reset();
+            var baseFreq = Math.random() * 5000;
+            var third = (5/4) * baseFreq;
+            var fifth = (6/4) * baseFreq;
+
+            baseSynth = sineWithFrequency(baseFreq);
+            thirdSynth = sawWithFrequency(third);
+            fifthSynth = squareWithFrequency(fifth);
+
             this.wasTriggered = false;
 
             randomGradientAnimation();

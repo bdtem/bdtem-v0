@@ -31,6 +31,8 @@
     <script src="bower_components/angular-hotkeys/build/hotkeys.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
+    <script src="bower_components/flocking/dist/flocking-no-jquery.min.js"></script>
+
     <!-- BDTEM App: -->
     <script src="js/filters.js"></script>
     <script src="js/bdtem.js"></script>
@@ -219,7 +221,6 @@ Like a game, it is to be interacted with.">
                     &#xe807;
                 </div>
 
-
                 <vg-scrub-bar>
                     <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
                 </vg-scrub-bar>
@@ -229,7 +230,6 @@ Like a game, it is to be interacted with.">
                     &#xe802;
                 </div>
 
-
                 <vg-volume>
                     <vg-mute-button></vg-mute-button>
                     <vg-volume-bar></vg-volume-bar>
@@ -238,7 +238,6 @@ Like a game, it is to be interacted with.">
                 <div class="custom-button-small" ng-click="toggleMetadata()">
                     &#xe804;
                 </div>
-
 
             </vg-controls>
         </videogular>
@@ -251,92 +250,8 @@ Like a game, it is to be interacted with.">
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<script>
-    var letters = [];
-    var largeLetters = [];
-
-    //Letter color animation:
-    var animation;
-    var startColor = 0xFA;
-    var endColor = 0xFF;
-    var currentFill = startColor;
-    var currentFillString = toGrayscaleColorString(startColor);
-
-    $(document).ready(function () {
-        setTimeout(function() {
-            letters = $('.info-page-letter');
-            largeLetters = $('.info-page').toArray();
-            animation = animateColor();
-        }, 0);
-    });
 
 
-    function highlightAllExcept(groupSelector) {
-        animation && animation.pause();
-
-        var elem = $(groupSelector);
-        var idToSkip = elem[0].id;
-        for (var i = 0; i < letters.length; i++) {
-            var id = letters[i].id;
-            if (id != idToSkip) {
-                letters[i].style['display'] = 'none';
-            } else {
-                var infoPageBigLetter = $(letters[i]).find('.info-page');
-
-                infoPageBigLetter[0].attributes['fill'].value = '#000';
-
-            }
-        }
-    }
-
-    function resetAllLetters() {
-        //Hacky Workaround for https://github.com/adobe-webplatform/Snap.svg/issues/139
-        Snap.select('.info-page').animate({dummy: 0}, 1);
-        animation && animation.resume();
-
-        letters.map(function reset(idx, elem) {
-            var elementSelector = $(elem);
-            elementSelector[0].style['display'] = 'inline-block';
-            elementSelector.find('.info-page')[0].attributes['fill'].value = toGrayscaleColorString(currentFill);
-        })
-    }
-
-    function animateColor() {
-        return Snap.animate(
-                startColor,
-                endColor,
-                updateColor,
-                10000,
-                function swapAndLoop() {
-                    endColor = startColor;
-                    startColor = currentFill;
-                    animation = animateColor();
-                }
-        )
-    }
-
-    function updateColor(value) {
-        var newValue = Math.floor(value);
-
-        if (newValue != currentFill) {
-            currentFill = newValue;
-            currentFillString = toGrayscaleColorString(newValue);
-            largeLetters.forEach(letterUpdateFunction);
-        }
-
-    }
-
-    function letterUpdateFunction(elem) {
-            $(elem).attr('fill', currentFillString);
-    }
-
-    function toGrayscaleColorString(value) {
-        var asString = value.toString(16);
-        return '#' + asString + asString + asString;
-    }
-
-
-</script>
 
 
 </body>
