@@ -40,34 +40,46 @@
         <!--M0 380 H 600-->
         <!--M0 400 H 600-->
         <!--M0 420 H 600"-->
-              <!--stroke="#000" stroke-width="1"/>-->
+        <!--stroke="#000" stroke-width="1"/>-->
 
         <g id="mission" class="info-page-letter">
-            <text class="info-page-small" style="text-anchor: middle" x="4.5%" y="49.5%">MISS</text><!--
-                            --><text x="5.5%" y="33%" fill="#F0F0F0" class="info-page">I</text><!--
-                            --><text class="info-page-small" style="text-anchor: middle" x="14.5%" y="49.5%">ON</text>
+            <text class="info-page-small" style="text-anchor: middle" x="4.5%" y="49.5%">MISS</text>
+            <!--
+                                        -->
+            <text x="5.5%" y="33%" fill="#F0F0F0" class="info-page">I</text>
+            <!--
+                                        -->
+            <text class="info-page-small" style="text-anchor: middle" x="14.5%" y="49.5%">ON</text>
         </g>
 
         <g id="analysis" class="info-page-letter">
             <text class="info-page-small" style="text-anchor: middle" x="22%" y="59.5%">
                 <tspan dx="14%">A</tspan>
                 <tspan dx="19%">ALYSIS</tspan>
-            </text><!--
-            --><text x="20%" y="33%" fill="#F0F0F0" class="info-page">N</text>
+            </text>
+            <!--
+                        -->
+            <text x="20%" y="33%" fill="#F0F0F0" class="info-page">N</text>
         </g>
 
-        <g id="faq" class="info-page-letter" >
-            <text x="50%" y="33%" fill="#F0F0F0" class="info-page">F</text><!--
-            --><text class="info-page-small" style="text-anchor: middle" x="59.5%" y="49.5%">AQ</text>
+        <g id="faq" class="info-page-letter">
+            <text x="50%" y="33%" fill="#F0F0F0" class="info-page">F</text>
+            <!--
+                        -->
+            <text class="info-page-small" style="text-anchor: middle" x="59.5%" y="49.5%">AQ</text>
         </g>
 
         <g id="about" class="info-page-letter">
-            <text class="info-page-small" style="text-anchor: middle" x="74%" y="59.5%">AB</text><!--
-         --><text x="72%" y="33%" fill="#F0F0F0" class="info-page">O</text><!--
-         --><text class="info-page-small" style="text-anchor: middle" x="94.5%" y="59.5%">UT</text>
+            <text class="info-page-small" style="text-anchor: middle" x="74%" y="59.5%">AB</text>
+            <!--
+                     -->
+            <text x="72%" y="33%" fill="#F0F0F0" class="info-page">O</text>
+            <!--
+                     -->
+            <text class="info-page-small" style="text-anchor: middle" x="94.5%" y="59.5%">UT</text>
         </g>
 
-            <path d="M0 100 H 600
+        <path d="M0 100 H 600
         M0 120 H 600
         M0 140 H 600
         M0 160 H 600
@@ -84,7 +96,7 @@
         M0 380 H 600
         M0 400 H 600
         M0 420 H 600"
-                  stroke="#000" stroke-width="1"/>
+              stroke="#000" stroke-width="1"/>
 
         <rect class="info-page-cover" x="0%" y="0%" width="20%"
               onmouseover="highlightAllExcept('#mission')"
@@ -114,7 +126,7 @@
     var currentFillString = toGrayscaleColorString(startColor);
 
     $(document).ready(function () {
-        setTimeout(function() {
+        setTimeout(function () {
             letters = $('.info-page-letter');
             largeLetters = $('.info-page').toArray();
             animation = animateColor();
@@ -132,7 +144,7 @@
             if (id != idToSkip) {
                 letters[i].style['display'] = 'none';
             } else {
-                var infoPageBigLetter = $(letters[i]).find('.info-page');
+                var infoPageBigLetter = $(letters[i]).find(INFO_PAGE_CLASS);
 
                 infoPageBigLetter[0].attributes['fill'].value = '#000';
 
@@ -140,15 +152,16 @@
         }
     }
 
+    const INFO_PAGE_CLASS = '.info-page';
     function resetAllLetters() {
         //Hacky Workaround for https://github.com/adobe-webplatform/Snap.svg/issues/139
-        Snap.select('.info-page').animate({dummy: 0}, 1);
+        Snap.select(INFO_PAGE_CLASS).animate({dummy: 0}, 1);
         animation && animation.resume();
 
         letters.map(function reset(idx, elem) {
             var elementSelector = $(elem);
             elementSelector[0].style['display'] = 'inline-block';
-            elementSelector.find('.info-page')[0].attributes['fill'].value = toGrayscaleColorString(currentFill);
+            elementSelector.find(INFO_PAGE_CLASS)[0].attributes['fill'].value = toGrayscaleColorString(currentFill);
         })
     }
 

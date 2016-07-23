@@ -72,8 +72,8 @@ bdtem.controller('GraveCtrl', ['$attrs', function () {
 
             flock.enviro.shared.reset();
             var baseFreq = Math.random() * 5000;
-            var third = (5/4) * baseFreq;
-            var fifth = (6/4) * baseFreq;
+            var third = (5 / 4) * baseFreq;
+            var fifth = (6 / 4) * baseFreq;
 
             baseSynth = sineWithFrequency(baseFreq);
             thirdSynth = sawWithFrequency(third);
@@ -91,9 +91,22 @@ bdtem.controller('GraveCtrl', ['$attrs', function () {
 
     this.svgContext = findSvgContext();
 
+
     function findSvgContext() {
         var existing = Snap.select('#graveButtons');
-        return existing ? existing : Snap(600, 800).attr({id: 'graveButtons', display: 'block', margin: '0 auto', preserveAspectRatio: 'none'})
+        return existing || createNewSvgObject()
+    }
+
+    const WIDTH = 600;
+    const HEIGHT = 800;
+
+    function createNewSvgObject() {
+        return Snap(WIDTH, HEIGHT).attr({
+            id: 'graveButtons',
+            display: 'block',
+            margin: '0 auto',
+            preserveAspectRatio: 'none'
+        });
     }
 
 
@@ -103,8 +116,7 @@ bdtem.controller('GraveCtrl', ['$attrs', function () {
 
     this.svgGradient = null;
     this.branchGroup = null;
-    this.translationAnimation = randomTranslation(this.svgGroup);
-    this.translationAnimation.startAnimation();
+    this.translationAnimation = randomTranslation(this.svgGroup).startAnimation();
 
 
     function randomGradientAnimation() {
@@ -121,7 +133,7 @@ bdtem.controller('GraveCtrl', ['$attrs', function () {
     function randomTranslation(group) {
         var animation = {
             scalingFactor: 5,
-            animation: null
+            animation: null 
         };
         var self = animation;
 
@@ -133,7 +145,8 @@ bdtem.controller('GraveCtrl', ['$attrs', function () {
                 4000,
                 null,
                 self.loopAnimation
-            )
+            );
+            return self;
         };
 
         var randomPhase = Math.random() * 360;

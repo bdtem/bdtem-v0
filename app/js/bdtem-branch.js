@@ -206,10 +206,6 @@ bdtem
     //    }
     //    return node;
     //})
-    .service('branchConverter', function () {
-
-
-    })
     .directive('bdtemCircle',
     ['branchesConfig', 'branchTypes', 'graveTracks', 'playerService', function (branchesConfig,
                                                                                 branchTypes,
